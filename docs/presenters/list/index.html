@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../../style.css?t=38982a6c">
+    <link rel="stylesheet" href="../../bui.css?t=d9061fa6">
+    <script src="../../assets/script.js?t=42463e55"></script>
+    <script src="../../bui.js?t=34665fec"></script>
+    <title>List - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-presenterslist" href="../../presenters/list/index.html">List</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-creating-the-list" href="#creating-the-list">Creating the List</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-list-options" href="#list-options">List Options</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-filters" href="#filters">Filters</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-custom-filter-view" href="#custom-filter-view">Custom Filter View</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-search" href="#search">Search</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-sorts" href="#sorts">Sorts</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-divider" href="#divider">Divider</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-html-slots" href="#html-slots">HTML Slots</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-events" href="#events">Events</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../../presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-presenterslist">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="list">List</h1>
+<p>Display an &#x201C;infinite&#x201D; list of results with a toolbar to sort
+and filter the results.</p>
+<h2 id="creating-the-list">Creating the List</h2>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-list</span>
+    <span class="hljs-attr">key</span>=<span class="pl-s">&quot;uniq-key&quot;</span>
+    <span class="hljs-attr">row</span>=<span class="pl-s">&quot;row-element-name&quot;</span>
+    <span class="hljs-attr">divider</span>=<span class="pl-s">&quot;row-divider-element&quot;</span>
+    <span class="hljs-attr">.listOptions</span>=<span class="pl-s">${listOptions}</span>
+    <span class="hljs-attr">.coll</span>=<span class="pl-s">${this.coll}</span>
+    <span class="hljs-attr">.filters</span>=<span class="pl-s">${filters}</span>
+    <span class="hljs-attr">.sorts</span>=<span class="pl-s">${sorts}</span>
+    @<span class="hljs-attr">content-changed</span>=<span class="pl-s">${this.onContentChange}</span>
+&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-list</span>&gt;</span>
+</code></pre>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>key</code> - used to remember which filters are selected</li>
+<li><code>row</code> - the name of the custom element to use for each item</li>
+<li><code>.coll</code> - a Backbone.Collection to use for fetching data</li>
+</ul>
+<h2 id="list-options">List Options</h2>
+<p>Options passed along to the infinite-list</p>
+<pre><code class="lang-js">listOptions = {
+    <span class="hljs-attr">fetch</span>: <span class="pl-c1">true</span>, <span class="pl-c">// true,false, &apos;more&apos;</span>
+    perPage: <span class="hljs-number">30</span>
+}
+</code></pre>
+<p><code>fetch:true</code> - will only fetch initial data.<br>
+<code>fetch:&apos;more&apos;</code> - will attempt to fetch more data
+when all available data has been displayed</p>
+<p><code>perPage</code> - how many rows to display at one time.
+Also determines how many &#x201C;more&#x201D; rows are requested
+via fetch:more</p>
+<h2 id="filters">Filters</h2>
+<pre><code class="lang-js"><span class="pl-k">const</span> filters = {
+
+    <span class="pl-c">// &quot;search&quot; is a special filter that applies to the search bar</span>
+    search: {
+        data(m){
+            <span class="pl-c">// return a hash of attributes to be searched</span>
+            <span class="pl-k">return</span> {
+                <span class="hljs-attr">title</span>: m.get(<span class="pl-s">&apos;title&apos;</span>),
+                <span class="hljs-attr">tags</span>: m.get(<span class="pl-s">&apos;tags&apos;</span>) <span class="pl-c">// value can be an array of strings</span>
+            }
+        },
+        <span class="pl-c">// optional</span>
+        placeholder: <span class="pl-s">&apos;Search&apos;</span>,
+        <span class="hljs-attr">delay</span>: <span class="hljs-number">500</span> <span class="pl-c">// how long of delay in user typing to begin searching?</span>
+        <span class="pl-c">//...specify other fuse.js options</span>
+    },
+
+    <span class="hljs-attr">type</span>: {
+        <span class="hljs-attr">label</span>: <span class="pl-s">&apos;Type&apos;</span>, <span class="pl-c">// the key will be used if no label is set</span>
+        maxHeight: <span class="pl-s">&apos;60vh&apos;</span>, <span class="pl-c">// max height of dropdown menu</span>
+        multi: <span class="pl-c1">false</span>, <span class="pl-c">// can more than one value be selected?</span>
+        db: <span class="pl-c1">false</span>, <span class="pl-c">// true will make the filterBy happen on server instead</span>
+        values: [
+            {<span class="hljs-attr">label</span>: <span class="pl-s">&apos;All&apos;</span>, <span class="hljs-attr">val</span>: <span class="pl-s">&apos;&apos;</span>},
+            <span class="pl-s">&apos;divider&apos;</span>,
+            {<span class="hljs-attr">label</span>: <span class="pl-s">&apos;Type 1&apos;</span>, <span class="hljs-attr">val</span>: <span class="pl-s">&apos;1&apos;</span>},
+            {<span class="hljs-attr">label</span>: <span class="pl-s">&apos;Type 2&apos;</span>, <span class="hljs-attr">val</span>: <span class="pl-s">&apos;2&apos;</span>}
+        ],
+        <span class="pl-c">// a default filter by will be used if none given</span>
+        filterBy(model, val, key){
+            <span class="pl-k">return</span> model.get(key) == val
+        }
+    },
+
+    <span class="hljs-attr">timestamp_created</span>: {
+        <span class="hljs-attr">label</span>: <span class="pl-s">&apos;Created&apos;</span>,
+        <span class="hljs-attr">view</span>: <span class="pl-s">&apos;date&apos;</span>,
+        <span class="hljs-attr">db</span>: <span class="pl-c1">true</span>
+    },
+
+    <span class="hljs-attr">runtime</span>: {
+        <span class="hljs-attr">view</span>: <span class="pl-s">&apos;slider&apos;</span>,
+        <span class="hljs-attr">viewOpts</span>: {
+            <span class="hljs-attr">range</span>: <span class="pl-c1">true</span>,
+            <span class="hljs-attr">max</span>: <span class="hljs-number">50</span>,
+            <span class="hljs-attr">suffix</span>: <span class="pl-s">&apos; hrs.&apos;</span>
+        }
+    },
+}
+</code></pre>
+<h3 id="custom-filter-view">Custom Filter View</h3>
+<p>A view can be specified instead of values &#x2013; <code>view</code> can be a preset
+or the name of a custom element</p>
+<h4 id="presets">Presets</h4>
+<ul>
+<li><code>date</code></li>
+<li><code>slider</code></li>
+</ul>
+<p>View options can be given to the view with <code>viewOpts</code></p>
+<h4 id="custom-filter-view">Custom Filter View</h4>
+<p>Custom elements need to have a <code>.value</code> and <code>.label</code> getter</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">CustomFilterView</span> <span class="pl-k">extends</span> <span class="pl-ent">HTMLElement</span> </span>{
+    
+    firstUpdated(){
+        <span class="pl-k">let</span> cachedVal = <span class="pl-k">this</span>.filter.value
+    }
+
+    <span class="pl-c">// REQUIRED</span>
+    <span class="pl-k">get</span> value(){
+        <span class="pl-c">// value to be set as the filter</span>
+    }
+
+    <span class="pl-c">// REQUIRED</span>
+    <span class="pl-k">get</span> label(){
+        <span class="pl-c">// label for the selected value</span>
+    }
+
+    <span class="pl-c">// OPTIONAL</span>
+    <span class="pl-k">get</span> defaultVal(){
+        <span class="pl-c">// when the filters are cleared/reset, what value should be the default?</span>
+        <span class="pl-k">return</span> <span class="pl-c1">null</span>
+    }
+
+    <span class="pl-c">// OPTIONAL</span>
+    <span class="pl-k">set</span> value(val){
+        <span class="pl-c">// the view will be opened in a popover and can close </span>
+        <span class="pl-c">// by using the magic &apos;close&apos; function (added to view by the filter)</span>
+        <span class="pl-c">// closing will apply the filter</span>
+        <span class="pl-k">this</span>.close()
+    }
+
+    <span class="pl-c">// OPTIONAL</span>
+    filterBy(model, val, key){
+        <span class="pl-c">// provide logic for how to apply the filter</span>
+    }
+}
+</code></pre>
+<h2 id="search">Search</h2>
+<p>Search options are specified as part of filters (see above).</p>
+<p><code>row.model.searchMatches</code> - when the search bar is actively searching, row models will have
+a <code>searchMatches</code> property they can check to see why they are being displayed</p>
+<h2 id="sorts">Sorts</h2>
+<pre><code class="lang-js"><span class="pl-k">const</span> sorts = {
+    
+    title(m){ <span class="pl-k">return</span> m.get(<span class="pl-s">&apos;title&apos;</span>) },
+
+    <span class="hljs-attr">moreComplex</span>: {
+        <span class="hljs-attr">label</span>: <span class="pl-s">&apos;More Complex Sort&apos;</span>,
+        <span class="hljs-attr">desc</span>: <span class="pl-c1">true</span>, <span class="pl-c">// change default to descending sort</span>
+        description: <span class="pl-s">&apos;When the contract was created&apos;</span>,
+        sortBy(model){
+            <span class="pl-k">return</span> model.moreComplexDataPoint()
+        }
+    }
+}
+</code></pre>
+<h2 id="divider">Divider</h2>
+<p>A divider can be added to the list.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-list</span> <span class="hljs-attr">divider</span>=<span class="pl-s">&quot;my-divider-elment&quot;</span>&gt;</span>
+</code></pre>
+<p>The divider element must implement a static <code>shouldDisplay</code> method</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">DividerElement</span> <span class="pl-k">extends</span> <span class="pl-ent">HTMLElement</span> </span>{
+
+    <span class="pl-k">static</span> shouldDisplay(prevModel, model, list){
+        <span class="pl-k">return</span> !prevModel || prevModel != model
+    }
+    
+    <span class="pl-k">constructor</span>(prevModel, model, list){
+        <span class="pl-k">super</span>()
+    }
+}
+</code></pre>
+<h2 id="html-slots">HTML Slots</h2>
+<p>The default list view can be extended with html slots</p>
+<ul>
+<li><code>spinner</code> - if you want to use a different spinner</li>
+<li><code>toolbar:before</code></li>
+<li><code>toolbar:after</code></li>
+</ul>
+<h2 id="events">Events</h2>
+<p>Filters and Sorts emit events when changed:</p>
+<pre><code>list.filters.on(&apos;change&apos;, changes=&gt;{})
+list.sorts.on(&apos;change&apos;, selectedSorts=&gt;{})
+</code></pre>
+<p>The list dispatches a DOM event when the content changes (this would happen when applied filters change, sort changes, or content is fetched from the server)</p>
+<pre><code>list.addEventListener(&apos;content-changed&apos;, e=&gt;{})
+</code></pre>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../../presenters/form-control/index.html"><span class="title">Form Control</span></a></div>
+          <div class="right"><a href="../../presenters/menu/index.html"><span class="label">Next: </span><span class="title">Menu</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

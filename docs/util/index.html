@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../style.css?t=38982a6c">
+    <link rel="stylesheet" href="../bui.css?t=d9061fa6">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <script src="../bui.js?t=34665fec"></script>
+    <title>Util - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../elements/index.html">Elements</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../icons.html">Icons</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title -active link-util" href="../util/index.html">Util</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-normalizetext" href="#normalizetext">normalizeText</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-titleize" href="#titleize">titleize</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-wait" href="#wait">wait</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-util">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="util">Util</h1>
+<h2 id="normalizetext">normalizeText</h2>
+<p>Converts strings to some special characters, such as three periods to an ellipsis</p>
+<pre><code class="lang-js">str = normalizeText(str)
+</code></pre>
+<h2 id="titleize">titleize</h2>
+<p>Converts underscores and dashes to spaces and then capitlizes each word</p>
+<pre><code class="lang-js">str = normalizeText(<span class="pl-s">&apos;my_string&apos;</span>) <span class="pl-c">// My String</span>
+</code></pre>
+<h2 id="wait">wait</h2>
+<p>Promise based setTimeout</p>
+<pre><code class="lang-js"><span class="pl-k">await</span> wait(ms) <span class="pl-c">// default is zero which will let the event loop finish</span>
+<span class="pl-k">await</span> wait(<span class="hljs-number">1000</span>) <span class="pl-c">// wait 1 second</span>
+</code></pre>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../icons.html"><span class="title">Icons</span></a></div>
+          <div class="right"><a href="../models/index.html"><span class="label">Next: </span><span class="title">Models</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

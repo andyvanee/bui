@@ -1,0 +1,288 @@
+<html>
+<head>
+    <title>Blackstone UI</title>
+    <meta name="apple-mobile-web-app-title" content="Blackstone UI">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="MobileOptimized" content="width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0">
+    <meta name="HandheldFriendly" content="true">
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.06381887.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.34238c3c.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.fc9607a9.png">
+    <link rel="shortcut icon" href="favicon.f9ddfcf4.ico?v2">
+
+    <script src="demo.4bdcd18d.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.16ea055c.css">
+    <script>window.addEventListener('DOMContentLoaded', _ => {
+  document.body.classList.add('loaded');
+});</script>
+<link rel="stylesheet" href="demo.48772020.css"></head>
+<body>
+
+    <style>.gitlab-corner-wrapper{overflow:hidden;width:100px;height:100px;position:absolute;top:0;right:0}.gitlab-corner{position:absolute;top:-16px;right:-50px;transform:rotate(45deg);background:#222;border:44px solid #222;border-bottom:none;border-top:#222 solid 16px}.gitlab-corner svg{width:60px;height:60px;margin-bottom:-4px}.cls-1{fill:#fc6d26}.cls-2{fill:#e24329}.cls-3{fill:#fca326}.gitlab-corner:hover .cls-1{animation:cycle .6s}.gitlab-corner:hover .cls-2{animation:cycleMid .6s}.gitlab-corner:hover .cls-3{animation:cycleEnd .6s}@keyframes cycle{100%,15%,60%{fill:#fc6d26}30%,75%{fill:#e24329}45%,90%{fill:#fca326}}@keyframes cycleMid{100%,15%,60%{fill:#e24329}30%,75%{fill:#fca326}45%,90%{fill:#fc6d26}}@keyframes cycleEnd{100%,15%,60%{fill:#fca326}30%,75%{fill:#fc6d26}45%,90%{fill:#e24329}}@media (max-width:500px){.gitlab-corner:hover .cls-1,.gitlab-corner:hover .cls-2,.gitlab-corner:hover .cls-3{animation:none}.gitlab-corner .cls-1{animation:cycle .6s}.gitlab-corner .cls-2{animation:cycleMid .6s}.gitlab-corner .cls-3{animation:cycleEnd .6s}}</style><div class="gitlab-corner-wrapper"><a href="https://gitlab.blackstone.io/blackstone/bui" class="gitlab-corner" aria-label="View source on GitLab"><svg id="logo_art" data-name="logo art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586 559"><g id="g44"><path id="path46" class="cls-1" d="M461.17,301.83l-18.91-58.12L404.84,128.43a6.47,6.47,0,0,0-12.27,0L355.15,243.64H230.82L193.4,128.43a6.46,6.46,0,0,0-12.26,0L143.78,243.64l-18.91,58.19a12.88,12.88,0,0,0,4.66,14.39L293,435,456.44,316.22a12.9,12.9,0,0,0,4.73-14.39"></path></g><g id="g48"><path id="path50" class="cls-2" d="M293,434.91h0l62.16-191.28H230.87L293,434.91Z"></path></g><g id="g56"><path id="path58" class="cls-1" d="M293,434.91,230.82,243.63h-87L293,434.91Z"></path></g><g id="g64"><path id="path66" class="cls-3" d="M143.75,243.69h0l-18.91,58.12a12.88,12.88,0,0,0,4.66,14.39L293,435,143.75,243.69Z"></path></g><g id="g72"><path id="path74" class="cls-2" d="M143.78,243.69h87.11L193.4,128.49a6.47,6.47,0,0,0-12.27,0l-37.35,115.2Z"></path></g><g id="g76"><path id="path78" class="cls-1" d="M293,434.91l62.16-191.28H442.3L293,434.91Z"></path></g><g id="g80"><path id="path82" class="cls-3" d="M442.24,243.69h0l18.91,58.12a12.85,12.85,0,0,1-4.66,14.39L293,434.91l149.2-191.22Z"></path></g><g id="g84"><path id="path86" class="cls-2" d="M442.28,243.69h-87.1l37.42-115.2a6.46,6.46,0,0,1,12.26,0l37.42,115.2Z"></path></g></svg></a></div>
+
+    <header>
+
+        <b-paper class="ribbon">
+            <img src="logo.9d79db2b.png">
+        </b-paper>
+
+        <div class="logo">
+            <h1>Blackstone UI</h1>
+            <p>Reusable web components for creating app interfaces</p>
+            <b-btn color="blue" lg="" onclick="location='./docs'">Documentation</b-btn>
+        </div>
+
+    </header>
+
+    <main>
+
+        <b-paper>
+            <h1>Form Control</h1>
+
+            <form-control material="filled" label="Text Field">
+                <text-field></text-field>
+            </form-control>
+
+            <form-control material="filled" label="Date Field">
+                <text-field type="date"></text-field>
+            </form-control>
+
+            <form-control material="filled" label="Text Field (Multiline)">
+                <text-field multiline=""></text-field>
+            </form-control>
+
+            <form-control material="filled" label="Rich Text Field">
+                <rich-text-field></rich-text-field>
+            </form-control>
+
+            <form-control material="filled" label="Select Field">
+                <select-field>
+                    <option value="">No Value</option>
+                    <hr>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                    <optgroup>Group Title</optgroup>
+                    <option value="4">Option 4</option>
+                    <option value="5">Option 5</option>
+                </select-field>
+            </form-control>
+
+            <br>
+
+            <check-box label="Checkbox"></check-box> &nbsp;&nbsp;
+            <check-box type="switch" label="Switch"></check-box> &nbsp;&nbsp;
+
+            <radio-group>
+                <radio-btn label="One"></radio-btn>
+                <radio-btn label="Two"></radio-btn>
+            </radio-group>
+
+        </b-paper>
+
+        <b-paper>
+            <h1>Panels</h1>
+
+            <div>
+                <a href="/#/view-1" onclick="openView(this)">Default Panel view</a>
+            </div>
+
+            <div>
+                <a href="/#/view-2-small" onclick="openView(this)">Custom sizing and anchor</a>
+            </div>
+
+        </b-paper>
+
+        <b-paper>
+            <h1>Tabs</h1>
+
+            <b-tabs style="margin: -2em;">
+                <div title="Tab 1">Tab 1 content</div>
+                <div title="Tab 2">Tab 2 content</div>
+            </b-tabs>
+
+        </b-paper>
+
+         <b-paper>
+            <h1>Menu</h1>
+
+            <b-btn outline="" onclick="showMenu(this)">Open Menu</b-btn>
+
+        </b-paper>
+
+        <b-paper>
+            <h1>Dialog</h1>
+
+            <b-btn outline="" onclick="dialogs.success(this)">Success Modal</b-btn> &nbsp;
+            <b-btn outline="" onclick="dialogs.error(this)">Error Modal</b-btn> &nbsp;
+            <b-btn outline="" onclick="dialogs.errorPopover(this)">Error Popover</b-btn> &nbsp;
+            <b-btn outline="" onclick="dialogs.warn(this)">Warn Modal</b-btn> &nbsp;
+            <b-btn outline="" onclick="dialogs.confirm(this)">Confirm Modal</b-btn> &nbsp;
+            <b-btn outline="" onclick="dialogs.confirmDelete(this)">Confirm Delete Popover</b-btn>
+
+        </b-paper>
+
+        <b-paper>
+            <h1>List</h1>
+
+            <a-list-view></a-list-view>
+
+        </b-paper>
+
+        <b-paper>
+            <h1>Paper</h1>
+            
+            <b-paper color="blue">
+                This is a "paper" block with color blue
+            </b-paper>
+
+            <b-paper color="red">
+                This is a "paper" block with color red
+            </b-paper>
+
+            <b-paper color="orange" border="">
+                This is a "paper" block with color orange <b>and a border</b>
+            </b-paper>
+
+            <b-paper dense="" color="gray">
+                Dense padding
+            </b-paper>
+
+            <b-paper compact="" color="gray">
+                Compact padding (no padding) - useful when the child element wants to set it's own padding
+            </b-paper>
+
+            <b-paper empty="">
+                A paper block in empty state
+            </b-paper>
+
+        </b-paper>
+
+        <b-paper>
+            <h1>Buttons</h1>
+
+            <b-label>Default</b-label><br><br>
+            <div>
+                <b-btn>Default</b-btn>
+                <b-btn color="blue">Blue</b-btn>
+                <b-btn color="red">Red</b-btn>
+                <b-btn color="green">Green</b-btn>
+
+                <b-hr vert=""></b-hr>
+
+                <b-btn icon="user">With Icon</b-btn>
+                <b-btn icon="cog"></b-btn>
+
+                <b-hr vert=""></b-hr>
+
+                <b-btn spin="">With Spinner</b-btn>
+            </div>
+
+            <br><br><b-label>Outline</b-label><br><br>
+            <div>
+                <b-btn outline="">Default</b-btn>
+                <b-btn outline="" color="blue">Blue</b-btn>
+                <b-btn outline="" color="red">Red</b-btn>
+                <b-btn outline="" color="green">Green</b-btn>
+            </div>
+
+            <br><br><b-label>Pill</b-label><br><br>
+            <div>
+                <b-btn pill="">Default</b-btn>
+                <b-btn pill="" color="blue">Blue</b-btn>
+                <b-btn pill="" color="red">Red</b-btn>
+                <b-btn pill="" color="green">Green</b-btn>
+            </div>
+
+            <br><br><b-label>Text style</b-label><br><br>
+            <div>
+                <b-btn text="">Default</b-btn>
+                <b-btn text="" color="blue">Blue</b-btn>
+                <b-btn text="" color="red">Red</b-btn>
+                <b-btn text="" color="green">Green</b-btn>
+            </div>
+
+            <br><br>
+            <div><b-icon name="info-circled"></b-icon> See list of all icons down below</div>
+            
+        </b-paper>
+
+        <b-paper>
+            <h1>Label</h1>
+
+            <b-label>A label</b-label>
+            
+            <br><br>
+            
+            <b-label filled="">Filled</b-label>&nbsp;
+            <b-label filled="black">Black</b-label>&nbsp;
+            <b-label filled="blue">Blue</b-label>&nbsp;
+            <b-label filled="red">Red</b-label>&nbsp;
+            <b-label filled="orange">Orange</b-label>&nbsp;
+            <b-label filled="green">Green</b-label>&nbsp;
+            
+            <br><br>
+            
+            <b-label outline="">Outline</b-label>&nbsp;
+            <b-label outline="black">Black</b-label>&nbsp;
+            <b-label outline="blue">Blue</b-label>&nbsp;
+            <b-label outline="red">Red</b-label>&nbsp;
+            <b-label outline="orange">Orange</b-label>&nbsp;
+            <b-label outline="green">Green</b-label>&nbsp;
+            
+            <br><br>
+
+            <b-label badge="">Badge</b-label>&nbsp;
+            <b-label badge="black">Black</b-label>&nbsp;
+            <b-label badge="blue">Blue</b-label>&nbsp;
+            <b-label badge="red">Red</b-label>&nbsp;
+            <b-label badge="orange">Orange</b-label>&nbsp;
+            <b-label badge="green">Green</b-label>&nbsp;
+
+        </b-paper>
+
+        <b-paper>
+            <h1>Spinners</h1>
+
+            Inline spinner <b-spinner></b-spinner>
+            <br><br>
+
+            <div style="position: relative; z-index: 0;">
+                <b-spinner-overlay show=""></b-spinner-overlay>
+                An overlay spinner. Sint ullamco sunt in officia sint. Ea ullamco ipsum anim fugiat anim officia eu sint. Laborum anim fugiat ipsum Lorem. Mollit et cupidatat incididunt pariatur mollit cillum ex ex.</div>
+        </b-paper>
+
+        <b-paper>
+            <h1>Empty state</h1>
+
+            <div style="height: 200px; position: relative">
+                <b-empty-state>No results</b-empty-state>
+            </div>
+        </b-paper>
+
+        <b-paper>
+            <h1>Uploader</h1>
+            <b-uploader></b-uploader>
+            <div>Drag and drop a file here to upload</div>
+            <script>let uploader = document.querySelector('b-uploader');
+uploader.addEventListener('change', async e => {
+  console.log('upload the file', uploader.files);
+  if (await Dialog.confirm({
+    title: 'Upload',
+    msg: 'Upload selected file?'
+  }).modal()) console.log('yes, upload'); // uploader.upload({url:'url-to-upload-to'})
+});</script>
+        </b-paper>
+        
+
+        <b-paper>
+            <h1>Icons</h1>
+            <b-icon-list cols="4"></b-icon-list>
+        </b-paper>
+
+    </main>
+
+</body>
+</html>

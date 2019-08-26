@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="style.css?t=38982a6c">
+    <link rel="stylesheet" href="bui.css?t=d9061fa6">
+    <script src="assets/script.js?t=42463e55"></script>
+    <script src="bui.js?t=34665fec"></script>
+    <title>Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title -active link-index" href="index.html">Blackstone UI</a>
+              <ul class="headings heading-list">
+                <li class="heading-item -depth-2"><a class="hlink link-overview" href="#overview">Overview</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-developing" href="#developing">Developing</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-demo" href="#demo">Demo</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-notes" href="#notes">Notes</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="elements/index.html">Elements</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="icons.html">Icons</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="router/index.html">Router</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-index">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><p><img src="https://i.imgur.com/6QKG2AG.png" alt="logo"></p>
+<p><a href="http://blackstone.gitlab.blackstone.inc/bui"><img src="https://img.shields.io/badge/-Demo-blue" alt="demo"></a>
+<a href="http://blackstone.gitlab.blackstone.inc/bui/docs/"><img src="https://img.shields.io/badge/-Documentation-black" alt="docs"></a></p>
+<p>Reusable web components for creating interfaces.</p>
+<hr>
+<p>Example</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;Tab 1&quot;</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">b-paper</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">b-spinner-overlay</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-spinner-overlay</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">b-icon</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;folder&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-icon</span>&gt;</span> 
+                    Title
+                    <span class="hljs-tag">&lt;<span class="hljs-name">b-label</span>&gt;</span>Active<span class="hljs-tag">&lt;/<span class="hljs-name">b-label</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">b-btn</span> <span class="hljs-attr">icon</span>=<span class="pl-s">&quot;upload-cloud&quot;</span> <span class="hljs-attr">class</span>=<span class="pl-s">&quot;text-btn&quot;</span>&gt;</span>Upload<span class="hljs-tag">&lt;/<span class="hljs-name">b-btn</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>
+                Content here
+                <span class="hljs-tag">&lt;<span class="hljs-name">b-hr</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-hr</span>&gt;</span>
+                More content
+            <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">b-paper</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;Tab 2&quot;</span>&gt;</span>
+        Tab 2 content
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
+
+</code></pre>
+<h2 id="overview">Overview</h2>
+<p>Web components (or custom elements) allow us to encapsalate
+logic, designs, and features in html elements. Along with custom
+elements, various &#x201C;presenters&#x201D; (or views) have been created
+for all the ways an app needs to display data</p>
+<ul>
+<li><a href="elements/index.html">Elements</a> - common building-block elements</li>
+<li><a href="util/index.html">Util</a> - utility methods</li>
+<li><a href="router/index.html">Router</a> - manages the url and triggers views</li>
+<li><a href="elements/index.html">Helpers</a> - helper/extensions</li>
+<li><strong>Presenters</strong> - ways to present views and data
+<ul>
+<li><a href="presenters/dialog/index.html">Dialog</a></li>
+<li><a href="presenters/form-control/index.html">Form Control</a></li>
+<li><a href="presenters/list/index.html">List</a></li>
+<li><a href="presenters/menu/index.html">Menu</a></li>
+<li><a href="presenters/panel/index.html">Panel</a></li>
+<li><a href="presenters/popover/index.html">Popover</a></li>
+<li><a href="presenters/tabs/index.html">Tabs</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="developing">Developing</h2>
+<p><a href="https://lit-html.polymer-project.org">lit-html</a> and <a href="https://lit-element.polymer-project.org">lit-element</a>
+are being used to create and render custom elements. The beauty in these tools
+is that they are simply syntactic sugar for native web technologies</p>
+<p><code>lit-html</code> - this is a templating tool that replaces a need for seomthign like mustache.js</p>
+<p><code>lit-element</code> - this is a base class for that makes it easier to make custom elements removing
+a lot of the boilerplate code usually needed.</p>
+<h2 id="demo">Demo</h2>
+<p>Install the parcel bundler</p>
+<pre><code>npm install -g parcel-bundler
+</code></pre>
+<p>Then cd to this directory and run:</p>
+<pre><code>npm start
+</code></pre>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>consider switching out <code>moment.js</code> for something lighter weight</li>
+</ul>
+
+        </div>
+        <div class="footer-nav">
+          <div class="right"><a href="elements/index.html"><span class="label">Next: </span><span class="title">Elements</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

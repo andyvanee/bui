@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../style.css?t=38982a6c">
+    <link rel="stylesheet" href="../bui.css?t=d9061fa6">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <script src="../bui.js?t=34665fec"></script>
+    <title>Models - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../elements/index.html">Elements</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../icons.html">Icons</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-models" href="../models/index.html">Models</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-collection" href="#collection">Collection</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-models">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="models">Models</h1>
+<blockquote>
+<p>NOTE: proof of concept &#x2013; still in development<br>
+NOTE: sort of replicates Backbone functionality, but with less
+overhead and modified for our needs&#x2026;still thinking things through</p>
+</blockquote>
+<h2 id="collection">Collection</h2>
+<p>A lightweight class for fetching an array of &#x201C;models&#x201D; from a server. No sorting is applied</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> {Collection} <span class="pl-k">from</span> <span class="pl-s">&apos;bui/models&apos;</span>
+
+<span class="pl-k">export</span> <span class="pl-k">default</span> <span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">Coll</span> <span class="pl-k">extends</span> <span class="pl-ent">Collection</span> </span>{
+
+    <span class="pl-k">get</span> url(){ <span class="pl-k">return</span> <span class="pl-s">&apos;/api/url-for-coll&apos;</span> }
+
+    <span class="pl-c">// optional: Object will be used if not specified</span>
+    <span class="pl-k">get</span> model(){ <span class="pl-k">return</span> Backbone.Model }
+
+}
+</code></pre>
+<h4 id="methods">Methods</h4>
+<ul>
+<li><code>fetch(params)</code> fetches data from url</li>
+</ul>
+<p>Some typical array methods are availble for iterating over the collection</p>
+<ul>
+<li><code>forEach</code></li>
+<li><code>map</code></li>
+<li><code>flatMap</code></li>
+<li><code>filter</code></li>
+<li><code>reduce</code></li>
+</ul>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../util/index.html"><span class="title">Util</span></a></div>
+          <div class="right"><a href="../router/index.html"><span class="label">Next: </span><span class="title">Router</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

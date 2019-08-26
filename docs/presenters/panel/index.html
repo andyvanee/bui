@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../../style.css?t=38982a6c">
+    <link rel="stylesheet" href="../../bui.css?t=d9061fa6">
+    <script src="../../assets/script.js?t=42463e55"></script>
+    <script src="../../bui.js?t=34665fec"></script>
+    <title>Panel - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-presenterspanel" href="../../presenters/panel/index.html">Panel</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-panel" href="#panel">Panel</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-properties-options" href="#properties-options">Properties / Options</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-rendering-a-custom-element" href="#rendering-a-custom-element">Rendering a Custom Element</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-rendering-dynamic-html" href="#rendering-dynamic-html">Rendering dynamic html</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-toolbar" href="#toolbar">Toolbar</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-slots" href="#slots">Slots</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-attributes" href="#attributes">Attributes</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../../presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-presenterspanel">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="panel-presenter">Panel Presenter</h1>
+<p>Presents a view as an overlay panel. Panels can be full size, vary in width/height, and anchor to
+different areas on the screen.</p>
+<h2 id="panel">Panel</h2>
+<pre><code class="lang-javascript"><span class="pl-k">let</span> panel = <span class="pl-k">new</span> Panel(view, options)
+panel.open()
+</code></pre>
+<h3 id="properties-options">Properties / Options</h3>
+<ul>
+<li><code>title</code> (will be displayed in <code>b-panel-toolbar</code>)</li>
+<li><code>width</code> (string)</li>
+<li><code>height</code> (string)</li>
+<li><code>anchor</code> (top, right, bottom, left, center)</li>
+<li><code>type</code> (modal)</li>
+<li><code>animation</code> (scale [only works on anchor=center])</li>
+<li><code>disableBackdropClick</code></li>
+<li><code>onClose</code></li>
+<li><code>onBackdropClick</code></li>
+<li><code>onKeypress</code> - only fires if panel is on top</li>
+<li><code>controller</code> - specify a different panel controller (optional)</li>
+</ul>
+<h3 id="rendering-a-custom-element">Rendering a Custom Element</h3>
+<p><strong>Immediate initialization</strong></p>
+<pre><code class="lang-javascript"><span class="pl-k">import</span> {Panel} <span class="pl-k">from</span> <span class="pl-s">&apos;bui&apos;</span>
+
+<span class="pl-k">let</span> panel = <span class="pl-k">new</span> Panel(<span class="pl-s">&apos;custom-element&apos;</span>, {
+    <span class="hljs-attr">title</span>: <span class="pl-s">&apos;My Custom Element View&apos;</span>,
+    <span class="hljs-attr">width</span>: <span class="pl-s">&apos;600px&apos;</span>,
+    <span class="hljs-attr">height</span>: <span class="pl-s">&apos;800px&apos;</span>,
+    <span class="hljs-attr">anchor</span>: <span class="pl-s">&apos;center&apos;</span>
+})
+
+panel.open()
+</code></pre>
+<p><strong>Delayed initialization</strong> with a URL route</p>
+<pre><code class="lang-javascript"><span class="pl-k">import</span> {Panel, router} <span class="pl-k">from</span> <span class="pl-s">&apos;bui&apos;</span>
+
+<span class="pl-c">// Panel.register(path, view, options)</span>
+Panel.register(<span class="pl-s">&apos;my-custom-element&apos;</span>, <span class="pl-s">&apos;custom-element&apos;</span>, {
+    <span class="hljs-attr">title</span>: <span class="pl-s">&apos;My Custom Element View&apos;</span>
+})
+
+router.goTo(<span class="pl-s">&apos;my-custom-element&apos;</span>)
+<span class="pl-c">// url will change to `/#/my-custom-element`</span>
+</code></pre>
+<h3 id="rendering-dynamic-html">Rendering dynamic html</h3>
+<p>Rendering panels this way probably shouldn&#x2019;t happen very often, but it is supported.</p>
+<pre><code class="lang-javascript"><span class="pl-k">import</span> {Panel} <span class="pl-k">from</span> <span class="pl-s">&apos;bui&apos;</span>
+<span class="pl-k">import</span> {html} <span class="pl-k">from</span> <span class="pl-s">&apos;lit-html&apos;</span>
+
+<span class="pl-c">// with toolbar</span>
+<span class="pl-k">new</span> Panel(<span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>)</span>{<span class="pl-k">return</span> html<span class="pl-s">`
+    &lt;b-panel-toolbar&gt;&lt;/b-panel-toolbar&gt;
+    &lt;section&gt;	
+        &lt;p&gt;Dynamically generated content&lt;/p&gt;
+    &lt;/section&gt;
+`</span>, {<span class="hljs-attr">type</span>:<span class="pl-s">&apos;modal&apos;</span>, <span class="hljs-attr">title</span>: <span class="pl-s">&apos;Custom Panel&apos;</span>}).open()
+
+<span class="pl-c">// without toolbar and a custom close button</span>
+<span class="pl-k">new</span> Panel(<span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>)</span>{<span class="pl-k">return</span> html<span class="pl-s">`
+    &lt;section&gt;
+        &lt;p&gt;Dynamically generated content&lt;/p&gt;
+        &lt;b-btn @click=<span class="hljs-subst">${<span class="pl-k">this</span>.close}</span>&gt;Okay&lt;/b-btn
+    &lt;/section&gt;
+`</span>}, {<span class="hljs-attr">type</span>:<span class="pl-s">&apos;modal&apos;</span>}).open()
+</code></pre>
+<h2 id="toolbar">Toolbar</h2>
+<p>A panel only presents the view given to it. If you would like a toolbar with a close button the view
+needs to render one. A panel toolbar element has been created for such a task.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-panel-toolbar</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-panel-toolbar</span>&gt;</span>
+</code></pre>
+<blockquote>
+<p>A close button will be rendered and a title will be displayed if the panel has a <code>title</code> property set</p>
+</blockquote>
+<h3 id="slots">Slots</h3>
+<ul>
+<li><code>left</code></li>
+<li><code>right</code></li>
+<li><code>middle</code> - next to title</li>
+<li><code>title</code> - in place of title</li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-panel-toolbar</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;middle&quot;</span>&gt;</span>I will appear after the title<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;right&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">b-btn</span>&gt;</span>Right Button<span class="hljs-tag">&lt;/<span class="hljs-name">b-btn</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-panel-toolbar</span>&gt;</span>
+</code></pre>
+<h3 id="attributes">Attributes</h3>
+<ul>
+<li><code>shadow</code></li>
+<li><code>overlay</code></li>
+<li><code>notitle</code></li>
+</ul>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../../presenters/menu/index.html"><span class="title">Menu</span></a></div>
+          <div class="right"><a href="../../presenters/popover/index.html"><span class="label">Next: </span><span class="title">Popover</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

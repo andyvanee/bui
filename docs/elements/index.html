@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../style.css?t=38982a6c">
+    <link rel="stylesheet" href="../bui.css?t=d9061fa6">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <script src="../bui.js?t=34665fec"></script>
+    <title>Elements - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title -active link-elements" href="../elements/index.html">Elements</a>
+              <ul class="headings heading-list">
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-papergreater" href="#lessb-papergreater">`&lt;b-paper&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-btngreater" href="#lessb-btngreater">`&lt;b-btn&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-icongreater" href="#lessb-icongreater">`&lt;b-icon&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-hrgreater" href="#lessb-hrgreater">`&lt;b-hr&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-subgreater" href="#lessb-subgreater">`&lt;b-sub&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-labelgreater" href="#lessb-labelgreater">`&lt;b-label&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-empty-stategreater" href="#lessb-empty-stategreater">`&lt;b-empty-state&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-spinnergreater" href="#lessb-spinnergreater">`&lt;b-spinner&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-spinner-overlaygreater" href="#lessb-spinner-overlaygreater">`&lt;b-spinner-overlay&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-uploadergreater" href="#lessb-uploadergreater">`&lt;b-uploader&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-carouselgreater" href="#lessb-carouselgreater">`&lt;b-carousel&gt;`</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-timergreater" href="#lessb-timergreater">`&lt;b-timer&gt;`</a>
+                </li>
+              </ul>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../icons.html">Icons</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-elements">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="bui-custom-elements">BUI Custom Elements</h1>
+<h2 id="lessb-papergreater"><code>&lt;b-paper&gt;</code></h2>
+<p>A white box with rounded corners and a shadow.</p>
+<!--
+<b-paper>Paper element</b-paper>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>color</code> - blue, green, red, orange, yellow, purple</li>
+<li><code>border</code> - only if a color is set</li>
+<li><code>dense</code> - less padding</li>
+<li><code>compact</code> - no padding</li>
+<li><code>empty</code> - no background and a dashed border</li>
+<li><code>outline</code> - no shadow, just border</li>
+</ul>
+<h2 id="lessb-btngreater"><code>&lt;b-btn&gt;</code></h2>
+<!--
+<b-btn>Default Button</b-btn>
+<b-btn color="blue">Blue Button</b-btn>
+<b-btn color="red" outline>Outline Button</b-btn>
+<b-btn text>Text Button</b-btn>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>icon</code></li>
+<li><code>color</code></li>
+<li><code>outline</code></li>
+<li><code>text</code> - no button outline until hover</li>
+<li><code>clear</code></li>
+<li><code>pill</code></li>
+</ul>
+<h4 id="properties">Properties</h4>
+<ul>
+<li><code>spin</code> - set to <code>true</code> to show a spinner</li>
+</ul>
+<h2 id="lessb-icongreater"><code>&lt;b-icon&gt;</code></h2>
+<p>Display an svg icon &#x2013; <a href="../icons.html">See a full list of icons</a></p>
+<!--
+<b-icon name="user"></b-icon>
+<b-icon name="cog"></b-icon>
+-->
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-icon</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;user&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-icon</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-icon</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;cog&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-icon</span>&gt;</span>
+</code></pre>
+<h2 id="lessb-hrgreater"><code>&lt;b-hr&gt;</code></h2>
+<p>A line divider</p>
+<!--
+<b-hr></b-hr>
+<br>
+Label 1 <b-hr vert></b-hr> Label 2
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>short</code> - makes the line short (not full width)</li>
+<li><code>vert</code> - changes to a vertical line</li>
+</ul>
+<h2 id="lessb-subgreater"><code>&lt;b-sub&gt;</code></h2>
+<p>A subdued (or sub text) text element that is slightly smaller and lighter in color</p>
+<!--
+<b-sub>Subdued text</b-sub>
+-->
+<h2 id="lessb-labelgreater"><code>&lt;b-label&gt;</code></h2>
+<p>Default is an uppercase, bold, and slightly subdued (gray) text block for labeling.
+Can be altered to display as filled, outlined, or as a badge.</p>
+<!--
+<b-label>Default Label</b-label>&nbsp;&nbsp;
+<b-label filled>Filled Label</b-label>&nbsp;&nbsp;
+<b-label outline>Outline Label</b-label>&nbsp;&nbsp;
+<b-label badge>Badge Label</b-label>
+<br><br>
+<b-label divider>Label Divider</b-label>
+<br>
+<b-label divider="center">Label Divider</b-label>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>xs</code> - xtra small</li>
+<li><code>sm</code> - small</li>
+<li><code>lg</code> - large</li>
+<li><code>filled</code>, <code>filled=&quot;color&quot;</code></li>
+<li><code>badge</code>, <code>badge=&quot;color&quot;</code></li>
+<li><code>outline</code>, <code>outline=&quot;color&quot;</code></li>
+<li><code>divider</code>, <code>divider=&quot;[center,right]&quot;</code></li>
+</ul>
+<h4 id="style-hooks">Style hooks</h4>
+<ul>
+<li><code>--dividerThickness</code></li>
+</ul>
+<h2 id="lessb-empty-stategreater"><code>&lt;b-empty-state&gt;</code></h2>
+<p>Use to show a message when a view is empty. <strong>NOTE:</strong> make sure the parent
+element has <code>position:relative</code> (or absolute)</p>
+<!--
+<b-empty-state static>Nothing to show</b-empty-state>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>xs</code> - xtra small</li>
+<li><code>sm</code> - small</li>
+<li><code>md</code> - medium</li>
+<li><code>lg</code> - large</li>
+<li><code>static</code> - removes absolute pos and 100% height</li>
+</ul>
+<h2 id="lessb-spinnergreater"><code>&lt;b-spinner&gt;</code></h2>
+<p>An animated circle spinner to represent progress</p>
+<!--
+<b-spinner></b-spinner>&nbsp;&nbsp;
+<b-spinner style="--size: 2em;"></b-spinner>
+-->
+<h4 id="style-hooks">Style Hooks</h4>
+<ul>
+<li><code>--size</code></li>
+</ul>
+<h2 id="lessb-spinner-overlaygreater"><code>&lt;b-spinner-overlay&gt;</code></h2>
+<p>Shows an overlay over the parent element with a <code>b-spinner</code> and optional label</p>
+<!--
+<div>
+    Some content here
+    <b-spinner-overlay show></b-spinner-overlay>
+</div>
+-->
+<blockquote>
+<p><strong>Note:</strong> if the spinner is at the top level of a shadowroot, it will link itself
+to the host element as <code>host.spinner</code></p>
+</blockquote>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>show</code></li>
+<li><code>label</code></li>
+<li><code>lg</code> - make spinner large</li>
+<li><code>dark</code></li>
+</ul>
+<h4 id="style-hooks">Style Hooks</h4>
+<ul>
+<li><code>--spinnerBgd</code></li>
+<li><code>--spinnerColor</code></li>
+<li><code>--spinnerSize</code></li>
+</ul>
+<h2 id="lessb-uploadergreater"><code>&lt;b-uploader&gt;</code></h2>
+<p>Lets files be dropped onto an element.</p>
+<!--
+Drag a file and drop it here
+<b-uploader></b-uploader>
+-->
+<p>Watches for files to be dragged over it&#x2019;s parent element;
+shows help text to let user know they can drop the file; shows upload progress.</p>
+<p>Views should hook into the <code>change</code> event to test for valid files, make the user
+confirm (optional), and then instruct the uploader to upload the selected files.</p>
+<p>Example usage</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-uploader</span> <span class="hljs-attr">accept</span>=<span class="pl-s">&quot;image/*&quot;</span> <span class="hljs-attr">multiple</span> <span class="hljs-attr">placeholder</span>=<span class="pl-s">&quot;Drop to upload images&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-uploader</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-js"><span class="pl-k">let</span> uploader = <span class="pl-c1">document</span>.querySelector(<span class="pl-s">&apos;b-uploader&apos;</span>)
+uploader.addEventListener(<span class="pl-s">&apos;change&apos;</span>, e=&gt;{
+    
+    <span class="pl-k">if</span>( e.detail.invalid ){
+        <span class="pl-k">return</span> <span class="pl-c1">console</span>.log(e.detail.invalid)
+    
+    uploader.upload({<span class="hljs-attr">url</span>:<span class="pl-s">&apos;/api/upload&apos;</span>}).then(<span class="hljs-function"><span class="hljs-params">resp</span>=&gt;</span>{
+        <span class="pl-c1">console</span>.log(<span class="pl-s">&apos;upload finished with resp:&apos;</span>, resp)
+    })
+})
+
+<span class="pl-c">// a native OS file picker can be opened too</span>
+uploader.chooseFile()
+</code></pre>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>disabled</code></li>
+<li><code>accept</code> - same syntax as <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept">input[type=&#x201C;file&#x201D;]</a></li>
+<li><code>multiple</code></li>
+<li><code>placeholder</code> - the text to display when dragging file over</li>
+<li><code>url</code> - where to upload the file (optional if setting in <code>.upload()</code> method)</li>
+<li><code>auto-upload</code> - url must be set for this to work</li>
+</ul>
+<h4 id="methods">Methods</h4>
+<ul>
+<li><code>.chooseFile()</code> - opens the browser exploer for choosing a file</li>
+<li><code>.upload({url=&apos;&apos;, method=&apos;POST&apos;, fileKey=&apos;file&apos;, formData={}})</code>
+<ul>
+<li><code>url</code> must be set as an attribute or given to the <code>upload</code> method</li>
+</ul>
+</li>
+</ul>
+<h4 id="events">Events</h4>
+<ul>
+<li><code>change</code> - when files are selected (via selection or drop)</li>
+<li><code>upload</code> - when all selected files finish uploading</li>
+</ul>
+<h4 id="styles">Styles</h4>
+<ul>
+<li><code>--hoverBgd</code></li>
+<li><code>--uploadingBgd</code></li>
+<li><code>--progressBgd</code></li>
+</ul>
+<h2 id="lessb-carouselgreater"><code>&lt;b-carousel&gt;</code></h2>
+<p>A slider/carousel element that will show one of the nested elements at time.
+A set of dots will be shown to represent the number of slides available.</p>
+<!--
+<b-carousel>
+    <b-paper block>Slide 1</b-paper>
+    <b-paper block>Slide 2</b-paper>
+    <b-paper block>Slide 3</b-paper>
+</b-carousel>
+-->
+<p>Currently a very simple implementation with no animation or sliding.
+Maybe later we&#x2019;ll introduce animation and more features, like nav arrows</p>
+<h5 id="styles">Styles</h5>
+<ul>
+<li><code>--dotSize</code></li>
+<li><code>--dotPadding</code></li>
+<li><code>--dotMargin</code></li>
+<li><code>--dotExpand</code> - transform scale</li>
+</ul>
+<h2 id="lessb-timergreater"><code>&lt;b-timer&gt;</code></h2>
+<p>Displays a runnning timer</p>
+<!--
+<b-timer running></b-timer>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>time</code> - current time in milliseconds</li>
+<li><code>ms</code> - whether to show milliseconds</li>
+<li><code>running</code> - should the timer be progressing</li>
+</ul>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../index.html"><span class="title">Blackstone UI</span></a></div>
+          <div class="right"><a href="../icons.html"><span class="label">Next: </span><span class="title">Icons</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

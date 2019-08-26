@@ -1,0 +1,928 @@
+{
+  "toc": {
+    "sections": [
+      {
+        "title": "Blackstone UI",
+        "source": "README.md",
+        "url": "index.html",
+        "slug": "index",
+        "headings": [
+          {
+            "title": "Overview",
+            "depth": 2,
+            "id": "overview"
+          },
+          {
+            "title": "Developing",
+            "depth": 2,
+            "id": "developing"
+          },
+          {
+            "title": "Demo",
+            "depth": 2,
+            "id": "demo"
+          },
+          {
+            "title": "Notes",
+            "depth": 2,
+            "id": "notes"
+          }
+        ]
+      },
+      {
+        "title": "Elements",
+        "source": "elements/README.md",
+        "url": "elements/index.html",
+        "slug": "elements",
+        "headings": [
+          {
+            "title": "`<b-paper>`",
+            "depth": 2,
+            "id": "lessb-papergreater"
+          },
+          {
+            "title": "`<b-btn>`",
+            "depth": 2,
+            "id": "lessb-btngreater"
+          },
+          {
+            "title": "`<b-icon>`",
+            "depth": 2,
+            "id": "lessb-icongreater"
+          },
+          {
+            "title": "`<b-hr>`",
+            "depth": 2,
+            "id": "lessb-hrgreater"
+          },
+          {
+            "title": "`<b-sub>`",
+            "depth": 2,
+            "id": "lessb-subgreater"
+          },
+          {
+            "title": "`<b-label>`",
+            "depth": 2,
+            "id": "lessb-labelgreater"
+          },
+          {
+            "title": "`<b-empty-state>`",
+            "depth": 2,
+            "id": "lessb-empty-stategreater"
+          },
+          {
+            "title": "`<b-spinner>`",
+            "depth": 2,
+            "id": "lessb-spinnergreater"
+          },
+          {
+            "title": "`<b-spinner-overlay>`",
+            "depth": 2,
+            "id": "lessb-spinner-overlaygreater"
+          },
+          {
+            "title": "`<b-uploader>`",
+            "depth": 2,
+            "id": "lessb-uploadergreater"
+          },
+          {
+            "title": "`<b-carousel>`",
+            "depth": 2,
+            "id": "lessb-carouselgreater"
+          },
+          {
+            "title": "`<b-timer>`",
+            "depth": 2,
+            "id": "lessb-timergreater"
+          }
+        ],
+        "sections": [
+          {
+            "title": "Icons",
+            "source": "docs/icons.md",
+            "url": "icons.html",
+            "slug": "icons"
+          }
+        ]
+      },
+      {
+        "title": "Extras",
+        "sections": [
+          {
+            "title": "Util",
+            "source": "util/README.md",
+            "url": "util/index.html",
+            "slug": "util",
+            "headings": [
+              {
+                "title": "normalizeText",
+                "depth": 2,
+                "id": "normalizetext"
+              },
+              {
+                "title": "titleize",
+                "depth": 2,
+                "id": "titleize"
+              },
+              {
+                "title": "wait",
+                "depth": 2,
+                "id": "wait"
+              }
+            ]
+          },
+          {
+            "title": "Models",
+            "source": "models/README.md",
+            "url": "models/index.html",
+            "slug": "models",
+            "headings": [
+              {
+                "title": "Collection",
+                "depth": 2,
+                "id": "collection"
+              }
+            ]
+          },
+          {
+            "title": "Router",
+            "source": "router/README.md",
+            "url": "router/index.html",
+            "slug": "router",
+            "headings": [
+              {
+                "title": "TODO",
+                "depth": 2,
+                "id": "todo"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Presenters",
+        "sections": [
+          {
+            "title": "Dialog",
+            "source": "presenters/dialog/README.md",
+            "url": "presenters/dialog/index.html",
+            "slug": "presentersdialog",
+            "headings": [
+              {
+                "title": "Options",
+                "depth": 2,
+                "id": "options"
+              },
+              {
+                "title": "Properties",
+                "depth": 2,
+                "id": "properties"
+              },
+              {
+                "title": "Presets",
+                "depth": 2,
+                "id": "presets"
+              },
+              {
+                "title": "Presenters",
+                "depth": 2,
+                "id": "presenters"
+              },
+              {
+                "title": "Promise Based",
+                "depth": 2,
+                "id": "promise-based"
+              },
+              {
+                "title": "Examples",
+                "depth": 2,
+                "id": "examples"
+              }
+            ]
+          },
+          {
+            "title": "Form Control",
+            "source": "presenters/form-control/README.md",
+            "url": "presenters/form-control/index.html",
+            "slug": "presentersform-control",
+            "headings": [
+              {
+                "title": "`<form-control>`",
+                "depth": 2,
+                "id": "lessform-controlgreater"
+              },
+              {
+                "title": "`<text-field>`",
+                "depth": 2,
+                "id": "lesstext-fieldgreater"
+              },
+              {
+                "title": "`<rich-text-field>`",
+                "depth": 2,
+                "id": "lessrich-text-fieldgreater"
+              },
+              {
+                "title": "`<select-field>`",
+                "depth": 2,
+                "id": "lessselect-fieldgreater"
+              },
+              {
+                "title": "`<check-box>`",
+                "depth": 2,
+                "id": "lesscheck-boxgreater"
+              },
+              {
+                "title": "`<radio-btn>`",
+                "depth": 2,
+                "id": "lessradio-btngreater"
+              },
+              {
+                "title": "`<range-slider>`",
+                "depth": 2,
+                "id": "lessrange-slidergreater"
+              },
+              {
+                "title": "`<form-handler>`",
+                "depth": 2,
+                "id": "lessform-handlergreater"
+              }
+            ]
+          },
+          {
+            "title": "List",
+            "source": "presenters/list/README.md",
+            "url": "presenters/list/index.html",
+            "slug": "presenterslist",
+            "headings": [
+              {
+                "title": "Creating the List",
+                "depth": 2,
+                "id": "creating-the-list"
+              },
+              {
+                "title": "List Options",
+                "depth": 2,
+                "id": "list-options"
+              },
+              {
+                "title": "Filters",
+                "depth": 2,
+                "id": "filters",
+                "headings": [
+                  {
+                    "title": "Custom Filter View",
+                    "depth": 3,
+                    "id": "custom-filter-view"
+                  }
+                ]
+              },
+              {
+                "title": "Search",
+                "depth": 2,
+                "id": "search"
+              },
+              {
+                "title": "Sorts",
+                "depth": 2,
+                "id": "sorts"
+              },
+              {
+                "title": "Divider",
+                "depth": 2,
+                "id": "divider"
+              },
+              {
+                "title": "HTML Slots",
+                "depth": 2,
+                "id": "html-slots"
+              },
+              {
+                "title": "Events",
+                "depth": 2,
+                "id": "events"
+              }
+            ]
+          },
+          {
+            "title": "Menu",
+            "source": "presenters/menu/README.md",
+            "url": "presenters/menu/index.html",
+            "slug": "presentersmenu",
+            "headings": [
+              {
+                "title": "Examples",
+                "depth": 2,
+                "id": "examples"
+              },
+              {
+                "title": "Menu Items",
+                "depth": 2,
+                "id": "menu-items"
+              },
+              {
+                "title": "Options",
+                "depth": 2,
+                "id": "options",
+                "headings": [
+                  {
+                    "title": "Search",
+                    "depth": 3,
+                    "id": "search"
+                  }
+                ]
+              },
+              {
+                "title": "Presenters",
+                "depth": 2,
+                "id": "presenters"
+              },
+              {
+                "title": "Changelog",
+                "depth": 2,
+                "id": "changelog"
+              }
+            ]
+          },
+          {
+            "title": "Panel",
+            "source": "presenters/panel/README.md",
+            "url": "presenters/panel/index.html",
+            "slug": "presenterspanel",
+            "headings": [
+              {
+                "title": "Panel",
+                "depth": 2,
+                "id": "panel",
+                "headings": [
+                  {
+                    "title": "Properties / Options",
+                    "depth": 3,
+                    "id": "properties-options"
+                  },
+                  {
+                    "title": "Rendering a Custom Element",
+                    "depth": 3,
+                    "id": "rendering-a-custom-element"
+                  },
+                  {
+                    "title": "Rendering dynamic html",
+                    "depth": 3,
+                    "id": "rendering-dynamic-html"
+                  }
+                ]
+              },
+              {
+                "title": "Toolbar",
+                "depth": 2,
+                "id": "toolbar",
+                "headings": [
+                  {
+                    "title": "Slots",
+                    "depth": 3,
+                    "id": "slots"
+                  },
+                  {
+                    "title": "Attributes",
+                    "depth": 3,
+                    "id": "attributes"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Popover",
+            "source": "presenters/popover/README.md",
+            "url": "presenters/popover/index.html",
+            "slug": "presenterspopover",
+            "headings": [
+              {
+                "title": "Rendering Views",
+                "depth": 2,
+                "id": "rendering-views",
+                "headings": [
+                  {
+                    "title": "Default Opts",
+                    "depth": 3,
+                    "id": "default-opts"
+                  },
+                  {
+                    "title": "Options",
+                    "depth": 3,
+                    "id": "options"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Tabs",
+            "source": "presenters/tabs/README.md",
+            "url": "presenters/tabs/index.html",
+            "slug": "presenterstabs",
+            "headings": [
+              {
+                "title": "Attributes",
+                "depth": 2,
+                "id": "attributes"
+              },
+              {
+                "title": "Events",
+                "depth": 2,
+                "id": "events"
+              },
+              {
+                "title": "Style Hooks",
+                "depth": 2,
+                "id": "style-hooks"
+              },
+              {
+                "title": "Views",
+                "depth": 2,
+                "id": "views"
+              },
+              {
+                "title": "Custom Menu Items",
+                "depth": 2,
+                "id": "custom-menu-items"
+              },
+              {
+                "title": "Menu Slots",
+                "depth": 2,
+                "id": "menu-slots"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "index": {
+    "index.html": {
+      "source": "README.md",
+      "title": "Blackstone UI",
+      "pageTitle": "Blackstone UI",
+      "slug": "index",
+      "headings": [
+        {
+          "title": "Overview",
+          "depth": 2,
+          "id": "overview"
+        },
+        {
+          "title": "Developing",
+          "depth": 2,
+          "id": "developing"
+        },
+        {
+          "title": "Demo",
+          "depth": 2,
+          "id": "demo"
+        },
+        {
+          "title": "Notes",
+          "depth": 2,
+          "id": "notes"
+        }
+      ]
+    },
+    "elements/index.html": {
+      "source": "elements/README.md",
+      "title": "Elements - Blackstone UI",
+      "pageTitle": "Elements",
+      "slug": "elements",
+      "headings": [
+        {
+          "title": "`<b-paper>`",
+          "depth": 2,
+          "id": "lessb-papergreater"
+        },
+        {
+          "title": "`<b-btn>`",
+          "depth": 2,
+          "id": "lessb-btngreater"
+        },
+        {
+          "title": "`<b-icon>`",
+          "depth": 2,
+          "id": "lessb-icongreater"
+        },
+        {
+          "title": "`<b-hr>`",
+          "depth": 2,
+          "id": "lessb-hrgreater"
+        },
+        {
+          "title": "`<b-sub>`",
+          "depth": 2,
+          "id": "lessb-subgreater"
+        },
+        {
+          "title": "`<b-label>`",
+          "depth": 2,
+          "id": "lessb-labelgreater"
+        },
+        {
+          "title": "`<b-empty-state>`",
+          "depth": 2,
+          "id": "lessb-empty-stategreater"
+        },
+        {
+          "title": "`<b-spinner>`",
+          "depth": 2,
+          "id": "lessb-spinnergreater"
+        },
+        {
+          "title": "`<b-spinner-overlay>`",
+          "depth": 2,
+          "id": "lessb-spinner-overlaygreater"
+        },
+        {
+          "title": "`<b-uploader>`",
+          "depth": 2,
+          "id": "lessb-uploadergreater"
+        },
+        {
+          "title": "`<b-carousel>`",
+          "depth": 2,
+          "id": "lessb-carouselgreater"
+        },
+        {
+          "title": "`<b-timer>`",
+          "depth": 2,
+          "id": "lessb-timergreater"
+        }
+      ]
+    },
+    "icons.html": {
+      "source": "docs/icons.md",
+      "title": "Icons - Blackstone UI",
+      "pageTitle": "Icons",
+      "slug": "icons"
+    },
+    "util/index.html": {
+      "source": "util/README.md",
+      "title": "Util - Blackstone UI",
+      "pageTitle": "Util",
+      "slug": "util",
+      "headings": [
+        {
+          "title": "normalizeText",
+          "depth": 2,
+          "id": "normalizetext"
+        },
+        {
+          "title": "titleize",
+          "depth": 2,
+          "id": "titleize"
+        },
+        {
+          "title": "wait",
+          "depth": 2,
+          "id": "wait"
+        }
+      ]
+    },
+    "models/index.html": {
+      "source": "models/README.md",
+      "title": "Models - Blackstone UI",
+      "pageTitle": "Models",
+      "slug": "models",
+      "headings": [
+        {
+          "title": "Collection",
+          "depth": 2,
+          "id": "collection"
+        }
+      ]
+    },
+    "router/index.html": {
+      "source": "router/README.md",
+      "title": "Router - Blackstone UI",
+      "pageTitle": "Router",
+      "slug": "router",
+      "headings": [
+        {
+          "title": "TODO",
+          "depth": 2,
+          "id": "todo"
+        }
+      ]
+    },
+    "presenters/dialog/index.html": {
+      "source": "presenters/dialog/README.md",
+      "title": "Dialog - Blackstone UI",
+      "pageTitle": "Dialog",
+      "slug": "presentersdialog",
+      "headings": [
+        {
+          "title": "Options",
+          "depth": 2,
+          "id": "options"
+        },
+        {
+          "title": "Properties",
+          "depth": 2,
+          "id": "properties"
+        },
+        {
+          "title": "Presets",
+          "depth": 2,
+          "id": "presets"
+        },
+        {
+          "title": "Presenters",
+          "depth": 2,
+          "id": "presenters"
+        },
+        {
+          "title": "Promise Based",
+          "depth": 2,
+          "id": "promise-based"
+        },
+        {
+          "title": "Examples",
+          "depth": 2,
+          "id": "examples"
+        }
+      ]
+    },
+    "presenters/form-control/index.html": {
+      "source": "presenters/form-control/README.md",
+      "title": "Form Control - Blackstone UI",
+      "pageTitle": "Form Control",
+      "slug": "presentersform-control",
+      "headings": [
+        {
+          "title": "`<form-control>`",
+          "depth": 2,
+          "id": "lessform-controlgreater"
+        },
+        {
+          "title": "`<text-field>`",
+          "depth": 2,
+          "id": "lesstext-fieldgreater"
+        },
+        {
+          "title": "`<rich-text-field>`",
+          "depth": 2,
+          "id": "lessrich-text-fieldgreater"
+        },
+        {
+          "title": "`<select-field>`",
+          "depth": 2,
+          "id": "lessselect-fieldgreater"
+        },
+        {
+          "title": "`<check-box>`",
+          "depth": 2,
+          "id": "lesscheck-boxgreater"
+        },
+        {
+          "title": "`<radio-btn>`",
+          "depth": 2,
+          "id": "lessradio-btngreater"
+        },
+        {
+          "title": "`<range-slider>`",
+          "depth": 2,
+          "id": "lessrange-slidergreater"
+        },
+        {
+          "title": "`<form-handler>`",
+          "depth": 2,
+          "id": "lessform-handlergreater"
+        }
+      ]
+    },
+    "presenters/list/index.html": {
+      "source": "presenters/list/README.md",
+      "title": "List - Blackstone UI",
+      "pageTitle": "List",
+      "slug": "presenterslist",
+      "headings": [
+        {
+          "title": "Creating the List",
+          "depth": 2,
+          "id": "creating-the-list"
+        },
+        {
+          "title": "List Options",
+          "depth": 2,
+          "id": "list-options"
+        },
+        {
+          "title": "Filters",
+          "depth": 2,
+          "id": "filters",
+          "headings": [
+            {
+              "title": "Custom Filter View",
+              "depth": 3,
+              "id": "custom-filter-view"
+            }
+          ]
+        },
+        {
+          "title": "Search",
+          "depth": 2,
+          "id": "search"
+        },
+        {
+          "title": "Sorts",
+          "depth": 2,
+          "id": "sorts"
+        },
+        {
+          "title": "Divider",
+          "depth": 2,
+          "id": "divider"
+        },
+        {
+          "title": "HTML Slots",
+          "depth": 2,
+          "id": "html-slots"
+        },
+        {
+          "title": "Events",
+          "depth": 2,
+          "id": "events"
+        }
+      ]
+    },
+    "presenters/menu/index.html": {
+      "source": "presenters/menu/README.md",
+      "title": "Menu - Blackstone UI",
+      "pageTitle": "Menu",
+      "slug": "presentersmenu",
+      "headings": [
+        {
+          "title": "Examples",
+          "depth": 2,
+          "id": "examples"
+        },
+        {
+          "title": "Menu Items",
+          "depth": 2,
+          "id": "menu-items"
+        },
+        {
+          "title": "Options",
+          "depth": 2,
+          "id": "options",
+          "headings": [
+            {
+              "title": "Search",
+              "depth": 3,
+              "id": "search"
+            }
+          ]
+        },
+        {
+          "title": "Presenters",
+          "depth": 2,
+          "id": "presenters"
+        },
+        {
+          "title": "Changelog",
+          "depth": 2,
+          "id": "changelog"
+        }
+      ]
+    },
+    "presenters/panel/index.html": {
+      "source": "presenters/panel/README.md",
+      "title": "Panel - Blackstone UI",
+      "pageTitle": "Panel",
+      "slug": "presenterspanel",
+      "headings": [
+        {
+          "title": "Panel",
+          "depth": 2,
+          "id": "panel",
+          "headings": [
+            {
+              "title": "Properties / Options",
+              "depth": 3,
+              "id": "properties-options"
+            },
+            {
+              "title": "Rendering a Custom Element",
+              "depth": 3,
+              "id": "rendering-a-custom-element"
+            },
+            {
+              "title": "Rendering dynamic html",
+              "depth": 3,
+              "id": "rendering-dynamic-html"
+            }
+          ]
+        },
+        {
+          "title": "Toolbar",
+          "depth": 2,
+          "id": "toolbar",
+          "headings": [
+            {
+              "title": "Slots",
+              "depth": 3,
+              "id": "slots"
+            },
+            {
+              "title": "Attributes",
+              "depth": 3,
+              "id": "attributes"
+            }
+          ]
+        }
+      ]
+    },
+    "presenters/popover/index.html": {
+      "source": "presenters/popover/README.md",
+      "title": "Popover - Blackstone UI",
+      "pageTitle": "Popover",
+      "slug": "presenterspopover",
+      "headings": [
+        {
+          "title": "Rendering Views",
+          "depth": 2,
+          "id": "rendering-views",
+          "headings": [
+            {
+              "title": "Default Opts",
+              "depth": 3,
+              "id": "default-opts"
+            },
+            {
+              "title": "Options",
+              "depth": 3,
+              "id": "options"
+            }
+          ]
+        }
+      ]
+    },
+    "presenters/tabs/index.html": {
+      "source": "presenters/tabs/README.md",
+      "title": "Tabs - Blackstone UI",
+      "pageTitle": "Tabs",
+      "slug": "presenterstabs",
+      "headings": [
+        {
+          "title": "Attributes",
+          "depth": 2,
+          "id": "attributes"
+        },
+        {
+          "title": "Events",
+          "depth": 2,
+          "id": "events"
+        },
+        {
+          "title": "Style Hooks",
+          "depth": 2,
+          "id": "style-hooks"
+        },
+        {
+          "title": "Views",
+          "depth": 2,
+          "id": "views"
+        },
+        {
+          "title": "Custom Menu Items",
+          "depth": 2,
+          "id": "custom-menu-items"
+        },
+        {
+          "title": "Menu Slots",
+          "depth": 2,
+          "id": "menu-slots"
+        }
+      ]
+    }
+  },
+  "sources": {
+    "README.md": "index.html",
+    "elements/README.md": "elements/index.html",
+    "docs/icons.md": "icons.html",
+    "util/README.md": "util/index.html",
+    "models/README.md": "models/index.html",
+    "router/README.md": "router/index.html",
+    "presenters/dialog/README.md": "presenters/dialog/index.html",
+    "presenters/form-control/README.md": "presenters/form-control/index.html",
+    "presenters/list/README.md": "presenters/list/index.html",
+    "presenters/menu/README.md": "presenters/menu/index.html",
+    "presenters/panel/README.md": "presenters/panel/index.html",
+    "presenters/popover/README.md": "presenters/popover/index.html",
+    "presenters/tabs/README.md": "presenters/tabs/index.html",
+    "docs/bui.css": "bui.css",
+    "docs/bui.css.map": "bui.css.map",
+    "docs/bui.js": "bui.js",
+    "docs/bui.js.map": "bui.js.map",
+    "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
+    "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
+    "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
+    "docs/icons.svg.f5352611.html": "icons.svg.f5352611.html",
+    "docs/style.css": "style.css"
+  }
+}

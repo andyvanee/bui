@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../../style.css?t=38982a6c">
+    <link rel="stylesheet" href="../../bui.css?t=d9061fa6">
+    <script src="../../assets/script.js?t=42463e55"></script>
+    <script src="../../bui.js?t=34665fec"></script>
+    <title>Form Control - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-lessform-controlgreater" href="#lessform-controlgreater">`&lt;form-control&gt;`</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-lesstext-fieldgreater" href="#lesstext-fieldgreater">`&lt;text-field&gt;`</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-lessrich-text-fieldgreater" href="#lessrich-text-fieldgreater">`&lt;rich-text-field&gt;`</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-lessselect-fieldgreater" href="#lessselect-fieldgreater">`&lt;select-field&gt;`</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-lesscheck-boxgreater" href="#lesscheck-boxgreater">`&lt;check-box&gt;`</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-lessradio-btngreater" href="#lessradio-btngreater">`&lt;radio-btn&gt;`</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-lessrange-slidergreater" href="#lessrange-slidergreater">`&lt;range-slider&gt;`</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-lessform-handlergreater" href="#lessform-handlergreater">`&lt;form-handler&gt;`</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../../presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-presentersform-control">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="form-control">Form Control</h1>
+<h1 id="example">Example</h1>
+<p><img src="https://i.imgur.com/XcEXhKh.png" alt="screenshot"></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span> <span class="hljs-attr">id</span>=<span class="pl-s">&quot;email&quot;</span> <span class="hljs-attr">material</span>=<span class="pl-s">&quot;outline&quot;</span> <span class="hljs-attr">label</span>=<span class="pl-s">&quot;Email&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">text-field</span> <span class="hljs-attr">validate</span>=<span class="pl-s">&quot;email&quot;</span>&gt;</span>test@example.com<span class="hljs-tag">&lt;/<span class="hljs-name">text-field</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;prefix&quot;</span> <span class="hljs-attr">class</span>=<span class="pl-s">&quot;icon-mail&quot;</span>&gt;</span>&amp;nbsp;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;help&quot;</span>&gt;</span>Please provide your email<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-js"><span class="pl-k">let</span> control = <span class="pl-c1">document</span>.querySelector(<span class="pl-s">&apos;#email&apos;</span>)
+
+control.addEventListener(<span class="pl-s">&apos;change&apos;</span>, e=&gt;{
+	
+	<span class="pl-k">if</span>( control.isValid )
+		<span class="pl-c1">console</span>.log(control.value);
+})
+</code></pre>
+<h2 id="lessform-controlgreater"><code>&lt;form-control&gt;</code></h2>
+<p>Form controls provide a uniform and consistent style for controls (see below)</p>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>material</code> - material UI style (add =&#x201C;outline&#x201D; or =&#x201C;filled&#x201D; for variant)</li>
+<li><code>disabled</code></li>
+<li><code>label</code></li>
+<li><code>prefix</code></li>
+<li><code>suffix</code></li>
+</ul>
+<h4 id="slots">Slots</h4>
+<p>Slots provide a way to customize the display of the form control</p>
+<ul>
+<li><code>label</code></li>
+<li><code>prefix</code></li>
+<li><code>suffix</code></li>
+<li><code>before</code></li>
+<li><code>help</code></li>
+<li><code>after</code></li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;help&quot;</span>&gt;</span>Help text here<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
+</code></pre>
+<h4 id="style-hooks">Style Hooks</h4>
+<p>Some of the CSS styles can be tweaked using these CSS variables</p>
+<pre><code>--placeholderColor
+--selectionBgd
+--focusBgd
+--focusColor
+--bgd
+--borderColor
+--invalidColor
+</code></pre>
+<h1 id="controls">Controls</h1>
+<p>Every <code>form-control</code> should have one (and only one) control element.</p>
+<h2 id="lesstext-fieldgreater"><code>&lt;text-field&gt;</code></h2>
+<p>Creates an input-like control. Add <code>multiline</code> attribute to make it perform like a text area.</p>
+<!--
+<form-control label="Text Field" material>
+	<text-field></text-field>
+</form-control>
+
+<form-control label="Text Field" material>
+	<text-field type="date"></text-field>
+</form-control>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>required</code></li>
+<li><code>multiline</code></li>
+<li><code>validate=&quot;int&quot;</code> - regexp or preset</li>
+<li><code>max=&quot;10&quot;</code> - max length of chars</li>
+<li><code>type=&quot;date&quot;</code></li>
+<li><code>reset-invalid</code></li>
+<li><code>placeholder</code></li>
+</ul>
+<h2 id="lessrich-text-fieldgreater"><code>&lt;rich-text-field&gt;</code></h2>
+<p>Similar to the <code>text-field</code> but with <a href="https://quilljs.com">quill.js</a> enabled for rich text editing.</p>
+<p>The field will also auto convert some special characters (such as 3 periods to an ellipsis) using
+<code>util/normalizeText</code></p>
+<!--
+<form-control label="Rich Text Field" material style="width: 100%">
+	<rich-text-field></rich-text-field>
+</form-control>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>value</code></li>
+<li><code>placeholder</code></li>
+</ul>
+<blockquote>
+<p>NOTE: current quill.js doesn&#x2019;t like the shadowDOM so we are using a forked version
+that has changes made to work inside the shadowDOM; however, the changes
+may still have some issues in certain browsers &#x2013; see <a href="https://github.com/quilljs/quill/pull/2337">https://github.com/quilljs/quill/pull/2337</a></p>
+</blockquote>
+<h2 id="lessselect-fieldgreater"><code>&lt;select-field&gt;</code></h2>
+<p>Creates a select field that uses <code>Menu</code> and <code>Popover</code> to display options.</p>
+<!--
+<form-control label="Select Field" material>
+	<select-field>
+		<option value="">–</option>
+		<option value="1">Value 1</option>
+		<option value="2">Value 2</option>
+	</select-field>
+</form-control>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>multiple</code></li>
+<li><code>chip</code> - show selected values as &#x201C;chips&#x201D;</li>
+<li><code>show-empty</code> - by default, the selected empty value will NOT be shown</li>
+<li><code>menu-max-height</code></li>
+<li><code>menu-align</code></li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span> <span class="hljs-attr">material</span>=<span class="pl-s">&quot;filled&quot;</span> <span class="hljs-attr">label</span>=<span class="pl-s">&quot;Select an option&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">select-field</span> <span class="hljs-attr">show-empty</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">optgroup</span>&gt;</span>Header<span class="hljs-tag">&lt;/<span class="hljs-name">optgroup</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span> <span class="hljs-attr">selected</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i</span>&gt;</span>None<span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">hr</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="pl-s">&quot;yes&quot;</span>&gt;</span>Yes<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="pl-s">&quot;no&quot;</span>&gt;</span>No<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">select-field</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
+</code></pre>
+<p>The select-field options can also be set programmatically</p>
+<pre><code class="lang-js"><span class="pl-k">let</span> selectOptions = [
+	{<span class="hljs-attr">divider</span>: <span class="pl-s">&apos;Header&apos;</span>}
+	{<span class="hljs-attr">label</span>: <span class="pl-s">&apos;None&apos;</span>, <span class="hljs-attr">val</span>: <span class="pl-s">&apos;&apos;</span>},
+	<span class="pl-s">&apos;divider&apos;</span>
+	{<span class="hljs-attr">label</span>: <span class="pl-s">&apos;Option 1&apos;</span>, <span class="hljs-attr">val</span>: <span class="hljs-number">1</span>},
+	{<span class="hljs-attr">label</span>: <span class="pl-s">&apos;Option 2&apos;</span>, <span class="hljs-attr">val</span>: <span class="hljs-number">2</span>}
+]
+
+html<span class="pl-s">`&lt;form-control material=&quot;filled&quot; label=&quot;Select an option&quot;&gt;
+	&lt;select-field show-empty .options=<span class="hljs-subst">${selectOptions}</span>&gt;&lt;/select-field&gt;
+&lt;/form-control&gt;`</span>
+</code></pre>
+<h2 id="lesscheck-boxgreater"><code>&lt;check-box&gt;</code></h2>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>checked</code></li>
+<li><code>label</code></li>
+<li><code>placement=&quot;right&quot;</code> - placement of label</li>
+<li><code>type=&quot;switch&quot;</code></li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">check-box</span> <span class="hljs-attr">label</span>=<span class="pl-s">&quot;Active&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">check-box</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
+</code></pre>
+<!--
+<check-box label="Active"></check-box>
+-->
+<h2 id="lessradio-btngreater"><code>&lt;radio-btn&gt;</code></h2>
+<p>Radio buttons should be nested inside of a <code>radio-group</code></p>
+<!--
+<radio-group>
+	<radio-btn label="Male"></radio-btn>
+	<radio-btn label="Female"></radio-btn>
+</radio-group>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>active</code></li>
+<li><code>label</code></li>
+<li><code>placement=&quot;right&quot;</code> - placement of label</li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span> <span class="hljs-attr">material</span>=<span class="pl-s">&quot;filled&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">radio-group</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">radio-btn</span> <span class="hljs-attr">value</span> <span class="hljs-attr">label</span>=<span class="pl-s">&quot;Null&quot;</span> <span class="hljs-attr">active</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">radio-btn</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">radio-btn</span> <span class="hljs-attr">value</span>=<span class="pl-s">0</span> <span class="hljs-attr">label</span>=<span class="pl-s">&quot;No&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">radio-btn</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">radio-btn</span> <span class="hljs-attr">value</span>=<span class="pl-s">1</span> <span class="hljs-attr">label</span>=<span class="pl-s">&quot;Yes&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">radio-btn</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">radio-group</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
+</code></pre>
+<h2 id="lessrange-slidergreater"><code>&lt;range-slider&gt;</code></h2>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>value</code></li>
+<li><code>range</code> - true/false</li>
+<li><code>min</code></li>
+<li><code>max</code></li>
+<li><code>step</code> - how much the value should change by</li>
+<li><code>label</code> - auto/show (toggle or always show the value label)</li>
+</ul>
+<h2 id="lessform-handlergreater"><code>&lt;form-handler&gt;</code></h2>
+<p>Wrap this around form controls to sync with a backbone model</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-handler</span> <span class="hljs-attr">.model</span>=<span class="pl-s">${this.model}</span> <span class="hljs-attr">autosave</span> <span class="hljs-attr">patchsave</span>&gt;</span>
+	
+	<span class="hljs-tag">&lt;<span class="hljs-name">form-control</span> <span class="hljs-attr">key</span>=<span class="pl-s">&quot;attr_1&quot;</span>&gt;</span>
+		<span class="pl-c">&lt;!-- .... --&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
+
+	<span class="hljs-tag">&lt;<span class="hljs-name">form-control</span> <span class="hljs-attr">key</span>=<span class="pl-s">&quot;attr_2&quot;</span>&gt;</span>
+		<span class="pl-c">&lt;!-- .... --&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">form-handler</span>&gt;</span>
+</code></pre>
+<p>You can also choose to save changes in local storage instead of model by using the <code>store</code> attribute</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-handler</span> <span class="hljs-attr">store</span>=<span class="pl-s">&quot;local-store-key&quot;</span>&gt;</span>
+	<span class="pl-c">&lt;!-- .... --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form-handler</span>&gt;</span>
+</code></pre>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>autosave</code> - will save any control changes to the model</li>
+<li><code>patchsave</code> - use with <code>autosave</code>; changed values will be synced with <code>patch:true</code></li>
+<li><code>store</code> - a key to save form data in local storage</li>
+<li><code>no-grid-area</code> - disable auto grid-area names</li>
+</ul>
+<h1 id="notes">Notes</h1>
+<ul>
+<li>TODO: fix rich-text-fild relying on <code>util/htmlCleaner</code></li>
+<li>TODO: range-slider has issues when nested in certain elements</li>
+<li>IDEA: <a href="https://github.com/insin/inputmask-core">https://github.com/insin/inputmask-core</a></li>
+</ul>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../../presenters/dialog/index.html"><span class="title">Dialog</span></a></div>
+          <div class="right"><a href="../../presenters/list/index.html"><span class="label">Next: </span><span class="title">List</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

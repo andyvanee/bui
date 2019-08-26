@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../../style.css?t=38982a6c">
+    <link rel="stylesheet" href="../../bui.css?t=d9061fa6">
+    <script src="../../assets/script.js?t=42463e55"></script>
+    <script src="../../bui.js?t=34665fec"></script>
+    <title>Popover - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-rendering-views" href="#rendering-views">Rendering Views</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-default-opts" href="#default-opts">Default Opts</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-options" href="#options">Options</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../../presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-presenterspopover">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="popover">Popover</h1>
+<p>Uses <a href="https://popper.js.org">popper.js</a> to display views as a popover
+over a partiuclar target</p>
+<h2 id="rendering-views">Rendering Views</h2>
+<p>Popover should only be used as the presenter of views and not be
+responsible for rendering or controlling the view.</p>
+<p>Use views like <code>Menu</code> and <code>Dialog</code> or roll your own and then use
+popover to display your view.</p>
+<pre><code class="lang-js"><span class="pl-k">let</span> view = <span class="pl-k">new</span> MyView()
+<span class="pl-k">let</span> popover = <span class="pl-k">new</span> Popover(target, view, opts)
+</code></pre>
+<h3 id="default-opts">Default Opts</h3>
+<pre><code class="lang-js"><span class="pl-k">const</span> DefaultOpts = {
+	<span class="hljs-attr">align</span>: <span class="pl-s">&apos;bottom&apos;</span>,
+	<span class="hljs-attr">className</span>: <span class="pl-s">&apos;&apos;</span>,
+	<span class="hljs-attr">clickToggles</span>: <span class="pl-c1">true</span>,
+	<span class="hljs-attr">closeOnHide</span>: <span class="pl-c1">true</span>,
+	<span class="hljs-attr">maxHeight</span>: <span class="pl-s">&apos;auto&apos;</span>,
+	<span class="hljs-attr">maxHeightThreshold</span>: <span class="hljs-number">400</span>,
+	<span class="hljs-attr">onClose</span>: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{},
+	<span class="hljs-attr">onKeydown</span>: <span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{}
+}
+</code></pre>
+<h3 id="options">Options</h3>
+<p><code>maxHeight</code> - (string) can be pixels, percent, or <code>vh</code></p>
+<p><code>overflowBoundry</code> - &#x2018;scrollParent&#x2019;, &#x2018;window&#x2019;, or an element</p>
+<blockquote>
+<p>Note: you may want to set <code>maxHeight</code> as well</p>
+</blockquote>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../../presenters/panel/index.html"><span class="title">Panel</span></a></div>
+          <div class="right"><a href="../../presenters/tabs/index.html"><span class="label">Next: </span><span class="title">Tabs</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
