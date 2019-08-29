@@ -36,62 +36,62 @@
         "slug": "elements",
         "headings": [
           {
-            "title": "`<b-paper>`",
+            "title": "<b-paper>",
             "depth": 2,
             "id": "lessb-papergreater"
           },
           {
-            "title": "`<b-btn>`",
+            "title": "<b-btn>",
             "depth": 2,
             "id": "lessb-btngreater"
           },
           {
-            "title": "`<b-icon>`",
+            "title": "<b-icon>",
             "depth": 2,
             "id": "lessb-icongreater"
           },
           {
-            "title": "`<b-hr>`",
+            "title": "<b-hr>",
             "depth": 2,
             "id": "lessb-hrgreater"
           },
           {
-            "title": "`<b-sub>`",
+            "title": "<b-sub>",
             "depth": 2,
             "id": "lessb-subgreater"
           },
           {
-            "title": "`<b-label>`",
+            "title": "<b-label>",
             "depth": 2,
             "id": "lessb-labelgreater"
           },
           {
-            "title": "`<b-empty-state>`",
+            "title": "<b-empty-state>",
             "depth": 2,
             "id": "lessb-empty-stategreater"
           },
           {
-            "title": "`<b-spinner>`",
+            "title": "<b-spinner>",
             "depth": 2,
             "id": "lessb-spinnergreater"
           },
           {
-            "title": "`<b-spinner-overlay>`",
+            "title": "<b-spinner-overlay>",
             "depth": 2,
             "id": "lessb-spinner-overlaygreater"
           },
           {
-            "title": "`<b-uploader>`",
+            "title": "<b-uploader>",
             "depth": 2,
             "id": "lessb-uploadergreater"
           },
           {
-            "title": "`<b-carousel>`",
+            "title": "<b-carousel>",
             "depth": 2,
             "id": "lessb-carouselgreater"
           },
           {
-            "title": "`<b-timer>`",
+            "title": "<b-timer>",
             "depth": 2,
             "id": "lessb-timergreater"
           }
@@ -128,6 +128,46 @@
                 "title": "wait",
                 "depth": 2,
                 "id": "wait"
+              },
+              {
+                "title": "toCSV",
+                "depth": 2,
+                "id": "tocsv"
+              },
+              {
+                "title": "csvToArray",
+                "depth": 2,
+                "id": "csvtoarray"
+              },
+              {
+                "title": "readFile",
+                "depth": 2,
+                "id": "readfile"
+              }
+            ]
+          },
+          {
+            "title": "Helpers",
+            "source": "helpers/README.md",
+            "url": "helpers/index.html",
+            "slug": "helpers",
+            "headings": [
+              {
+                "title": "Helpers",
+                "depth": 2,
+                "id": "helpers",
+                "headings": [
+                  {
+                    "title": "LitElement Extensions",
+                    "depth": 3,
+                    "id": "litelement-extensions"
+                  },
+                  {
+                    "title": "Backbone.js Integration",
+                    "depth": 3,
+                    "id": "backbone.js-integration"
+                  }
+                ]
               }
             ]
           },
@@ -207,42 +247,42 @@
             "slug": "presentersform-control",
             "headings": [
               {
-                "title": "`<form-control>`",
+                "title": "<form-control>",
                 "depth": 2,
                 "id": "lessform-controlgreater"
               },
               {
-                "title": "`<text-field>`",
+                "title": "<text-field>",
                 "depth": 2,
                 "id": "lesstext-fieldgreater"
               },
               {
-                "title": "`<rich-text-field>`",
+                "title": "<rich-text-field>",
                 "depth": 2,
                 "id": "lessrich-text-fieldgreater"
               },
               {
-                "title": "`<select-field>`",
+                "title": "<select-field>",
                 "depth": 2,
                 "id": "lessselect-fieldgreater"
               },
               {
-                "title": "`<check-box>`",
+                "title": "<check-box>",
                 "depth": 2,
                 "id": "lesscheck-boxgreater"
               },
               {
-                "title": "`<radio-btn>`",
+                "title": "<radio-btn>",
                 "depth": 2,
                 "id": "lessradio-btngreater"
               },
               {
-                "title": "`<range-slider>`",
+                "title": "<range-slider>",
                 "depth": 2,
                 "id": "lessrange-slidergreater"
               },
               {
-                "title": "`<form-handler>`",
+                "title": "<form-handler>",
                 "depth": 2,
                 "id": "lessform-handlergreater"
               }
@@ -287,19 +327,36 @@
                 "id": "sorts"
               },
               {
-                "title": "Divider",
+                "title": "Other Views",
                 "depth": 2,
-                "id": "divider"
-              },
-              {
-                "title": "HTML Slots",
-                "depth": 2,
-                "id": "html-slots"
+                "id": "other-views",
+                "headings": [
+                  {
+                    "title": "Header",
+                    "depth": 3,
+                    "id": "header"
+                  },
+                  {
+                    "title": "Divider",
+                    "depth": 3,
+                    "id": "divider"
+                  },
+                  {
+                    "title": "Slots",
+                    "depth": 3,
+                    "id": "slots"
+                  }
+                ]
               },
               {
                 "title": "Events",
                 "depth": 2,
                 "id": "events"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods"
               }
             ]
           },
@@ -493,62 +550,62 @@
       "slug": "elements",
       "headings": [
         {
-          "title": "`<b-paper>`",
+          "title": "<b-paper>",
           "depth": 2,
           "id": "lessb-papergreater"
         },
         {
-          "title": "`<b-btn>`",
+          "title": "<b-btn>",
           "depth": 2,
           "id": "lessb-btngreater"
         },
         {
-          "title": "`<b-icon>`",
+          "title": "<b-icon>",
           "depth": 2,
           "id": "lessb-icongreater"
         },
         {
-          "title": "`<b-hr>`",
+          "title": "<b-hr>",
           "depth": 2,
           "id": "lessb-hrgreater"
         },
         {
-          "title": "`<b-sub>`",
+          "title": "<b-sub>",
           "depth": 2,
           "id": "lessb-subgreater"
         },
         {
-          "title": "`<b-label>`",
+          "title": "<b-label>",
           "depth": 2,
           "id": "lessb-labelgreater"
         },
         {
-          "title": "`<b-empty-state>`",
+          "title": "<b-empty-state>",
           "depth": 2,
           "id": "lessb-empty-stategreater"
         },
         {
-          "title": "`<b-spinner>`",
+          "title": "<b-spinner>",
           "depth": 2,
           "id": "lessb-spinnergreater"
         },
         {
-          "title": "`<b-spinner-overlay>`",
+          "title": "<b-spinner-overlay>",
           "depth": 2,
           "id": "lessb-spinner-overlaygreater"
         },
         {
-          "title": "`<b-uploader>`",
+          "title": "<b-uploader>",
           "depth": 2,
           "id": "lessb-uploadergreater"
         },
         {
-          "title": "`<b-carousel>`",
+          "title": "<b-carousel>",
           "depth": 2,
           "id": "lessb-carouselgreater"
         },
         {
-          "title": "`<b-timer>`",
+          "title": "<b-timer>",
           "depth": 2,
           "id": "lessb-timergreater"
         }
@@ -580,6 +637,46 @@
           "title": "wait",
           "depth": 2,
           "id": "wait"
+        },
+        {
+          "title": "toCSV",
+          "depth": 2,
+          "id": "tocsv"
+        },
+        {
+          "title": "csvToArray",
+          "depth": 2,
+          "id": "csvtoarray"
+        },
+        {
+          "title": "readFile",
+          "depth": 2,
+          "id": "readfile"
+        }
+      ]
+    },
+    "helpers/index.html": {
+      "source": "helpers/README.md",
+      "title": "Helpers - Blackstone UI",
+      "pageTitle": "Helpers",
+      "slug": "helpers",
+      "headings": [
+        {
+          "title": "Helpers",
+          "depth": 2,
+          "id": "helpers",
+          "headings": [
+            {
+              "title": "LitElement Extensions",
+              "depth": 3,
+              "id": "litelement-extensions"
+            },
+            {
+              "title": "Backbone.js Integration",
+              "depth": 3,
+              "id": "backbone.js-integration"
+            }
+          ]
         }
       ]
     },
@@ -654,42 +751,42 @@
       "slug": "presentersform-control",
       "headings": [
         {
-          "title": "`<form-control>`",
+          "title": "<form-control>",
           "depth": 2,
           "id": "lessform-controlgreater"
         },
         {
-          "title": "`<text-field>`",
+          "title": "<text-field>",
           "depth": 2,
           "id": "lesstext-fieldgreater"
         },
         {
-          "title": "`<rich-text-field>`",
+          "title": "<rich-text-field>",
           "depth": 2,
           "id": "lessrich-text-fieldgreater"
         },
         {
-          "title": "`<select-field>`",
+          "title": "<select-field>",
           "depth": 2,
           "id": "lessselect-fieldgreater"
         },
         {
-          "title": "`<check-box>`",
+          "title": "<check-box>",
           "depth": 2,
           "id": "lesscheck-boxgreater"
         },
         {
-          "title": "`<radio-btn>`",
+          "title": "<radio-btn>",
           "depth": 2,
           "id": "lessradio-btngreater"
         },
         {
-          "title": "`<range-slider>`",
+          "title": "<range-slider>",
           "depth": 2,
           "id": "lessrange-slidergreater"
         },
         {
-          "title": "`<form-handler>`",
+          "title": "<form-handler>",
           "depth": 2,
           "id": "lessform-handlergreater"
         }
@@ -734,19 +831,36 @@
           "id": "sorts"
         },
         {
-          "title": "Divider",
+          "title": "Other Views",
           "depth": 2,
-          "id": "divider"
-        },
-        {
-          "title": "HTML Slots",
-          "depth": 2,
-          "id": "html-slots"
+          "id": "other-views",
+          "headings": [
+            {
+              "title": "Header",
+              "depth": 3,
+              "id": "header"
+            },
+            {
+              "title": "Divider",
+              "depth": 3,
+              "id": "divider"
+            },
+            {
+              "title": "Slots",
+              "depth": 3,
+              "id": "slots"
+            }
+          ]
         },
         {
           "title": "Events",
           "depth": 2,
           "id": "events"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods"
         }
       ]
     },
@@ -906,6 +1020,7 @@
     "elements/README.md": "elements/index.html",
     "docs/icons.md": "icons.html",
     "util/README.md": "util/index.html",
+    "helpers/README.md": "helpers/index.html",
     "models/README.md": "models/index.html",
     "router/README.md": "router/index.html",
     "presenters/dialog/README.md": "presenters/dialog/index.html",

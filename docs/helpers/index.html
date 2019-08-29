@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../bui.css?t=d9061fa6">
     <script src="../assets/script.js?t=42463e55"></script>
     <script src="../bui.js?t=34665fec"></script>
-    <title>Router - Blackstone UI</title>
+    <title>Helpers - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -28,15 +28,21 @@
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-util" href="../util/index.html">Util</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-helpers" href="../helpers/index.html">Helpers</a>
+                <li class="menu-item -level-2"><a class="link title -active link-helpers" href="../helpers/index.html">Helpers</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-helpers" href="#helpers">Helpers</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-litelement-extensions" href="#litelement-extensions">LitElement Extensions</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-backbone.js-integration" href="#backbone.js-integration">Backbone.js Integration</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title -active link-router" href="../router/index.html">Router</a>
-                  <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-todo" href="#todo">TODO</a>
-                    </li>
-                  </ul>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
                 </li>
               </ul>
             </li>
@@ -61,29 +67,31 @@
           </ul>
         </li>
       </div>
-      <div class="body page-router">
+      <div class="body page-helpers">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="router">Router</h1>
-<blockquote>
-<p>Documentation needed</p>
-</blockquote>
-<p>A class for managing the URL and routing to views. Router is a singleton class</p>
-<p>Routes can be added manually, but should generally be used by core UI components
-such as Panel. Panels leverage the router with a <code>.register()</code> method</p>
-<pre><code class="lang-javascript">Panel.register(<span class="pl-s">&apos;url-path&apos;</span>, <span class="pl-s">&apos;view-name&apos;</span>, opts={})
+        <div class="markdown-body"><h2 id="helpers">Helpers</h2>
+<h3 id="litelement-extensions">LitElement Extensions</h3>
+<p>We&#x2019;ve added some extenions LitElement to fit our needs at Blackstone</p>
+<p><a href="./helpers/lit-element/README.md">read more</a></p>
+<h3 id="backbone.js-integration">Backbone.js Integration</h3>
+<p>We are still using Backbone models and collections for data management (for now at least)
+and Backbone views are still used as top level entry points for UI.</p>
+<p><code>Backbone.View</code> will render the contents of the <code>html()</code> method:</p>
+<pre><code class="lang-javascript"><span class="pl-k">import</span> {html} <span class="pl-k">from</span> <span class="pl-s">&apos;lit-html&apos;</span>
+<span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyView</span> <span class="pl-k">extends</span> <span class="pl-ent">Backbone</span>.<span class="pl-ent">View</span> </span>{
+    html(){<span class="pl-k">return</span> html<span class="pl-s">`
+        create your html view here
+    `</span>}
+}
 </code></pre>
-<h2 id="todo">TODO</h2>
-<ul>
-<li>needs to be able to handle base URLs that aren&#x2019;t at the root</li>
-</ul>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../models/index.html"><span class="title">Models</span></a></div>
-          <div class="right"><a href="../presenters/dialog/index.html"><span class="label">Next: </span><span class="title">Dialog</span></a></div>
+          <div class="left"><a href="../util/index.html"><span class="title">Util</span></a></div>
+          <div class="right"><a href="../models/index.html"><span class="label">Next: </span><span class="title">Models</span></a></div>
         </div>
       </div>
     </div>

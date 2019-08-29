@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
-    <link rel="stylesheet" href="../../style.css?t=38982a6c">
+    <link rel="stylesheet" href="../../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../../bui.css?t=d9061fa6">
     <script src="../../assets/script.js?t=42463e55"></script>
     <script src="../../bui.js?t=34665fec"></script>
@@ -27,6 +27,8 @@
             <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-helpers" href="../../helpers/index.html">Helpers</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
                 </li>
@@ -56,11 +58,19 @@
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-sorts" href="#sorts">Sorts</a>
                     </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-divider" href="#divider">Divider</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-html-slots" href="#html-slots">HTML Slots</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-other-views" href="#other-views">Other Views</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-header" href="#header">Header</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-divider" href="#divider">Divider</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-slots" href="#slots">Slots</a>
+                        </li>
+                      </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-events" href="#events">Events</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-methods" href="#methods">Methods</a>
                     </li>
                   </ul>
                 </li>
@@ -97,11 +107,17 @@ and filter the results.</p>
     @<span class="hljs-attr">content-changed</span>=<span class="pl-s">${this.onContentChange}</span>
 &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-list</span>&gt;</span>
 </code></pre>
+<blockquote>
+<p><em>NOTE:</em> the list will link itself to the host view as <code>.list</code>
+(so long as .list is not already set)</p>
+</blockquote>
 <h4 id="attributes">Attributes</h4>
 <ul>
 <li><code>key</code> - used to remember which filters are selected</li>
 <li><code>row</code> - the name of the custom element to use for each item</li>
+<li><code>divider</code> - optional divider (see below)</li>
 <li><code>.coll</code> - a Backbone.Collection to use for fetching data</li>
+<li><code>listOptions</code> - change defaults (see below)</li>
 </ul>
 <h2 id="list-options">List Options</h2>
 <p>Options passed along to the infinite-list</p>
@@ -233,7 +249,14 @@ a <code>searchMatches</code> property they can check to see why they are being d
     }
 }
 </code></pre>
-<h2 id="divider">Divider</h2>
+<h2 id="other-views">Other Views</h2>
+<h3 id="header">Header</h3>
+<p>A list header can be rendered between the toolbar and the list items.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-list</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;header&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-list</span>&gt;</span>
+</code></pre>
+<h3 id="divider">Divider</h3>
 <p>A divider can be added to the list.</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-list</span> <span class="hljs-attr">divider</span>=<span class="pl-s">&quot;my-divider-elment&quot;</span>&gt;</span>
 </code></pre>
@@ -249,12 +272,14 @@ a <code>searchMatches</code> property they can check to see why they are being d
     }
 }
 </code></pre>
-<h2 id="html-slots">HTML Slots</h2>
+<h3 id="slots">Slots</h3>
 <p>The default list view can be extended with html slots</p>
 <ul>
 <li><code>spinner</code> - if you want to use a different spinner</li>
 <li><code>toolbar:before</code></li>
 <li><code>toolbar:after</code></li>
+<li><code>toolbar:refresh</code> - your own refresh button (or to remove default)</li>
+<li><code>header</code></li>
 </ul>
 <h2 id="events">Events</h2>
 <p>Filters and Sorts emit events when changed:</p>
@@ -264,6 +289,11 @@ list.sorts.on(&apos;change&apos;, selectedSorts=&gt;{})
 <p>The list dispatches a DOM event when the content changes (this would happen when applied filters change, sort changes, or content is fetched from the server)</p>
 <pre><code>list.addEventListener(&apos;content-changed&apos;, e=&gt;{})
 </code></pre>
+<h2 id="methods">Methods</h2>
+<ul>
+<li><code>refresh</code> - clears the list and fetches new data</li>
+<li><code>reload</code> - reapplies the filters and reloads the table (new data NOT fetched)</li>
+</ul>
 
         </div>
         <div class="footer-nav">
