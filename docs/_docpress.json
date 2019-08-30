@@ -86,6 +86,11 @@
             "id": "lessb-uploadergreater"
           },
           {
+            "title": "<b-embed>",
+            "depth": 2,
+            "id": "lessb-embedgreater"
+          },
+          {
             "title": "<b-carousel>",
             "depth": 2,
             "id": "lessb-carouselgreater"
@@ -444,6 +449,11 @@
                     "id": "attributes"
                   }
                 ]
+              },
+              {
+                "title": "Modal",
+                "depth": 2,
+                "id": "modal"
               }
             ]
           },
@@ -598,6 +608,11 @@
           "title": "<b-uploader>",
           "depth": 2,
           "id": "lessb-uploadergreater"
+        },
+        {
+          "title": "<b-embed>",
+          "depth": 2,
+          "id": "lessb-embedgreater"
         },
         {
           "title": "<b-carousel>",
@@ -948,6 +963,11 @@
               "id": "attributes"
             }
           ]
+        },
+        {
+          "title": "Modal",
+          "depth": 2,
+          "id": "modal"
         }
       ]
     },
@@ -1037,6 +1057,7 @@
     "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
     "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
+    "docs/icons.svg.c6868b42.html": "icons.svg.c6868b42.html",
     "docs/icons.svg.f5352611.html": "icons.svg.f5352611.html",
     "docs/style.css": "style.css"
   }

@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=d9061fa6">
+    <link rel="stylesheet" href="../../bui.css?t=f74feee3">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=34665fec"></script>
+    <script src="../../bui.js?t=fcac32cb"></script>
     <title>Panel - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -66,6 +66,8 @@
                         </li>
                       </ul>
                     </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-modal" href="#modal">Modal</a>
+                    </li>
                   </ul>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
@@ -96,6 +98,7 @@ panel.open()
 <li><code>height</code> (string)</li>
 <li><code>anchor</code> (top, right, bottom, left, center)</li>
 <li><code>type</code> (modal)</li>
+<li><code>closeBtn</code> (bool) - will show a close button in the top right</li>
 <li><code>animation</code> (scale [only works on anchor=center])</li>
 <li><code>disableBackdropClick</code></li>
 <li><code>onClose</code></li>
@@ -177,6 +180,15 @@ needs to render one. A panel toolbar element has been created for such a task.</
 <li><code>overlay</code></li>
 <li><code>notitle</code></li>
 </ul>
+<h2 id="modal">Modal</h2>
+<p>Although designed as a large panel view, panels can be leveraged to present
+modal (popup/alert) windows. This can be accomplished through the options
+parameter or through the convenient Modal function</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> {Modal} <span class="pl-k">from</span> <span class="pl-s">&apos;bui/presenters/panel&apos;</span>
+
+Modal(<span class="pl-s">&apos;my-view&apos;</span>)
+Modal(<span class="pl-s">&apos;my-view&apos;</span>, {<span class="hljs-attr">width</span>: <span class="pl-s">&apos;400px&apos;</span>, <span class="hljs-attr">closeBtn</span>: <span class="pl-c1">true</span>})
+</code></pre>
 
         </div>
         <div class="footer-nav">
