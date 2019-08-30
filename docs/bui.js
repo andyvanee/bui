@@ -9969,6 +9969,82 @@ customElements.define('b-sub', class extends _litElement.LitElement {
 var _default = customElements.get('b-sub');
 
 exports.default = _default;
+},{"lit-element":"+bhx"}],"bpDM":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+// https://embedresponsively.com/ 
+customElements.define('b-embed', class Embed extends _litElement.LitElement {
+  static get properties() {
+    return {
+      url: {
+        type: String
+      }
+    };
+  }
+
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            position:relative;
+        }
+
+        main {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <main>
+            <iframe src='${this.formattedURL}' 
+                    frameborder='0' 
+                    allowfullscreen>
+            </iframe>
+        </main>
+    `;
+  }
+
+  get formattedURL() {
+    if (!this.url) return '';
+    let match = Embed.isYoutube(this.url);
+
+    if (match) {
+      return 'https://www.youtube.com/embed/' + match[1];
+    }
+
+    return this.url;
+  }
+
+  static isYoutube(url) {
+    return url.match(/(?:youtu\.be|youtube\.com)\/(?:watch\?v\=)?(?:embed\/)?(.+)/);
+  }
+
+});
+
+var _default = customElements.get('b-embed');
+
+exports.default = _default;
 },{"lit-element":"+bhx"}],"/jTP":[function(require,module,exports) {
 "use strict";
 
@@ -35383,6 +35459,8 @@ require("../elements/hr");
 
 require("../elements/sub");
 
+require("../elements/embed");
+
 require("../presenters/tabs");
 
 require("../presenters/form-control");
@@ -35437,7 +35515,7 @@ history.replaceState = (f => function replaceState() {
 window.addEventListener('popstate', function () {
   convertComments();
 });
-},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/carousel":"inC5","../elements/timer":"u+eY","../elements/empty-state":"+2dU","../elements/label":"DcCw","../elements/hr":"IOAQ","../elements/sub":"VANQ","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../presenters/dialog":"pos3","../presenters/menu":"0tCY"}],"RVcF":[function(require,module,exports) {
+},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/carousel":"inC5","../elements/timer":"u+eY","../elements/empty-state":"+2dU","../elements/label":"DcCw","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/embed":"bpDM","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../presenters/dialog":"pos3","../presenters/menu":"0tCY"}],"RVcF":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
