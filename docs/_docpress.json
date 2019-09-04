@@ -71,6 +71,11 @@
             "id": "lessb-labelgreater"
           },
           {
+            "title": "<b-avatar>",
+            "depth": 2,
+            "id": "lessb-avatargreater"
+          },
+          {
             "title": "<b-empty-state>",
             "depth": 2,
             "id": "lessb-empty-stategreater"
@@ -598,6 +603,11 @@
           "title": "<b-label>",
           "depth": 2,
           "id": "lessb-labelgreater"
+        },
+        {
+          "title": "<b-avatar>",
+          "depth": 2,
+          "id": "lessb-avatargreater"
         },
         {
           "title": "<b-empty-state>",

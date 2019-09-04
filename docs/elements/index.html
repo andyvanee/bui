@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=f74feee3">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=7891f80b"></script>
+    <script src="../bui.js?t=12b93e86"></script>
     <title>Elements - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -31,6 +31,8 @@
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-subgreater" href="#lessb-subgreater">&lt;b-sub&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-labelgreater" href="#lessb-labelgreater">&lt;b-label&gt;</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-avatargreater" href="#lessb-avatargreater">&lt;b-avatar&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-empty-stategreater" href="#lessb-empty-stategreater">&lt;b-empty-state&gt;</a>
                 </li>
@@ -188,6 +190,36 @@ Can be altered to display as filled, outlined, or as a badge.</p>
 <ul>
 <li><code>--dividerThickness</code></li>
 </ul>
+<h2 id="lessb-avatargreater"><code>&lt;b-avatar&gt;</code></h2>
+<p>Create scalable avatars with initials or image with from a url or gravatar GUID</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-avatar</span> <span class="hljs-attr">initials</span>=<span class="pl-s">&quot;KJ&quot;</span> <span class="hljs-attr">size</span>=<span class="pl-s">&quot;40&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-avatar</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-avatar</span> <span class="hljs-attr">initials</span>=<span class="pl-s">&quot;BT&quot;</span> <span class="hljs-attr">size</span>=<span class="pl-s">&quot;40&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-avatar</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-avatar</span> <span class="hljs-attr">initials</span>=<span class="pl-s">&quot;JD&quot;</span> <span class="hljs-attr">size</span>=<span class="pl-s">&quot;40&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-avatar</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-avatar</span> <span class="hljs-attr">initials</span>=<span class="pl-s">&quot;KJ&quot;</span> <span class="hljs-attr">bgd</span>=<span class="pl-s">&quot;#E91E63&quot;</span> <span class="hljs-attr">size</span>=<span class="pl-s">&quot;40&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-avatar</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-avatar</span> <span class="hljs-attr">gravatar</span>=<span class="pl-s">&quot;6bd69795f929a40746cdf026a03b703e&quot;</span> <span class="hljs-attr">size</span>=<span class="pl-s">&quot;40&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-avatar</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-avatar</span> <span class="hljs-attr">url</span>=<span class="pl-s">&quot;https://i.imgur.com/6QKG2AG.png&quot;</span> <span class="hljs-attr">size</span>=<span class="pl-s">&quot;40&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-avatar</span>&gt;</span>
+</code></pre>
+<!--
+<b-avatar initials="KJ" size="40"></b-avatar>
+<b-avatar initials="BT" size="40"></b-avatar>
+<b-avatar initials="JD" size="40"></b-avatar>
+<b-avatar initials="KJ" bgd="#E91E63" size="40"></b-avatar>
+<b-avatar gravatar="6bd69795f929a40746cdf026a03b703e" size="40"></b-avatar>
+<b-avatar url="https://i.imgur.com/6QKG2AG.png" size="40"></b-avatar>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>initials</code> - will display a dash if not set</li>
+<li><code>bgd</code> - defaults to selecting a color keyed from the initials</li>
+<li><code>color</code> - text color, defaults to white</li>
+<li><code>size</code> - default: 24</li>
+<li><code>gravatar</code> - the GUID of a <a href="https://en.gravatar.com/">gravatar</a> account</li>
+<li><code>url</code> - specify a custom image to use</li>
+</ul>
+<h4 id="changing-default-colors">Changing default colors</h4>
+<pre><code class="lang-js"><span class="pl-k">import</span> {BgdColors} <span class="pl-k">from</span> <span class="pl-s">&apos;avatar&apos;</span>
+BgdColors = [<span class="pl-c">/*...array of colors...*/</span>]
+</code></pre>
 <h2 id="lessb-empty-stategreater"><code>&lt;b-empty-state&gt;</code></h2>
 <p>Use to show a message when a view is empty. <strong>NOTE:</strong> make sure the parent
 element has <code>position:relative</code> (or absolute)</p>
