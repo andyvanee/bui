@@ -8,6 +8,11 @@
         "slug": "index",
         "headings": [
           {
+            "title": "Installation",
+            "depth": 2,
+            "id": "installation"
+          },
+          {
             "title": "Overview",
             "depth": 2,
             "id": "overview"
@@ -531,6 +536,11 @@
       "pageTitle": "Blackstone UI",
       "slug": "index",
       "headings": [
+        {
+          "title": "Installation",
+          "depth": 2,
+          "id": "installation"
+        },
         {
           "title": "Overview",
           "depth": 2,

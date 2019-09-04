@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css?t=0174a9d9">
     <link rel="stylesheet" href="bui.css?t=f74feee3">
     <script src="assets/script.js?t=42463e55"></script>
-    <script src="bui.js?t=f0773cf6"></script>
+    <script src="bui.js?t=94ac0941"></script>
     <title>Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -18,6 +18,8 @@
           <ul class="submenu">
             <li class="menu-item -level-1"><a class="link title -active link-index" href="index.html">Blackstone UI</a>
               <ul class="headings heading-list">
+                <li class="heading-item -depth-2"><a class="hlink link-installation" href="#installation">Installation</a>
+                </li>
                 <li class="heading-item -depth-2"><a class="hlink link-overview" href="#overview">Overview</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-developing" href="#developing">Developing</a>
@@ -72,9 +74,17 @@
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><p><img src="https://i.imgur.com/6QKG2AG.png" alt="logo"></p>
-<p><a href="http://kjantzer.github.io/bui/"><img src="https://img.shields.io/badge/-Demo-blue" alt="demo"></a>
+        <div class="markdown-body"><p align="center">
+  <a href="https://github.com/kjantzer/bui" rel="noopener" target="_blank">
+    <img width="200" src="https://i.imgur.com/MZ8wSL8.png">
+  </a>
+</p>
+<h1 align="center" id="blackstone-ui">Blackstone-UI</h1>
+<div align="center">
+<p><a href="https://www.npmjs.com/package/blackstone-ui"><img src="https://img.shields.io/badge/npm-v1.0.2-blue" alt="demo"></a>
+<a href="http://kjantzer.github.io/bui/"><img src="https://img.shields.io/badge/-Demo-blue" alt="demo"></a>
 <a href="http://kjantzer.github.io/bui/docs/"><img src="https://img.shields.io/badge/-Documentation-black" alt="docs"></a></p>
+</div>
 <p>Web components for creating interfaces - built with <a href="https://lit-html.polymer-project.org/">lit-html</a> and <a href="https://lit-element.polymer-project.org/">lit-element</a> by <a href="https://blackstonepublishing.com">Blackstone Publishing</a></p>
 <hr>
 <p>Example</p>
@@ -106,6 +116,10 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
 
 </code></pre>
+<h2 id="installation">Installation</h2>
+<p>Blackstone-UI is available as an <a href="https://www.npmjs.com/package/blackstone-ui">npm package</a></p>
+<pre><code>npm install blackstone-ui
+</code></pre>
 <h2 id="overview">Overview</h2>
 <p>Web components (or custom elements) allow us to encapsalate
 logic, designs, and features in html elements. Along with custom
@@ -132,14 +146,14 @@ for all the ways an app needs to display data</p>
 <p><a href="https://lit-html.polymer-project.org">lit-html</a> and <a href="https://lit-element.polymer-project.org">lit-element</a>
 are being used to create and render custom elements. The beauty in these tools
 is that they are simply syntactic sugar for native web technologies</p>
-<p><code>lit-html</code> - this is a templating tool that replaces a need for seomthign like mustache.js</p>
+<p><code>lit-html</code> - this is a templating tool that replaces a need for something like mustache.js</p>
 <p><code>lit-element</code> - this is a base class for that makes it easier to make custom elements removing
 a lot of the boilerplate code usually needed.</p>
 <h2 id="demo">Demo</h2>
 <p>Install the parcel bundler</p>
 <pre><code>npm install -g parcel-bundler
 </code></pre>
-<p>Then cd to this directory and run:</p>
+<p>Then <code>cd</code> to this directory and run:</p>
 <pre><code>npm start
 </code></pre>
 <h2 id="notes">Notes</h2>

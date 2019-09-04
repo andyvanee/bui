@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=f74feee3">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=f0773cf6"></script>
+    <script src="../bui.js?t=94ac0941"></script>
     <title>Elements - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -90,7 +90,17 @@
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="bui-custom-elements">BUI Custom Elements</h1>
+        <div class="markdown-body"><h1 id="custom-elements">Custom Elements</h1>
+<p>Although custom elements are globally accessible after initially imported,
+it is best practice to import elements when you need them.</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;blackstone-ui/elements/btn&apos;</span>
+<span class="pl-k">let</span> btn = <span class="pl-c1">document</span>.createElement(<span class="pl-s">&apos;b-btn&apos;</span>)
+
+<span class="pl-c">// or</span>
+<span class="pl-k">import</span> Btn <span class="pl-k">from</span> <span class="pl-s">&apos;blackstone-ui/elements/btn&apos;</span>
+<span class="pl-k">let</span> btn = <span class="pl-k">new</span> Btn()
+</code></pre>
+<hr>
 <h2 id="lessb-papergreater"><code>&lt;b-paper&gt;</code></h2>
 <p>A white box with rounded corners and a shadow.</p>
 <!--
