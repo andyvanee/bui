@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../../bui.css?t=f74feee3">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=12b93e86"></script>
+    <script src="../../bui.js?t=0257e740"></script>
     <title>List - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -266,12 +266,12 @@ a <code>searchMatches</code> property they can check to see why they are being d
     <span class="pl-k">static</span> shouldDisplay(prevModel, model, list){
         <span class="pl-k">return</span> !prevModel || prevModel != model
     }
-    
-    <span class="pl-k">constructor</span>(prevModel, model, list){
-        <span class="pl-k">super</span>()
-    }
+
 }
 </code></pre>
+<blockquote>
+<p>Note: <code>.list</code>, <code>.model</code>, and <code>.prevModel</code> properties are accessible via the render method</p>
+</blockquote>
 <h3 id="slots">Slots</h3>
 <p>The default list view can be extended with html slots</p>
 <ul>
