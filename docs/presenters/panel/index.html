@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=f74feee3">
+    <link rel="stylesheet" href="../../bui.css?t=44253f5d">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=0257e740"></script>
+    <script src="../../bui.js?t=d50aeb73"></script>
     <title>Panel - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -21,6 +21,8 @@
             <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
                 </li>
               </ul>
             </li>
@@ -50,13 +52,19 @@
                   <ul class="headings heading-list">
                     <li class="heading-item -depth-2"><a class="hlink link-panel" href="#panel">Panel</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-properties-options" href="#properties-options">Properties / Options</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-options" href="#options">Options</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-rendering-a-custom-element" href="#rendering-a-custom-element">Rendering a Custom Element</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-basic-use" href="#basic-use">Basic Use</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-rendering-dynamic-html" href="#rendering-dynamic-html">Rendering dynamic html</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-dynamic-html" href="#dynamic-html">Dynamic html</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-registering-a-custom-element" href="#registering-a-custom-element">Registering a Custom Element</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-animation" href="#animation">Animation</a>
                         </li>
                       </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-controller" href="#controller">Controller</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-toolbar" href="#toolbar">Toolbar</a>
                       <ul class="heading-list -depth-2">
@@ -91,7 +99,7 @@ different areas on the screen.</p>
 <pre><code class="lang-javascript"><span class="pl-k">let</span> panel = <span class="pl-k">new</span> Panel(view, options)
 panel.open()
 </code></pre>
-<h3 id="properties-options">Properties / Options</h3>
+<h3 id="options">Options</h3>
 <ul>
 <li><code>title</code> (will be displayed in <code>b-panel-toolbar</code>)</li>
 <li><code>width</code> (string)</li>
@@ -100,14 +108,15 @@ panel.open()
 <li><code>type</code> (modal)</li>
 <li><code>closeBtn</code> (bool) - will show a close button in the top right</li>
 <li><code>animation</code> (scale [only works on anchor=center])</li>
-<li><code>disableBackdropClick</code></li>
-<li><code>onClose</code></li>
-<li><code>onBackdropClick</code></li>
-<li><code>onKeypress</code> - only fires if panel is on top</li>
-<li><code>controller</code> - specify a different panel controller (optional)</li>
+<li><code>disableBackdropClick</code> - by default clicking backdrop will close panel</li>
+<li><code>closeOnEsc</code> - default is false</li>
+<li><code>controller</code> - specify a different panel controller (see below)</li>
+<li><code>onClose</code> - do something before closing; return <code>false</code> to stop closing</li>
+<li><code>onBackdropClick</code> - do something when backdrop clicked; return <code>false</code> to stop closing</li>
+<li><code>onKeydown</code> - only fires if panel is on top (of other panels)</li>
 </ul>
-<h3 id="rendering-a-custom-element">Rendering a Custom Element</h3>
-<p><strong>Immediate initialization</strong></p>
+<h3 id="basic-use">Basic Use</h3>
+<p>It is best practice to give panels a name of a custom element to render</p>
 <pre><code class="lang-javascript"><span class="pl-k">import</span> {Panel} <span class="pl-k">from</span> <span class="pl-s">&apos;bui&apos;</span>
 
 <span class="pl-k">let</span> panel = <span class="pl-k">new</span> Panel(<span class="pl-s">&apos;custom-element&apos;</span>, {
@@ -119,7 +128,23 @@ panel.open()
 
 panel.open()
 </code></pre>
-<p><strong>Delayed initialization</strong> with a URL route</p>
+<p><strong>Tip:</strong> panels will link themselves to the custom element they are rendering with <code>.panel</code>.
+So inside of <code>custom-element</code> you can access the panel with <code>this.panel</code></p>
+<h3 id="dynamic-html">Dynamic html</h3>
+<p>Rendering panels this way probably shouldn&#x2019;t happen very often, but it is supported.</p>
+<pre><code class="lang-javascript"><span class="pl-k">import</span> {Panel} <span class="pl-k">from</span> <span class="pl-s">&apos;bui&apos;</span>
+<span class="pl-k">import</span> {html} <span class="pl-k">from</span> <span class="pl-s">&apos;lit-html&apos;</span>
+
+<span class="pl-k">new</span> Panel(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>html<span class="pl-s">`
+    &lt;b-panel-toolbar&gt;&lt;/b-panel-toolbar&gt;
+    &lt;section&gt;	
+        &lt;p&gt;Dynamically generated content&lt;/p&gt;
+    &lt;/section&gt;
+`</span>, {<span class="hljs-attr">title</span>: <span class="pl-s">&apos;Custom Panel&apos;</span>}).open()
+</code></pre>
+<h3 id="registering-a-custom-element">Registering a Custom Element</h3>
+<p>Panel is integrated with <code>router</code> allowing for panels be opened via url.
+The registered panel will not be created until the url is triggered</p>
 <pre><code class="lang-javascript"><span class="pl-k">import</span> {Panel, router} <span class="pl-k">from</span> <span class="pl-s">&apos;bui&apos;</span>
 
 <span class="pl-c">// Panel.register(path, view, options)</span>
@@ -130,27 +155,34 @@ Panel.register(<span class="pl-s">&apos;my-custom-element&apos;</span>, <span cl
 router.goTo(<span class="pl-s">&apos;my-custom-element&apos;</span>)
 <span class="pl-c">// url will change to `/#/my-custom-element`</span>
 </code></pre>
-<h3 id="rendering-dynamic-html">Rendering dynamic html</h3>
-<p>Rendering panels this way probably shouldn&#x2019;t happen very often, but it is supported.</p>
-<pre><code class="lang-javascript"><span class="pl-k">import</span> {Panel} <span class="pl-k">from</span> <span class="pl-s">&apos;bui&apos;</span>
-<span class="pl-k">import</span> {html} <span class="pl-k">from</span> <span class="pl-s">&apos;lit-html&apos;</span>
-
-<span class="pl-c">// with toolbar</span>
-<span class="pl-k">new</span> Panel(<span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>)</span>{<span class="pl-k">return</span> html<span class="pl-s">`
-    &lt;b-panel-toolbar&gt;&lt;/b-panel-toolbar&gt;
-    &lt;section&gt;	
-        &lt;p&gt;Dynamically generated content&lt;/p&gt;
-    &lt;/section&gt;
-`</span>, {<span class="hljs-attr">type</span>:<span class="pl-s">&apos;modal&apos;</span>, <span class="hljs-attr">title</span>: <span class="pl-s">&apos;Custom Panel&apos;</span>}).open()
-
-<span class="pl-c">// without toolbar and a custom close button</span>
-<span class="pl-k">new</span> Panel(<span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>)</span>{<span class="pl-k">return</span> html<span class="pl-s">`
-    &lt;section&gt;
-        &lt;p&gt;Dynamically generated content&lt;/p&gt;
-        &lt;b-btn @click=<span class="hljs-subst">${<span class="pl-k">this</span>.close}</span>&gt;Okay&lt;/b-btn
-    &lt;/section&gt;
-`</span>}, {<span class="hljs-attr">type</span>:<span class="pl-s">&apos;modal&apos;</span>}).open()
+<h3 id="animation">Animation</h3>
+<p>There are some built in animations</p>
+<pre><code class="lang-js">panel.shake()
+panel.bounce()
 </code></pre>
+<h2 id="controller">Controller</h2>
+<p>Panels are rendered inside of a panel controller <code>&lt;b-panels&gt;&lt;/b-pannels&gt;</code>.</p>
+<p>When the first panel is opened a root controller will be created and appended
+to the the body. If you wish for the root controller to be rendered somewhere
+other than the root of body, you can create one ahead of time</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">b-panels</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;root&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-panel</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</code></pre>
+<h4 id="multiple-controllers">Multiple Controllers</h4>
+<p>Panels can also be opened inside of other panel controllers by first creating the controller
+with a different name and then specifying the controller in the panel opts</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-panels</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;sub-panel&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-panels</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-js"><span class="pl-k">let</span> panel = <span class="pl-k">new</span> Panel(<span class="pl-s">&apos;custom-element&apos;</span>, {
+    <span class="hljs-attr">controller</span>: <span class="pl-s">&apos;sub-panel&apos;</span>
+})
+</code></pre>
+<blockquote>
+<p>Note: if the controller cannot be found, the root controller will be used</p>
+</blockquote>
 <h2 id="toolbar">Toolbar</h2>
 <p>A panel only presents the view given to it. If you would like a toolbar with a close button the view
 needs to render one. A panel toolbar element has been created for such a task.</p>
@@ -189,6 +221,7 @@ parameter or through the convenient Modal function</p>
 Modal(<span class="pl-s">&apos;my-view&apos;</span>)
 Modal(<span class="pl-s">&apos;my-view&apos;</span>, {<span class="hljs-attr">width</span>: <span class="pl-s">&apos;400px&apos;</span>, <span class="hljs-attr">closeBtn</span>: <span class="pl-c1">true</span>})
 </code></pre>
+<p><strong>Note</strong> <code>closeOnEsc:true</code> will be automatically set when <code>closeBtn:true</code> is set</p>
 
         </div>
         <div class="footer-nav">

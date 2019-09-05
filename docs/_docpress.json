@@ -117,6 +117,12 @@
             "source": "docs/icons.md",
             "url": "icons.html",
             "slug": "icons"
+          },
+          {
+            "title": "Colors",
+            "source": "docs/colors.md",
+            "url": "colors.html",
+            "slug": "colors"
           }
         ]
       },
@@ -427,21 +433,36 @@
                 "id": "panel",
                 "headings": [
                   {
-                    "title": "Properties / Options",
+                    "title": "Options",
                     "depth": 3,
-                    "id": "properties-options"
+                    "id": "options"
                   },
                   {
-                    "title": "Rendering a Custom Element",
+                    "title": "Basic Use",
                     "depth": 3,
-                    "id": "rendering-a-custom-element"
+                    "id": "basic-use"
                   },
                   {
-                    "title": "Rendering dynamic html",
+                    "title": "Dynamic html",
                     "depth": 3,
-                    "id": "rendering-dynamic-html"
+                    "id": "dynamic-html"
+                  },
+                  {
+                    "title": "Registering a Custom Element",
+                    "depth": 3,
+                    "id": "registering-a-custom-element"
+                  },
+                  {
+                    "title": "Animation",
+                    "depth": 3,
+                    "id": "animation"
                   }
                 ]
+              },
+              {
+                "title": "Controller",
+                "depth": 2,
+                "id": "controller"
               },
               {
                 "title": "Toolbar",
@@ -651,6 +672,12 @@
       "title": "Icons - Blackstone UI",
       "pageTitle": "Icons",
       "slug": "icons"
+    },
+    "colors.html": {
+      "source": "docs/colors.md",
+      "title": "Colors - Blackstone UI",
+      "pageTitle": "Colors",
+      "slug": "colors"
     },
     "util/index.html": {
       "source": "util/README.md",
@@ -951,21 +978,36 @@
           "id": "panel",
           "headings": [
             {
-              "title": "Properties / Options",
+              "title": "Options",
               "depth": 3,
-              "id": "properties-options"
+              "id": "options"
             },
             {
-              "title": "Rendering a Custom Element",
+              "title": "Basic Use",
               "depth": 3,
-              "id": "rendering-a-custom-element"
+              "id": "basic-use"
             },
             {
-              "title": "Rendering dynamic html",
+              "title": "Dynamic html",
               "depth": 3,
-              "id": "rendering-dynamic-html"
+              "id": "dynamic-html"
+            },
+            {
+              "title": "Registering a Custom Element",
+              "depth": 3,
+              "id": "registering-a-custom-element"
+            },
+            {
+              "title": "Animation",
+              "depth": 3,
+              "id": "animation"
             }
           ]
+        },
+        {
+          "title": "Controller",
+          "depth": 2,
+          "id": "controller"
         },
         {
           "title": "Toolbar",
@@ -1059,6 +1101,7 @@
     "README.md": "index.html",
     "elements/README.md": "elements/index.html",
     "docs/icons.md": "icons.html",
+    "docs/colors.md": "colors.html",
     "util/README.md": "util/index.html",
     "helpers/README.md": "helpers/index.html",
     "models/README.md": "models/index.html",
@@ -1075,8 +1118,8 @@
     "docs/bui.js": "bui.js",
     "docs/bui.js.map": "bui.js.map",
     "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
-    "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
+    "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
     "docs/icons.svg.c6868b42.html": "icons.svg.c6868b42.html",
     "docs/icons.svg.f5352611.html": "icons.svg.f5352611.html",
     "docs/style.css": "style.css"

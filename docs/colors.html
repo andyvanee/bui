@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="bui.css?t=44253f5d">
     <script src="assets/script.js?t=42463e55"></script>
     <script src="bui.js?t=d50aeb73"></script>
-    <title>Icons - Blackstone UI</title>
+    <title>Colors - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -20,9 +20,9 @@
             </li>
             <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="elements/index.html">Elements</a>
               <ul class="submenu">
-                <li class="menu-item -level-2"><a class="link title -active link-icons" href="icons.html">Icons</a>
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="icons.html">Icons</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-colors" href="colors.html">Colors</a>
+                <li class="menu-item -level-2"><a class="link title -active link-colors" href="colors.html">Colors</a>
                 </li>
               </ul>
             </li>
@@ -59,20 +59,39 @@
           </ul>
         </li>
       </div>
-      <div class="body page-icons">
+      <div class="body page-colors">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="icons">Icons</h1>
-<p>Icons are saved as svg symbol references. These can be generated here: <a href="https://icomoon.io/app">https://icomoon.io/app</a></p>
+        <div class="markdown-body"><h1 id="colors">Colors</h1>
+<p>The list of colors is pulled from <a href="https://material.io/design/color/">material.io</a></p>
+<h4 id="using-the-colors">Using the colors</h4>
+<pre><code class="lang-css">@<span class="pl-k">import</span> <span class="pl-s">&apos;node_modules/blackstone-ui/helpers/colors.less&apos;</span>;
+
+<span class="hljs-selector-class">.my-div</span> {
+    <span class="pl-e">background</span>: <span class="pl-c1">var</span>(--gray-blue-50);
+}
+
+<span class="hljs-selector-tag">button</span> {
+    <span class="pl-e">background</span>: <span class="pl-c1">var</span>(--color-primary);
+    <span class="pl-e">color</span>: <span class="pl-c1">var</span>(--white);
+}
+</code></pre>
+<h4 id="changing-default-colors">Changing default colors</h4>
+<pre><code class="lang-css"><span class="hljs-selector-pseudo">:root</span> {
+    <span class="pl-e">--color-primary</span>: <span class="pl-c1">var</span>(--teal-400);
+    <span class="pl-e">--color-secondary</span>: <span class="pl-c1">var</span>(--amber);
+    <span class="pl-e">--black</span>: <span class="hljs-number">#222</span>;
+}
+</code></pre>
 <!--plain
-<b-icon-list cols="3"></b-icon-list>
+<b-list-of-colors></b-list-of-colors>
 -->
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="elements/index.html"><span class="title">Elements</span></a></div>
-          <div class="right"><a href="colors.html"><span class="label">Next: </span><span class="title">Colors</span></a></div>
+          <div class="left"><a href="icons.html"><span class="title">Icons</span></a></div>
+          <div class="right"><a href="util/index.html"><span class="label">Next: </span><span class="title">Util</span></a></div>
         </div>
       </div>
     </div>
