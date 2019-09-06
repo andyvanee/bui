@@ -174,21 +174,36 @@
             "slug": "helpers",
             "headings": [
               {
-                "title": "Helpers",
+                "title": "LitElement",
                 "depth": 2,
-                "id": "helpers",
+                "id": "litelement",
                 "headings": [
                   {
-                    "title": "LitElement Extensions",
+                    "title": "Listeners",
                     "depth": 3,
-                    "id": "litelement-extensions"
+                    "id": "listeners"
                   },
                   {
-                    "title": "Backbone.js Integration",
+                    "title": "Events",
                     "depth": 3,
-                    "id": "backbone.js-integration"
+                    "id": "events"
+                  },
+                  {
+                    "title": "Subviews",
+                    "depth": 3,
+                    "id": "subviews"
+                  },
+                  {
+                    "title": "Model",
+                    "depth": 3,
+                    "id": "model"
                   }
                 ]
+              },
+              {
+                "title": "Backbone.js",
+                "depth": 2,
+                "id": "backbone.js"
               }
             ]
           },
@@ -724,21 +739,36 @@
       "slug": "helpers",
       "headings": [
         {
-          "title": "Helpers",
+          "title": "LitElement",
           "depth": 2,
-          "id": "helpers",
+          "id": "litelement",
           "headings": [
             {
-              "title": "LitElement Extensions",
+              "title": "Listeners",
               "depth": 3,
-              "id": "litelement-extensions"
+              "id": "listeners"
             },
             {
-              "title": "Backbone.js Integration",
+              "title": "Events",
               "depth": 3,
-              "id": "backbone.js-integration"
+              "id": "events"
+            },
+            {
+              "title": "Subviews",
+              "depth": 3,
+              "id": "subviews"
+            },
+            {
+              "title": "Model",
+              "depth": 3,
+              "id": "model"
             }
           ]
+        },
+        {
+          "title": "Backbone.js",
+          "depth": 2,
+          "id": "backbone.js"
         }
       ]
     },

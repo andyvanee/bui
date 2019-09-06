@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=44253f5d">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=bc594e5c"></script>
+    <script src="../bui.js?t=e586fb42"></script>
     <title>Helpers - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -32,13 +32,19 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title -active link-helpers" href="../helpers/index.html">Helpers</a>
                   <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-helpers" href="#helpers">Helpers</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-litelement" href="#litelement">LitElement</a>
                       <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-litelement-extensions" href="#litelement-extensions">LitElement Extensions</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-listeners" href="#listeners">Listeners</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-backbone.js-integration" href="#backbone.js-integration">Backbone.js Integration</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-events" href="#events">Events</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-subviews" href="#subviews">Subviews</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-model" href="#model">Model</a>
                         </li>
                       </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-backbone.js" href="#backbone.js">Backbone.js</a>
                     </li>
                   </ul>
                 </li>
@@ -74,13 +80,53 @@
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h2 id="helpers">Helpers</h2>
-<h3 id="litelement-extensions">LitElement Extensions</h3>
-<p>We&#x2019;ve added some extenions LitElement to fit our needs at Blackstone</p>
-<p><a href="./helpers/lit-element/README.md">read more</a></p>
-<h3 id="backbone.js-integration">Backbone.js Integration</h3>
-<p>We are still using Backbone models and collections for data management (for now at least)
-and Backbone views are still used as top level entry points for UI.</p>
+        <div class="markdown-body"><h1 id="helpers">Helpers</h1>
+<h2 id="litelement">LitElement</h2>
+<p>Extend LitElement to fit our needs. I like doing this so that we dont have to create unnecessary subclasses</p>
+<h3 id="listeners">Listeners</h3>
+<p>Adds support for listening to Backbone Model/Collection/ChildCollection
+events and responding. Most events should just be calling <code>update</code> which
+will rerender the view.</p>
+<pre><code class="lang-javascript"><span class="pl-k">static</span> <span class="pl-k">get</span> listeners(){ <span class="pl-k">return</span> {
+    <span class="pl-s">&apos;model&apos;</span>: {
+        <span class="pl-s">&apos;change reset&apos;</span>: <span class="pl-s">&apos;update&apos;</span>
+    },
+    <span class="pl-s">&apos;child-collection&apos;</span>: {
+        <span class="pl-s">&apos;reset&apos;</span>: <span class="pl-s">&apos;update&apos;</span>
+    }
+}}
+</code></pre>
+<h3 id="events">Events</h3>
+<p>To simplify event dispatching from inside the shadow dom, an <code>emitEvent</code>
+method has been added to lit-element</p>
+<pre><code class="lang-js"><span class="pl-k">this</span>.emitEvent(eventName, detail)
+<span class="pl-k">this</span>.emitEvent(<span class="pl-s">&apos;element-event&apos;</span>, {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>})
+</code></pre>
+<p>The emitted event with have <code>bubbles: true</code> and <code>composed: true</code> so that the even
+will bubble up and out of the shadow dom</p>
+<h3 id="subviews">Subviews</h3>
+<p>Sometimes a linked subview needs to be created and we&#x2019;d like to keep
+and reuse it rather than recreate it each time (for example, a view
+that pops over an element to edit)</p>
+<pre><code class="lang-javascript"><span class="pl-c">// syntax</span>
+<span class="pl-k">this</span>.sv(viewName, elementName)
+
+<span class="pl-c">// the view will be created if it doesn&apos;t exist</span>
+<span class="pl-k">this</span>.sv(<span class="pl-s">&apos;edit&apos;</span>, <span class="pl-s">&apos;my-edit-view&apos;</span>)
+</code></pre>
+<h3 id="model">Model</h3>
+<p>A common pattern is to pass a model object to the custom element. This extension
+will unbind and rebind listeners (if using that extension; see above) and then
+call <code>onModelChange</code> to let you hook into the update and do something (like fetch data)</p>
+<pre><code class="lang-js">onModelChange(model){
+    <span class="pl-k">if</span>( model )
+        model.fetch()
+}
+</code></pre>
+<h2 id="backbone.js">Backbone.js</h2>
+<p>[DEPRECATED]</p>
+<p>Here at Blackstone our legacy code relies on Backbone and so to take advantage of
+lit-html we&#x2019;ve added some extensions to support this.</p>
 <p><code>Backbone.View</code> will render the contents of the <code>html()</code> method:</p>
 <pre><code class="lang-javascript"><span class="pl-k">import</span> {html} <span class="pl-k">from</span> <span class="pl-s">&apos;lit-html&apos;</span>
 <span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyView</span> <span class="pl-k">extends</span> <span class="pl-ent">Backbone</span>.<span class="pl-ent">View</span> </span>{
