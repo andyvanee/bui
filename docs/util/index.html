@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=71b5bd61">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=0a252655"></script>
+    <script src="../bui.js?t=5e472a83"></script>
     <title>Util - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -33,6 +33,8 @@
                     <li class="heading-item -depth-2"><a class="hlink link-normalizetext" href="#normalizetext">normalizeText</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-titleize" href="#titleize">titleize</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-device" href="#device">device</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-wait" href="#wait">wait</a>
                     </li>
@@ -86,6 +88,14 @@
 <h2 id="titleize"><code>titleize</code></h2>
 <p>Converts underscores and dashes to spaces and then capitlizes each word</p>
 <pre><code class="lang-js"><span class="pl-k">let</span> str = normalizeText(<span class="pl-s">&apos;my_string&apos;</span>) <span class="pl-c">// My String</span>
+</code></pre>
+<h2 id="device"><code>device</code></h2>
+<p>Some simple device detection</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> device <span class="pl-k">from</span> <span class="pl-s">&apos;util/device&apos;</span>
+
+device.is_ios
+device.is_android
+device.is_mobile
 </code></pre>
 <h2 id="wait"><code>wait</code></h2>
 <p>Promise based setTimeout</p>

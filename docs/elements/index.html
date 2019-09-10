@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=71b5bd61">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=0a252655"></script>
+    <script src="../bui.js?t=5e472a83"></script>
     <title>Elements - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -43,6 +43,8 @@
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-uploadergreater" href="#lessb-uploadergreater">&lt;b-uploader&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-embedgreater" href="#lessb-embedgreater">&lt;b-embed&gt;</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-audiogreater" href="#lessb-audiogreater">&lt;b-audio&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-carouselgreater" href="#lessb-carouselgreater">&lt;b-carousel&gt;</a>
                 </li>
@@ -334,6 +336,26 @@ uploader.chooseFile()
 <!--
 <b-embed url="https://www.youtube.com/watch?v=sK1ODp0nDbM"></b-embed>
 -->
+<h2 id="lessb-audiogreater"><code>&lt;b-audio&gt;</code></h2>
+<p>Display an audio control bar for playing audio. Provides seeking keyboard
+shortcuts when hovered over the element</p>
+<!--
+<b-audio src="http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp4"><b-audio>
+-->
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-audio</span> <span class="hljs-attr">src</span>=<span class="pl-s">&quot;http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp4&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b-audio</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-js"><span class="pl-c">// or via JS</span>
+<span class="pl-k">import</span> AudioPlayer <span class="pl-k">from</span> <span class="pl-s">&apos;elements/audio&apos;</span>
+<span class="pl-k">let</span> player = <span class="pl-k">new</span> AudioPlayer(<span class="pl-s">&apos;http://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp4&apos;</span>, {<span class="hljs-attr">autoplay</span>: <span class="pl-c1">true</span>})
+</code></pre>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>src</code></li>
+<li><code>autoplay</code></li>
+</ul>
+<blockquote>
+<p>TODO: provide better theming control</p>
+</blockquote>
 <h2 id="lessb-carouselgreater"><code>&lt;b-carousel&gt;</code></h2>
 <p>A slider/carousel element that will show one of the nested elements at time.
 A set of dots will be shown to represent the number of slides available.</p>

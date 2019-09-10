@@ -101,6 +101,11 @@
             "id": "lessb-embedgreater"
           },
           {
+            "title": "<b-audio>",
+            "depth": 2,
+            "id": "lessb-audiogreater"
+          },
+          {
             "title": "<b-carousel>",
             "depth": 2,
             "id": "lessb-carouselgreater"
@@ -144,6 +149,11 @@
                 "title": "titleize",
                 "depth": 2,
                 "id": "titleize"
+              },
+              {
+                "title": "device",
+                "depth": 2,
+                "id": "device"
               },
               {
                 "title": "wait",
@@ -671,6 +681,11 @@
           "id": "lessb-embedgreater"
         },
         {
+          "title": "<b-audio>",
+          "depth": 2,
+          "id": "lessb-audiogreater"
+        },
+        {
           "title": "<b-carousel>",
           "depth": 2,
           "id": "lessb-carouselgreater"
@@ -709,6 +724,11 @@
           "title": "titleize",
           "depth": 2,
           "id": "titleize"
+        },
+        {
+          "title": "device",
+          "depth": 2,
+          "id": "device"
         },
         {
           "title": "wait",
