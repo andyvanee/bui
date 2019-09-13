@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=71b5bd61">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=5e472a83"></script>
+    <script src="../bui.js?t=a741ecd0"></script>
     <title>Util - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -23,34 +23,6 @@
                 <li class="menu-item -level-2"><a class="link title  link-icons" href="../icons.html">Icons</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-colors" href="../colors.html">Colors</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
-              <ul class="submenu">
-                <li class="menu-item -level-2"><a class="link title -active link-util" href="../util/index.html">Util</a>
-                  <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-normalizetext" href="#normalizetext">normalizeText</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-titleize" href="#titleize">titleize</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-device" href="#device">device</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-wait" href="#wait">wait</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-tocsv" href="#tocsv">toCSV</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-csvtoarray" href="#csvtoarray">csvToArray</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-readfile" href="#readfile">readFile</a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-helpers" href="../helpers/index.html">Helpers</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
                 </li>
               </ul>
             </li>
@@ -72,6 +44,42 @@
                 </li>
               </ul>
             </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title -active link-util" href="../util/index.html">Util</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-normalizetext" href="#normalizetext">normalizeText</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-titleize" href="#titleize">titleize</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-promise.series" href="#promise.series">Promise.series</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-device" href="#device">device</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-store" href="#store">store</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-sum" href="#sum">sum</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-wait" href="#wait">wait</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-tocsv" href="#tocsv">toCSV</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-csvtoarray" href="#csvtoarray">csvToArray</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-readfile" href="#readfile">readFile</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-helpers" href="../helpers/index.html">Helpers</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-realtime" href="../realtime/index.html">Realtime</a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </li>
       </div>
@@ -89,6 +97,14 @@
 <p>Converts underscores and dashes to spaces and then capitlizes each word</p>
 <pre><code class="lang-js"><span class="pl-k">let</span> str = normalizeText(<span class="pl-s">&apos;my_string&apos;</span>) <span class="pl-c">// My String</span>
 </code></pre>
+<h2 id="promise.series"><code>Promise.series</code></h2>
+<p>Perform a set of promise tasks in series (waiting to complete until moving on to the next)</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;util/promise.series&apos;</span> <span class="pl-c">// import once</span>
+
+<span class="pl-c1">Promise</span>.series([task1, task2, task3], task=&gt;{
+    <span class="pl-k">await</span> task()
+})
+</code></pre>
 <h2 id="device"><code>device</code></h2>
 <p>Some simple device detection</p>
 <pre><code class="lang-js"><span class="pl-k">import</span> device <span class="pl-k">from</span> <span class="pl-s">&apos;util/device&apos;</span>
@@ -96,6 +112,27 @@
 device.is_ios
 device.is_android
 device.is_mobile
+</code></pre>
+<h2 id="store"><code>store</code></h2>
+<p>Simplified method for using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">localStorage</a>; automatically encodes and decodes JSON.</p>
+<pre><code class="lang-js">store(key, val)
+
+<span class="pl-c">// set</span>
+store(<span class="pl-s">&apos;my-setting&apos;</span>, {<span class="hljs-attr">some</span>:<span class="pl-s">&apos;setting&apos;</span>, <span class="hljs-attr">another</span>:<span class="pl-s">&apos;setting&apos;</span>})
+
+<span class="pl-c">// get</span>
+<span class="pl-k">let</span> mySetting = store(<span class="pl-s">&apos;my-setting&apos;</span>)
+
+<span class="pl-c">// clear</span>
+store(<span class="pl-s">&apos;my-setting&apos;</span>, <span class="pl-c1">null</span>)
+</code></pre>
+<h2 id="sum"><code>sum</code></h2>
+<p>Wrapper around <code>Array.reduce</code> for summing the values in an array.
+Will automatically be added to the prototype of Array</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;util/sum&apos;</span> <span class="pl-c">// only needs to be done once</span>
+
+[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>].sum() <span class="pl-c">// = 3</span>
+[{<span class="hljs-attr">val</span>:<span class="hljs-number">1</span>}, {<span class="hljs-attr">val</span>: <span class="hljs-number">2</span>}].sum(<span class="hljs-function"><span class="hljs-params">o</span>=&gt;</span>o.val) <span class="pl-c">// = 3</span>
 </code></pre>
 <h2 id="wait"><code>wait</code></h2>
 <p>Promise based setTimeout</p>
@@ -132,7 +169,7 @@ saveAs(blob, <span class="pl-s">&apos;filename.csv&apos;</span>)
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../colors.html"><span class="title">Colors</span></a></div>
+          <div class="left"><a href="../presenters/tabs/index.html"><span class="title">Tabs</span></a></div>
           <div class="right"><a href="../helpers/index.html"><span class="label">Next: </span><span class="title">Helpers</span></a></div>
         </div>
       </div>

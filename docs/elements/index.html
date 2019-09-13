@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=71b5bd61">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=5e472a83"></script>
+    <script src="../bui.js?t=a741ecd0"></script>
     <title>Elements - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -58,18 +58,6 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
-              <ul class="submenu">
-                <li class="menu-item -level-2"><a class="link title  link-util" href="../util/index.html">Util</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-helpers" href="../helpers/index.html">Helpers</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
-                </li>
-              </ul>
-            </li>
             <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../presenters/dialog/index.html">Dialog</a>
@@ -85,6 +73,20 @@
                 <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../presenters/popover/index.html">Popover</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../presenters/tabs/index.html">Tabs</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-helpers" href="../helpers/index.html">Helpers</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-realtime" href="../realtime/index.html">Realtime</a>
                 </li>
               </ul>
             </li>
@@ -237,6 +239,7 @@ element has <code>position:relative</code> (or absolute)</p>
 <li><code>md</code> - medium</li>
 <li><code>lg</code> - large</li>
 <li><code>static</code> - removes absolute pos and 100% height</li>
+<li><code>must-be=&quot;first&quot;</code> or &#x201C;last&#x201D; - will not display if not</li>
 </ul>
 <h2 id="lessb-spinnergreater"><code>&lt;b-spinner&gt;</code></h2>
 <p>An animated circle spinner to represent progress</p>
@@ -379,11 +382,13 @@ Maybe later we&#x2019;ll introduce animation and more features, like nav arrows<
 <p>Displays a runnning timer</p>
 <!--
 <b-timer running></b-timer>
+<b-timer running short ms style="margin-left: 2em;"></b-timer>
 -->
 <h4 id="attributes">Attributes</h4>
 <ul>
 <li><code>time</code> - current time in milliseconds</li>
 <li><code>ms</code> - whether to show milliseconds</li>
+<li><code>short</code> -  wont show minutes/hours unless greater than 0</li>
 <li><code>running</code> - should the timer be progressing</li>
 </ul>
 

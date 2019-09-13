@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../bui.css?t=71b5bd61">
     <script src="../assets/script.js?t=42463e55"></script>
     <script src="../bui.js?t=a741ecd0"></script>
-    <title>Router - Blackstone UI</title>
+    <title>Realtime - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -52,42 +52,57 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title -active link-router" href="../router/index.html">Router</a>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-realtime" href="../realtime/index.html">Realtime</a>
                   <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-todo" href="#todo">TODO</a>
+                    <li class="heading-item -depth-2"><a class="hlink link-views" href="#views">Views</a>
                     </li>
                   </ul>
-                </li>
-                <li class="menu-item -level-2"><a class="link title  link-realtime" href="../realtime/index.html">Realtime</a>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
       </div>
-      <div class="body page-router">
+      <div class="body page-realtime">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="router">Router</h1>
+        <div class="markdown-body"><h1 id="realtime-(via-socket.io)">Realtime (via <a href="http://Socket.io">Socket.io</a>)</h1>
 <blockquote>
-<p>Documentation needed</p>
+<p>NOTE: work in progress; subject to change</p>
 </blockquote>
-<p>A class for managing the URL and routing to views. Router is a singleton class</p>
-<p>Routes can be added manually, but should generally be used by core UI components
-such as Panel. Panels leverage the router with a <code>.register()</code> method</p>
-<pre><code class="lang-javascript">Panel.register(<span class="pl-s">&apos;url-path&apos;</span>, <span class="pl-s">&apos;view-name&apos;</span>, opts={})
+<h2 id="views">Views</h2>
+<p>Provides an easy way to keep track of views that are opened by clients</p>
+<pre><code class="lang-js"><span class="pl-c">// server</span>
+<span class="pl-k">import</span> Views <span class="pl-k">from</span> <span class="pl-s">&apos;server/views&apos;</span>
+<span class="pl-k">const</span> io = io();
+
+io.on(<span class="pl-s">&apos;connection&apos;</span>, socket=&gt;{
+    Views.connect(socket)
+});
 </code></pre>
-<h2 id="todo">TODO</h2>
-<ul>
-<li>needs to be able to handle base URLs that aren&#x2019;t at the root</li>
-</ul>
+<pre><code class="lang-js"><span class="pl-c">// client</span>
+<span class="pl-k">import</span> Views <span class="pl-k">from</span> <span class="pl-s">&apos;client/views&apos;</span>
+<span class="pl-k">const</span> socket = io();
+<span class="pl-k">const</span> socketViews = <span class="pl-k">new</span> Views(socket)
+
+<span class="pl-k">let</span> view = socketViews.open(<span class="pl-s">&apos;view-name&apos;</span>)
+view.on(<span class="pl-s">&apos;change&apos;</span>, clients=&gt;{
+    <span class="pl-c1">console</span>.log(clients.length)
+})
+
+<span class="pl-c">// later</span>
+socketViews.close(view)
+<span class="pl-c">// or</span>
+socketViews.close(<span class="pl-s">&apos;view-name&apos;</span>)
+</code></pre>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../models/index.html"><span class="title">Models</span></a></div>
-          <div class="right"><a href="../realtime/index.html"><span class="label">Next: </span><span class="title">Realtime</span></a></div>
+          <div class="left"><a href="../router/index.html"><span class="title">Router</span></a></div>
         </div>
       </div>
     </div>

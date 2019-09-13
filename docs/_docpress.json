@@ -132,120 +132,6 @@
         ]
       },
       {
-        "title": "Extras",
-        "sections": [
-          {
-            "title": "Util",
-            "source": "util/README.md",
-            "url": "util/index.html",
-            "slug": "util",
-            "headings": [
-              {
-                "title": "normalizeText",
-                "depth": 2,
-                "id": "normalizetext"
-              },
-              {
-                "title": "titleize",
-                "depth": 2,
-                "id": "titleize"
-              },
-              {
-                "title": "device",
-                "depth": 2,
-                "id": "device"
-              },
-              {
-                "title": "wait",
-                "depth": 2,
-                "id": "wait"
-              },
-              {
-                "title": "toCSV",
-                "depth": 2,
-                "id": "tocsv"
-              },
-              {
-                "title": "csvToArray",
-                "depth": 2,
-                "id": "csvtoarray"
-              },
-              {
-                "title": "readFile",
-                "depth": 2,
-                "id": "readfile"
-              }
-            ]
-          },
-          {
-            "title": "Helpers",
-            "source": "helpers/README.md",
-            "url": "helpers/index.html",
-            "slug": "helpers",
-            "headings": [
-              {
-                "title": "LitElement",
-                "depth": 2,
-                "id": "litelement",
-                "headings": [
-                  {
-                    "title": "Listeners",
-                    "depth": 3,
-                    "id": "listeners"
-                  },
-                  {
-                    "title": "Events",
-                    "depth": 3,
-                    "id": "events"
-                  },
-                  {
-                    "title": "Subviews",
-                    "depth": 3,
-                    "id": "subviews"
-                  },
-                  {
-                    "title": "Model",
-                    "depth": 3,
-                    "id": "model"
-                  }
-                ]
-              },
-              {
-                "title": "Backbone.js",
-                "depth": 2,
-                "id": "backbone.js"
-              }
-            ]
-          },
-          {
-            "title": "Models",
-            "source": "models/README.md",
-            "url": "models/index.html",
-            "slug": "models",
-            "headings": [
-              {
-                "title": "Collection",
-                "depth": 2,
-                "id": "collection"
-              }
-            ]
-          },
-          {
-            "title": "Router",
-            "source": "router/README.md",
-            "url": "router/index.html",
-            "slug": "router",
-            "headings": [
-              {
-                "title": "TODO",
-                "depth": 2,
-                "id": "todo"
-              }
-            ]
-          }
-        ]
-      },
-      {
         "title": "Presenters",
         "sections": [
           {
@@ -577,6 +463,148 @@
             ]
           }
         ]
+      },
+      {
+        "title": "Extras",
+        "sections": [
+          {
+            "title": "Util",
+            "source": "util/README.md",
+            "url": "util/index.html",
+            "slug": "util",
+            "headings": [
+              {
+                "title": "normalizeText",
+                "depth": 2,
+                "id": "normalizetext"
+              },
+              {
+                "title": "titleize",
+                "depth": 2,
+                "id": "titleize"
+              },
+              {
+                "title": "Promise.series",
+                "depth": 2,
+                "id": "promise.series"
+              },
+              {
+                "title": "device",
+                "depth": 2,
+                "id": "device"
+              },
+              {
+                "title": "store",
+                "depth": 2,
+                "id": "store"
+              },
+              {
+                "title": "sum",
+                "depth": 2,
+                "id": "sum"
+              },
+              {
+                "title": "wait",
+                "depth": 2,
+                "id": "wait"
+              },
+              {
+                "title": "toCSV",
+                "depth": 2,
+                "id": "tocsv"
+              },
+              {
+                "title": "csvToArray",
+                "depth": 2,
+                "id": "csvtoarray"
+              },
+              {
+                "title": "readFile",
+                "depth": 2,
+                "id": "readfile"
+              }
+            ]
+          },
+          {
+            "title": "Helpers",
+            "source": "helpers/README.md",
+            "url": "helpers/index.html",
+            "slug": "helpers",
+            "headings": [
+              {
+                "title": "LitElement",
+                "depth": 2,
+                "id": "litelement",
+                "headings": [
+                  {
+                    "title": "Listeners",
+                    "depth": 3,
+                    "id": "listeners"
+                  },
+                  {
+                    "title": "Events",
+                    "depth": 3,
+                    "id": "events"
+                  },
+                  {
+                    "title": "Subviews",
+                    "depth": 3,
+                    "id": "subviews"
+                  },
+                  {
+                    "title": "Model",
+                    "depth": 3,
+                    "id": "model"
+                  }
+                ]
+              },
+              {
+                "title": "Backbone.js",
+                "depth": 2,
+                "id": "backbone.js"
+              }
+            ]
+          },
+          {
+            "title": "Models",
+            "source": "models/README.md",
+            "url": "models/index.html",
+            "slug": "models",
+            "headings": [
+              {
+                "title": "Collection",
+                "depth": 2,
+                "id": "collection"
+              }
+            ]
+          },
+          {
+            "title": "Router",
+            "source": "router/README.md",
+            "url": "router/index.html",
+            "slug": "router",
+            "headings": [
+              {
+                "title": "TODO",
+                "depth": 2,
+                "id": "todo"
+              }
+            ]
+          },
+          {
+            "title": "Realtime",
+            "source": "realtime/README.md",
+            "url": "realtime/index.html",
+            "slug": "realtime",
+            "headings": [
+              {
+                "title": "Views",
+                "depth": 2,
+                "id": "views"
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -708,115 +736,6 @@
       "title": "Colors - Blackstone UI",
       "pageTitle": "Colors",
       "slug": "colors"
-    },
-    "util/index.html": {
-      "source": "util/README.md",
-      "title": "Util - Blackstone UI",
-      "pageTitle": "Util",
-      "slug": "util",
-      "headings": [
-        {
-          "title": "normalizeText",
-          "depth": 2,
-          "id": "normalizetext"
-        },
-        {
-          "title": "titleize",
-          "depth": 2,
-          "id": "titleize"
-        },
-        {
-          "title": "device",
-          "depth": 2,
-          "id": "device"
-        },
-        {
-          "title": "wait",
-          "depth": 2,
-          "id": "wait"
-        },
-        {
-          "title": "toCSV",
-          "depth": 2,
-          "id": "tocsv"
-        },
-        {
-          "title": "csvToArray",
-          "depth": 2,
-          "id": "csvtoarray"
-        },
-        {
-          "title": "readFile",
-          "depth": 2,
-          "id": "readfile"
-        }
-      ]
-    },
-    "helpers/index.html": {
-      "source": "helpers/README.md",
-      "title": "Helpers - Blackstone UI",
-      "pageTitle": "Helpers",
-      "slug": "helpers",
-      "headings": [
-        {
-          "title": "LitElement",
-          "depth": 2,
-          "id": "litelement",
-          "headings": [
-            {
-              "title": "Listeners",
-              "depth": 3,
-              "id": "listeners"
-            },
-            {
-              "title": "Events",
-              "depth": 3,
-              "id": "events"
-            },
-            {
-              "title": "Subviews",
-              "depth": 3,
-              "id": "subviews"
-            },
-            {
-              "title": "Model",
-              "depth": 3,
-              "id": "model"
-            }
-          ]
-        },
-        {
-          "title": "Backbone.js",
-          "depth": 2,
-          "id": "backbone.js"
-        }
-      ]
-    },
-    "models/index.html": {
-      "source": "models/README.md",
-      "title": "Models - Blackstone UI",
-      "pageTitle": "Models",
-      "slug": "models",
-      "headings": [
-        {
-          "title": "Collection",
-          "depth": 2,
-          "id": "collection"
-        }
-      ]
-    },
-    "router/index.html": {
-      "source": "router/README.md",
-      "title": "Router - Blackstone UI",
-      "pageTitle": "Router",
-      "slug": "router",
-      "headings": [
-        {
-          "title": "TODO",
-          "depth": 2,
-          "id": "todo"
-        }
-      ]
     },
     "presenters/dialog/index.html": {
       "source": "presenters/dialog/README.md",
@@ -1145,6 +1064,143 @@
           "id": "menu-slots"
         }
       ]
+    },
+    "util/index.html": {
+      "source": "util/README.md",
+      "title": "Util - Blackstone UI",
+      "pageTitle": "Util",
+      "slug": "util",
+      "headings": [
+        {
+          "title": "normalizeText",
+          "depth": 2,
+          "id": "normalizetext"
+        },
+        {
+          "title": "titleize",
+          "depth": 2,
+          "id": "titleize"
+        },
+        {
+          "title": "Promise.series",
+          "depth": 2,
+          "id": "promise.series"
+        },
+        {
+          "title": "device",
+          "depth": 2,
+          "id": "device"
+        },
+        {
+          "title": "store",
+          "depth": 2,
+          "id": "store"
+        },
+        {
+          "title": "sum",
+          "depth": 2,
+          "id": "sum"
+        },
+        {
+          "title": "wait",
+          "depth": 2,
+          "id": "wait"
+        },
+        {
+          "title": "toCSV",
+          "depth": 2,
+          "id": "tocsv"
+        },
+        {
+          "title": "csvToArray",
+          "depth": 2,
+          "id": "csvtoarray"
+        },
+        {
+          "title": "readFile",
+          "depth": 2,
+          "id": "readfile"
+        }
+      ]
+    },
+    "helpers/index.html": {
+      "source": "helpers/README.md",
+      "title": "Helpers - Blackstone UI",
+      "pageTitle": "Helpers",
+      "slug": "helpers",
+      "headings": [
+        {
+          "title": "LitElement",
+          "depth": 2,
+          "id": "litelement",
+          "headings": [
+            {
+              "title": "Listeners",
+              "depth": 3,
+              "id": "listeners"
+            },
+            {
+              "title": "Events",
+              "depth": 3,
+              "id": "events"
+            },
+            {
+              "title": "Subviews",
+              "depth": 3,
+              "id": "subviews"
+            },
+            {
+              "title": "Model",
+              "depth": 3,
+              "id": "model"
+            }
+          ]
+        },
+        {
+          "title": "Backbone.js",
+          "depth": 2,
+          "id": "backbone.js"
+        }
+      ]
+    },
+    "models/index.html": {
+      "source": "models/README.md",
+      "title": "Models - Blackstone UI",
+      "pageTitle": "Models",
+      "slug": "models",
+      "headings": [
+        {
+          "title": "Collection",
+          "depth": 2,
+          "id": "collection"
+        }
+      ]
+    },
+    "router/index.html": {
+      "source": "router/README.md",
+      "title": "Router - Blackstone UI",
+      "pageTitle": "Router",
+      "slug": "router",
+      "headings": [
+        {
+          "title": "TODO",
+          "depth": 2,
+          "id": "todo"
+        }
+      ]
+    },
+    "realtime/index.html": {
+      "source": "realtime/README.md",
+      "title": "Realtime - Blackstone UI",
+      "pageTitle": "Realtime",
+      "slug": "realtime",
+      "headings": [
+        {
+          "title": "Views",
+          "depth": 2,
+          "id": "views"
+        }
+      ]
     }
   },
   "sources": {
@@ -1152,10 +1208,6 @@
     "elements/README.md": "elements/index.html",
     "docs/icons.md": "icons.html",
     "docs/colors.md": "colors.html",
-    "util/README.md": "util/index.html",
-    "helpers/README.md": "helpers/index.html",
-    "models/README.md": "models/index.html",
-    "router/README.md": "router/index.html",
     "presenters/dialog/README.md": "presenters/dialog/index.html",
     "presenters/form-control/README.md": "presenters/form-control/index.html",
     "presenters/list/README.md": "presenters/list/index.html",
@@ -1163,6 +1215,11 @@
     "presenters/panel/README.md": "presenters/panel/index.html",
     "presenters/popover/README.md": "presenters/popover/index.html",
     "presenters/tabs/README.md": "presenters/tabs/index.html",
+    "util/README.md": "util/index.html",
+    "helpers/README.md": "helpers/index.html",
+    "models/README.md": "models/index.html",
+    "router/README.md": "router/index.html",
+    "realtime/README.md": "realtime/index.html",
     "docs/bui.css": "bui.css",
     "docs/bui.css.map": "bui.css.map",
     "docs/bui.js": "bui.js",
@@ -1170,6 +1227,7 @@
     "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
     "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
+    "docs/icons.svg.b0516ff5.html": "icons.svg.b0516ff5.html",
     "docs/icons.svg.c6868b42.html": "icons.svg.c6868b42.html",
     "docs/icons.svg.f5352611.html": "icons.svg.f5352611.html",
     "docs/style.css": "style.css"

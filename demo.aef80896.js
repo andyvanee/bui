@@ -4852,134 +4852,6 @@ class PaperElement extends _litElement.LitElement {
 
 exports.PaperElement = PaperElement;
 customElements.define('b-paper', PaperElement);
-},{"lit-element":"+bhx"}],"inC5":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-/*
-    TODO:
-    - add sliding animation?
-*/
-customElements.define('b-carousel', class extends _litElement.LitElement {
-  static get properties() {
-    return {
-      views: {
-        type: Array
-      }
-    };
-  }
-
-  constructor() {
-    super();
-    this.views = [];
-    this.active = 0;
-  }
-
-  static get styles() {
-    return _litElement.css`
-        :host {
-            display: block;
-            position:relative;
-            --dotSize: 14px;
-            --dotPadding: 4px;
-            --dotMargin: 5px;
-            --dotExpand: scale(1.4);
-        }
-
-        [hidden] {
-            display: none;
-        }
-
-        nav {
-            display: flex;
-            margin: 1em 0;
-            justify-content: center;
-            align-items: center;
-        }
-
-        nav > div {
-            width: var(--dotSize);
-            height: var(--dotSize);
-            margin: var(--dotMargin);
-            padding: var(--dotPadding);
-            cursor: pointer;
-        }
-
-        nav > div > div {
-            height: 100%;
-            width: 100%;
-            border-radius: 20px;
-            background: #ccc;
-            transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-        }
-
-        nav > div:hover > div {
-            transform: var(--dotExpand);
-        }
-
-        nav > div[active] > div {
-            background: #2196F3;
-        }
-        
-        @media print {
-            nav {
-                display: none;
-            }
-
-            ::slotted(*) {
-                display: block !important
-            }
-        }
-    `;
-  }
-
-  render() {
-    return _litElement.html`
-        <slot></slot>
-        <nav ?hidden=${this.views.length <= 1}>${this.views.map((v, i) => _litElement.html`
-            <div i=${i} ?active=${i == this.active} @click=${this.navTo}>
-                <div></div>
-            </div>
-        `)}</nav>
-    `;
-  }
-
-  get active() {
-    return this.__active;
-  }
-
-  set active(val) {
-    this.__active = val;
-    this.views.forEach(v => v.hidden = true);
-    if (!this.views[val]) return;
-    this.views[val].hidden = false;
-    this.update();
-  }
-
-  navTo(e) {
-    let i = e.currentTarget.getAttribute('i');
-    this.active = i;
-  }
-
-  firstUpdated() {
-    let slot = this.shadowRoot.querySelector('slot');
-    slot.addEventListener('slotchange', e => {
-      this.views = slot.assignedElements();
-      this.active = 0;
-    });
-  }
-
-});
-
-var _default = customElements.get('b-carousel');
-
-exports.default = _default;
 },{"lit-element":"+bhx"}],"a2/B":[function(require,module,exports) {
 var define;
 var global = arguments[3];
@@ -9954,90 +9826,6 @@ class Label extends _litElement.LitElement {
 
 exports.default = Label;
 customElements.define('b-label', Label);
-},{"lit-element":"+bhx"}],"IOAQ":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-customElements.define('b-hr', class extends _litElement.LitElement {
-  static get styles() {
-    return _litElement.css`
-        :host {
-            --bgd: rgba(0,0,0,.1);
-
-            display: block;
-            margin: 1em auto;
-            height: 1px;
-            width: 100%;
-            background: var(--bgd);
-            vertical-align: middle;
-        }
-
-        :host([short]) {
-            width: 180px;
-            max-width: 100%;
-        }
-
-        :host([vert]) {
-            display: inline-block;
-            min-height: 1em;
-            height: auto;
-            width: 1px;
-            margin: 0 .5em;
-            align-self: stretch;
-        }
-    `;
-  } // dont support slotted content yet
-
-
-  render() {
-    return _litElement.html``;
-  }
-
-});
-
-var _default = customElements.get('b-hr');
-
-exports.default = _default;
-},{"lit-element":"+bhx"}],"VANQ":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-customElements.define('b-sub', class extends _litElement.LitElement {
-  static get styles() {
-    return _litElement.css`
-        :host {
-            display: inline;
-            position:relative;
-            color: rgba(0,0,0,.4);
-            font-size: .8em;
-            font-weight: normal;
-        }
-    `;
-  }
-
-  render() {
-    return _litElement.html`
-        <slot></slot>
-    `;
-  }
-
-});
-
-var _default = customElements.get('b-sub');
-
-exports.default = _default;
 },{"lit-element":"+bhx"}],"Da++":[function(require,module,exports) {
 "use strict";
 
@@ -10232,7 +10020,91 @@ customElements.define('b-avatar', AvatarElement);
 var _default = customElements.get('b-avatar');
 
 exports.default = _default;
-},{}],"bpDM":[function(require,module,exports) {
+},{}],"IOAQ":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+customElements.define('b-hr', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            --bgd: rgba(0,0,0,.1);
+
+            display: block;
+            margin: 1em auto;
+            height: 1px;
+            width: 100%;
+            background: var(--bgd);
+            vertical-align: middle;
+        }
+
+        :host([short]) {
+            width: 180px;
+            max-width: 100%;
+        }
+
+        :host([vert]) {
+            display: inline-block;
+            min-height: 1em;
+            height: auto;
+            width: 1px;
+            margin: 0 .5em;
+            align-self: stretch;
+        }
+    `;
+  } // dont support slotted content yet
+
+
+  render() {
+    return _litElement.html``;
+  }
+
+});
+
+var _default = customElements.get('b-hr');
+
+exports.default = _default;
+},{"lit-element":"+bhx"}],"VANQ":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+customElements.define('b-sub', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: inline;
+            position:relative;
+            color: rgba(0,0,0,.4);
+            font-size: .8em;
+            font-weight: normal;
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <slot></slot>
+    `;
+  }
+
+});
+
+var _default = customElements.get('b-sub');
+
+exports.default = _default;
+},{"lit-element":"+bhx"}],"bpDM":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11168,7 +11040,973 @@ customElements.define('b-audio', class extends _litElement.LitElement {
 var _default = customElements.get('b-audio');
 
 exports.default = _default;
-},{"lit-element":"+bhx","./icon":"ncPe","../presenters/form-control/controls/range-slider":"ZCfn","moment":"a2/B","../util/store":"2z4L"}],"/jTP":[function(require,module,exports) {
+},{"lit-element":"+bhx","./icon":"ncPe","../presenters/form-control/controls/range-slider":"ZCfn","moment":"a2/B","../util/store":"2z4L"}],"inC5":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+/*
+    TODO:
+    - add sliding animation?
+*/
+customElements.define('b-carousel', class extends _litElement.LitElement {
+  static get properties() {
+    return {
+      views: {
+        type: Array
+      }
+    };
+  }
+
+  constructor() {
+    super();
+    this.views = [];
+    this.active = 0;
+  }
+
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            position:relative;
+            --dotSize: 14px;
+            --dotPadding: 4px;
+            --dotMargin: 5px;
+            --dotExpand: scale(1.4);
+        }
+
+        [hidden] {
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            margin: 1em 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav > div {
+            width: var(--dotSize);
+            height: var(--dotSize);
+            margin: var(--dotMargin);
+            padding: var(--dotPadding);
+            cursor: pointer;
+        }
+
+        nav > div > div {
+            height: 100%;
+            width: 100%;
+            border-radius: 20px;
+            background: #ccc;
+            transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        }
+
+        nav > div:hover > div {
+            transform: var(--dotExpand);
+        }
+
+        nav > div[active] > div {
+            background: #2196F3;
+        }
+        
+        @media print {
+            nav {
+                display: none;
+            }
+
+            ::slotted(*) {
+                display: block !important
+            }
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <slot></slot>
+        <nav ?hidden=${this.views.length <= 1}>${this.views.map((v, i) => _litElement.html`
+            <div i=${i} ?active=${i == this.active} @click=${this.navTo}>
+                <div></div>
+            </div>
+        `)}</nav>
+    `;
+  }
+
+  get active() {
+    return this.__active;
+  }
+
+  set active(val) {
+    this.__active = val;
+    this.views.forEach(v => v.hidden = true);
+    if (!this.views[val]) return;
+    this.views[val].hidden = false;
+    this.update();
+  }
+
+  navTo(e) {
+    let i = e.currentTarget.getAttribute('i');
+    this.active = i;
+  }
+
+  firstUpdated() {
+    let slot = this.shadowRoot.querySelector('slot');
+    slot.addEventListener('slotchange', e => {
+      this.views = slot.assignedElements();
+      this.active = 0;
+    });
+  }
+
+});
+
+var _default = customElements.get('b-carousel');
+
+exports.default = _default;
+},{"lit-element":"+bhx"}],"AZEX":[function(require,module,exports) {
+var define;
+// Generated by CoffeeScript 1.10.0
+var slice = [].slice;
+
+(function (root, factory) {
+  if ('function' === typeof define && define.amd != null) {
+    return define([], factory);
+  } else if (typeof exports !== "undefined" && exports !== null) {
+    return module.exports = factory();
+  } else {
+    return root.UrlPattern = factory();
+  }
+})(this, function () {
+  var P, UrlPattern, astNodeContainsSegmentsForProvidedParams, astNodeToNames, astNodeToRegexString, baseAstNodeToRegexString, concatMap, defaultOptions, escapeForRegex, getParam, keysAndValuesToObject, newParser, regexGroupCount, stringConcatMap, stringify;
+
+  escapeForRegex = function (string) {
+    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  };
+
+  concatMap = function (array, f) {
+    var i, length, results;
+    results = [];
+    i = -1;
+    length = array.length;
+
+    while (++i < length) {
+      results = results.concat(f(array[i]));
+    }
+
+    return results;
+  };
+
+  stringConcatMap = function (array, f) {
+    var i, length, result;
+    result = '';
+    i = -1;
+    length = array.length;
+
+    while (++i < length) {
+      result += f(array[i]);
+    }
+
+    return result;
+  };
+
+  regexGroupCount = function (regex) {
+    return new RegExp(regex.toString() + '|').exec('').length - 1;
+  };
+
+  keysAndValuesToObject = function (keys, values) {
+    var i, key, length, object, value;
+    object = {};
+    i = -1;
+    length = keys.length;
+
+    while (++i < length) {
+      key = keys[i];
+      value = values[i];
+
+      if (value == null) {
+        continue;
+      }
+
+      if (object[key] != null) {
+        if (!Array.isArray(object[key])) {
+          object[key] = [object[key]];
+        }
+
+        object[key].push(value);
+      } else {
+        object[key] = value;
+      }
+    }
+
+    return object;
+  };
+
+  P = {};
+
+  P.Result = function (value, rest) {
+    this.value = value;
+    this.rest = rest;
+  };
+
+  P.Tagged = function (tag, value) {
+    this.tag = tag;
+    this.value = value;
+  };
+
+  P.tag = function (tag, parser) {
+    return function (input) {
+      var result, tagged;
+      result = parser(input);
+
+      if (result == null) {
+        return;
+      }
+
+      tagged = new P.Tagged(tag, result.value);
+      return new P.Result(tagged, result.rest);
+    };
+  };
+
+  P.regex = function (regex) {
+    return function (input) {
+      var matches, result;
+      matches = regex.exec(input);
+
+      if (matches == null) {
+        return;
+      }
+
+      result = matches[0];
+      return new P.Result(result, input.slice(result.length));
+    };
+  };
+
+  P.sequence = function () {
+    var parsers;
+    parsers = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+    return function (input) {
+      var i, length, parser, rest, result, values;
+      i = -1;
+      length = parsers.length;
+      values = [];
+      rest = input;
+
+      while (++i < length) {
+        parser = parsers[i];
+        result = parser(rest);
+
+        if (result == null) {
+          return;
+        }
+
+        values.push(result.value);
+        rest = result.rest;
+      }
+
+      return new P.Result(values, rest);
+    };
+  };
+
+  P.pick = function () {
+    var indexes, parsers;
+    indexes = arguments[0], parsers = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+    return function (input) {
+      var array, result;
+      result = P.sequence.apply(P, parsers)(input);
+
+      if (result == null) {
+        return;
+      }
+
+      array = result.value;
+      result.value = array[indexes];
+      return result;
+    };
+  };
+
+  P.string = function (string) {
+    var length;
+    length = string.length;
+    return function (input) {
+      if (input.slice(0, length) === string) {
+        return new P.Result(string, input.slice(length));
+      }
+    };
+  };
+
+  P.lazy = function (fn) {
+    var cached;
+    cached = null;
+    return function (input) {
+      if (cached == null) {
+        cached = fn();
+      }
+
+      return cached(input);
+    };
+  };
+
+  P.baseMany = function (parser, end, stringResult, atLeastOneResultRequired, input) {
+    var endResult, parserResult, rest, results;
+    rest = input;
+    results = stringResult ? '' : [];
+
+    while (true) {
+      if (end != null) {
+        endResult = end(rest);
+
+        if (endResult != null) {
+          break;
+        }
+      }
+
+      parserResult = parser(rest);
+
+      if (parserResult == null) {
+        break;
+      }
+
+      if (stringResult) {
+        results += parserResult.value;
+      } else {
+        results.push(parserResult.value);
+      }
+
+      rest = parserResult.rest;
+    }
+
+    if (atLeastOneResultRequired && results.length === 0) {
+      return;
+    }
+
+    return new P.Result(results, rest);
+  };
+
+  P.many1 = function (parser) {
+    return function (input) {
+      return P.baseMany(parser, null, false, true, input);
+    };
+  };
+
+  P.concatMany1Till = function (parser, end) {
+    return function (input) {
+      return P.baseMany(parser, end, true, true, input);
+    };
+  };
+
+  P.firstChoice = function () {
+    var parsers;
+    parsers = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+    return function (input) {
+      var i, length, parser, result;
+      i = -1;
+      length = parsers.length;
+
+      while (++i < length) {
+        parser = parsers[i];
+        result = parser(input);
+
+        if (result != null) {
+          return result;
+        }
+      }
+    };
+  };
+
+  newParser = function (options) {
+    var U;
+    U = {};
+    U.wildcard = P.tag('wildcard', P.string(options.wildcardChar));
+    U.optional = P.tag('optional', P.pick(1, P.string(options.optionalSegmentStartChar), P.lazy(function () {
+      return U.pattern;
+    }), P.string(options.optionalSegmentEndChar)));
+    U.name = P.regex(new RegExp("^[" + options.segmentNameCharset + "]+"));
+    U.named = P.tag('named', P.pick(1, P.string(options.segmentNameStartChar), P.lazy(function () {
+      return U.name;
+    })));
+    U.escapedChar = P.pick(1, P.string(options.escapeChar), P.regex(/^./));
+    U["static"] = P.tag('static', P.concatMany1Till(P.firstChoice(P.lazy(function () {
+      return U.escapedChar;
+    }), P.regex(/^./)), P.firstChoice(P.string(options.segmentNameStartChar), P.string(options.optionalSegmentStartChar), P.string(options.optionalSegmentEndChar), U.wildcard)));
+    U.token = P.lazy(function () {
+      return P.firstChoice(U.wildcard, U.optional, U.named, U["static"]);
+    });
+    U.pattern = P.many1(P.lazy(function () {
+      return U.token;
+    }));
+    return U;
+  };
+
+  defaultOptions = {
+    escapeChar: '\\',
+    segmentNameStartChar: ':',
+    segmentValueCharset: 'a-zA-Z0-9-_~ %',
+    segmentNameCharset: 'a-zA-Z0-9',
+    optionalSegmentStartChar: '(',
+    optionalSegmentEndChar: ')',
+    wildcardChar: '*'
+  };
+
+  baseAstNodeToRegexString = function (astNode, segmentValueCharset) {
+    if (Array.isArray(astNode)) {
+      return stringConcatMap(astNode, function (node) {
+        return baseAstNodeToRegexString(node, segmentValueCharset);
+      });
+    }
+
+    switch (astNode.tag) {
+      case 'wildcard':
+        return '(.*?)';
+
+      case 'named':
+        return "([" + segmentValueCharset + "]+)";
+
+      case 'static':
+        return escapeForRegex(astNode.value);
+
+      case 'optional':
+        return '(?:' + baseAstNodeToRegexString(astNode.value, segmentValueCharset) + ')?';
+    }
+  };
+
+  astNodeToRegexString = function (astNode, segmentValueCharset) {
+    if (segmentValueCharset == null) {
+      segmentValueCharset = defaultOptions.segmentValueCharset;
+    }
+
+    return '^' + baseAstNodeToRegexString(astNode, segmentValueCharset) + '$';
+  };
+
+  astNodeToNames = function (astNode) {
+    if (Array.isArray(astNode)) {
+      return concatMap(astNode, astNodeToNames);
+    }
+
+    switch (astNode.tag) {
+      case 'wildcard':
+        return ['_'];
+
+      case 'named':
+        return [astNode.value];
+
+      case 'static':
+        return [];
+
+      case 'optional':
+        return astNodeToNames(astNode.value);
+    }
+  };
+
+  getParam = function (params, key, nextIndexes, sideEffects) {
+    var index, maxIndex, result, value;
+
+    if (sideEffects == null) {
+      sideEffects = false;
+    }
+
+    value = params[key];
+
+    if (value == null) {
+      if (sideEffects) {
+        throw new Error("no values provided for key `" + key + "`");
+      } else {
+        return;
+      }
+    }
+
+    index = nextIndexes[key] || 0;
+    maxIndex = Array.isArray(value) ? value.length - 1 : 0;
+
+    if (index > maxIndex) {
+      if (sideEffects) {
+        throw new Error("too few values provided for key `" + key + "`");
+      } else {
+        return;
+      }
+    }
+
+    result = Array.isArray(value) ? value[index] : value;
+
+    if (sideEffects) {
+      nextIndexes[key] = index + 1;
+    }
+
+    return result;
+  };
+
+  astNodeContainsSegmentsForProvidedParams = function (astNode, params, nextIndexes) {
+    var i, length;
+
+    if (Array.isArray(astNode)) {
+      i = -1;
+      length = astNode.length;
+
+      while (++i < length) {
+        if (astNodeContainsSegmentsForProvidedParams(astNode[i], params, nextIndexes)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    switch (astNode.tag) {
+      case 'wildcard':
+        return getParam(params, '_', nextIndexes, false) != null;
+
+      case 'named':
+        return getParam(params, astNode.value, nextIndexes, false) != null;
+
+      case 'static':
+        return false;
+
+      case 'optional':
+        return astNodeContainsSegmentsForProvidedParams(astNode.value, params, nextIndexes);
+    }
+  };
+
+  stringify = function (astNode, params, nextIndexes) {
+    if (Array.isArray(astNode)) {
+      return stringConcatMap(astNode, function (node) {
+        return stringify(node, params, nextIndexes);
+      });
+    }
+
+    switch (astNode.tag) {
+      case 'wildcard':
+        return getParam(params, '_', nextIndexes, true);
+
+      case 'named':
+        return getParam(params, astNode.value, nextIndexes, true);
+
+      case 'static':
+        return astNode.value;
+
+      case 'optional':
+        if (astNodeContainsSegmentsForProvidedParams(astNode.value, params, nextIndexes)) {
+          return stringify(astNode.value, params, nextIndexes);
+        } else {
+          return '';
+        }
+
+    }
+  };
+
+  UrlPattern = function (arg1, arg2) {
+    var groupCount, options, parsed, parser, withoutWhitespace;
+
+    if (arg1 instanceof UrlPattern) {
+      this.isRegex = arg1.isRegex;
+      this.regex = arg1.regex;
+      this.ast = arg1.ast;
+      this.names = arg1.names;
+      return;
+    }
+
+    this.isRegex = arg1 instanceof RegExp;
+
+    if (!('string' === typeof arg1 || this.isRegex)) {
+      throw new TypeError('argument must be a regex or a string');
+    }
+
+    if (this.isRegex) {
+      this.regex = arg1;
+
+      if (arg2 != null) {
+        if (!Array.isArray(arg2)) {
+          throw new Error('if first argument is a regex the second argument may be an array of group names but you provided something else');
+        }
+
+        groupCount = regexGroupCount(this.regex);
+
+        if (arg2.length !== groupCount) {
+          throw new Error("regex contains " + groupCount + " groups but array of group names contains " + arg2.length);
+        }
+
+        this.names = arg2;
+      }
+
+      return;
+    }
+
+    if (arg1 === '') {
+      throw new Error('argument must not be the empty string');
+    }
+
+    withoutWhitespace = arg1.replace(/\s+/g, '');
+
+    if (withoutWhitespace !== arg1) {
+      throw new Error('argument must not contain whitespace');
+    }
+
+    options = {
+      escapeChar: (arg2 != null ? arg2.escapeChar : void 0) || defaultOptions.escapeChar,
+      segmentNameStartChar: (arg2 != null ? arg2.segmentNameStartChar : void 0) || defaultOptions.segmentNameStartChar,
+      segmentNameCharset: (arg2 != null ? arg2.segmentNameCharset : void 0) || defaultOptions.segmentNameCharset,
+      segmentValueCharset: (arg2 != null ? arg2.segmentValueCharset : void 0) || defaultOptions.segmentValueCharset,
+      optionalSegmentStartChar: (arg2 != null ? arg2.optionalSegmentStartChar : void 0) || defaultOptions.optionalSegmentStartChar,
+      optionalSegmentEndChar: (arg2 != null ? arg2.optionalSegmentEndChar : void 0) || defaultOptions.optionalSegmentEndChar,
+      wildcardChar: (arg2 != null ? arg2.wildcardChar : void 0) || defaultOptions.wildcardChar
+    };
+    parser = newParser(options);
+    parsed = parser.pattern(arg1);
+
+    if (parsed == null) {
+      throw new Error("couldn't parse pattern");
+    }
+
+    if (parsed.rest !== '') {
+      throw new Error("could only partially parse pattern");
+    }
+
+    this.ast = parsed.value;
+    this.regex = new RegExp(astNodeToRegexString(this.ast, options.segmentValueCharset));
+    this.names = astNodeToNames(this.ast);
+  };
+
+  UrlPattern.prototype.match = function (url) {
+    var groups, match;
+    match = this.regex.exec(url);
+
+    if (match == null) {
+      return null;
+    }
+
+    groups = match.slice(1);
+
+    if (this.names) {
+      return keysAndValuesToObject(this.names, groups);
+    } else {
+      return groups;
+    }
+  };
+
+  UrlPattern.prototype.stringify = function (params) {
+    if (params == null) {
+      params = {};
+    }
+
+    if (this.isRegex) {
+      throw new Error("can't stringify patterns generated from a regex");
+    }
+
+    if (params !== Object(params)) {
+      throw new Error("argument must be an object or undefined");
+    }
+
+    return stringify(this.ast, params, {});
+  };
+
+  UrlPattern.escapeForRegex = escapeForRegex;
+  UrlPattern.concatMap = concatMap;
+  UrlPattern.stringConcatMap = stringConcatMap;
+  UrlPattern.regexGroupCount = regexGroupCount;
+  UrlPattern.keysAndValuesToObject = keysAndValuesToObject;
+  UrlPattern.P = P;
+  UrlPattern.newParser = newParser;
+  UrlPattern.defaultOptions = defaultOptions;
+  UrlPattern.astNodeToRegexString = astNodeToRegexString;
+  UrlPattern.astNodeToNames = astNodeToNames;
+  UrlPattern.getParam = getParam;
+  UrlPattern.astNodeContainsSegmentsForProvidedParams = astNodeContainsSegmentsForProvidedParams;
+  UrlPattern.stringify = stringify;
+  return UrlPattern;
+});
+},{}],"phBv":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+const APP_TITLE = document.title;
+
+class HistoryState {
+  constructor(parent, props) {
+    this.parent = parent;
+    this.props = Object.assign({
+      path: location.pathname,
+      hash: location.hash,
+      title: APP_TITLE
+    }, props);
+  }
+
+  get num() {
+    return this.props.num;
+  }
+
+  get isCurrent() {
+    return history.state && history.state.num == this.num;
+  }
+
+  get isBefore() {
+    return history.state && history.state.num > this.num;
+  }
+
+  get isBack() {
+    return this.isBefore();
+  }
+
+  get isAfter() {
+    return history.state && history.state.num < this.num;
+  }
+
+  get isForward() {
+    return this.isAfter();
+  }
+
+  get path() {
+    return this.props.path + this.props.hash;
+  }
+
+  update(props) {
+    this.props = Object.assign(this.props, props); // if( this.isCurrent )
+    // FIXME: hmmm...this is causing problems (#1930)
+    // ...why did I do this in the first place? Do I actually need it?
+    // yes, I need it, add hacky path check for now
+
+    if ((!history.state || history.state.num == undefined) && this.path && this.path != '/') history.replaceState(this.props, null, this.path);
+    this.parent.save();
+    if (this.props.title && this.isCurrent) document.title = this.props.title;
+  }
+
+  toJSON() {
+    return JSON.stringify(this.props);
+  }
+
+}
+
+exports.default = HistoryState;
+},{}],"OLbi":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _historyState = _interopRequireDefault(require("./history-state"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class HistoryStates {
+  constructor() {
+    let storedData = sessionStorage.getItem('history-states');
+    this.states = JSON.parse(storedData || '[]').map(props => new _historyState.default(this, JSON.parse(props)));
+    this._current = history.state && history.state.num || -1;
+    this.add(); // set initial state data
+  }
+
+  get length() {
+    return this.states.length;
+  }
+
+  get current() {
+    return this.get(this._current);
+  }
+
+  save() {
+    sessionStorage.setItem('history-states', JSON.stringify(this.states));
+  }
+
+  get(num, create = false) {
+    if (!this.states[num] && create) {
+      this.states[num] = new _historyState.default(this, {
+        num
+      }); // this.save()
+    }
+
+    return this.states[num];
+  }
+
+  add(props = {}) {
+    let oldNum = this._current;
+    let num = history.state && history.state.num;
+
+    if (num == undefined) {
+      num = ++this._current; // remove trailing states as they are no longer valid
+
+      this.states.splice(num + 1).forEach(state => {
+        state.parent = null;
+      });
+    }
+
+    let state = this.get(num, true);
+    state.update(props);
+    this._current = state.num;
+    let step = oldNum > this._current ? -1 : 1;
+    let oldStates = []; // console.log(oldNum, this._current);
+
+    while (oldNum != this._current) {
+      let oldState = this.get(oldNum);
+      if (oldState) oldStates.push(oldState);
+      oldNum += step;
+    } // console.log(oldStates);
+
+
+    return [state, oldStates];
+  }
+
+}
+
+exports.default = HistoryStates;
+},{"./history-state":"phBv"}],"38Qe":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.Route = exports.Router = void 0;
+
+var _urlPattern = _interopRequireDefault(require("url-pattern"));
+
+var _historyStates = _interopRequireDefault(require("./history-states"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// https://github.com/snd/url-pattern 
+const ROUTES = [];
+const APP_TITLE = document.title;
+const PATH_ROOT = location.pathname;
+const PATH_PREFIX = '#/';
+
+class Router {
+  // normalize path (always begin with `/#/`)
+  // TODO: allow for prefix to be set by developer
+  static normalizePath(path) {
+    return path ? PATH_ROOT + PATH_PREFIX + path.replace(/^[#\/]+/, '') : path;
+  }
+
+  start(opts = {}) {
+    opts = Object.assign({
+      requireState: false
+    }, opts);
+    this.states = new _historyStates.default(); // listen for state changes and change routes accordingly
+
+    window.addEventListener('popstate', e => {
+      if (opts.requireState && !e.state) return; // probably a sheetview change, ignore
+
+      let [newState, oldStates] = this.states.add();
+
+      this._changeRoute(oldStates, newState);
+    }); // trigger initial route
+
+    this._changeRoute([], this.states.current);
+  } // pushes new path/state onto stack (does not trigger route change)
+
+
+  push(path, data = {}) {
+    if (path instanceof Route) path = path.state ? path.state.path : path.rootPath;else path = Router.normalizePath(path);
+
+    if (!path) {
+      path = PATH_ROOT; // empty string doesn't work
+
+      data.title = data.title || APP_TITLE;
+    }
+
+    history.pushState(data, null, path);
+    if (data.title) document.title = data.title;
+    return this.states.add(data);
+  } // pushes new path/state and triggers route change
+
+
+  goTo(path, data) {
+    let [newState, oldStates] = this.push(path, data);
+
+    this._changeRoute(oldStates, newState);
+  }
+
+  _changeRoute(oldStates, newState) {
+    let dir = oldStates.length == 0 || oldStates[0].num < newState.num ? 'forward' : 'back';
+    ROUTES.forEach(route => {
+      route._change(oldStates, newState, dir);
+    });
+  }
+
+  add(path, enter, exit) {
+    new Route(path, enter, exit);
+  }
+
+  get routes() {
+    return ROUTES.map(route => route.path);
+  }
+
+  get rootRoutes() {
+    return ROUTES.map(route => route.rootPath);
+  }
+
+}
+
+exports.Router = Router;
+
+class Route {
+  constructor(path, onChange) {
+    path = Router.normalizePath(path);
+    this.path = path;
+    this.patt = new _urlPattern.default(path);
+    this.change = onChange;
+    ROUTES.push(this);
+  }
+
+  get params() {
+    return this.state ? this.state.params : {};
+  }
+
+  get rootPath() {
+    return this.patt.ast[0].value;
+  }
+
+  get isCurrent() {
+    return this.state && this.state.isCurrent;
+  }
+
+  update(props) {
+    this.state && this.state.update(props);
+  }
+
+  matches(state) {
+    // array of states, get the last matched state in the list
+    if (Array.isArray(state)) {
+      let matchedState = null;
+
+      for (let i in state) {
+        if (this.matches(state[i])) matchedState = state[i];
+      }
+
+      return matchedState;
+    }
+
+    let params = state ? this.patt.match(state.path ? state.path : state) : false;
+
+    if (params) {
+      this.state = state;
+      state.params = params;
+      return state;
+    }
+
+    return null;
+  }
+
+  _change(oldState, newState, dir) {
+    oldState = this.matches(oldState);
+    newState = this.matches(newState);
+    if (oldState || newState) this.change(oldState, newState, dir);
+  }
+
+} // singleton
+
+
+exports.Route = Route;
+
+var _default = new Router();
+
+exports.default = _default;
+},{"url-pattern":"AZEX","./history-states":"OLbi"}],"/jTP":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14067,845 +14905,7 @@ class Popover {
 }
 
 exports.default = Popover;
-},{"popper.js":"lo/u","./style.less":"r4vn"}],"AZEX":[function(require,module,exports) {
-var define;
-// Generated by CoffeeScript 1.10.0
-var slice = [].slice;
-
-(function (root, factory) {
-  if ('function' === typeof define && define.amd != null) {
-    return define([], factory);
-  } else if (typeof exports !== "undefined" && exports !== null) {
-    return module.exports = factory();
-  } else {
-    return root.UrlPattern = factory();
-  }
-})(this, function () {
-  var P, UrlPattern, astNodeContainsSegmentsForProvidedParams, astNodeToNames, astNodeToRegexString, baseAstNodeToRegexString, concatMap, defaultOptions, escapeForRegex, getParam, keysAndValuesToObject, newParser, regexGroupCount, stringConcatMap, stringify;
-
-  escapeForRegex = function (string) {
-    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-  };
-
-  concatMap = function (array, f) {
-    var i, length, results;
-    results = [];
-    i = -1;
-    length = array.length;
-
-    while (++i < length) {
-      results = results.concat(f(array[i]));
-    }
-
-    return results;
-  };
-
-  stringConcatMap = function (array, f) {
-    var i, length, result;
-    result = '';
-    i = -1;
-    length = array.length;
-
-    while (++i < length) {
-      result += f(array[i]);
-    }
-
-    return result;
-  };
-
-  regexGroupCount = function (regex) {
-    return new RegExp(regex.toString() + '|').exec('').length - 1;
-  };
-
-  keysAndValuesToObject = function (keys, values) {
-    var i, key, length, object, value;
-    object = {};
-    i = -1;
-    length = keys.length;
-
-    while (++i < length) {
-      key = keys[i];
-      value = values[i];
-
-      if (value == null) {
-        continue;
-      }
-
-      if (object[key] != null) {
-        if (!Array.isArray(object[key])) {
-          object[key] = [object[key]];
-        }
-
-        object[key].push(value);
-      } else {
-        object[key] = value;
-      }
-    }
-
-    return object;
-  };
-
-  P = {};
-
-  P.Result = function (value, rest) {
-    this.value = value;
-    this.rest = rest;
-  };
-
-  P.Tagged = function (tag, value) {
-    this.tag = tag;
-    this.value = value;
-  };
-
-  P.tag = function (tag, parser) {
-    return function (input) {
-      var result, tagged;
-      result = parser(input);
-
-      if (result == null) {
-        return;
-      }
-
-      tagged = new P.Tagged(tag, result.value);
-      return new P.Result(tagged, result.rest);
-    };
-  };
-
-  P.regex = function (regex) {
-    return function (input) {
-      var matches, result;
-      matches = regex.exec(input);
-
-      if (matches == null) {
-        return;
-      }
-
-      result = matches[0];
-      return new P.Result(result, input.slice(result.length));
-    };
-  };
-
-  P.sequence = function () {
-    var parsers;
-    parsers = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-    return function (input) {
-      var i, length, parser, rest, result, values;
-      i = -1;
-      length = parsers.length;
-      values = [];
-      rest = input;
-
-      while (++i < length) {
-        parser = parsers[i];
-        result = parser(rest);
-
-        if (result == null) {
-          return;
-        }
-
-        values.push(result.value);
-        rest = result.rest;
-      }
-
-      return new P.Result(values, rest);
-    };
-  };
-
-  P.pick = function () {
-    var indexes, parsers;
-    indexes = arguments[0], parsers = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-    return function (input) {
-      var array, result;
-      result = P.sequence.apply(P, parsers)(input);
-
-      if (result == null) {
-        return;
-      }
-
-      array = result.value;
-      result.value = array[indexes];
-      return result;
-    };
-  };
-
-  P.string = function (string) {
-    var length;
-    length = string.length;
-    return function (input) {
-      if (input.slice(0, length) === string) {
-        return new P.Result(string, input.slice(length));
-      }
-    };
-  };
-
-  P.lazy = function (fn) {
-    var cached;
-    cached = null;
-    return function (input) {
-      if (cached == null) {
-        cached = fn();
-      }
-
-      return cached(input);
-    };
-  };
-
-  P.baseMany = function (parser, end, stringResult, atLeastOneResultRequired, input) {
-    var endResult, parserResult, rest, results;
-    rest = input;
-    results = stringResult ? '' : [];
-
-    while (true) {
-      if (end != null) {
-        endResult = end(rest);
-
-        if (endResult != null) {
-          break;
-        }
-      }
-
-      parserResult = parser(rest);
-
-      if (parserResult == null) {
-        break;
-      }
-
-      if (stringResult) {
-        results += parserResult.value;
-      } else {
-        results.push(parserResult.value);
-      }
-
-      rest = parserResult.rest;
-    }
-
-    if (atLeastOneResultRequired && results.length === 0) {
-      return;
-    }
-
-    return new P.Result(results, rest);
-  };
-
-  P.many1 = function (parser) {
-    return function (input) {
-      return P.baseMany(parser, null, false, true, input);
-    };
-  };
-
-  P.concatMany1Till = function (parser, end) {
-    return function (input) {
-      return P.baseMany(parser, end, true, true, input);
-    };
-  };
-
-  P.firstChoice = function () {
-    var parsers;
-    parsers = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-    return function (input) {
-      var i, length, parser, result;
-      i = -1;
-      length = parsers.length;
-
-      while (++i < length) {
-        parser = parsers[i];
-        result = parser(input);
-
-        if (result != null) {
-          return result;
-        }
-      }
-    };
-  };
-
-  newParser = function (options) {
-    var U;
-    U = {};
-    U.wildcard = P.tag('wildcard', P.string(options.wildcardChar));
-    U.optional = P.tag('optional', P.pick(1, P.string(options.optionalSegmentStartChar), P.lazy(function () {
-      return U.pattern;
-    }), P.string(options.optionalSegmentEndChar)));
-    U.name = P.regex(new RegExp("^[" + options.segmentNameCharset + "]+"));
-    U.named = P.tag('named', P.pick(1, P.string(options.segmentNameStartChar), P.lazy(function () {
-      return U.name;
-    })));
-    U.escapedChar = P.pick(1, P.string(options.escapeChar), P.regex(/^./));
-    U["static"] = P.tag('static', P.concatMany1Till(P.firstChoice(P.lazy(function () {
-      return U.escapedChar;
-    }), P.regex(/^./)), P.firstChoice(P.string(options.segmentNameStartChar), P.string(options.optionalSegmentStartChar), P.string(options.optionalSegmentEndChar), U.wildcard)));
-    U.token = P.lazy(function () {
-      return P.firstChoice(U.wildcard, U.optional, U.named, U["static"]);
-    });
-    U.pattern = P.many1(P.lazy(function () {
-      return U.token;
-    }));
-    return U;
-  };
-
-  defaultOptions = {
-    escapeChar: '\\',
-    segmentNameStartChar: ':',
-    segmentValueCharset: 'a-zA-Z0-9-_~ %',
-    segmentNameCharset: 'a-zA-Z0-9',
-    optionalSegmentStartChar: '(',
-    optionalSegmentEndChar: ')',
-    wildcardChar: '*'
-  };
-
-  baseAstNodeToRegexString = function (astNode, segmentValueCharset) {
-    if (Array.isArray(astNode)) {
-      return stringConcatMap(astNode, function (node) {
-        return baseAstNodeToRegexString(node, segmentValueCharset);
-      });
-    }
-
-    switch (astNode.tag) {
-      case 'wildcard':
-        return '(.*?)';
-
-      case 'named':
-        return "([" + segmentValueCharset + "]+)";
-
-      case 'static':
-        return escapeForRegex(astNode.value);
-
-      case 'optional':
-        return '(?:' + baseAstNodeToRegexString(astNode.value, segmentValueCharset) + ')?';
-    }
-  };
-
-  astNodeToRegexString = function (astNode, segmentValueCharset) {
-    if (segmentValueCharset == null) {
-      segmentValueCharset = defaultOptions.segmentValueCharset;
-    }
-
-    return '^' + baseAstNodeToRegexString(astNode, segmentValueCharset) + '$';
-  };
-
-  astNodeToNames = function (astNode) {
-    if (Array.isArray(astNode)) {
-      return concatMap(astNode, astNodeToNames);
-    }
-
-    switch (astNode.tag) {
-      case 'wildcard':
-        return ['_'];
-
-      case 'named':
-        return [astNode.value];
-
-      case 'static':
-        return [];
-
-      case 'optional':
-        return astNodeToNames(astNode.value);
-    }
-  };
-
-  getParam = function (params, key, nextIndexes, sideEffects) {
-    var index, maxIndex, result, value;
-
-    if (sideEffects == null) {
-      sideEffects = false;
-    }
-
-    value = params[key];
-
-    if (value == null) {
-      if (sideEffects) {
-        throw new Error("no values provided for key `" + key + "`");
-      } else {
-        return;
-      }
-    }
-
-    index = nextIndexes[key] || 0;
-    maxIndex = Array.isArray(value) ? value.length - 1 : 0;
-
-    if (index > maxIndex) {
-      if (sideEffects) {
-        throw new Error("too few values provided for key `" + key + "`");
-      } else {
-        return;
-      }
-    }
-
-    result = Array.isArray(value) ? value[index] : value;
-
-    if (sideEffects) {
-      nextIndexes[key] = index + 1;
-    }
-
-    return result;
-  };
-
-  astNodeContainsSegmentsForProvidedParams = function (astNode, params, nextIndexes) {
-    var i, length;
-
-    if (Array.isArray(astNode)) {
-      i = -1;
-      length = astNode.length;
-
-      while (++i < length) {
-        if (astNodeContainsSegmentsForProvidedParams(astNode[i], params, nextIndexes)) {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    switch (astNode.tag) {
-      case 'wildcard':
-        return getParam(params, '_', nextIndexes, false) != null;
-
-      case 'named':
-        return getParam(params, astNode.value, nextIndexes, false) != null;
-
-      case 'static':
-        return false;
-
-      case 'optional':
-        return astNodeContainsSegmentsForProvidedParams(astNode.value, params, nextIndexes);
-    }
-  };
-
-  stringify = function (astNode, params, nextIndexes) {
-    if (Array.isArray(astNode)) {
-      return stringConcatMap(astNode, function (node) {
-        return stringify(node, params, nextIndexes);
-      });
-    }
-
-    switch (astNode.tag) {
-      case 'wildcard':
-        return getParam(params, '_', nextIndexes, true);
-
-      case 'named':
-        return getParam(params, astNode.value, nextIndexes, true);
-
-      case 'static':
-        return astNode.value;
-
-      case 'optional':
-        if (astNodeContainsSegmentsForProvidedParams(astNode.value, params, nextIndexes)) {
-          return stringify(astNode.value, params, nextIndexes);
-        } else {
-          return '';
-        }
-
-    }
-  };
-
-  UrlPattern = function (arg1, arg2) {
-    var groupCount, options, parsed, parser, withoutWhitespace;
-
-    if (arg1 instanceof UrlPattern) {
-      this.isRegex = arg1.isRegex;
-      this.regex = arg1.regex;
-      this.ast = arg1.ast;
-      this.names = arg1.names;
-      return;
-    }
-
-    this.isRegex = arg1 instanceof RegExp;
-
-    if (!('string' === typeof arg1 || this.isRegex)) {
-      throw new TypeError('argument must be a regex or a string');
-    }
-
-    if (this.isRegex) {
-      this.regex = arg1;
-
-      if (arg2 != null) {
-        if (!Array.isArray(arg2)) {
-          throw new Error('if first argument is a regex the second argument may be an array of group names but you provided something else');
-        }
-
-        groupCount = regexGroupCount(this.regex);
-
-        if (arg2.length !== groupCount) {
-          throw new Error("regex contains " + groupCount + " groups but array of group names contains " + arg2.length);
-        }
-
-        this.names = arg2;
-      }
-
-      return;
-    }
-
-    if (arg1 === '') {
-      throw new Error('argument must not be the empty string');
-    }
-
-    withoutWhitespace = arg1.replace(/\s+/g, '');
-
-    if (withoutWhitespace !== arg1) {
-      throw new Error('argument must not contain whitespace');
-    }
-
-    options = {
-      escapeChar: (arg2 != null ? arg2.escapeChar : void 0) || defaultOptions.escapeChar,
-      segmentNameStartChar: (arg2 != null ? arg2.segmentNameStartChar : void 0) || defaultOptions.segmentNameStartChar,
-      segmentNameCharset: (arg2 != null ? arg2.segmentNameCharset : void 0) || defaultOptions.segmentNameCharset,
-      segmentValueCharset: (arg2 != null ? arg2.segmentValueCharset : void 0) || defaultOptions.segmentValueCharset,
-      optionalSegmentStartChar: (arg2 != null ? arg2.optionalSegmentStartChar : void 0) || defaultOptions.optionalSegmentStartChar,
-      optionalSegmentEndChar: (arg2 != null ? arg2.optionalSegmentEndChar : void 0) || defaultOptions.optionalSegmentEndChar,
-      wildcardChar: (arg2 != null ? arg2.wildcardChar : void 0) || defaultOptions.wildcardChar
-    };
-    parser = newParser(options);
-    parsed = parser.pattern(arg1);
-
-    if (parsed == null) {
-      throw new Error("couldn't parse pattern");
-    }
-
-    if (parsed.rest !== '') {
-      throw new Error("could only partially parse pattern");
-    }
-
-    this.ast = parsed.value;
-    this.regex = new RegExp(astNodeToRegexString(this.ast, options.segmentValueCharset));
-    this.names = astNodeToNames(this.ast);
-  };
-
-  UrlPattern.prototype.match = function (url) {
-    var groups, match;
-    match = this.regex.exec(url);
-
-    if (match == null) {
-      return null;
-    }
-
-    groups = match.slice(1);
-
-    if (this.names) {
-      return keysAndValuesToObject(this.names, groups);
-    } else {
-      return groups;
-    }
-  };
-
-  UrlPattern.prototype.stringify = function (params) {
-    if (params == null) {
-      params = {};
-    }
-
-    if (this.isRegex) {
-      throw new Error("can't stringify patterns generated from a regex");
-    }
-
-    if (params !== Object(params)) {
-      throw new Error("argument must be an object or undefined");
-    }
-
-    return stringify(this.ast, params, {});
-  };
-
-  UrlPattern.escapeForRegex = escapeForRegex;
-  UrlPattern.concatMap = concatMap;
-  UrlPattern.stringConcatMap = stringConcatMap;
-  UrlPattern.regexGroupCount = regexGroupCount;
-  UrlPattern.keysAndValuesToObject = keysAndValuesToObject;
-  UrlPattern.P = P;
-  UrlPattern.newParser = newParser;
-  UrlPattern.defaultOptions = defaultOptions;
-  UrlPattern.astNodeToRegexString = astNodeToRegexString;
-  UrlPattern.astNodeToNames = astNodeToNames;
-  UrlPattern.getParam = getParam;
-  UrlPattern.astNodeContainsSegmentsForProvidedParams = astNodeContainsSegmentsForProvidedParams;
-  UrlPattern.stringify = stringify;
-  return UrlPattern;
-});
-},{}],"phBv":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-const APP_TITLE = document.title;
-
-class HistoryState {
-  constructor(parent, props) {
-    this.parent = parent;
-    this.props = Object.assign({
-      path: location.pathname,
-      hash: location.hash,
-      title: APP_TITLE
-    }, props);
-  }
-
-  get num() {
-    return this.props.num;
-  }
-
-  get isCurrent() {
-    return history.state && history.state.num == this.num;
-  }
-
-  get isBefore() {
-    return history.state && history.state.num > this.num;
-  }
-
-  get isBack() {
-    return this.isBefore();
-  }
-
-  get isAfter() {
-    return history.state && history.state.num < this.num;
-  }
-
-  get isForward() {
-    return this.isAfter();
-  }
-
-  get path() {
-    return this.props.path + this.props.hash;
-  }
-
-  update(props) {
-    this.props = Object.assign(this.props, props); // if( this.isCurrent )
-    // FIXME: hmmm...this is causing problems (#1930)
-    // ...why did I do this in the first place? Do I actually need it?
-    // yes, I need it, add hacky path check for now
-
-    if ((!history.state || history.state.num == undefined) && this.path && this.path != '/') history.replaceState(this.props, null, this.path);
-    this.parent.save();
-    if (this.props.title && this.isCurrent) document.title = this.props.title;
-  }
-
-  toJSON() {
-    return JSON.stringify(this.props);
-  }
-
-}
-
-exports.default = HistoryState;
-},{}],"OLbi":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _historyState = _interopRequireDefault(require("./history-state"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-class HistoryStates {
-  constructor() {
-    let storedData = sessionStorage.getItem('history-states');
-    this.states = JSON.parse(storedData || '[]').map(props => new _historyState.default(this, JSON.parse(props)));
-    this._current = history.state && history.state.num || -1;
-    this.add(); // set initial state data
-  }
-
-  get length() {
-    return this.states.length;
-  }
-
-  get current() {
-    return this.get(this._current);
-  }
-
-  save() {
-    sessionStorage.setItem('history-states', JSON.stringify(this.states));
-  }
-
-  get(num, create = false) {
-    if (!this.states[num] && create) {
-      this.states[num] = new _historyState.default(this, {
-        num
-      }); // this.save()
-    }
-
-    return this.states[num];
-  }
-
-  add(props = {}) {
-    let oldNum = this._current;
-    let num = history.state && history.state.num;
-
-    if (num == undefined) {
-      num = ++this._current; // remove trailing states as they are no longer valid
-
-      this.states.splice(num + 1).forEach(state => {
-        state.parent = null;
-      });
-    }
-
-    let state = this.get(num, true);
-    state.update(props);
-    this._current = state.num;
-    let step = oldNum > this._current ? -1 : 1;
-    let oldStates = []; // console.log(oldNum, this._current);
-
-    while (oldNum != this._current) {
-      let oldState = this.get(oldNum);
-      if (oldState) oldStates.push(oldState);
-      oldNum += step;
-    } // console.log(oldStates);
-
-
-    return [state, oldStates];
-  }
-
-}
-
-exports.default = HistoryStates;
-},{"./history-state":"phBv"}],"38Qe":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = exports.Route = exports.Router = void 0;
-
-var _urlPattern = _interopRequireDefault(require("url-pattern"));
-
-var _historyStates = _interopRequireDefault(require("./history-states"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// https://github.com/snd/url-pattern 
-const ROUTES = [];
-const APP_TITLE = document.title;
-const PATH_ROOT = location.pathname;
-const PATH_PREFIX = '#/';
-
-class Router {
-  // normalize path (always begin with `/#/`)
-  // TODO: allow for prefix to be set by developer
-  static normalizePath(path) {
-    return path ? PATH_ROOT + PATH_PREFIX + path.replace(/^[#\/]+/, '') : path;
-  }
-
-  start(opts = {}) {
-    opts = Object.assign({
-      requireState: false
-    }, opts);
-    this.states = new _historyStates.default(); // listen for state changes and change routes accordingly
-
-    window.addEventListener('popstate', e => {
-      if (opts.requireState && !e.state) return; // probably a sheetview change, ignore
-
-      let [newState, oldStates] = this.states.add();
-
-      this._changeRoute(oldStates, newState);
-    }); // trigger initial route
-
-    this._changeRoute([], this.states.current);
-  } // pushes new path/state onto stack (does not trigger route change)
-
-
-  push(path, data = {}) {
-    if (path instanceof Route) path = path.state ? path.state.path : path.rootPath;else path = Router.normalizePath(path);
-
-    if (!path) {
-      path = PATH_ROOT; // empty string doesn't work
-
-      data.title = data.title || APP_TITLE;
-    }
-
-    history.pushState(data, null, path);
-    if (data.title) document.title = data.title;
-    return this.states.add(data);
-  } // pushes new path/state and triggers route change
-
-
-  goTo(path, data) {
-    let [newState, oldStates] = this.push(path, data);
-
-    this._changeRoute(oldStates, newState);
-  }
-
-  _changeRoute(oldStates, newState) {
-    let dir = oldStates.length == 0 || oldStates[0].num < newState.num ? 'forward' : 'back';
-    ROUTES.forEach(route => {
-      route._change(oldStates, newState, dir);
-    });
-  }
-
-  add(path, enter, exit) {
-    new Route(path, enter, exit);
-  }
-
-  get routes() {
-    return ROUTES.map(route => route.path);
-  }
-
-  get rootRoutes() {
-    return ROUTES.map(route => route.rootPath);
-  }
-
-}
-
-exports.Router = Router;
-
-class Route {
-  constructor(path, onChange) {
-    path = Router.normalizePath(path);
-    this.path = path;
-    this.patt = new _urlPattern.default(path);
-    this.change = onChange;
-    ROUTES.push(this);
-  }
-
-  get params() {
-    return this.state ? this.state.params : {};
-  }
-
-  get rootPath() {
-    return this.patt.ast[0].value;
-  }
-
-  get isCurrent() {
-    return this.state && this.state.isCurrent;
-  }
-
-  update(props) {
-    this.state && this.state.update(props);
-  }
-
-  matches(state) {
-    // array of states, get the last matched state in the list
-    if (Array.isArray(state)) {
-      let matchedState = null;
-
-      for (let i in state) {
-        if (this.matches(state[i])) matchedState = state[i];
-      }
-
-      return matchedState;
-    }
-
-    let params = state ? this.patt.match(state.path ? state.path : state) : false;
-
-    if (params) {
-      this.state = state;
-      state.params = params;
-      return state;
-    }
-
-    return null;
-  }
-
-  _change(oldState, newState, dir) {
-    oldState = this.matches(oldState);
-    newState = this.matches(newState);
-    if (oldState || newState) this.change(oldState, newState, dir);
-  }
-
-} // singleton
-
-
-exports.Route = Route;
-
-var _default = new Router();
-
-exports.default = _default;
-},{"url-pattern":"AZEX","./history-states":"OLbi"}],"R9Fe":[function(require,module,exports) {
+},{"popper.js":"lo/u","./style.less":"r4vn"}],"R9Fe":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35927,7 +35927,7 @@ customElements.define('b-list-of-colors', class extends _litElement.LitElement {
   }
 
 });
-},{"lit-element":"+bhx"}],"gE6T":[function(require,module,exports) {
+},{"lit-element":"+bhx"}],"lgAh":[function(require,module,exports) {
 "use strict";
 
 require("../elements/icon");
@@ -35942,23 +35942,27 @@ require("../elements/uploader");
 
 require("../elements/paper");
 
-require("../elements/carousel");
-
 require("../elements/timer");
 
 require("../elements/empty-state");
 
 require("../elements/label");
 
+require("../elements/avatar");
+
 require("../elements/hr");
 
 require("../elements/sub");
 
-require("../elements/avatar");
-
 require("../elements/embed");
 
 require("../elements/audio");
+
+require("../elements/carousel");
+
+var _litElement = require("lit-element");
+
+var _router = _interopRequireDefault(require("../router"));
 
 require("../presenters/tabs");
 
@@ -35966,61 +35970,369 @@ require("../presenters/form-control");
 
 require("../presenters/list");
 
-require("../helpers/colors-list");
+var _panel = _interopRequireWildcard(require("../presenters/panel"));
 
-require("../helpers/colors.less");
+var _menu = _interopRequireDefault(require("../presenters/menu"));
 
 var _dialog = _interopRequireDefault(require("../presenters/dialog"));
 
-var _menu = _interopRequireDefault(require("../presenters/menu"));
+var _README = _interopRequireDefault(require("../util/README.md"));
+
+require("../helpers/colors.less");
+
+require("../helpers/colors-list");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.Dialog = _dialog.default;
-window.Menu = _menu.default;
 
-function convertComments() {
-  var tw = document.createTreeWalker(document, NodeFilter.SHOW_COMMENT, null, null);
-  var comment;
-  var comments = [];
+window.showMenu = async function (el, renderTo = false) {
+  let menu = [{
+    divider: 'Group Title'
+  }, {
+    label: 'Menu Item 1',
+    val: '1'
+  }, {
+    label: 'Menu Item 2',
+    val: '2'
+  }, {
+    label: 'Menu Item 3',
+    val: '3'
+  }, 'divider', {
+    label: 'More',
+    menu: [{
+      label: 'Submenu 1',
+      val: 'more-1'
+    }, {
+      label: 'Submenu 2',
+      val: 'more-2'
+    }],
+    menuOpts: {
+      popover: {
+        align: 'right-start'
+      }
+    }
+  }, {
+    text: 'Look at the console after selecting a value'
+  }];
+  menu = new _menu.default(menu);
 
-  while (comment = tw.nextNode()) {
-    comments.push(comment);
+  if (renderTo) {
+    el.appendChild(menu.el);
+    menu.render();
+  } else {
+    let selected = await menu.popover(el);
+  }
+};
+
+showMenu(document.querySelector('#render-menu'), true);
+
+_panel.default.register('view-1', () => _litElement.html`
+    <b-panel-toolbar shadow>
+        <b-btn slot="right">Right Side</b-btn>
+        <span slot="left">
+            <b-hr vert></b-hr>
+            Left Content
+        </span>
+        <span slot="middle"> <b-label filled>Badge</b-label></span>
+    </b-panel-toolbar>
+    <main style="flex:1">
+        <b-tabs layout="left">
+            <div title="View 1">Try using your browser's back button</div>
+            <div title="View 2">View 2 content</div>
+        </b-tabs>
+    </main>
+`, {
+  title: 'View 1'
+});
+
+customElements.define('view-two', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        main {
+            padding: 1em;
+            overflow: auto;
+        }
+    `;
   }
 
-  comments.forEach(com => {
-    let div = document.createElement('div');
-    div.classList.add('demo-block');
-    let str = com.textContent;
-    let strs = str.split("\n");
-    let type = strs.shift();
-    str = strs.join("\n");
-    div.innerHTML = str;
-    if (type) div.setAttribute('type', type);
-    let script = div.querySelector('script');
-    if (script) eval(script.innerText);
-    com.replaceWith(div);
+  render() {
+    return _litElement.html`
+        <b-panel-toolbar look="white" noshadow>
+            <b-btn slot="right" @click=${this.btnMenu}>Change Style</b-btn>
+        </b-panel-toolbar>
+        <main>
+            content
+        </main>
+    `;
+  }
+
+  async btnMenu(e) {
+    let selected = await new _menu.default([{
+      label: 'Modal',
+      opts: {
+        width: '600px',
+        height: '400px',
+        anchor: 'center'
+      }
+    }, {
+      label: 'Drawer',
+      opts: {
+        width: '600px',
+        height: '',
+        anchor: 'right'
+      }
+    }, {
+      label: 'Drawer Left ',
+      opts: {
+        width: '600px',
+        height: '',
+        anchor: 'left'
+      }
+    }, {
+      label: 'Slide Top ',
+      opts: {
+        width: '100%',
+        height: '50vh',
+        anchor: 'top'
+      }
+    }, 'divider', {
+      label: 'Reset',
+      icon: 'arrows-ccw',
+      opts: {
+        width: '100%',
+        height: '100%',
+        anchor: 'right'
+      }
+    }]).popover(e.target, {
+      align: 'bottom-end'
+    });
+
+    if (selected) {
+      console.log(selected);
+
+      for (let key in selected.opts) {
+        console.log(key);
+        this.panel[key] = selected.opts[key];
+      }
+    }
+  }
+
+});
+
+_panel.default.register('view-2', 'view-two', {
+  title: 'View 2'
+});
+
+_panel.default.register('view-2-small', 'view-two', {
+  title: 'View 2 Small',
+  width: '600px',
+  height: '400px',
+  anchor: 'center'
+});
+
+customElements.define('view-animate', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        main {
+            padding: 1em;
+            overflow: auto;
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <b-panel-toolbar look="white" noshadow></b-panel-toolbar>
+        <main>
+            <b-btn @click=${this.animate}>bounce</b-btn>
+            <b-btn @click=${this.animate}>shake</b-btn>
+        </main>
+    `;
+  }
+
+  animate(e) {
+    let fn = e.target.innerText;
+    this.panel[fn]();
+  }
+
+});
+
+_panel.default.register('view-animate', 'view-animate', {
+  title: 'View Animate',
+  width: '600px',
+  height: '400px',
+  anchor: 'center'
+});
+
+_panel.default.register('view-3', 'view-two', {
+  title: 'View 3',
+  controller: 'inset',
+  width: '400px',
+  anchor: 'right'
+});
+
+window.openModalPanel = () => {
+  (0, _panel.Modal)(() => _litElement.html`
+        <b-embed url="https://www.youtube.com/watch?v=sK1ODp0nDbM"></b-embed>
+    `, {
+    closeBtn: true,
+    width: '60vw'
+  });
+};
+
+let listData = [];
+let i = 0;
+
+while (i++ < 100) {
+  listData.push({
+    id: i,
+    label: 'Row ' + i,
+    date: new Date().getTime() + i * 10000000
   });
 }
 
-convertComments(); // popstate
+const listSorts = {
+  id: {
+    label: 'ID',
 
-history.pushState = (f => function pushState() {
-  var ret = f.apply(this, arguments);
-  convertComments();
-  return ret;
-})(history.pushState);
+    sortBy(m) {
+      return m.id;
+    }
 
-history.replaceState = (f => function replaceState() {
-  var ret = f.apply(this, arguments);
-  convertComments();
-  return ret;
-})(history.replaceState);
+  }
+};
+customElements.define('a-list-view', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            height: 340px;
+            /* margin: -2em; */
+            border-bottom: solid 1px rgba(0,0,0,.1);
+        }
 
-window.addEventListener('popstate', function () {
-  convertComments();
+        b-list {
+            height: 100%;
+            overflow: hidden;
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <b-list
+            key="a-list-view"
+            row="a-list-view-row"
+            .sorts=${listSorts}
+            .coll=${listData}
+        ></b-list>
+    `;
+  }
+
 });
-},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/carousel":"inC5","../elements/timer":"u+eY","../elements/empty-state":"+2dU","../elements/label":"DcCw","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/avatar":"Da++","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../helpers/colors-list":"TMO9","../helpers/colors.less":"r4vn","../presenters/dialog":"pos3","../presenters/menu":"0tCY"}],"RVcF":[function(require,module,exports) {
+customElements.define('a-list-view-row', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            padding: .5em 1em;
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        ${this.model.label}
+    `;
+  }
+
+});
+customElements.define('tab-divider', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            color: inherit;
+            margin: 1em 0 0 0;
+            padding: 1em 1.2em .5em;
+            border-top: solid 1px rgba(0,0,0,.1);
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <b-label><slot></slot></b-label>
+    `;
+  }
+
+});
+customElements.define('b-util-info', class extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = _README.default;
+  }
+
+}); // import formControlDocs from '../presenters/form-control/README.md'
+// document.querySelector('#form-control-docs').innerHTML = formControlDocs
+// import listDocs from '../presenters/list/README.md'
+// document.querySelector('#list-docs').innerHTML = listDocs
+
+window.dialogs = {
+  async success(el) {
+    _dialog.default.success().modal();
+  },
+
+  async warn(el) {
+    _dialog.default.warn({
+      title: 'Ooops',
+      msg: 'That is not supported'
+    }).modal();
+  },
+
+  async error(el) {
+    _dialog.default.error({
+      title: 'Error',
+      msg: 'Something went wrong'
+    }).modal();
+  },
+
+  async errorPopover(el) {
+    _dialog.default.error({
+      title: 'Error',
+      msg: 'Something went wrong'
+    }).popover(el);
+  },
+
+  async confirm(el) {
+    if (await _dialog.default.confirm().modal()) console.log('confimed');
+  },
+
+  async confirmDelete(el) {
+    if (await _dialog.default.confirmDelete().popover(el)) console.log('confimed delete');
+  }
+
+};
+document.querySelector('#dialog-success').appendChild(_dialog.default.success().el);
+document.querySelector('#dialog-warn').appendChild(_dialog.default.warn({
+  title: 'Ooops',
+  msg: 'That is not supported'
+}).el);
+document.querySelector('#dialog-error').appendChild(_dialog.default.error({
+  title: 'Error',
+  msg: 'Something went wrong'
+}).el);
+
+window.openView = el => {
+  event.preventDefault();
+
+  _router.default.goTo(el.getAttribute('href'));
+};
+
+_router.default.start();
+},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/timer":"u+eY","../elements/empty-state":"+2dU","../elements/label":"DcCw","../elements/avatar":"Da++","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/embed":"bpDM","../elements/audio":"EIVk","../elements/carousel":"inC5","lit-element":"+bhx","../router":"38Qe","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../presenters/panel":"cmZt","../presenters/menu":"0tCY","../presenters/dialog":"pos3","../util/README.md":"H6j2","../helpers/colors.less":"r4vn","../helpers/colors-list":"TMO9"}],"RVcF":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -36142,6 +36454,6 @@ module.exports = function loadHTMLBundle(bundle) {
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("m0oQ");b.register("html",require("uu9t"));b.load([["icons.svg.b0516ff5.html","pxeq"]]).then(function(){require("gE6T");});
+var b=require("m0oQ");b.register("html",require("uu9t"));b.load([["icons.svg.b0516ff5.html","pxeq"],["README.b5156bc3.html","H6j2"]]).then(function(){require("lgAh");});
 },{}]},{},[0], null)
-//# sourceMappingURL=/bui.js.map
+//# sourceMappingURL=demo.aef80896.js.map
