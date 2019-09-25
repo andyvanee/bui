@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../../bui.css?t=71b5bd61">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=9f9a3b9e"></script>
+    <script src="../../bui.js?t=7a8bb966"></script>
     <title>Form Control - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -47,6 +47,12 @@
                     <li class="heading-item -depth-2"><a class="hlink link-lessrange-slidergreater" href="#lessrange-slidergreater">&lt;range-slider&gt;</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-lessform-handlergreater" href="#lessform-handlergreater">&lt;form-handler&gt;</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-extras" href="#extras">Extras</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-lessdate-pickergreater" href="#lessdate-pickergreater">&lt;date-picker&gt;</a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>
@@ -191,8 +197,9 @@ may still have some issues in certain browsers &#x2013; see <a href="https://git
 <h4 id="attributes">Attributes</h4>
 <ul>
 <li><code>multiple</code></li>
-<li><code>chip</code> - show selected values as &#x201C;chips&#x201D;</li>
+<li><code>placeholder</code></li>
 <li><code>show-empty</code> - by default, the selected empty value will NOT be shown</li>
+<li><code>chip</code> - show selected values as &#x201C;chips&#x201D;</li>
 <li><code>menu-max-height</code></li>
 <li><code>menu-align</code></li>
 </ul>
@@ -295,6 +302,21 @@ html<span class="pl-s">`&lt;form-control material=&quot;filled&quot; label=&quot
 <li><code>patchsave</code> - use with <code>autosave</code>; changed values will be synced with <code>patch:true</code></li>
 <li><code>store</code> - a key to save form data in local storage</li>
 <li><code>no-grid-area</code> - disable auto grid-area names</li>
+</ul>
+<h2 id="extras">Extras</h2>
+<h3 id="lessdate-pickergreater"><code>&lt;date-picker&gt;</code></h3>
+<p>Renders a date picker view</p>
+<pre><code class="lang-js"><span class="pl-k">let</span> picker = <span class="pl-c1">document</span>.createElement(<span class="pl-s">&apos;date-picker&apos;</span>)
+picker.addEventListener(<span class="pl-s">&apos;change&apos;</span>, e=&gt;{
+	<span class="pl-c1">console</span>.log(picker.value)
+})
+</code></pre>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>value</code></li>
+<li><code>format</code> - <a href="https://momentjs.com/docs/#/displaying/format/">moment.js</a> format (default <code>MM/DD/YYYY</code>)</li>
+<li><code>year-start</code> - defaults to 1900</li>
+<li><code>year-end</code> - defaults to 2099</li>
 </ul>
 <h1 id="notes">Notes</h1>
 <ul>

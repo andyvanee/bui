@@ -217,6 +217,18 @@
                 "title": "<form-handler>",
                 "depth": 2,
                 "id": "lessform-handlergreater"
+              },
+              {
+                "title": "Extras",
+                "depth": 2,
+                "id": "extras",
+                "headings": [
+                  {
+                    "title": "<date-picker>",
+                    "depth": 3,
+                    "id": "lessdate-pickergreater"
+                  }
+                ]
               }
             ]
           },
@@ -585,6 +597,50 @@
             "slug": "router",
             "headings": [
               {
+                "title": "Getting Started",
+                "depth": 2,
+                "id": "getting-started"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods",
+                "headings": [
+                  {
+                    "title": "start()",
+                    "depth": 3,
+                    "id": "start()"
+                  },
+                  {
+                    "title": "add(path, onChange)",
+                    "depth": 3,
+                    "id": "add(path-onchange)"
+                  },
+                  {
+                    "title": "goTo(path [, props])",
+                    "depth": 3,
+                    "id": "goto(path-props)"
+                  }
+                ]
+              },
+              {
+                "title": "State",
+                "depth": 2,
+                "id": "state",
+                "headings": [
+                  {
+                    "title": "state.props",
+                    "depth": 3,
+                    "id": "state.props"
+                  },
+                  {
+                    "title": "state.params",
+                    "depth": 3,
+                    "id": "state.params"
+                  }
+                ]
+              },
+              {
                 "title": "TODO",
                 "depth": 2,
                 "id": "todo"
@@ -820,6 +876,18 @@
           "title": "<form-handler>",
           "depth": 2,
           "id": "lessform-handlergreater"
+        },
+        {
+          "title": "Extras",
+          "depth": 2,
+          "id": "extras",
+          "headings": [
+            {
+              "title": "<date-picker>",
+              "depth": 3,
+              "id": "lessdate-pickergreater"
+            }
+          ]
         }
       ]
     },
@@ -1183,6 +1251,50 @@
       "slug": "router",
       "headings": [
         {
+          "title": "Getting Started",
+          "depth": 2,
+          "id": "getting-started"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods",
+          "headings": [
+            {
+              "title": "start()",
+              "depth": 3,
+              "id": "start()"
+            },
+            {
+              "title": "add(path, onChange)",
+              "depth": 3,
+              "id": "add(path-onchange)"
+            },
+            {
+              "title": "goTo(path [, props])",
+              "depth": 3,
+              "id": "goto(path-props)"
+            }
+          ]
+        },
+        {
+          "title": "State",
+          "depth": 2,
+          "id": "state",
+          "headings": [
+            {
+              "title": "state.props",
+              "depth": 3,
+              "id": "state.props"
+            },
+            {
+              "title": "state.params",
+              "depth": 3,
+              "id": "state.params"
+            }
+          ]
+        },
+        {
           "title": "TODO",
           "depth": 2,
           "id": "todo"
@@ -1221,8 +1333,8 @@
     "router/README.md": "router/index.html",
     "realtime/README.md": "realtime/index.html",
     "docs/bui.css": "bui.css",
-    "docs/bui.js": "bui.js",
     "docs/bui.css.map": "bui.css.map",
+    "docs/bui.js": "bui.js",
     "docs/bui.js.map": "bui.js.map",
     "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",

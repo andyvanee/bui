@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=71b5bd61">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=9f9a3b9e"></script>
+    <script src="../bui.js?t=7a8bb966"></script>
     <title>Realtime - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -98,6 +98,10 @@ view.on(<span class="pl-s">&apos;change&apos;</span>, clients=&gt;{
 socketViews.close(view)
 <span class="pl-c">// or</span>
 socketViews.close(<span class="pl-s">&apos;view-name&apos;</span>)
+
+<span class="pl-c">// get info about open views (exact match or regex)</span>
+<span class="pl-k">let</span> info = <span class="pl-k">await</span> socketViews.info(<span class="pl-s">&apos;view-name&apos;</span>) <span class="pl-c">// {view info}</span>
+<span class="pl-k">let</span> info = <span class="pl-k">await</span> socketViews.info(<span class="pl-s">&apos;^view-&apos;</span>) <span class="pl-c">// [{view info}]</span>
 </code></pre>
 
         </div>
