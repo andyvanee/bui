@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../../bui.css?t=71b5bd61">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=7a8bb966"></script>
+    <script src="../../bui.js?t=d3f0b1e7"></script>
     <title>Form Control - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -94,7 +94,7 @@
 <h1 id="example">Example</h1>
 <p><img src="https://i.imgur.com/XcEXhKh.png" alt="screenshot"></p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span> <span class="hljs-attr">id</span>=<span class="pl-s">&quot;email&quot;</span> <span class="hljs-attr">material</span>=<span class="pl-s">&quot;outline&quot;</span> <span class="hljs-attr">label</span>=<span class="pl-s">&quot;Email&quot;</span>&gt;</span>
-	<span class="hljs-tag">&lt;<span class="hljs-name">text-field</span> <span class="hljs-attr">validate</span>=<span class="pl-s">&quot;email&quot;</span>&gt;</span>test@example.com<span class="hljs-tag">&lt;/<span class="hljs-name">text-field</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">text-field</span> <span class="hljs-attr">pattern</span>=<span class="pl-s">&quot;email&quot;</span>&gt;</span>test@example.com<span class="hljs-tag">&lt;/<span class="hljs-name">text-field</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;prefix&quot;</span> <span class="hljs-attr">class</span>=<span class="pl-s">&quot;icon-mail&quot;</span>&gt;</span>&amp;nbsp;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;help&quot;</span>&gt;</span>Please provide your email<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
@@ -121,10 +121,11 @@ control.addEventListener(<span class="pl-s">&apos;change&apos;</span>, e=&gt;{
 <p>Slots provide a way to customize the display of the form control</p>
 <ul>
 <li><code>label</code></li>
+<li><code>main</code> - same position as control but without any bindings</li>
 <li><code>prefix</code></li>
 <li><code>suffix</code></li>
-<li><code>before</code></li>
 <li><code>help</code></li>
+<li><code>before</code> - (considering deprecation for these two)</li>
 <li><code>after</code></li>
 </ul>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span>&gt;</span>
@@ -140,6 +141,12 @@ control.addEventListener(<span class="pl-s">&apos;change&apos;</span>, e=&gt;{
 --bgd
 --borderColor
 --invalidColor
+</code></pre>
+<h4 id="native-inputs">Native Inputs</h4>
+<p><code>form-control</code> supports native inputs as a control but you must mark it as the control slot</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="pl-s">&quot;text&quot;</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;control&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">form-control</span>&gt;</span>
 </code></pre>
 <h1 id="controls">Controls</h1>
 <p>Every <code>form-control</code> should have one (and only one) control element.</p>
@@ -158,12 +165,23 @@ control.addEventListener(<span class="pl-s">&apos;change&apos;</span>, e=&gt;{
 <ul>
 <li><code>required</code></li>
 <li><code>multiline</code></li>
-<li><code>validate=&quot;int&quot;</code> - regexp or preset</li>
+<li><code>pattern=&quot;int&quot;</code> - regexp or preset</li>
 <li><code>max=&quot;10&quot;</code> - max length of chars</li>
 <li><code>type=&quot;date&quot;</code></li>
 <li><code>reset-invalid</code></li>
 <li><code>placeholder</code></li>
+<li><code>input</code></li>
+<li><code>name</code> - useful for autofill (must use <code>input</code>)</li>
+<li><code>autocomplete</code> (must use <code>input</code>)</li>
 </ul>
+<h4 id="input-type">Input type</h4>
+<p><code>text-field</code> defaults to using <code>contenteditable</code> which allows the field to grow and shrink
+as the user types. However, doing so removes support for autofill and input types such
+as <code>password</code>. For this purpose the <code>input</code> attribute can be applied.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">text-field</span> <span class="hljs-attr">input</span>=<span class="pl-s">&quot;password&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">text-field</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text-field</span> <span class="hljs-attr">input</span>=<span class="pl-s">&quot;email&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">text-field</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text-field</span> <span class="hljs-attr">input</span>=<span class="pl-s">&quot;tel&quot;</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;phone&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">text-field</span>&gt;</span>
+</code></pre>
 <h2 id="lessrich-text-fieldgreater"><code>&lt;rich-text-field&gt;</code></h2>
 <p>Similar to the <code>text-field</code> but with <a href="https://quilljs.com">quill.js</a> enabled for rich text editing.</p>
 <p>The field will also auto convert some special characters (such as 3 periods to an ellipsis) using
