@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../../bui.css?t=71b5bd61">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=17ca2c4d"></script>
+    <script src="../../bui.js?t=a2827085"></script>
     <title>Panel - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -161,6 +161,9 @@ router.goTo(<span class="pl-s">&apos;my-custom-element&apos;</span>)
 <p><code>onOpen(state)</code><br>
 If the custom element implements <code>onOpen</code>, the panel will call it with the
 route <code>state</code> object</p>
+<p><code>willOpen(state)</code>
+Called right before opening. If the function returns <code>false</code>, the panel
+will not open</p>
 <h3 id="animation">Animation</h3>
 <p>There are some built in animations</p>
 <pre><code class="lang-js">panel.shake()
