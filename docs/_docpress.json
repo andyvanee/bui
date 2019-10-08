@@ -71,6 +71,11 @@
             "id": "lessb-labelgreater"
           },
           {
+            "title": "<b-ribbon>",
+            "depth": 2,
+            "id": "lessb-ribbongreater"
+          },
+          {
             "title": "<b-avatar>",
             "depth": 2,
             "id": "lessb-avatargreater"
@@ -733,6 +738,11 @@
           "title": "<b-label>",
           "depth": 2,
           "id": "lessb-labelgreater"
+        },
+        {
+          "title": "<b-ribbon>",
+          "depth": 2,
+          "id": "lessb-ribbongreater"
         },
         {
           "title": "<b-avatar>",

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../bui.css?t=71b5bd61">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=a2827085"></script>
+    <script src="../bui.js?t=7162b0c1"></script>
     <title>Elements - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -31,6 +31,8 @@
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-subgreater" href="#lessb-subgreater">&lt;b-sub&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-labelgreater" href="#lessb-labelgreater">&lt;b-label&gt;</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-ribbongreater" href="#lessb-ribbongreater">&lt;b-ribbon&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-avatargreater" href="#lessb-avatargreater">&lt;b-avatar&gt;</a>
                 </li>
@@ -195,6 +197,32 @@ Can be altered to display as filled, outlined, or as a badge.</p>
 <h4 id="style-hooks">Style hooks</h4>
 <ul>
 <li><code>--dividerThickness</code></li>
+</ul>
+<h2 id="lessb-ribbongreater"><code>&lt;b-ribbon&gt;</code></h2>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-ribbon</span>&gt;</span>Ribbon<span class="hljs-tag">&lt;/<span class="hljs-name">b-ribbon</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-ribbon</span> <span class="hljs-attr">pos</span>=<span class="pl-s">&quot;right&quot;</span>&gt;</span>Ribbon<span class="hljs-tag">&lt;/<span class="hljs-name">b-ribbon</span>&gt;</span>
+</code></pre>
+<p><strong>Note:</strong> make sure the correct parent element has a relative type position</p>
+<!--
+<b-paper style="height: 7em">
+    <b-ribbon>Ribbon</b-ribbon>
+    <b-ribbon pos="right" style="--color:var(--pink);--height:2em;">Right <b-sub>second line</b-sub></b-ribbon>
+</b-paper>
+-->
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>pos</code> - left/right</li>
+<li><code>shadow</code> - true/false</li>
+<li><code>value</code> - can be used in place of inner html slot</li>
+</ul>
+<h4 id="style-hooks">Style Hooks</h4>
+<ul>
+<li><code>--width</code></li>
+<li><code>--height</code> ex: set to <code>2em</code> for 2 lines</li>
+<li><code>--padding</code> top/bottom padding</li>
+<li><code>--color</code> background color</li>
+<li><code>--shadow</code> customize shadow attribute</li>
+<li><code>--offset</code> defaults to slight offset to give depth</li>
 </ul>
 <h2 id="lessb-avatargreater"><code>&lt;b-avatar&gt;</code></h2>
 <p>Create scalable avatars with initials or image with from a url or gravatar GUID</p>
