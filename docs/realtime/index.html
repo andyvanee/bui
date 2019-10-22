@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../bui.css?t=71b5bd61">
+    <link rel="stylesheet" href="../bui.css?t=4273a473">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=7162b0c1"></script>
+    <script src="../bui.js?t=90b2b723"></script>
     <title>Realtime - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -77,18 +77,28 @@
 <h2 id="views">Views</h2>
 <p>Provides an easy way to keep track of views that are opened by clients</p>
 <pre><code class="lang-js"><span class="pl-c">// server</span>
-<span class="pl-k">import</span> Views <span class="pl-k">from</span> <span class="pl-s">&apos;server/views&apos;</span>
-<span class="pl-k">const</span> io = io();
+<span class="pl-k">const</span> IO = <span class="pl-c1">require</span>(<span class="pl-s">&apos;socket.io&apos;</span>)
+<span class="pl-k">const</span> Views = <span class="pl-c1">require</span>(<span class="pl-s">&apos;server/views&apos;</span>)
+<span class="pl-k">const</span> io = IO();
 
 io.on(<span class="pl-s">&apos;connection&apos;</span>, socket=&gt;{
     Views.connect(socket)
 });
+
+<span class="pl-c">// Dont forget to:</span>
+<span class="pl-c">// io.attach(server)</span>
 </code></pre>
 <pre><code class="lang-js"><span class="pl-c">// client</span>
+<span class="pl-k">import</span> io <span class="pl-k">from</span> <span class="pl-s">&apos;socket.io-client&apos;</span>
 <span class="pl-k">import</span> Views <span class="pl-k">from</span> <span class="pl-s">&apos;client/views&apos;</span>
-<span class="pl-k">const</span> socket = io();
+
+<span class="pl-k">const</span> socket = io(<span class="pl-s">&apos;/&apos;</span>, {
+    <span class="hljs-attr">transports</span>: [<span class="pl-s">&apos;websocket&apos;</span>], <span class="pl-c">// https://caniuse.com/#feat=websockets</span>
+});
+
 <span class="pl-k">const</span> socketViews = <span class="pl-k">new</span> Views(socket)
 
+<span class="pl-c">// open a view and watch for changes</span>
 <span class="pl-k">let</span> view = socketViews.open(<span class="pl-s">&apos;view-name&apos;</span>)
 view.on(<span class="pl-s">&apos;change&apos;</span>, clients=&gt;{
     <span class="pl-c1">console</span>.log(clients.length)

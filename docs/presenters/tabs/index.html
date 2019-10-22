@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=71b5bd61">
+    <link rel="stylesheet" href="../../bui.css?t=4273a473">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=7162b0c1"></script>
+    <script src="../../bui.js?t=90b2b723"></script>
     <title>Tabs - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -53,6 +53,8 @@
                     <li class="heading-item -depth-2"><a class="hlink link-custom-menu-items" href="#custom-menu-items">Custom Menu Items</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-menu-slots" href="#menu-slots">Menu Slots</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-custom-tab-bar" href="#custom-tab-bar">Custom Tab Bar</a>
                     </li>
                   </ul>
                 </li>
@@ -189,6 +191,38 @@ prefixed with <code>menu:</code></p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;menu:before&quot;</span>&gt;</span>before menu items<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;menu:after&quot;</span>&gt;</span>after menu items<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
+<h2 id="custom-tab-bar">Custom Tab Bar</h2>
+<p>You can choose to implement your own tab bar menu by specificying the custom element in
+a <code>tab-bar</code> attribute. The custom tab bar will have inherit styles to support the
+different layouts</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span> <span class="hljs-attr">tab-bar</span>=<span class="pl-s">&quot;my-custom-tab-bar&quot;</span>&gt;</span>
+</code></pre>
+<p>The tab bar will have the following references set:</p>
+<pre><code class="lang-js"><span class="pl-k">this</span>.views <span class="pl-c">// class containing the views</span>
+<span class="pl-k">this</span>.onMenuClick <span class="pl-c">// the function to call when a menu item is clicked</span>
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-js">customElements.define(<span class="pl-s">&apos;my-custom-tab-bar&apos;</span>, <span class="hljs-class"><span class="pl-k">class</span> <span class="pl-k">extends</span> <span class="pl-ent">LitElement</span></span>{
+
+    <span class="pl-k">static</span> <span class="pl-k">get</span> styles(){<span class="pl-k">return</span> css<span class="pl-s">`
+        [active] {
+            color: var(--blue);
+        }
+    `</span>}
+
+    render(){<span class="pl-k">return</span> html<span class="pl-s">`
+        <span class="hljs-subst">${<span class="pl-k">this</span>.views.map(v=&gt;html<span class="pl-s">`
+            <span class="hljs-subst">${v.canDisplay?html<span class="pl-s">`
+                &lt;div ?active=<span class="hljs-subst">${v.active}</span> .tabView=<span class="hljs-subst">${v}</span> @click=<span class="hljs-subst">${<span class="pl-k">this</span>.onMenuClick}</span>&gt;
+                    <span class="hljs-subst">${v.title}</span>
+                &lt;/div&gt;
+            `</span>:<span class="pl-s">&apos;&apos;</span>}</span>
+        `</span>)}</span>
+    `</span>}
+
+})
+</code></pre>
+<p>Clicked menu items <strong>must</strong> have <code>.tabView=${view}</code> set to work</p>
 
         </div>
         <div class="footer-nav">

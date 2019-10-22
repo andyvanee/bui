@@ -476,6 +476,11 @@
                 "title": "Menu Slots",
                 "depth": 2,
                 "id": "menu-slots"
+              },
+              {
+                "title": "Custom Tab Bar",
+                "depth": 2,
+                "id": "custom-tab-bar"
               }
             ]
           }
@@ -1140,6 +1145,11 @@
           "title": "Menu Slots",
           "depth": 2,
           "id": "menu-slots"
+        },
+        {
+          "title": "Custom Tab Bar",
+          "depth": 2,
+          "id": "custom-tab-bar"
         }
       ]
     },
