@@ -51,9 +51,19 @@
             "id": "lessb-btngreater"
           },
           {
+            "title": "<b-btn-group>",
+            "depth": 2,
+            "id": "lessb-btn-groupgreater"
+          },
+          {
             "title": "<b-icon>",
             "depth": 2,
             "id": "lessb-icongreater"
+          },
+          {
+            "title": "<b-file-icon>",
+            "depth": 2,
+            "id": "lessb-file-icongreater"
           },
           {
             "title": "<b-hr>",
@@ -64,6 +74,11 @@
             "title": "<b-sub>",
             "depth": 2,
             "id": "lessb-subgreater"
+          },
+          {
+            "title": "<b-ts>",
+            "depth": 2,
+            "id": "lessb-tsgreater"
           },
           {
             "title": "<b-label>",
@@ -99,6 +114,11 @@
             "title": "<b-uploader>",
             "depth": 2,
             "id": "lessb-uploadergreater"
+          },
+          {
+            "title": "<b-code>",
+            "depth": 2,
+            "id": "lessb-codegreater"
           },
           {
             "title": "<b-embed>",
@@ -254,10 +274,20 @@
                 "id": "list-options"
               },
               {
+                "title": "Custom Styles",
+                "depth": 2,
+                "id": "custom-styles"
+              },
+              {
                 "title": "Filters",
                 "depth": 2,
                 "id": "filters",
                 "headings": [
+                  {
+                    "title": "Search",
+                    "depth": 3,
+                    "id": "search"
+                  },
                   {
                     "title": "Custom Filter View",
                     "depth": 3,
@@ -266,14 +296,21 @@
                 ]
               },
               {
-                "title": "Search",
-                "depth": 2,
-                "id": "search"
-              },
-              {
                 "title": "Sorts",
                 "depth": 2,
-                "id": "sorts"
+                "id": "sorts",
+                "headings": [
+                  {
+                    "title": "Sort Defaults",
+                    "depth": 3,
+                    "id": "sort-defaults"
+                  },
+                  {
+                    "title": "Sorting on the database",
+                    "depth": 3,
+                    "id": "sorting-on-the-database"
+                  }
+                ]
               },
               {
                 "title": "Other Views",
@@ -390,7 +427,19 @@
               {
                 "title": "Controller",
                 "depth": 2,
-                "id": "controller"
+                "id": "controller",
+                "headings": [
+                  {
+                    "title": "Multiple Controllers",
+                    "depth": 3,
+                    "id": "multiple-controllers"
+                  },
+                  {
+                    "title": "Events",
+                    "depth": 3,
+                    "id": "events"
+                  }
+                ]
               },
               {
                 "title": "Toolbar",
@@ -506,6 +555,11 @@
                 "id": "titleize"
               },
               {
+                "title": "sortString",
+                "depth": 2,
+                "id": "sortstring"
+              },
+              {
                 "title": "Promise.series",
                 "depth": 2,
                 "id": "promise.series"
@@ -544,6 +598,16 @@
                 "title": "readFile",
                 "depth": 2,
                 "id": "readfile"
+              },
+              {
+                "title": "AJAX",
+                "depth": 2,
+                "id": "ajax"
+              },
+              {
+                "title": "Background Resume",
+                "depth": 2,
+                "id": "background-resume"
               }
             ]
           },
@@ -583,7 +647,19 @@
               {
                 "title": "Backbone.js",
                 "depth": 2,
-                "id": "backbone.js"
+                "id": "backbone.js",
+                "headings": [
+                  {
+                    "title": "Promises",
+                    "depth": 3,
+                    "id": "promises"
+                  },
+                  {
+                    "title": "Attribute Types",
+                    "depth": 3,
+                    "id": "attribute-types"
+                  }
+                ]
               }
             ]
           },
@@ -617,9 +693,14 @@
                 "id": "methods",
                 "headings": [
                   {
-                    "title": "start()",
+                    "title": "config(opts)",
                     "depth": 3,
-                    "id": "start()"
+                    "id": "config(opts)"
+                  },
+                  {
+                    "title": "start(opts)",
+                    "depth": 3,
+                    "id": "start(opts)"
                   },
                   {
                     "title": "add(path, onChange)",
@@ -630,8 +711,18 @@
                     "title": "goTo(path [, props])",
                     "depth": 3,
                     "id": "goto(path-props)"
+                  },
+                  {
+                    "title": "push(path[, props])",
+                    "depth": 3,
+                    "id": "push(path-props)"
                   }
                 ]
+              },
+              {
+                "title": "Events",
+                "depth": 2,
+                "id": "events"
               },
               {
                 "title": "State",
@@ -647,13 +738,18 @@
                     "title": "state.params",
                     "depth": 3,
                     "id": "state.params"
+                  },
+                  {
+                    "title": "state.query",
+                    "depth": 3,
+                    "id": "state.query"
+                  },
+                  {
+                    "title": "state.update(props)",
+                    "depth": 3,
+                    "id": "state.update(props)"
                   }
                 ]
-              },
-              {
-                "title": "TODO",
-                "depth": 2,
-                "id": "todo"
               }
             ]
           },
@@ -725,9 +821,19 @@
           "id": "lessb-btngreater"
         },
         {
+          "title": "<b-btn-group>",
+          "depth": 2,
+          "id": "lessb-btn-groupgreater"
+        },
+        {
           "title": "<b-icon>",
           "depth": 2,
           "id": "lessb-icongreater"
+        },
+        {
+          "title": "<b-file-icon>",
+          "depth": 2,
+          "id": "lessb-file-icongreater"
         },
         {
           "title": "<b-hr>",
@@ -738,6 +844,11 @@
           "title": "<b-sub>",
           "depth": 2,
           "id": "lessb-subgreater"
+        },
+        {
+          "title": "<b-ts>",
+          "depth": 2,
+          "id": "lessb-tsgreater"
         },
         {
           "title": "<b-label>",
@@ -773,6 +884,11 @@
           "title": "<b-uploader>",
           "depth": 2,
           "id": "lessb-uploadergreater"
+        },
+        {
+          "title": "<b-code>",
+          "depth": 2,
+          "id": "lessb-codegreater"
         },
         {
           "title": "<b-embed>",
@@ -923,10 +1039,20 @@
           "id": "list-options"
         },
         {
+          "title": "Custom Styles",
+          "depth": 2,
+          "id": "custom-styles"
+        },
+        {
           "title": "Filters",
           "depth": 2,
           "id": "filters",
           "headings": [
+            {
+              "title": "Search",
+              "depth": 3,
+              "id": "search"
+            },
             {
               "title": "Custom Filter View",
               "depth": 3,
@@ -935,14 +1061,21 @@
           ]
         },
         {
-          "title": "Search",
-          "depth": 2,
-          "id": "search"
-        },
-        {
           "title": "Sorts",
           "depth": 2,
-          "id": "sorts"
+          "id": "sorts",
+          "headings": [
+            {
+              "title": "Sort Defaults",
+              "depth": 3,
+              "id": "sort-defaults"
+            },
+            {
+              "title": "Sorting on the database",
+              "depth": 3,
+              "id": "sorting-on-the-database"
+            }
+          ]
         },
         {
           "title": "Other Views",
@@ -1059,7 +1192,19 @@
         {
           "title": "Controller",
           "depth": 2,
-          "id": "controller"
+          "id": "controller",
+          "headings": [
+            {
+              "title": "Multiple Controllers",
+              "depth": 3,
+              "id": "multiple-controllers"
+            },
+            {
+              "title": "Events",
+              "depth": 3,
+              "id": "events"
+            }
+          ]
         },
         {
           "title": "Toolbar",
@@ -1170,6 +1315,11 @@
           "id": "titleize"
         },
         {
+          "title": "sortString",
+          "depth": 2,
+          "id": "sortstring"
+        },
+        {
           "title": "Promise.series",
           "depth": 2,
           "id": "promise.series"
@@ -1208,6 +1358,16 @@
           "title": "readFile",
           "depth": 2,
           "id": "readfile"
+        },
+        {
+          "title": "AJAX",
+          "depth": 2,
+          "id": "ajax"
+        },
+        {
+          "title": "Background Resume",
+          "depth": 2,
+          "id": "background-resume"
         }
       ]
     },
@@ -1247,7 +1407,19 @@
         {
           "title": "Backbone.js",
           "depth": 2,
-          "id": "backbone.js"
+          "id": "backbone.js",
+          "headings": [
+            {
+              "title": "Promises",
+              "depth": 3,
+              "id": "promises"
+            },
+            {
+              "title": "Attribute Types",
+              "depth": 3,
+              "id": "attribute-types"
+            }
+          ]
         }
       ]
     },
@@ -1281,9 +1453,14 @@
           "id": "methods",
           "headings": [
             {
-              "title": "start()",
+              "title": "config(opts)",
               "depth": 3,
-              "id": "start()"
+              "id": "config(opts)"
+            },
+            {
+              "title": "start(opts)",
+              "depth": 3,
+              "id": "start(opts)"
             },
             {
               "title": "add(path, onChange)",
@@ -1294,8 +1471,18 @@
               "title": "goTo(path [, props])",
               "depth": 3,
               "id": "goto(path-props)"
+            },
+            {
+              "title": "push(path[, props])",
+              "depth": 3,
+              "id": "push(path-props)"
             }
           ]
+        },
+        {
+          "title": "Events",
+          "depth": 2,
+          "id": "events"
         },
         {
           "title": "State",
@@ -1311,13 +1498,18 @@
               "title": "state.params",
               "depth": 3,
               "id": "state.params"
+            },
+            {
+              "title": "state.query",
+              "depth": 3,
+              "id": "state.query"
+            },
+            {
+              "title": "state.update(props)",
+              "depth": 3,
+              "id": "state.update(props)"
             }
           ]
-        },
-        {
-          "title": "TODO",
-          "depth": 2,
-          "id": "todo"
         }
       ]
     },
@@ -1356,6 +1548,7 @@
     "docs/bui.css.map": "bui.css.map",
     "docs/bui.js": "bui.js",
     "docs/bui.js.map": "bui.js.map",
+    "docs/icons.svg.28577cf8.html": "icons.svg.28577cf8.html",
     "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
     "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",

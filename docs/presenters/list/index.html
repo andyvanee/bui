@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=4273a473">
+    <link rel="stylesheet" href="../../bui.css?t=23936738">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=90b2b723"></script>
+    <script src="../../bui.js?t=8db9a08c"></script>
     <title>List - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -38,15 +38,23 @@
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-list-options" href="#list-options">List Options</a>
                     </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-custom-styles" href="#custom-styles">Custom Styles</a>
+                    </li>
                     <li class="heading-item -depth-2"><a class="hlink link-filters" href="#filters">Filters</a>
                       <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-search" href="#search">Search</a>
+                        </li>
                         <li class="heading-item -depth-3"><a class="hlink link-custom-filter-view" href="#custom-filter-view">Custom Filter View</a>
                         </li>
                       </ul>
                     </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-search" href="#search">Search</a>
-                    </li>
                     <li class="heading-item -depth-2"><a class="hlink link-sorts" href="#sorts">Sorts</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-sort-defaults" href="#sort-defaults">Sort Defaults</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-sorting-on-the-database" href="#sorting-on-the-database">Sorting on the database</a>
+                        </li>
+                      </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-other-views" href="#other-views">Other Views</a>
                       <ul class="heading-list -depth-2">
@@ -105,6 +113,7 @@ and filter the results.</p>
     <span class="hljs-attr">row</span>=<span class="pl-s">&quot;row-element-name&quot;</span>
     <span class="hljs-attr">divider</span>=<span class="pl-s">&quot;row-divider-element&quot;</span>
     <span class="hljs-attr">.listOptions</span>=<span class="pl-s">${listOptions}</span>
+    <span class="hljs-attr">.customStyles</span>=<span class="pl-s">${css</span>``}
     <span class="hljs-attr">.coll</span>=<span class="pl-s">${this.coll}</span>
     <span class="hljs-attr">.filters</span>=<span class="pl-s">${filters}</span>
     <span class="hljs-attr">.sorts</span>=<span class="pl-s">${sorts}</span>
@@ -127,7 +136,7 @@ and filter the results.</p>
 <p>Options passed along to the infinite-list</p>
 <pre><code class="lang-js">listOptions = {
     <span class="hljs-attr">fetch</span>: <span class="pl-c1">true</span>, <span class="pl-c">// true,false, &apos;more&apos;</span>
-    perPage: <span class="hljs-number">30</span>
+    <span class="hljs-attr">perPage</span>: <span class="hljs-number">30</span>
 }
 </code></pre>
 <p><code>fetch:true</code> - will only fetch initial data.<br>
@@ -136,11 +145,25 @@ when all available data has been displayed</p>
 <p><code>perPage</code> - how many rows to display at one time.
 Also determines how many &#x201C;more&#x201D; rows are requested
 via fetch:more</p>
+<h2 id="custom-styles">Custom Styles</h2>
+<p>The list view uses shadow dom to render the content. If you need to apply
+custom styles (ex: to make results display as a grid) you can provide
+a <code>.customStyles</code> prop</p>
+<pre><code class="lang-html">let styles = css`
+    :host b-infinite-list {
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(140px, 1fr) );
+        grid-template-rows: 140px;
+        gap: 1em;
+    }
+`
+<span class="hljs-tag">&lt;<span class="hljs-name">b-list</span> <span class="hljs-attr">.customStyles</span>=<span class="pl-s">${styles}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-list</span>&gt;</span>
+</code></pre>
 <h2 id="filters">Filters</h2>
 <pre><code class="lang-js"><span class="pl-k">const</span> filters = {
 
     <span class="pl-c">// &quot;search&quot; is a special filter that applies to the search bar</span>
-    search: {
+    <span class="hljs-attr">search</span>: {
         data(m){
             <span class="pl-c">// return a hash of attributes to be searched</span>
             <span class="pl-k">return</span> {
@@ -149,18 +172,27 @@ via fetch:more</p>
             }
         },
         <span class="pl-c">// optional</span>
-        placeholder: <span class="pl-s">&apos;Search&apos;</span>,
+        <span class="hljs-attr">placeholder</span>: <span class="pl-s">&apos;Search&apos;</span>,
         <span class="hljs-attr">delay</span>: <span class="hljs-number">500</span> <span class="pl-c">// how long of delay in user typing to begin searching?</span>
         <span class="pl-c">//...specify other fuse.js options</span>
     },
 
     <span class="hljs-attr">type</span>: {
         <span class="hljs-attr">label</span>: <span class="pl-s">&apos;Type&apos;</span>, <span class="pl-c">// the key will be used if no label is set</span>
-        maxHeight: <span class="pl-s">&apos;60vh&apos;</span>, <span class="pl-c">// max height of dropdown menu</span>
-        multi: <span class="pl-c1">false</span>, <span class="pl-c">// can more than one value be selected?</span>
-        db: <span class="pl-c1">false</span>, <span class="pl-c">// true will make the filterBy happen on server instead</span>
-        values: [
-            {<span class="hljs-attr">label</span>: <span class="pl-s">&apos;All&apos;</span>, <span class="hljs-attr">val</span>: <span class="pl-s">&apos;&apos;</span>},
+        <span class="hljs-attr">maxHeight</span>: <span class="pl-s">&apos;60vh&apos;</span>, <span class="pl-c">// max height of dropdown menu</span>
+        <span class="hljs-attr">multi</span>: <span class="pl-c1">false</span>, <span class="pl-c">// can more than one value be selected?</span>
+        <span class="hljs-attr">db</span>: <span class="pl-c1">false</span>, <span class="pl-c">// true will make the filterBy happen on server instead</span>
+
+        <span class="pl-c">// values are passed to `Menu`, check docs for available options</span>
+        <span class="hljs-attr">values</span>: [
+            {   <span class="pl-c">// required</span>
+                <span class="hljs-attr">label</span>: <span class="pl-s">&apos;All&apos;</span>,
+                <span class="hljs-attr">val</span>: <span class="pl-s">&apos;&apos;</span>,
+                <span class="pl-c">// optional</span>
+                <span class="hljs-attr">toolbarLabel</span>: <span class="pl-s">&apos;all&apos;</span>, <span class="pl-c">// label will be used if this is unset</span>
+                <span class="hljs-attr">description</span>: <span class="pl-s">&apos;&apos;</span>,
+                <span class="hljs-attr">icon</span>: <span class="pl-s">&apos;&apos;</span>
+            },
             <span class="pl-s">&apos;divider&apos;</span>,
             {<span class="hljs-attr">label</span>: <span class="pl-s">&apos;Type 1&apos;</span>, <span class="hljs-attr">val</span>: <span class="pl-s">&apos;1&apos;</span>},
             {<span class="hljs-attr">label</span>: <span class="pl-s">&apos;Type 2&apos;</span>, <span class="hljs-attr">val</span>: <span class="pl-s">&apos;2&apos;</span>}
@@ -187,6 +219,14 @@ via fetch:more</p>
     },
 }
 </code></pre>
+<h3 id="search">Search</h3>
+<p>Search options are specified as part of filters (see above).</p>
+<p><strong>Tips</strong></p>
+<ul>
+<li>You can hide the search bar by adding: <code>search:false</code>. Search is on by default and will use defautl settings</li>
+<li><code>row.model.searchMatches</code> - when the search bar is actively searching, row models will have
+a <code>searchMatches</code> property they can check to see why they are being displayed</li>
+</ul>
 <h3 id="custom-filter-view">Custom Filter View</h3>
 <p>A view can be specified instead of values &#x2013; <code>view</code> can be a preset
 or the name of a custom element</p>
@@ -234,10 +274,6 @@ or the name of a custom element</p>
     }
 }
 </code></pre>
-<h2 id="search">Search</h2>
-<p>Search options are specified as part of filters (see above).</p>
-<p><code>row.model.searchMatches</code> - when the search bar is actively searching, row models will have
-a <code>searchMatches</code> property they can check to see why they are being displayed</p>
 <h2 id="sorts">Sorts</h2>
 <pre><code class="lang-js"><span class="pl-k">const</span> sorts = {
     
@@ -246,17 +282,27 @@ a <code>searchMatches</code> property they can check to see why they are being d
     <span class="hljs-attr">moreComplex</span>: {
         <span class="hljs-attr">label</span>: <span class="pl-s">&apos;More Complex Sort&apos;</span>,
         <span class="hljs-attr">desc</span>: <span class="pl-c1">true</span>, <span class="pl-c">// change default to descending sort</span>
-        description: <span class="pl-s">&apos;When the contract was created&apos;</span>,
+        <span class="hljs-attr">description</span>: <span class="pl-s">&apos;When the contract was created&apos;</span>,
         sortBy(model){
             <span class="pl-k">return</span> model.moreComplexDataPoint()
         }
     }
 }
 </code></pre>
-<h4 id="sort-defaults">Sort Defaults</h4>
+<h3 id="sort-defaults">Sort Defaults</h3>
 <pre><code class="lang-js"><span class="pl-k">const</span> sorts = {
     <span class="hljs-attr">defaults</span>: [<span class="pl-s">&apos;title&apos;</span>],
     title(m){ <span class="pl-k">return</span> m.get(<span class="pl-s">&apos;title&apos;</span>) }
+}
+</code></pre>
+<h3 id="sorting-on-the-database">Sorting on the database</h3>
+<p>If you want the sorting to happen on the database/server instead of
+in the browser, add <code>db:true</code>. Changes to sort will trigger refetch
+and no sorting will happen in JS</p>
+<pre><code class="lang-js"><span class="pl-k">const</span> sorts = {
+    <span class="hljs-attr">defaults</span>: [<span class="pl-s">&apos;title&apos;</span>],
+    <span class="hljs-attr">db</span>: <span class="pl-c1">true</span>,
+    <span class="hljs-attr">title</span>:{}
 }
 </code></pre>
 <h2 id="other-views">Other Views</h2>

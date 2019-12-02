@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../bui.css?t=4273a473">
+    <link rel="stylesheet" href="../bui.css?t=23936738">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=90b2b723"></script>
+    <script src="../bui.js?t=8db9a08c"></script>
     <title>Helpers - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -63,6 +63,12 @@
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-backbone.js" href="#backbone.js">Backbone.js</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-promises" href="#promises">Promises</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-attribute-types" href="#attribute-types">Attribute Types</a>
+                        </li>
+                      </ul>
                     </li>
                   </ul>
                 </li>
@@ -126,16 +132,64 @@ call <code>onModelChange</code> to let you hook into the update and do something
 }
 </code></pre>
 <h2 id="backbone.js">Backbone.js</h2>
-<p>[DEPRECATED]</p>
-<p>Here at Blackstone our legacy code relies on Backbone and so to take advantage of
-lit-html we&#x2019;ve added some extensions to support this.</p>
-<p><code>Backbone.View</code> will render the contents of the <code>html()</code> method:</p>
-<pre><code class="lang-javascript"><span class="pl-k">import</span> {html} <span class="pl-k">from</span> <span class="pl-s">&apos;lit-html&apos;</span>
-<span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyView</span> <span class="pl-k">extends</span> <span class="pl-ent">Backbone</span>.<span class="pl-ent">View</span> </span>{
-    html(){<span class="pl-k">return</span> html<span class="pl-s">`
-        create your html view here
-    `</span>}
+<p>If you want to use Backbone.js for managing data (models/collections) there are some helpers
+to improve the workflow.</p>
+<h3 id="promises">Promises</h3>
+<p>Crud methods in promise form</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;helpers/backbone/promises&apos;</span>
+
+<span class="pl-k">await</span> model.fetchSync()
+<span class="pl-k">await</span> model.saveSync()
+<span class="pl-k">await</span> model.destroySync()
+
+<span class="pl-k">await</span> collection.fetchSync()
+<span class="pl-k">await</span> collection.createSync()
+</code></pre>
+<h3 id="attribute-types">Attribute Types</h3>
+<p>Make sure <code>.get()</code> attributes returns data in the expected type (e.g. a number or date object rather than a string)</p>
+<pre><code class="lang-js"><span class="pl-c">// Supported Types</span>
+<span class="pl-k">const</span> ModelAttrTypes = {
+	<span class="pl-s">&apos;string&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">val</span>)</span>{ <span class="pl-k">return</span> <span class="pl-c1">String</span>(val) },
+	<span class="pl-s">&apos;json&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">val</span>)</span>{ <span class="pl-k">return</span> <span class="pl-k">typeof</span> val == <span class="pl-s">&apos;string&apos;</span> ? <span class="pl-c1">JSON</span>.parse(val) : val },
+	<span class="pl-s">&apos;bool&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">val</span>)</span>{ <span class="pl-k">return</span> !!val },
+	<span class="pl-s">&apos;boolish&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">val</span>)</span>{ <span class="pl-k">return</span> !!val &amp;&amp; val !== <span class="pl-s">&apos;0&apos;</span> &amp;&amp; val !== <span class="hljs-number">0</span>},
+	<span class="pl-s">&apos;int&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">val</span>)</span>{ <span class="pl-k">return</span> val ? <span class="pl-c1">parseInt</span>(val) : <span class="hljs-number">0</span> },
+	<span class="pl-s">&apos;float&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">val</span>)</span>{ <span class="pl-k">return</span> val ? <span class="pl-c1">parseFloat</span>(val) : <span class="hljs-number">0</span> },
+	<span class="pl-s">&apos;num&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">val</span>)</span>{ <span class="pl-k">return</span> val ? <span class="pl-c1">parseFloat</span>(val) : <span class="hljs-number">0</span> },
+	<span class="pl-s">&apos;date&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">val</span>)</span>{ <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-c1">Date</span>(val) }
 }
+</code></pre>
+<pre><code class="lang-js"><span class="pl-c">// How to use</span>
+<span class="pl-k">import</span> <span class="pl-s">&apos;helpers/backbone/attr-types&apos;</span>
+
+<span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyModel</span> <span class="pl-k">extends</span> <span class="pl-ent">Backbone</span>.<span class="pl-ent">Model</span> </span>{
+
+    <span class="pl-k">get</span> attrTypes(){<span class="pl-k">return</span> {
+        <span class="hljs-attr">is_active</span>: <span class="pl-s">&apos;bool&apos;</span>,
+        <span class="hljs-attr">ts_created</span>: <span class="pl-s">&apos;date&apos;</span>,
+    }}
+}
+
+<span class="pl-k">let</span> myModel = <span class="pl-k">new</span> MyModel({
+    <span class="hljs-attr">is_active</span>:<span class="pl-s">&apos;1&apos;</span>,
+    <span class="hljs-attr">ts_created</span>: <span class="pl-s">&apos;2019-10-24 10:30:16&apos;</span>
+})
+
+myModel.get(<span class="pl-s">&apos;is_active&apos;</span>) <span class="pl-c">// true</span>
+myModel.get(<span class="pl-s">&apos;ts_created&apos;</span>) <span class="pl-c">// Date()</span>
+</code></pre>
+<blockquote>
+<p>Attributes will be cached and only re-evaluated to their type after changed</p>
+</blockquote>
+<h4 id="registering-your-own-attribute-type">Registering your own attribute type</h4>
+<pre><code class="lang-js"><span class="pl-k">import</span> moment <span class="pl-k">from</span> <span class="pl-s">&apos;moment&apos;</span>
+
+Backbone.registerModelAttrType(<span class="pl-s">&apos;date&apos;</span>, val=&gt;{
+    <span class="pl-k">return</span> moment(val)
+})
+
+<span class="pl-c">//....</span>
+myModel.get(<span class="pl-s">&apos;ts_created&apos;</span>).fromNow()
 </code></pre>
 
         </div>

@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=4273a473">
+    <link rel="stylesheet" href="../../bui.css?t=23936738">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=90b2b723"></script>
+    <script src="../../bui.js?t=8db9a08c"></script>
     <title>Panel - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -53,6 +53,12 @@
                       </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-controller" href="#controller">Controller</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-multiple-controllers" href="#multiple-controllers">Multiple Controllers</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-events" href="#events">Events</a>
+                        </li>
+                      </ul>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-toolbar" href="#toolbar">Toolbar</a>
                       <ul class="heading-list -depth-2">
@@ -112,6 +118,7 @@ panel.open()
 <li><code>animation</code> (scale [only works on anchor=center])</li>
 <li><code>quickJump</code> (bool) - show quick jump menu when right click on close btn</li>
 <li><code>disableBackdropClick</code> - by default clicking backdrop will close panel</li>
+<li><code>disableOverscrollClose</code> - by default pulling down in overscroll (iOS) and letting go will hide the top panel</li>
 <li><code>closeOnEsc</code> - default is false</li>
 <li><code>controller</code> - specify a different panel controller (see below)</li>
 <li><code>onClose</code> - do something before closing; return <code>false</code> to stop closing</li>
@@ -138,11 +145,11 @@ So inside of <code>custom-element</code> you can access the panel with <code>thi
 <pre><code class="lang-javascript"><span class="pl-k">import</span> {Panel} <span class="pl-k">from</span> <span class="pl-s">&apos;bui&apos;</span>
 <span class="pl-k">import</span> {html} <span class="pl-k">from</span> <span class="pl-s">&apos;lit-html&apos;</span>
 
-<span class="pl-k">new</span> Panel(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>html<span class="pl-s">`
-    &lt;b-panel-toolbar&gt;&lt;/b-panel-toolbar&gt;
-    &lt;section&gt;	
-        &lt;p&gt;Dynamically generated content&lt;/p&gt;
-    &lt;/section&gt;
+<span class="pl-k">new</span> Panel(<span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>html`<span class="xml">
+    <span class="hljs-tag">&lt;<span class="hljs-name">b-panel-toolbar</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-panel-toolbar</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span>	
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Dynamically generated content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
 `</span>, {<span class="hljs-attr">title</span>: <span class="pl-s">&apos;Custom Panel&apos;</span>}).open()
 </code></pre>
 <h3 id="registering-a-custom-element">Registering a Custom Element</h3>
@@ -181,7 +188,7 @@ other than the root of body, you can create one ahead of time</p>
     <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 </code></pre>
-<h4 id="multiple-controllers">Multiple Controllers</h4>
+<h3 id="multiple-controllers">Multiple Controllers</h3>
 <p>Panels can also be opened inside of other panel controllers by first creating the controller
 with a different name and then specifying the controller in the panel opts</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-panels</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;sub-panel&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-panels</span>&gt;</span>
@@ -193,6 +200,13 @@ with a different name and then specifying the controller in the panel opts</p>
 <blockquote>
 <p>Note: if the controller cannot be found, the root controller will be used</p>
 </blockquote>
+<h3 id="events">Events</h3>
+<p>When a controller has all of it&#x2019;s panels closed, it will dispatch a <code>panels-closed</code> event</p>
+<pre><code class="lang-js"><span class="pl-c1">window</span>.addEventListener(<span class="pl-s">&apos;panels-closed&apos;</span>, e=&gt;{
+    <span class="pl-k">if</span>( e.target.name == <span class="pl-s">&apos;root&apos;</span> )
+        <span class="pl-c1">console</span>.log(<span class="pl-s">&apos;all root panels closed&apos;</span>)
+})
+</code></pre>
 <h2 id="toolbar">Toolbar</h2>
 <p>A panel only presents the view given to it. If you would like a toolbar with a close button the view
 needs to render one. A panel toolbar element has been created for such a task.</p>

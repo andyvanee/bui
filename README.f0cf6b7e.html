@@ -1,0 +1,225 @@
+<h1 id="backbone-relations">Backbone Relations</h1>
+<blockquote>
+<p>Formerly &quot;Backbone Child Collections&quot;</p>
+</blockquote>
+<p><img src="https://img.shields.io/badge/Version-1.2.0-blue.svg" alt="Version 1.2.0"></p>
+<blockquote>
+<p>Create lazy-loading relations between Backbone.js models and collections with minimal effort. Perfect for REST APIs</p>
+</blockquote>
+<h2 id="collection-relation">Collection Relation</h2>
+<p>Let&#39;s define and create a model with a collection</p>
+<pre><code class="language-js">var Employees = Backbone.ChildCollection.extend({
+    // url path will be appended to the url of the parent model
+    urlPath: &#39;employees&#39;
+})
+
+var Company = Backbone.Model.extend({
+    urlRoot: &#39;/api/company&#39;
+
+    name: &#39;company&#39;, // see below how this is used
+
+    // setup all child collections with a key
+    collections: {
+        &#39;employees&#39;: Employees
+    }
+});
+
+// instantiate a new model
+var myCompany = new Company({id: 1, name: &#39;My Company&#39;});</code></pre>
+<p>The url for child collections is created automatically using the URL from parent models</p>
+<pre><code class="language-js">console.log( myCompany.get(&#39;employees&#39;).url() ) // = /api/company/1/employees</code></pre>
+<p>The collections have a reference to the parent model</p>
+<pre><code class="language-js">var employeeColl = myCompany.get(&#39;employees&#39;);
+
+console.log( employeeColl.parentModel == myCompany ) // true</code></pre>
+<p>Here&#39;s some more use cases.</p>
+<pre><code class="language-js">// create employee models – POST: /api/company/1/employees
+myCompany.get(&#39;employees&#39;).create([
+    {id: 1, name: &#39;John Doe&#39;},
+    {id: 2, name: &#39;Jane Doe&#39;}
+])
+
+// there&#39;s more than one to access children
+var firstEmployee = myCompany.get(&#39;employees&#39;).first()
+//var firstEmployee = myCompany.get(&#39;employees.first&#39;)
+//var firstEmployee = myCompany.get(&#39;employees.at0&#39;)
+//var firstEmployee = myCompany.get(&#39;employees.1&#39;) // ID
+
+// child models inside the child collections can traverse to the parent model
+firstEmployee.collection.parentModel == myCompany // true
+
+// of if you give the parent model a `name`, you can do this
+firstEmployee.get(&#39;company&#39;) == myCompany // true
+</code></pre>
+<h2 id="model-relation">Model Relation</h2>
+<pre><code class="language-js">// Setup a computer model with a link to a single employee model
+var Computer = Backbone.Model.extend({
+    models: {
+        &#39;employee&#39;: {id: &#39;employee_id&#39;, coll: myCompany.get(&#39;employees&#39;)}
+    }
+});
+
+var computer = new Computer({&#39;employee_id&#39;:&#39;1&#39;})
+
+console.log( computer.get(&#39;employee&#39;) ) // John Doe Model
+console.log( computer.get(&#39;employee&#39;).get(&#39;name&#39;) ) // &quot;John Doe&quot;
+</code></pre>
+<blockquote>
+<p>Note: a model can have both collections <em>and</em> models defined.</p>
+</blockquote>
+<h2 id="documentation">Documentation</h2>
+<h4 id="model-attributes-and-collection-keys">Model Attributes and Collection Keys</h4>
+<p>Model attributes and collection keys should not conflict unless you are wanting to preload the collection with data. If they keys are the same, the child collection with be returned and not the model attribute. However, if the model attribute is an array it will be added to the child collection.</p>
+<pre><code class="language-js">var jsonModelData = {
+    id: 1,
+    name: &#39;My Company&#39;,
+
+    // this matches the child collection key,
+    // so when `get(employees)` is used, this data will be converted into a real collection
+    employees: [
+        {name: &#39;Bob&#39;},
+        {name: &#39;Jill&#39;}
+    ]
+}
+
+// using the example from above...
+var myCompany = new Company(jsonModelData);
+
+// returns collection with two employees, Bob and Jill
+myCompany.get(&#39;employees&#39;);</code></pre>
+<h4 id="collections-setup">Collections setup</h4>
+<p>You start by putting a list of <code>collections</code> on your model. <em>Multiple structures are supported.</em></p>
+<pre><code class="language-js">collections: {
+        &#39;employees&#39;: &#39;employees&#39;, // urlPath will be set with generic ChildCollection
+        &#39;employees&#39;: EmployeesColl,
+        &#39;employees&#39;: {
+                collection: EmployeesColl,
+                ... // any other options listed here will be passed to collection on init
+        },
+        &#39;employees&#39;: function(){ return EmployeesColl },
+        &#39;employees&#39;: function(){ return {
+                collection: EmployeesColl,
+        }}
+}</code></pre>
+<p>As of v0.12.0, child collections can be nested under a group name. This can be helpful when your collections grow in number and you&#39;d like to organize.</p>
+<pre><code class="language-js"> // group-coll.js
+ module.exports = {
+     &#39;one&#39;: Coll1
+     &#39;two&#39;: Coll2
+ }
+
+ // model.js
+ collections: {
+     &#39;employees&#39;: EmployeesColl,
+     &#39;group&#39;: require(&#39;./group-coll&#39;)
+ }
+
+ // using
+ model.get(&#39;employees&#39;)
+ model.get(&#39;group/one&#39;)
+ model.get(&#39;group/two&#39;)</code></pre>
+<h4 id="models-setup">Models setup</h4>
+<p>Sometimes you may want to translate a related ID to a real Model. To do this, setup <code>models</code>. Like Collections, you can specify a hash or a function that returns a hash</p>
+<pre><code class="language-js">/* assuming your model looks like:
+    {
+        id: 1, 
+        employee_id: 1,
+        more: &#39;attrs&#39;
+    }
+*/
+models: {
+    &#39;employee&#39;: {
+        id: &#39;employee_id&#39;, // the attribute on the model,
+
+        // where to lookup the id
+        coll: EmployeesColl // instance
+        coll: &#39;EmployeesColl&#39; // string name of instance on this model or global window (useful when instance not defined on load)
+        coll: function(id, key){ // you can also choose to lookup the model with a custom function instead
+            return MyLookupCollection.findASpecialModel(id)
+        },
+
+        // optional
+        fetch: true // if `id` isn&#39;t found, it will be fetched from server
+    }
+}
+
+// later: `.get(&#39;employee&#39;)` == model</code></pre>
+<p>Models will also work by having the entire model attributes rather than just and ID. Like so...</p>
+<pre><code class="language-js">/* assuming your model looks like:
+    {
+        id: 1, 
+        employee: {
+            id: 1,
+            name: &#39;John Doe&#39;,
+            more: &#39;attrs&#39;
+        },
+        more: &#39;attrs&#39;
+    }
+*/
+models: {
+    &#39;employee&#39;: Employee // will turn the attrs into a real Model
+}
+
+// later: `.get(&#39;employee&#39;)` == model</code></pre>
+<h4 id="properties-and-methods-available">Properties and methods available</h4>
+<p><code>[Collection/Model].parentModel</code> – a reference to the parent model of this collection/model</p>
+<p><code>Model.refColl</code> - a reference to the collection they were fetched from. Only set when a child model is setup with a <code>coll</code> option</p>
+<p><code>Collection.urlPath</code> – the path to be appended to the URL of the parent model.</p>
+<p><code>[Collection/Model].hasFetched</code> (BOOL) – Is set to <code>true</code> after a <code>fetch</code> happens.</p>
+<p><code>[Collection/Model].isFetching</code> (BOOL) – Will be set to <code>true</code> while the <code>fetch</code> method is happening.</p>
+<p><code>Collection.fetchOnce()</code> – Fetches collection if it has not been fetched yet. (Tests for <code>hasFetched</code>)</p>
+<p><code>Collection.timeSinceLastFetch()</code> - Time in miliseconds since last fetched</p>
+<p><code>Collection.stale</code> - if set, <code>fetch</code> will only make request once data is given <code>ms</code> stale.</p>
+<p><code>Collection.fetch({stale:10000})</code> - Overrides <code>.stale</code> option to signify when the collection data becomes stale. A <code>fetch</code> request will not follow through until the data is stale.</p>
+<p><code>Model.needsFetching</code></p>
+<h3 id="dot-notation">Dot Notation</h3>
+<p>Dot notation is supported when getting child collections and models.</p>
+<pre><code class="language-js">// collections can return a specific model by providing an index
+myCompany.get(&#39;employees.at0.name&#39;)
+// aka
+myCompany.get(&#39;employees&#39;).at(0).get(&#39;name&#39;)
+
+// `first` and `last` are also supported
+myCompany.get(&#39;employees.first.name&#39;)
+myCompany.get(&#39;employees.last.name&#39;)
+
+// as is model ID
+myCompany.get(&#39;employees.1.name&#39;)</code></pre>
+<p>A benefit of using dot notation is if a nested item does not exist a fatal error <em>will not</em> occur.</p>
+<h2 id="changelog">Changelog</h2>
+<h4 id="next-ver-11-2-18">next ver - 11/2/18</h4>
+<ul>
+<li>added <code>getBefore(model)</code> and <code>getAfter(model)</code> to collections</li>
+</ul>
+<h4 id="v1-2-0-10-4-18">v1.2.0 - 10/4/18</h4>
+<ul>
+<li>can set a <code>defaultID</code> in a child model definition for when the attribute is null or undefined</li>
+</ul>
+<h4 id="v1-1-0-9-14-18">v1.1.0 - 9/14/18</h4>
+<ul>
+<li>child model lookup via <code>coll</code> property can be a custom function.</li>
+</ul>
+<h4 id="v1-0-0-6-26-18">v1.0.0 - 6/26/18</h4>
+<ul>
+<li>ready for commonjs loaders such as Webpack</li>
+</ul>
+<h4 id="v0-12-0-6-25-18">v0.12.0 - 6/25/18</h4>
+<ul>
+<li>child <code>collections</code> can be grouped under a common key – helpful for organized modular loading</li>
+<li>child models have reference to collection they fetched from via <code>refColl</code></li>
+</ul>
+<h4 id="v0-11-1">v0.11.1</h4>
+<ul>
+<li><code>id</code> is not longer required, the key name will be used to find the ID on the model attributes</li>
+<li>if model <code>info.coll</code> is a string, it will also check for it on the window</li>
+</ul>
+<h4 id="v0-11-0">v0.11.0</h4>
+<ul>
+<li>dot notation logic changed: index retrieval must be prefixed with &quot;at&quot;. ex: <code>at0</code>. If not, a normal <code>get()</code> will happen</li>
+<li>access to parentModel via <code>name</code> will traverse all the way to the top (previously limited to first parentModel)</li>
+<li>getOrFetch accepts <code>silent</code> option</li>
+<li>model info defined as a function will be called in context of model</li>
+<li>model info.coll can be a string which will retrieved with dot notation</li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT © <a href="http://kevinjantzer.com">Kevin Jantzer</a> - Blackstone Publishing</p>

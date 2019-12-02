@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../bui.css?t=4273a473">
+    <link rel="stylesheet" href="../bui.css?t=23936738">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=90b2b723"></script>
+    <script src="../bui.js?t=8db9a08c"></script>
     <title>Util - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -52,6 +52,8 @@
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-titleize" href="#titleize">titleize</a>
                     </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-sortstring" href="#sortstring">sortString</a>
+                    </li>
                     <li class="heading-item -depth-2"><a class="hlink link-promise.series" href="#promise.series">Promise.series</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-device" href="#device">device</a>
@@ -67,6 +69,10 @@
                     <li class="heading-item -depth-2"><a class="hlink link-csvtoarray" href="#csvtoarray">csvToArray</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-readfile" href="#readfile">readFile</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-ajax" href="#ajax">AJAX</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-background-resume" href="#background-resume">Background Resume</a>
                     </li>
                   </ul>
                 </li>
@@ -96,6 +102,14 @@
 <h2 id="titleize"><code>titleize</code></h2>
 <p>Converts underscores and dashes to spaces and then capitlizes each word</p>
 <pre><code class="lang-js"><span class="pl-k">let</span> str = normalizeText(<span class="pl-s">&apos;my_string&apos;</span>) <span class="pl-c">// My String</span>
+</code></pre>
+<h2 id="sortstring"><code>sortString</code></h2>
+<p>Moves the leading article to the end (also strips leading and trailing quotes)</p>
+<pre><code class="lang-js">sortString(<span class="pl-s">&apos;The Book Title&apos;</span>) <span class="pl-c">// Book Title, The</span>
+sortString(<span class="pl-s">&apos;&quot;A Book Title&quot;&apos;</span>) <span class="pl-c">// Book Title, A</span>
+
+<span class="pl-c">// disable quote strip</span>
+sortString(<span class="pl-s">&apos;&quot;A Book Title&quot;&apos;</span>, <span class="pl-c1">false</span>) <span class="pl-c">// &quot;A Book Title&quot;</span>
 </code></pre>
 <h2 id="promise.series"><code>Promise.series</code></h2>
 <p>Perform a set of promise tasks in series (waiting to complete until moving on to the next)</p>
@@ -172,6 +186,43 @@ saveAs(blob, <span class="pl-s">&apos;filename.csv&apos;</span>)
 <p>Read a <a href="https://developer.mozilla.org/en-US/docs/Web/API/File">file</a> to text (async)</p>
 <pre><code class="lang-js"><span class="pl-k">let</span> text = <span class="pl-k">await</span> readFile(file)
 </code></pre>
+<h2 id="ajax"><code>AJAX</code></h2>
+<p>A wrapper around <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a> to simplify and provide async/await.</p>
+<blockquote>
+<p><code>fetch</code> is a good solution most of the time, but does not provide progress.</p>
+</blockquote>
+<pre><code class="lang-js"><span class="pl-k">let</span> formData = <span class="pl-k">new</span> FormData()
+
+formData.set(<span class="pl-s">&apos;file&apos;</span>, FileObject)
+
+<span class="pl-k">new</span> AJAX(method, url)
+.on(<span class="pl-s">&apos;progress&apos;</span>, e=&gt;{
+    <span class="pl-k">let</span> progress = <span class="pl-c1">Math</span>.round(e.loaded / e.total * <span class="hljs-number">100</span>)
+    <span class="pl-c1">console</span>.log(progress)
+})
+.send(formData)
+.then(<span class="hljs-function"><span class="hljs-params">resp</span>=&gt;</span>{
+    <span class="pl-c1">console</span>.log(resp)
+})
+</code></pre>
+<p>The <code>.on</code> method provides a chainable version of <code>target.addEventListener</code></p>
+<pre><code class="lang-js"><span class="pl-k">new</span> AJAX(method, url)
+.on(<span class="pl-s">&apos;loadstart&apos;</span>, handler)
+.on(<span class="pl-s">&apos;progress&apos;</span>, handler)
+.send()
+</code></pre>
+<h2 id="background-resume">Background Resume</h2>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;bui/util/background-resume&apos;</span>
+
+<span class="pl-c1">window</span>.addEventListener(<span class="pl-s">&apos;background-resume&apos;</span>, e=&gt;{ <span class="pl-c">/*do something*/</span> })
+</code></pre>
+<p>iOS devices (untested on Android) stop processing JS
+when backgrounded for a few seconds (10-20 in my testing)</p>
+<p>When the browser is reopended, safari resumes with the JS &#x201C;state&#x201D;
+intact but since time was essentially frozen, no updates (long poll)
+would have been made or received (websocket).</p>
+<p>It may be important to trigger a refresh of data when resuming
+from the background; this script enables such a function.</p>
 
         </div>
         <div class="footer-nav">

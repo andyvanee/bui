@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../bui.css?t=4273a473">
+    <link rel="stylesheet" href="../bui.css?t=23936738">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=90b2b723"></script>
+    <script src="../bui.js?t=8db9a08c"></script>
     <title>Elements - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -24,11 +24,17 @@
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-btngreater" href="#lessb-btngreater">&lt;b-btn&gt;</a>
                 </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-btn-groupgreater" href="#lessb-btn-groupgreater">&lt;b-btn-group&gt;</a>
+                </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-icongreater" href="#lessb-icongreater">&lt;b-icon&gt;</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-file-icongreater" href="#lessb-file-icongreater">&lt;b-file-icon&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-hrgreater" href="#lessb-hrgreater">&lt;b-hr&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-subgreater" href="#lessb-subgreater">&lt;b-sub&gt;</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-tsgreater" href="#lessb-tsgreater">&lt;b-ts&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-labelgreater" href="#lessb-labelgreater">&lt;b-label&gt;</a>
                 </li>
@@ -43,6 +49,8 @@
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-spinner-overlaygreater" href="#lessb-spinner-overlaygreater">&lt;b-spinner-overlay&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-uploadergreater" href="#lessb-uploadergreater">&lt;b-uploader&gt;</a>
+                </li>
+                <li class="heading-item -depth-2"><a class="hlink link-lessb-codegreater" href="#lessb-codegreater">&lt;b-code&gt;</a>
                 </li>
                 <li class="heading-item -depth-2"><a class="hlink link-lessb-embedgreater" href="#lessb-embedgreater">&lt;b-embed&gt;</a>
                 </li>
@@ -145,6 +153,19 @@ it is best practice to import elements when you need them.</p>
 <ul>
 <li><code>spin</code> - set to <code>true</code> to show a spinner</li>
 </ul>
+<h2 id="lessb-btn-groupgreater"><code>&lt;b-btn-group&gt;</code></h2>
+<p>Visually groups buttons together</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-btn-group</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">b-btn</span>&gt;</span>Send<span class="hljs-tag">&lt;/<span class="hljs-name">b-btn</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">b-btn</span> <span class="hljs-attr">icon</span>=<span class="pl-s">&quot;down-open&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-btn</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-btn-group</span>&gt;</span>
+</code></pre>
+<!--
+<b-btn-group>
+    <b-btn>Send</b-btn>
+    <b-btn icon="down-open"></b-btn>
+</b-btn-group>
+-->
 <h2 id="lessb-icongreater"><code>&lt;b-icon&gt;</code></h2>
 <p>Display an svg icon &#x2013; <a href="../icons.html">See a full list of icons</a></p>
 <!--
@@ -154,6 +175,51 @@ it is best practice to import elements when you need them.</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-icon</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;user&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-icon</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">b-icon</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;cog&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-icon</span>&gt;</span>
 </code></pre>
+<h2 id="lessb-file-icongreater"><code>&lt;b-file-icon&gt;</code></h2>
+<p>File icon has some default file formats defined, but you will inevitably want to add your own.
+To support this, you must deliberately call the &#x201C;define&#x201D; function before using the custom element.</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> { css } <span class="pl-k">from</span> <span class="pl-s">&apos;lit-element&apos;</span>
+<span class="pl-k">import</span> defineFileIcon, {fileIconColors} <span class="pl-k">from</span> <span class="pl-s">&apos;bui/elements/file-icon&apos;</span>
+
+<span class="pl-c">// list of predefined colors</span>
+<span class="pl-c">// override them in this object or in the define method</span>
+<span class="pl-c1">console</span>.log(fileIconColors)
+
+<span class="pl-c">// use default colors</span>
+defineFileIcon()
+
+<span class="pl-c">// use defaults with your own colors</span>
+defineFileIcon({
+    <span class="pl-c">// must be defined with lit-element css</span>
+    <span class="hljs-attr">jpg</span>: css`<span class="css">
+        <span class="hljs-selector-pseudo">:host(</span><span class="hljs-selector-attr">[ext=&quot;jpg&quot;]</span>),
+        <span class="hljs-selector-pseudo">:host(</span><span class="hljs-selector-attr">[ext=&quot;jpeg&quot;]</span>) {
+            <span class="pl-e">--color</span>: orange;
+        }
+    `</span>
+})
+</code></pre>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-file-icon</span> <span class="hljs-attr">ext</span>=<span class="pl-s">&quot;pdf&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-file-icon</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-file-icon</span> <span class="hljs-attr">ext</span>=<span class="pl-s">&quot;doc&quot;</span> <span class="hljs-attr">style</span>=<span class="pl-s">&quot;--size:4em&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-file-icon</span>&gt;</span>
+</code></pre>
+<!--
+<b-file-icon ext="pdf"></b-file-icon>
+<b-file-icon ext="docx"></b-file-icon>
+<b-file-icon ext="xlsx"></b-file-icon>
+<b-file-icon ext="psd"></b-file-icon>
+<b-file-icon ext="indd"></b-file-icon>
+<b-file-icon ext="ai"></b-file-icon>
+<b-file-icon ext="mp3"></b-file-icon>
+<b-file-icon ext="mp4"></b-file-icon>
+<b-file-icon ext="html"></b-file-icon>
+<b-file-icon ext="xml"></b-file-icon>
+<b-file-icon ext="zip"></b-file-icon>
+-->
+<h4 id="style-hooks">Style hooks</h4>
+<p><code>--b-file-icon-color-default</code> - when no <code>ext</code> color<br>
+<code>--b-file-icon-bgd-default</code>  - when no <code>ext</code> bgd<br>
+<code>--b-file-icon-size</code><br>
+<code>--b-file-icon-radius</code></p>
 <h2 id="lessb-hrgreater"><code>&lt;b-hr&gt;</code></h2>
 <p>A line divider</p>
 <!--
@@ -170,6 +236,13 @@ Label 1 <b-hr vert></b-hr> Label 2
 <p>A subdued (or sub text) text element that is slightly smaller and lighter in color</p>
 <!--
 <b-sub>Subdued text</b-sub>
+-->
+<h2 id="lessb-tsgreater"><code>&lt;b-ts&gt;</code></h2>
+<p>Simple element for displaying timestamps. Should be given a moment date object. <code>moment.fromNow()</code> will be rendered and updated every 1 minute.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-ts</span> <span class="hljs-attr">.date</span>=<span class="pl-s">${moment()}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-ts</span>&gt;</span>
+</code></pre>
+<!--
+Element created <b-ts .date=${moment()}></b-ts>
 -->
 <h2 id="lessb-labelgreater"><code>&lt;b-label&gt;</code></h2>
 <p>Default is an uppercase, bold, and slightly subdued (gray) text block for labeling.
@@ -360,6 +433,22 @@ uploader.chooseFile()
 <li><code>--uploadingBgd</code></li>
 <li><code>--progressBgd</code></li>
 </ul>
+<h2 id="lessb-codegreater"><code>&lt;b-code&gt;</code></h2>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-code</span>&gt;</span>inline code<span class="hljs-tag">&lt;/<span class="hljs-name">b-code</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-code</span> <span class="hljs-attr">block</span>&gt;</span>
+{
+    code: &apos;block&apos;
+}
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-code</span>&gt;</span>
+</code></pre>
+<!--
+<b-code>inline code</b-code>
+<b-code block>
+{
+    code: 'block'
+}
+</b-code>
+-->
 <h2 id="lessb-embedgreater"><code>&lt;b-embed&gt;</code></h2>
 <p>For embedding iframes and videos (like youtube) that responsively scale</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-embed</span> <span class="hljs-attr">url</span>=<span class="pl-s">&quot;https://www.youtube.com/watch?v=sK1ODp0nDbM&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-embed</span>&gt;</span>

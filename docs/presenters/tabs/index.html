@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=4273a473">
+    <link rel="stylesheet" href="../../bui.css?t=23936738">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=90b2b723"></script>
+    <script src="../../bui.js?t=8db9a08c"></script>
     <title>Tabs - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -127,6 +127,9 @@ any of the following</p>
 <p><code>view.didBecomeInactive</code></p>
 </li>
 <li>
+<p><code>menu-clicked</code> - anytime a menu item is clicked (even if already active)</p>
+</li>
+<li>
 <p><code>active-changed</code> - the tabs element will also emit a DOM event</p>
 <ul>
 <li>The event detail will contain a reference to the tab view object: <code>event.detail.tabView</code></li>
@@ -204,20 +207,20 @@ different layouts</p>
 <h4 id="example">Example</h4>
 <pre><code class="lang-js">customElements.define(<span class="pl-s">&apos;my-custom-tab-bar&apos;</span>, <span class="hljs-class"><span class="pl-k">class</span> <span class="pl-k">extends</span> <span class="pl-ent">LitElement</span></span>{
 
-    <span class="pl-k">static</span> <span class="pl-k">get</span> styles(){<span class="pl-k">return</span> css<span class="pl-s">`
-        [active] {
-            color: var(--blue);
+    <span class="pl-k">static</span> <span class="pl-k">get</span> styles(){<span class="pl-k">return</span> css`<span class="css">
+        <span class="hljs-selector-attr">[active]</span> {
+            <span class="pl-e">color</span>: <span class="pl-c1">var</span>(--blue);
         }
     `</span>}
 
-    render(){<span class="pl-k">return</span> html<span class="pl-s">`
-        <span class="hljs-subst">${<span class="pl-k">this</span>.views.map(v=&gt;html<span class="pl-s">`
-            <span class="hljs-subst">${v.canDisplay?html<span class="pl-s">`
-                &lt;div ?active=<span class="hljs-subst">${v.active}</span> .tabView=<span class="hljs-subst">${v}</span> @click=<span class="hljs-subst">${<span class="pl-k">this</span>.onMenuClick}</span>&gt;
-                    <span class="hljs-subst">${v.title}</span>
-                &lt;/div&gt;
-            `</span>:<span class="pl-s">&apos;&apos;</span>}</span>
-        `</span>)}</span>
+    render(){<span class="pl-k">return</span> html`<span class="xml">
+        </span><span class="hljs-subst">${<span class="pl-k">this</span>.views.map(v=&gt;html`<span class="xml">
+            </span><span class="hljs-subst">${v.canDisplay?html`<span class="xml">
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> ?<span class="hljs-attr">active</span>=</span></span><span class="hljs-subst">${v.active}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">.tabView</span>=</span></span><span class="hljs-subst">${v}</span><span class="xml"><span class="hljs-tag"> @<span class="hljs-attr">click</span>=</span></span><span class="hljs-subst">${<span class="pl-k">this</span>.onMenuClick}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+                    </span><span class="hljs-subst">${v.title}</span><span class="xml">
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            `</span>:<span class="pl-s">&apos;&apos;</span>}</span><span class="xml">
+        `</span>)}</span><span class="xml">
     `</span>}
 
 })

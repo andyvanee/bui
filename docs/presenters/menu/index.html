@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=4273a473">
+    <link rel="stylesheet" href="../../bui.css?t=23936738">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=90b2b723"></script>
+    <script src="../../bui.js?t=8db9a08c"></script>
     <title>Menu - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -108,11 +108,11 @@ selections, keyboard navigation, search bar, and loadings results via ajax.</p>
 {
     <span class="hljs-attr">label</span>: <span class="pl-s">&apos;Label to display&apos;</span>,
     <span class="pl-c">// optional</span>
-    description: <span class="pl-s">&apos;&apos;</span>, <span class="pl-c">// will display below the label</span>
-    val: <span class="pl-s">&apos;value&apos;</span>, <span class="pl-c">// (required if using &quot;selected&quot; option)</span>
-    icon: <span class="pl-s">&apos;&apos;</span>, <span class="pl-c">// name of an icon</span>
-    dataTitle: <span class="pl-s">&apos;&apos;</span>, <span class="pl-c">// set custom value for quickly </span>
-    className: <span class="pl-s">&apos;&apos;</span>,
+    <span class="hljs-attr">description</span>: <span class="pl-s">&apos;&apos;</span>, <span class="pl-c">// will display below the label</span>
+    <span class="hljs-attr">val</span>: <span class="pl-s">&apos;value&apos;</span>, <span class="pl-c">// (required if using &quot;selected&quot; option)</span>
+    <span class="hljs-attr">icon</span>: <span class="pl-s">&apos;&apos;</span>, <span class="pl-c">// name of an icon</span>
+    <span class="hljs-attr">dataTitle</span>: <span class="pl-s">&apos;&apos;</span>, <span class="pl-c">// set custom value for quickly </span>
+    <span class="hljs-attr">className</span>: <span class="pl-s">&apos;&apos;</span>,
     <span class="hljs-attr">extras</span>: [] <span class="pl-c">// array of custom elements to render after label</span>
 }
 
@@ -132,13 +132,14 @@ selections, keyboard navigation, search bar, and loadings results via ajax.</p>
 <h2 id="options">Options</h2>
 <pre><code class="lang-js">{
 	<span class="hljs-attr">selected</span>: <span class="pl-c1">false</span>, <span class="pl-c">// value or array of values</span>
-	multiple: <span class="pl-c1">false</span>, <span class="pl-c">// more than one value selectable?</span>
-	search: <span class="hljs-number">20</span>, <span class="pl-c">// true (always show) or number of results for it to show</span>
-	minW: <span class="pl-c1">false</span>,
+	<span class="hljs-attr">multiple</span>: <span class="pl-c1">false</span>, <span class="pl-c">// more than one value selectable?</span>
+	<span class="hljs-attr">search</span>: <span class="hljs-number">20</span>, <span class="pl-c">// true (always show) or number of results for it to show</span>
+	<span class="hljs-attr">minW</span>: <span class="pl-c1">false</span>,
 	<span class="hljs-attr">width</span>: <span class="pl-c1">null</span>,
+    <span class="hljs-attr">autoSelectFirst</span>: <span class="pl-c1">false</span>,
 	<span class="hljs-attr">jumpNav</span>: <span class="pl-c1">false</span>, <span class="pl-c">// true (always show) or number of results for it to show</span>
-	typeDelay: <span class="hljs-number">700</span>, <span class="pl-c">// how long until typed characters reset</span>
-	hasMenuIcon: <span class="pl-s">&apos;right-open&apos;</span>,
+	<span class="hljs-attr">typeDelay</span>: <span class="hljs-number">700</span>, <span class="pl-c">// how long until typed characters reset</span>
+	<span class="hljs-attr">hasMenuIcon</span>: <span class="pl-s">&apos;right-open&apos;</span>,
 	<span class="hljs-attr">onSelect</span>: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{}
 }
 </code></pre>
@@ -151,16 +152,16 @@ searching that reduces the results, you can opt to show a search bar.</p>
 <pre><code class="lang-javascript">search: {
     
     <span class="pl-c">// a url is required, it can be a string or a function</span>
-    url: <span class="pl-s">&apos;my-search?term=&apos;</span>, <span class="pl-c">// term will be appended to end</span>
-    url: <span class="hljs-function"><span class="hljs-params">term</span>=&gt;</span><span class="pl-s">&apos;my-search?term=&apos;</span>+term, <span class="pl-c">// custom function supported</span>
+    <span class="hljs-attr">url</span>: <span class="pl-s">&apos;my-search?term=&apos;</span>, <span class="pl-c">// term will be appended to end</span>
+    <span class="hljs-attr">url</span>: <span class="hljs-function"><span class="hljs-params">term</span>=&gt;</span><span class="pl-s">&apos;my-search?term=&apos;</span>+term, <span class="pl-c">// custom function supported</span>
 
-    showAll: <span class="pl-c1">true</span>, <span class="pl-c">// should all results be displayed when nothing is searched</span>
-    hideUnselected: <span class="pl-c1">false</span>,
+    <span class="hljs-attr">showAll</span>: <span class="pl-c1">true</span>, <span class="pl-c">// should all results be displayed when nothing is searched</span>
+    <span class="hljs-attr">hideUnselected</span>: <span class="pl-c1">false</span>,
     <span class="hljs-attr">placeholder</span>: <span class="pl-s">&apos;Search&apos;</span>,
 
     <span class="pl-c">// a default parser will be used if none given</span>
     <span class="pl-c">// the parsed response should format to expected menu structure</span>
-    parse: <span class="hljs-function"><span class="hljs-params">row</span>=&gt;</span>{
+    <span class="hljs-attr">parse</span>: <span class="hljs-function"><span class="hljs-params">row</span>=&gt;</span>{
         <span class="pl-k">return</span> {
             <span class="hljs-attr">label</span>: row.label,
             <span class="hljs-attr">val</span>: row.val
