@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css?t=0174a9d9">
     <link rel="stylesheet" href="bui.css?t=23936738">
     <script src="assets/script.js?t=42463e55"></script>
-    <script src="bui.js?t=beef3411"></script>
+    <script src="bui.js?t=95286d6a"></script>
     <title>Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -60,7 +60,11 @@
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-util" href="util/index.html">Util</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-helpers" href="helpers/index.html">Helpers</a>
+                <li class="menu-item -level-2 -parent"><a class="link title  link-helpers" href="helpers/index.html">Helpers</a>
+                  <ul class="submenu">
+                    <li class="menu-item -level-3"><a class="link title  link-helpersbackbonerelations" href="helpers/backbone/relations/index.html">Backbone.js Relations</a>
+                    </li>
+                  </ul>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-models" href="models/index.html">Models</a>
                 </li>
@@ -86,40 +90,63 @@
 <h1 align="center" id="blackstone-ui">Blackstone-UI</h1>
 <div align="center">
 <p><a href="https://www.npmjs.com/package/blackstone-ui"><img src="https://img.shields.io/badge/npm-v1.1.0-blue" alt="demo"></a>
-<a href="http://kjantzer.github.io/bui/"><img src="https://img.shields.io/badge/-Demo-blue" alt="demo"></a>
-<a href="http://kjantzer.github.io/bui/docs/"><img src="https://img.shields.io/badge/-Documentation-black" alt="docs"></a></p>
+<a href="https://bui.js.org"><img src="https://img.shields.io/badge/-Demo-blue" alt="demo"></a>
+<a href="https://bui.js.org/docs/"><img src="https://img.shields.io/badge/-Documentation-black" alt="docs"></a></p>
 </div>
 <p>Web components for creating interfaces - built with <a href="https://lit-html.polymer-project.org/">lit-html</a> and <a href="https://lit-element.polymer-project.org/">lit-element</a> by <a href="https://blackstonepublishing.com">Blackstone Publishing</a></p>
 <hr>
 <p>Example</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span>&gt;</span>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-paper</span> <span class="hljs-attr">compact</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;Tab 1&quot;</span>&gt;</span>
-
-        <span class="hljs-tag">&lt;<span class="hljs-name">b-paper</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">b-spinner-overlay</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-spinner-overlay</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">b-icon</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;folder&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-icon</span>&gt;</span> 
-                    Title
-                    <span class="hljs-tag">&lt;<span class="hljs-name">b-label</span>&gt;</span>Active<span class="hljs-tag">&lt;/<span class="hljs-name">b-label</span>&gt;</span>
-                <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">b-btn</span> <span class="hljs-attr">icon</span>=<span class="pl-s">&quot;upload-cloud&quot;</span> <span class="hljs-attr">class</span>=<span class="pl-s">&quot;text-btn&quot;</span>&gt;</span>Upload<span class="hljs-tag">&lt;/<span class="hljs-name">b-btn</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>
-                Content here
-                <span class="hljs-tag">&lt;<span class="hljs-name">b-hr</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-hr</span>&gt;</span>
-                More content
-            <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">b-paper</span>&gt;</span>
-
+        <span class="hljs-tag">&lt;<span class="hljs-name">b-spinner-overlay</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-spinner-overlay</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">b-icon</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;folder&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-icon</span>&gt;</span> 
+                Title
+                <span class="hljs-tag">&lt;<span class="hljs-name">b-label</span>&gt;</span>Active<span class="hljs-tag">&lt;/<span class="hljs-name">b-label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">b-uploader</span> <span class="hljs-attr">url</span>=<span class="pl-s">&quot;/&quot;</span> <span class="hljs-attr">auto-upload</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-uploader</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">b-btn</span> <span class="hljs-attr">icon</span>=<span class="pl-s">&quot;upload-cloud&quot;</span> <span class="hljs-attr">class</span>=<span class="pl-s">&quot;text-btn&quot;</span> <span class="hljs-attr">onclick</span>=<span class="pl-s">&quot;this.previousElementSibling.selectFile()&quot;</span>&gt;</span>Upload<span class="hljs-tag">&lt;/<span class="hljs-name">b-btn</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">main</span>&gt;</span>
+            Content here
+            <span class="hljs-tag">&lt;<span class="hljs-name">b-hr</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-hr</span>&gt;</span>
+            More content
+        <span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;Tab 2&quot;</span>&gt;</span>
         Tab 2 content
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-
 <span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
-
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-paper</span>&gt;</span>
 </code></pre>
+<!--
+<b-paper compact>
+<b-tabs>
+    <div title="Tab 1">
+        <b-spinner-overlay></b-spinner-overlay>
+        <header>
+            <h3>
+                <b-icon name="folder"></b-icon> 
+                Title
+                <b-label>Active</b-label>
+            </h3>
+            <b-uploader url="/" auto-upload></b-uploader>
+            <b-btn icon="upload-cloud" class="text-btn" onclick="this.previousElementSibling.selectFile()">Upload</b-btn>
+        </header>
+        <main>
+            Content here
+            <b-hr></b-hr>
+            More content
+        </main>
+    </div>
+    <div title="Tab 2">
+        Tab 2 content
+    </div>
+</b-tabs>
+</b-paper>
+-->
 <h2 id="installation">Installation</h2>
 <p>Blackstone-UI is available as an <a href="https://www.npmjs.com/package/blackstone-ui">npm package</a></p>
 <pre><code>npm install blackstone-ui --save
@@ -165,7 +192,7 @@ a lot of the boilerplate code usually needed.</p>
 </code></pre>
 <h2 id="notes">Notes</h2>
 <ul>
-<li>consider switching out <code>moment.js</code> for something lighter weight</li>
+<li>consider switching out <code>moment.js</code> for something lighter weight (like <a href="https://day.js.org/">day.js</a>)</li>
 </ul>
 
         </div>

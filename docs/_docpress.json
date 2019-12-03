@@ -661,6 +661,48 @@
                   }
                 ]
               }
+            ],
+            "sections": [
+              {
+                "title": "Backbone.js Relations",
+                "source": "helpers/backbone/relations/README.md",
+                "url": "helpers/backbone/relations/index.html",
+                "slug": "helpersbackbonerelations",
+                "headings": [
+                  {
+                    "title": "Collection Relation",
+                    "depth": 2,
+                    "id": "collection-relation"
+                  },
+                  {
+                    "title": "Model Relation",
+                    "depth": 2,
+                    "id": "model-relation"
+                  },
+                  {
+                    "title": "Documentation",
+                    "depth": 2,
+                    "id": "documentation",
+                    "headings": [
+                      {
+                        "title": "Dot Notation",
+                        "depth": 3,
+                        "id": "dot-notation"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Changelog",
+                    "depth": 2,
+                    "id": "changelog"
+                  },
+                  {
+                    "title": "License",
+                    "depth": 2,
+                    "id": "license"
+                  }
+                ]
+              }
             ]
           },
           {
@@ -1423,6 +1465,46 @@
         }
       ]
     },
+    "helpers/backbone/relations/index.html": {
+      "source": "helpers/backbone/relations/README.md",
+      "title": "Backbone.js Relations - Blackstone UI",
+      "pageTitle": "Backbone.js Relations",
+      "slug": "helpersbackbonerelations",
+      "headings": [
+        {
+          "title": "Collection Relation",
+          "depth": 2,
+          "id": "collection-relation"
+        },
+        {
+          "title": "Model Relation",
+          "depth": 2,
+          "id": "model-relation"
+        },
+        {
+          "title": "Documentation",
+          "depth": 2,
+          "id": "documentation",
+          "headings": [
+            {
+              "title": "Dot Notation",
+              "depth": 3,
+              "id": "dot-notation"
+            }
+          ]
+        },
+        {
+          "title": "Changelog",
+          "depth": 2,
+          "id": "changelog"
+        },
+        {
+          "title": "License",
+          "depth": 2,
+          "id": "license"
+        }
+      ]
+    },
     "models/index.html": {
       "source": "models/README.md",
       "title": "Models - Blackstone UI",
@@ -1541,6 +1623,7 @@
     "presenters/tabs/README.md": "presenters/tabs/index.html",
     "util/README.md": "util/index.html",
     "helpers/README.md": "helpers/index.html",
+    "helpers/backbone/relations/README.md": "helpers/backbone/relations/index.html",
     "models/README.md": "models/index.html",
     "router/README.md": "router/index.html",
     "realtime/README.md": "realtime/index.html",
