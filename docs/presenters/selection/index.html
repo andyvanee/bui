@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../../style.css?t=0174a9d9">
+    <link rel="stylesheet" href="../../bui.css?t=2cc14b54">
+    <script src="../../assets/script.js?t=42463e55"></script>
+    <script src="../../bui.js?t=b728ab77"></script>
+    <title>Selection - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersnotif" href="../../presenters/notif/index.html">Notif</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../../presenters/tabs/index.html">Tabs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-presentersselection" href="../../presenters/selection/index.html">Selection</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-methods" href="#methods">Methods</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-.begin()" href="#.begin()">.begin()</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-.end()" href="#.end()">.end()</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-.on(event-callback)" href="#.on(event-callback)">.on(event, callback)</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-options" href="#options">Options</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-listelement" href="#listelement">listElement</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-itemtagname" href="#itemtagname">itemTagName</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-selectedattr" href="#selectedattr">selectedAttr</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-endwhennoresults" href="#endwhennoresults">endWhenNoResults</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-endonesc" href="#endonesc">endOnEsc</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-autoscrollthreshold" href="#autoscrollthreshold">autoScrollThreshold</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-autoscrollacceleration" href="#autoscrollacceleration">autoScrollAcceleration</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-events" href="#events">Events</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-begin" href="#begin">begin</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-end" href="#end">end</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-change" href="#change">change</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-todo" href="#todo">TODO</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2 -parent"><a class="link title  link-helpers" href="../../helpers/index.html">Helpers</a>
+                  <ul class="submenu">
+                    <li class="menu-item -level-3"><a class="link title  link-helpersbackbonerelations" href="../../helpers/backbone/relations/index.html">Backbone.js Relations</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-realtime" href="../../realtime/index.html">Realtime</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-presentersselection">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="selection">Selection</h1>
+<p>Enable bulk selection of items in a list. Supports desktop and touch/mobile devices;
+selects items from a long press and drag; auto scrolls on mobile; selects range of items
+from a click and shfit+click (like a native desktop file explorer)</p>
+<p><img src="/presenters/selection/screenshot.gif" alt="screenshot"></p>
+<pre><code class="lang-js"><span class="pl-k">let</span> bulkSelect = <span class="pl-k">new</span> Selection(listEl, <span class="pl-s">&apos;tag-name-of-item&apos;</span>, opts={})
+
+bulkSelect.begin()
+
+<span class="pl-c">// ... later</span>
+bulkSelect.result.length
+bulkSelect.result.models
+</code></pre>
+<h2 id="methods">Methods</h2>
+<h3 id=".begin()"><code>.begin()</code></h3>
+<h3 id=".end()"><code>.end()</code></h3>
+<h3 id=".on(event-callback)"><code>.on(event, callback)</code></h3>
+<p>See &#x201C;events&#x201D; below</p>
+<h2 id="options">Options</h2>
+<pre><code class="lang-js"><span class="pl-k">new</span> Selection(listElement, itemTagName, opts)
+</code></pre>
+<h3 id="listelement"><code>listElement</code></h3>
+<p>Watches for mouse/touch events on this element and captures selected items</p>
+<h3 id="itemtagname"><code>itemTagName</code></h3>
+<p>The tag name of the items to be selected</p>
+<blockquote>
+<p>Note: currently assumes you will be selecting custom element items</p>
+</blockquote>
+<hr>
+<pre><code class="lang-js">opts = {
+    <span class="hljs-attr">toolbar</span>: <span class="pl-c1">null</span>, <span class="pl-c">// will set `.selection = this` on the toolbar</span>
+    <span class="hljs-attr">selectedAttr</span>: <span class="pl-s">&apos;isSelected&apos;</span>,
+    <span class="hljs-attr">endWhenNoResults</span>: <span class="pl-c1">true</span>,
+    <span class="hljs-attr">closeOnEsc</span>: <span class="pl-c1">true</span>,
+    <span class="hljs-attr">autoScrollThreshold</span>: <span class="hljs-number">48</span>,
+    <span class="hljs-attr">autoScrollAcceleration</span>: <span class="hljs-number">5</span>,
+
+    <span class="hljs-attr">onBegin</span>: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{},
+    <span class="hljs-attr">onEnd</span>: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{},
+    <span class="hljs-attr">onChange</span>: <span class="hljs-function"><span class="hljs-params">result</span>=&gt;</span>{}
+}
+</code></pre>
+<h3 id="selectedattr"><code>selectedAttr</code></h3>
+<p>The attribute to be applied to selected items</p>
+<h3 id="endwhennoresults"><code>endWhenNoResults</code></h3>
+<p>Once the last selected item is deselected, selection will be turned off</p>
+<h3 id="endonesc"><code>endOnEsc</code></h3>
+<p>End selection when escape key is pressed</p>
+<h3 id="autoscrollthreshold"><code>autoScrollThreshold</code></h3>
+<p>How close (in px) to the top or bottom of the list until auto scrolling is triggered.
+Set to <code>false</code> to disable auto scrolling</p>
+<h3 id="autoscrollacceleration"><code>autoScrollAcceleration</code></h3>
+<p>How aggressively auto scroll should accelerate. The further away from the
+threshold, the faster the list will scroll.</p>
+<p><code>1</code> = no acceleration (constant speed)<br>
+<code>5</code> = medium acceleration<br>
+<code>10</code> = rapid acceleration</p>
+<h2 id="events">Events</h2>
+<pre><code class="lang-js"><span class="pl-k">let</span> sel = <span class="pl-k">new</span> Selection(<span class="pl-c">/*...*/</span>)
+
+sel.on(<span class="pl-s">&apos;change&apos;</span>, result=&gt;{
+    <span class="pl-c1">console</span>.log(result.length)
+})
+</code></pre>
+<h3 id="begin"><code>begin</code></h3>
+<p>Do something when bulk selection begins, such as showing a &#x201C;bulk select toolbar&#x201D;</p>
+<h3 id="end"><code>end</code></h3>
+<p>Do something when selection ends</p>
+<h3 id="change"><code>change</code></h3>
+<p>When items are selected and deselected</p>
+<h2 id="todo">TODO</h2>
+<ul>
+<li>support selecting items programaticaly; e.g. <code>selection.select(3,6)</code></li>
+</ul>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../../presenters/tabs/index.html"><span class="title">Tabs</span></a></div>
+          <div class="right"><a href="../../util/index.html"><span class="label">Next: </span><span class="title">Util</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

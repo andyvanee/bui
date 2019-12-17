@@ -4325,7 +4325,10 @@ class BtnElement extends _litElement.LitElement {
         /* floating action btn */
         :host([fab]) {
             position: absolute;
-            box-shadow: rgba(0,0,0,.4) 0 3px 10px;
+            z-index: 100;
+            box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),
+                        0px 6px 10px 0px rgba(0,0,0,0.14),
+                        0px 1px 18px 0px rgba(0,0,0,0.12);
             bottom: 1rem;
             right: 1rem;
             font-size: 1.4em;
@@ -10044,7 +10047,7 @@ class EmptyState extends _litElement.LitElement {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: rgba(55,71,79,.2);
+            color: var(--b-empty-state-color, rgba(55,71,79,.2));
             font-size: 2em;
             text-align: center;
             padding: 1em;
@@ -10563,13 +10566,11 @@ class AvatarElement extends HTMLElement {
     let temp = document.createElement('template');
     temp.innerHTML = `<style>
 			:host {
-				--radius: 50%;
-				--size: 1em;
 				--bgd: ${this.bgd};
 				--bgdDefault: transparent;
 				--color: ${this.color};
-				height: var(--size);
-			    width: var(--size);
+				height: var(--size, 1em);
+			    width: var(--size, 1em);
 			    display: inline-block;
 			    vertical-align: middle;
 
@@ -10586,7 +10587,7 @@ class AvatarElement extends HTMLElement {
 			}
 
 			svg {
-				border-radius: var(--radius);
+				border-radius: var(--b-avatar-radius, 50%);
 			}
 			
 			svg rect {
@@ -14405,6 +14406,10 @@ const device = {
     return /Linux/.test(UA);
   },
 
+  get minScreenSize() {
+    return window.outerWidth < window.outerHeight ? window.outerWidth : window.outerHeight;
+  },
+
   get isiOS() {
     return /iPad|iPhone|iPod/.test(UA) || device.isMac && navigator.standalone !== undefined; // iPadOS 13+
   },
@@ -14417,6 +14422,10 @@ const device = {
     return /android/i.test(UA);
   },
 
+  get isTouch() {
+    return 'ontouchstart' in window;
+  },
+
   get isMobile() {
     return device.isiOS || device.isAndroid;
   },
@@ -14424,6 +14433,10 @@ const device = {
   // https://developer.chrome.com/multidevice/user-agent
   get isiOSChrome() {
     return /CriOS/.test(UA);
+  },
+
+  get isChromeInstalledApp() {
+    return this.isInstalled && /Chrome/.test(UA);
   },
 
   get isInstalled() {
@@ -14534,6 +14547,11 @@ class Popover {
     }
 
     if (window.Backbone && view instanceof window.Backbone.View) view = view.el;
+
+    if (target instanceof MouseEvent) {
+      target = this.createInvisiblePlaceholderTarget(target);
+    }
+
     this.opts = opts;
     this.target = target;
     this.view = view;
@@ -14589,6 +14607,16 @@ class Popover {
     OpenPopovers.push(this);
   }
 
+  createInvisiblePlaceholderTarget(e) {
+    let target = document.createElement('div');
+    target.classList.add('popover-invisible-placeholder');
+    target.style.position = 'absolute';
+    target.style.left = e.clientX + 'px';
+    target.style.top = e.clientY + 'px';
+    document.body.appendChild(target);
+    return target;
+  }
+
   contains(target) {
     if (!target) return false;
     if (this.el.contains(target)) return true; // let parentPopover = this.parentPopover
@@ -14627,7 +14655,8 @@ class Popover {
     this.view.popover = null;
     this.mutationObserver.disconnect();
     this.popper.destroy();
-    this.target.classList.remove('popover-open'); // remove this from the list of open popovers as well as all popovers after it
+    this.target.classList.remove('popover-open');
+    if (this.target.classList.contains('popover-invisible-placeholder')) this.target.remove(); // remove this from the list of open popovers as well as all popovers after it
 
     var indx = OpenPopovers.indexOf(this);
 
@@ -15795,14 +15824,16 @@ class PanelController extends _litElement.LitElement {
         panel.removeAttribute('ontop');
       }
     });
+    let hostEl = this.getRootNode();
+    hostEl = hostEl.host || hostEl.body || hostEl;
 
-    if (this.parentElement) {
+    if (hostEl) {
       if (this.length == 0) {
-        this.parentElement.classList.remove('b-panel-open');
-        this.parentElement.style.overflow = '';
+        hostEl.classList.remove('b-panel-open');
+        hostEl.style.overflow = '';
       } else {
-        this.parentElement.classList.add('b-panel-open');
-        this.parentElement.style.overflow = 'hidden';
+        hostEl.classList.add('b-panel-open');
+        hostEl.style.overflow = 'hidden';
       }
     }
   }
@@ -16545,6 +16576,10 @@ class Panel extends _litElement.LitElement {
             transform: scale(.5);
         }
 
+        :host([anchor="center"][animation="fade"]) > main {
+            transform: none;
+        }
+
         :host([anchor="top"]) > main {
             margin-top: 0;
             transform: translateY(-100px);
@@ -16690,6 +16725,13 @@ var _default = customElements.get('b-panel');
 
 exports.default = _default;
 },{"lit-element":"bhxD","./controller":"R9Fe","../../router":"Qeq3","../../router/route":"WZSr","../../util/device":"la8o","./toolbar":"ZNP1","../../elements/btn":"DABr"}],"TZ6L":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = makeBtn;
+exports.cancelBtns = void 0;
 const btnPresets = {
   'dismiss': {
     label: 'Dismiss'
@@ -16724,8 +16766,10 @@ const btnPresets = {
     color: 'red'
   }
 };
+const cancelBtns = ['dismiss', 'cancel', 'no'];
+exports.cancelBtns = cancelBtns;
 
-module.exports = function makeBtn(opts = {}, i) {
+function makeBtn(opts = {}, i) {
   if (typeof opts == 'string') {
     if (!btnPresets[opts]) return console.warn('Button preset `' + opts + '` does not exist');
     opts = btnPresets[opts];
@@ -16741,7 +16785,7 @@ module.exports = function makeBtn(opts = {}, i) {
   } = opts; // icon = icon ? 'icon-'+icon : ''
 
   return `<b-btn ${text && 'text'} icon="${icon}" color="${color}" class="${className}">${label}</b-btn>`; // return `<span class="btn ${className} ${color} ${icon}">${label}</span>`
-};
+}
 },{}],"HbKK":[function(require,module,exports) {
 "use strict";
 
@@ -16758,14 +16802,15 @@ var _panel = _interopRequireDefault(require("../panel"));
 
 var _popover = _interopRequireDefault(require("../popover"));
 
-var _makeBtn = _interopRequireDefault(require("./make-btn"));
+var _makeBtn = _interopRequireWildcard(require("./make-btn"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// FIXME: this module needs to be refactored using lit-element to better apply styles
 const styles = require('./style.less');
-
-const cancelBtns = ['dismiss', 'cancel', 'no'];
 
 class Dialog {
   constructor(opts = {}) {
@@ -16861,9 +16906,9 @@ class Dialog {
     let btnInfo = undefined;
 
     if (e.code == 'Escape') {
-      btnInfo = this.opts.btns.find(btn => cancelBtns.includes(btn));
+      btnInfo = this.opts.btns.find(btn => _makeBtn.cancelBtns.includes(btn));
     } else if (e.code == 'Enter') {
-      btnInfo = this.opts.btns.find(btn => !cancelBtns.includes(btn));
+      btnInfo = this.opts.btns.find(btn => !_makeBtn.cancelBtns.includes(btn));
     }
 
     if (btnInfo != undefined) {
@@ -16875,7 +16920,7 @@ class Dialog {
   }
 
   resolveBtn(btnInfo) {
-    if (cancelBtns.includes(btnInfo)) btnInfo = false;
+    if (_makeBtn.cancelBtns.includes(btnInfo)) btnInfo = false;
     if (this.resolve(btnInfo) === true) this.close();
   }
 
@@ -36632,6 +36677,7 @@ customElements.define('b-list-toolbar', class extends _litElement.LitElement {
             display: flex;
             align-items: center;
             min-width: 0;
+            position: relative;
         }
 
         [hidden] { display: none; }
@@ -36751,6 +36797,8 @@ customElements.define('b-list-toolbar', class extends _litElement.LitElement {
             <slot name="refresh-btn"></slot>
 
             <slot name="after"></slot>
+
+            <slot></slot>
         </div>
     `;
   }
@@ -36817,7 +36865,95 @@ customElements.define('b-list-toolbar', class extends _litElement.LitElement {
 var _default = customElements.get('b-list-toolbar');
 
 exports.default = _default;
-},{"lit-element":"bhxD","../../popover":"Soyf","./sort-btn":"FOqU","./sort-dir-btn":"pUXj","./filter-btn":"zIYl","./search":"uCjH"}],"zwrR":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../popover":"Soyf","./sort-btn":"FOqU","./sort-dir-btn":"pUXj","./filter-btn":"zIYl","./search":"uCjH"}],"xA0J":[function(require,module,exports) {
+"use strict";
+
+var _litElement = require("lit-element");
+
+customElements.define('b-list-selection-bar', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            position:absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            background: var(--theme-bgd); /* FIXME: */
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 0;
+            padding: 0 .5em;
+        }
+
+        :host(:not(.show)) {
+            display: none;
+        }
+
+        .cancel-btn {
+            margin-right: .5em;
+            /* margin: 0 1em; */
+        }
+
+        @media (max-width: 699px) {
+            .count > span {
+                display: none;
+            }
+        }
+
+    `;
+  }
+
+  set selection(selection) {
+    this.__selection = selection; // TODO: unbind when changing?
+
+    selection.on('begin', e => {
+      this.classList.add('show');
+      this.update();
+    });
+    selection.on('end', e => {
+      this.classList.remove('show');
+    });
+    selection.on('change', result => {
+      this.update();
+    });
+  }
+
+  get selection() {
+    return this.__selection;
+  }
+
+  render() {
+    return _litElement.html`
+        ${this.selection ? _litElement.html`
+
+            <div>
+                <b-btn class="cancel-btn" icon="cancel-1" @click=${this.end} outline></b-btn>
+
+                <span class="count">
+                ${this.selection.result.size} <span>selected</span>
+                </span>
+
+                <slot name="left"></slot>
+            </div>
+
+            <div>
+                <slot name="right"></slot>
+            </div>
+        ` : ''}
+    `;
+  }
+
+  end() {
+    this.selection.end();
+  }
+
+});
+},{"lit-element":"bhxD"}],"zwrR":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36935,7 +37071,321 @@ customElements.define('b-infinite-list', class extends _litElement.LitElement {
 var _default = customElements.get('b-infinite-list');
 
 exports.default = _default;
-},{"lit-element":"bhxD","../../elements/empty-state":"dUnZ"}],"tkaB":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../elements/empty-state":"dUnZ"}],"aR3g":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _componentEmitter = _interopRequireDefault(require("component-emitter"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const isTouch = 'ontouchstart' in window;
+
+class ResultMap extends Map {
+  get models() {
+    return Array.from(this.values());
+  }
+
+  get elements() {
+    return Array.from(this.keys());
+  }
+
+  get length() {
+    return this.size;
+  }
+
+}
+
+const DISABLE_EVENTS = ['longpress', 'contextmenu', 'dragstart', 'mouseenter', 'mousemove', 'click'];
+
+class Selection {
+  constructor(list, itemTagName, opts = {}) {
+    this.opts = Object.assign({
+      toolbar: null,
+      selectedAttr: 'isSelected',
+      endWhenNoResults: true,
+      endOnEsc: true,
+      autoScrollThreshold: 48,
+      autoScrollAcceleration: 5,
+      onBegin: () => {},
+      onEnd: () => {},
+      onChange: result => {}
+    }, opts);
+    this.EVENTS = {
+      DOWN: isTouch ? 'touchstart' : 'mousedown',
+      UP: isTouch ? 'touchend' : 'mouseup',
+      DRAG: isTouch ? 'touchmove' : 'mouseover'
+    };
+    if (this.opts.toolbar) this.opts.toolbar.selection = this;
+    this.result = new ResultMap();
+    this.list = list;
+    this.itemTagName = itemTagName.toUpperCase();
+    this.SELECTED = this.opts.selectedAttr; // bind method context
+
+    this.stopPropagation = this.stopPropagation.bind(this); // this.onClick = this.onClick.bind(this)
+
+    this.onScroll = this.onScroll.bind(this);
+    this.onKeydown = this.onKeydown.bind(this);
+    this.onEventDown = this.onEventDown.bind(this);
+    this.onEventUp = this.onEventUp.bind(this);
+    this.onEventDrag = this.onEventDrag.bind(this);
+  }
+
+  get isOn() {
+    return this.__on === true;
+  }
+
+  begin(e) {
+    if (this.isOn) return;
+    this.__on = true;
+    this.bindEvents(e); // select the item that triggered the selection
+
+    if (e) {
+      this._dragging = true;
+      this._startItem = this.itemInEvent(e);
+      this.select(this._startItem);
+    }
+
+    this.opts.onBegin();
+    this.emit('begin');
+  }
+
+  end() {
+    this.__on = false;
+    this.unbindEvents();
+    let {
+      items
+    } = this.getItems();
+    items.forEach(item => {
+      this._deselect(item);
+    });
+    this.opts.onEnd();
+    this.emit('end');
+  }
+
+  bindEvents(e) {
+    // incase other code is listening for these events
+    // disable them while we are in selection mode
+    DISABLE_EVENTS.forEach(evt => {
+      this.list.addEventListener(evt, this.stopPropagation, true);
+    });
+    window.addEventListener('keydown', this.onKeydown);
+    this.list.addEventListener('scroll', this.onScroll, true);
+    this.list.addEventListener(this.EVENTS.DOWN, this.onEventDown, true);
+    this.list.addEventListener(this.EVENTS.UP, this.onEventUp, true);
+    if (e && e.detail && e.detail.dragging) this.list.addEventListener(this.EVENTS.DRAG, this.onEventDrag, true);
+  }
+
+  unbindEvents() {
+    DISABLE_EVENTS.forEach(evt => {
+      this.list.removeEventListener(evt, this.stopPropagation, true);
+    });
+    window.removeEventListener('keydown', this.onKeydown);
+    this.list.removeEventListener('scroll', this.onScroll, true);
+    this.list.removeEventListener(this.EVENTS.DRAG, this.onEventDrag, true);
+    this.list.removeEventListener(this.EVENTS.DOWN, this.onEventDown, true);
+    this.list.removeEventListener(this.EVENTS.UP, this.onEventUp, true);
+  }
+
+  getItems(start, end) {
+    let items = Array.from(this.list.querySelectorAll(this.itemTagName));
+    if (typeof start === 'number') start = items[start];
+    if (typeof end === 'number') end = items[end];
+    let oldStart = this._dragging && this._dragging.start;
+    let oldEnd = this._dragging && this._dragging.end;
+
+    if (start && end) {
+      let startIndex = items.indexOf(start);
+      let endIndex = items.indexOf(end);
+
+      if (startIndex == -1 || endIndex == -1) {
+        start = null;
+        end = null;
+      } else {
+        start = startIndex < endIndex ? startIndex : endIndex;
+        end = startIndex < endIndex ? endIndex : startIndex;
+      }
+
+      this._dragging = {
+        items,
+        start,
+        end
+      };
+    }
+
+    return {
+      items,
+      start,
+      end,
+      oldStart,
+      oldEnd
+    };
+  }
+
+  select(item, startItem) {
+    if (item instanceof Event) item = this.itemInEvent(item);
+    if (!item) return;
+
+    if (!startItem) {
+      this._toggleSelect(item);
+
+      this.opts.onChange(this.result);
+      this.emit('change', this.result);
+      if (this.opts.endWhenNoResults && this.result.size == 0) setTimeout(() => this.end()); // let mouseup finish
+
+      return;
+    }
+
+    let {
+      items,
+      start,
+      end,
+      oldStart,
+      oldEnd
+    } = this.getItems(startItem, item);
+    let shouldSelect = startItem.hasAttribute(this.SELECTED);
+    items.forEach((_item, i) => {
+      if (i >= start && i <= end) shouldSelect ? this._select(_item) : this._deselect(_item);else if (oldStart !== false && oldEnd !== false && i >= oldStart && i <= oldEnd) this._deselect(_item);
+    });
+    this.emit('change', this.result);
+    if (this.opts.endWhenNoResults && this.result.size == 0) setTimeout(() => this.end()); // let mouseup finish
+  }
+
+  _toggleSelect(item) {
+    if (item.hasAttribute(this.SELECTED)) this._deselect(item);else this._select(item);
+  }
+
+  _select(item) {
+    item.setAttribute(this.SELECTED, '');
+    this.result.set(item, item.model || item);
+  }
+
+  _deselect(item) {
+    item.removeAttribute(this.SELECTED);
+    this.result.delete(item);
+  }
+
+  stopPropagation(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    e.stopPropagation();
+  }
+
+  onScroll() {
+    if (isTouch && !this._autoScroll && !this._dragging) {
+      this._scrolling = new Date().getTime();
+    }
+  }
+
+  onKeydown(e) {
+    if (this.opts.endOnEsc && e.key == 'Escape') this.end();
+  }
+
+  onEventDown(e) {
+    e.stopPropagation(); // while mouse/touch is down...watch dragging
+
+    this.list.addEventListener(this.EVENTS.DRAG, this.onEventDrag, true);
+    let item = this.itemInEvent(e);
+    if (item) this.isClickEvent = setTimeout(() => {
+      let ts = new Date().getTime(); // no longer a mouse click
+
+      delete this.isClickEvent;
+      if (this._scrolling && ts - this._scrolling <= 50) return;
+      delete this._scrolling;
+      this._dragging = true;
+      this._startItem = item;
+
+      this._select(item);
+    }, 200);
+  }
+
+  onEventUp(e) {
+    this.stopPropagation(e);
+    this._dragging = false;
+    this.autoScroll(false);
+    clearTimeout(this.isClickEvent);
+    let ts = new Date().getTime();
+
+    if (this.isClickEvent && (!this._scrolling || ts - this._scrolling > 50)) {
+      delete this.isClickEvent;
+      let item = this.itemInEvent(e);
+      this.select(item, e.shiftKey ? this._startItem : null);
+      if (!e.shiftKey) this._startItem = item;
+    } else {
+      delete this._startItem;
+      delete this._lastTouchItem;
+    }
+
+    delete this._scrolling;
+    this.list.removeEventListener(this.EVENTS.DRAG, this.onEventDrag, true);
+  }
+
+  onEventDrag(e) {
+    if (this._dragging) this.stopPropagation(e);
+    if (this.isClickEvent || this._scrolling && !this._autoScroll) return; // touch devices
+
+    if (!e.path) {
+      let {
+        clientX,
+        clientY
+      } = e.changedTouches[0];
+
+      if (this.opts.autoScrollThreshold !== false) {
+        let listRect = this.list.getBoundingClientRect();
+        let top = listRect.y + this.opts.autoScrollThreshold;
+        let bottom = listRect.y + listRect.height - this.opts.autoScrollThreshold;
+        let acceleration = (this.opts.autoScrollAcceleration || 1) / 10; // scroll up
+
+        if (clientY < top) this.autoScroll(-1 - Math.round(Math.pow(top - clientY, acceleration))); // scroll down
+        else if (clientY > bottom) this.autoScroll(1 + Math.round(Math.pow(clientY - bottom, acceleration))); // not within threshold, stop scrolling
+          else this.autoScroll(false);
+      }
+
+      let item = this.list.getRootNode().elementFromPoint(clientX, clientY);
+
+      if (item && item.tagName == this.itemTagName && item != this._lastTouchItem) {
+        this._lastTouchItem = item;
+        this.select(item, this._startItem);
+      } // mouse event
+
+    } else {
+      this.select(e, this._startItem);
+    }
+  }
+
+  itemInEvent(e) {
+    let path = e.composedPath();
+    return path.find(_el => _el.tagName == this.itemTagName);
+  }
+
+  autoScroll(speed = 2) {
+    if (speed == false || this._autoScrollSpeed != speed) {
+      clearInterval(this._autoScroll);
+
+      if (speed == false) {
+        delete this._autoScroll;
+        delete this._autoScrollSpeed;
+      }
+    }
+
+    if (speed !== false && this._autoScrollSpeed != speed) {
+      this._autoScrollSpeed = speed;
+      this.list.scrollTop = this.list.scrollTop + this._autoScrollSpeed;
+      this._autoScroll = setInterval(() => {
+        this.list.scrollTop = this.list.scrollTop + this._autoScrollSpeed;
+      }, 10);
+    }
+  }
+
+}
+
+exports.default = Selection;
+(0, _componentEmitter.default)(Selection.prototype);
+},{"component-emitter":"Wr69"}],"tkaB":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36953,9 +37403,13 @@ var _sorts = _interopRequireDefault(require("./data/sorts"));
 
 require("./toolbar");
 
+require("./toolbar/selection-bar");
+
 require("./infinite-list");
 
 require("../../elements/spinner-overlay");
+
+var _selection = _interopRequireDefault(require("../selection"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37043,6 +37497,13 @@ customElements.define('b-list', class extends _litElement.LitElement {
 
         slot[name="header"] {
             display: block;
+            overflow-x: auto;
+        }
+
+        slot[name="header"]::-webkit-scrollbar {
+            display: none;
+            width: 0 !important;
+            height: 0 !important;
         }
 
         b-spinner-overlay {
@@ -37124,7 +37585,12 @@ customElements.define('b-list', class extends _litElement.LitElement {
                 <b-btn text pill icon="arrows-ccw" @click=${this.refresh}></b-btn>
             </slot>
             <!-- <b-label slot="after" class="queuing-label">Queuing filters, release to apply</b-label> -->
+            <b-list-selection-bar>
+                <slot name="actions:left" slot="left"></slot>
+                <slot name="actions:right" slot="right"></slot>
+            </b-list-selection-bar>
         </b-list-toolbar>
+
         <slot name="header"></slot>
         <b-infinite-list
             row="${this.rowElement}"
@@ -37209,6 +37675,19 @@ customElements.define('b-list', class extends _litElement.LitElement {
     this.spinner.show = true;
     this.toolbar.count = await this.dataSource.length();
     this.spinner.show = false;
+    this.header = this.$$('[name="header"]').assignedNodes()[0];
+    if (this.header) this.list.addEventListener('scroll', e => {
+      this.header.scrollLeft = e.currentTarget.scrollLeft;
+      if (e.currentTarget.scrollLeft == 0) this.removeAttribute('scrolled-x');else this.setAttribute('scrolled-x', '');
+    }); // TODO: unbind on disconnect?
+
+    this.selection = new _selection.default(this.list, this.rowElement, {
+      toolbar: this.shadowRoot.querySelector('b-list-selection-bar')
+    });
+    this.addEventListener('selection:begin', e => {
+      e.stopPropagation();
+      this.selection.begin(e);
+    });
   }
 
   async refresh() {
@@ -37266,7 +37745,7 @@ customElements.define('b-list', class extends _litElement.LitElement {
 var _default = customElements.get('b-list');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./data/source":"zXhY","./data/filters":"HGW8","./data/sorts":"sAKI","./toolbar":"iwaU","./infinite-list":"zwrR","../../elements/spinner-overlay":"eyVY"}],"TMO9":[function(require,module,exports) {
+},{"lit-element":"bhxD","./data/source":"zXhY","./data/filters":"HGW8","./data/sorts":"sAKI","./toolbar":"iwaU","./toolbar/selection-bar":"xA0J","./infinite-list":"zwrR","../../elements/spinner-overlay":"eyVY","../selection":"aR3g"}],"TMO9":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("lit-element");
@@ -37493,7 +37972,6 @@ function _default(customColors = {}, customLabels = {}) {
     }
 
     static get styles() {
-      console.log('applying styles');
       return [_litElement.css`
         :host {
             display: inline-block;
@@ -37586,7 +38064,690 @@ function _default(customColors = {}, customLabels = {}) {
 
   });
 }
-},{"lit-element":"bhxD"}],"gE6T":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"sHUN":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+const NotifControllers = {};
+customElements.define('b-notifs', class extends _litElement.LitElement {
+  // createRenderRoot(){ return this }
+  static get(name = 'main') {
+    if (name == 'main' && !NotifControllers[name]) {
+      let controller = document.createElement('b-notifs');
+      controller.setAttribute('name', 'main');
+      document.body.appendChild(controller);
+      NotifControllers[name] = controller;
+    }
+
+    return NotifControllers[name];
+  }
+
+  get name() {
+    return this.hasAttribute('name') ? this.getAttribute('name') : undefined;
+  }
+
+  constructor() {
+    super();
+
+    if (this.name) {
+      if (NotifControllers[this.name]) console.warn('A `b-notifs` controller already exists with the name: ', this.name);else NotifControllers[this.name] = this;
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.name) delete NotifControllers[this.name];
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.name && !NotifControllers[this.name]) NotifControllers[this.name] = this;
+  }
+
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            pointer-events: none;
+            
+            overflow: hidden;
+            position:absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 1200;
+            --padding: var(--b-notif-padding, 1em);
+        }
+
+        :host([name="main"]) {
+            position: fixed;
+            top: env(safe-area-inset-top);
+            left: env(safe-area-inset-left);
+            bottom: env(safe-area-inset-bottom);
+            right: env(safe-area-inset-right);
+        }
+
+        @media (max-width:699px), (max-height: 699px) {
+            :host {
+                position: fixed;
+                top: env(safe-area-inset-top);
+                left: env(safe-area-inset-left);
+                bottom: env(safe-area-inset-bottom);
+                right: env(safe-area-inset-right);
+            }
+        }
+
+        slot {
+            position: absolute;
+            display: flex;
+        }
+
+        slot[name="top"],
+        slot[name="bottom"] {
+            width: 100%;
+            align-items: center;
+        }
+
+        slot[name*="top"] {
+            top: 0;
+            flex-direction: column;
+            padding-top: var(--padding);
+        }
+
+        slot[name*="bottom"] {
+            bottom: 0;
+            flex-direction: column-reverse;
+            padding-bottom: var(--padding);
+        }
+
+        slot[name*="left"] {
+            left: 0;
+            padding-left: var(--padding);
+            align-items: flex-start;
+        }
+
+        slot[name*="right"] {
+            right: 0;
+            padding-right: var(--padding);
+            align-items: flex-end;
+        }
+
+        @media (max-width:699px) {
+            slot {
+                padding: 0 !important;
+                position: static !important;
+                --b-notif-width: 100%;
+            }
+
+            .top {
+                position: absolute;
+                top: 0;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                padding: var(--padding);
+                box-sizing: border-box;
+            }
+
+            .bottom {
+                position: absolute;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                padding: var(--padding);
+                box-sizing: border-box;
+            }
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <div class="bottom">
+            <slot name="bottom-left"></slot>
+            <slot name="bottom"></slot>
+            <slot name="bottom-right"></slot>
+        </div>
+
+        <div class="top">
+            <slot name="top-left"></slot>
+            <slot name="top"></slot>
+            <slot name="top-right"></slot>
+        </div>
+        
+    `;
+  }
+
+});
+
+var _default = customElements.get('b-notifs');
+
+exports.default = _default;
+},{"lit-element":"bhxD"}],"HXsq":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+var _default = _litElement.css`
+:host {
+    display: block;
+    position:relative;
+    pointer-events: all;
+    width: var(--b-notif-width, 300px);
+    max-width: 100%;
+
+    /* overflow: hidden; */
+
+    transition: 
+        height 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms,
+        opacity 300ms,
+        transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    opacity: 0;
+    will-change: transform; 
+}
+
+:host([slot*="right"]) { transform: translateX(100%); }
+:host([slot*="left"]) { transform: translateX(-100%); }
+:host([slot="top"]) { transform: translateY(-100%); }
+:host([slot="bottom"]) { transform: translateY(100%); }
+
+:host([animation="grow"]) {
+    transform: scale(.8)
+}
+
+:host([animation="bounce"]) {
+    transform: none;
+}
+
+:host([animation="bounce"].entered) {
+    animation-name: bounce;
+    animation-duration: 700ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-fill-mode: forwards;
+}
+
+:host([animation="fade"]) {
+    transform: none;
+}
+
+:host([slot*="top"]) {
+    --spacing-bottom: var(--padding);
+}
+
+:host([slot*="bottom"]) {
+    --spacing-top: var(--padding);
+}
+
+:host(.entered) {
+    opacity: 1;
+    transform: none;
+}
+
+:host(.exit) {
+    height: 0 !important;
+}
+
+:host([color="red"]) {
+    --b-notif-color: #fff;
+    --b-notif-bgd: var(--red);
+}
+
+:host([color="blue"]) {
+    --b-notif-color: #fff;
+    --b-notif-bgd: var(--blue);
+}
+
+:host([color="green"]) {
+    --b-notif-color: #fff;
+    --b-notif-bgd: var(--green);
+}
+
+:host([color="orange"]) {
+    --b-notif-color: #fff;
+    --b-notif-bgd: var(--orange);
+}
+
+:host([color="amber"]) {
+    --b-notif-color: var(--gray-900);
+    --b-notif-bgd: var(--amber);
+}
+
+main {
+    border-radius: var(--b-notif-radius, 4px);
+    color: var(--b-notif-color, #fff);
+    background: var(--b-notif-bgd, #333);
+    margin-top: var(--spacing-top, 0);
+    margin-bottom: var(--spacing-bottom, 0);
+
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),
+                0px 6px 10px 0px rgba(0,0,0,0.14),
+                0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+
+slot {
+    display: block;
+}
+
+
+:host {
+    --b-notif-btn-color: var(--b-notif-color);
+}
+
+:host([color]) {
+    --b-notif-btn-bgd: rgba(255,255,255,.1);
+}
+
+@keyframes bounce {
+  0% { transform: scale(0.8); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(.9); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
+`;
+
+exports.default = _default;
+},{"lit-element":"bhxD"}],"tUj8":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  error: {
+    icon: 'attention-circle',
+    color: 'red',
+    animation: 'bounce'
+  },
+  failed: {
+    icon: 'cancel-circled',
+    color: 'red'
+  },
+  success: {
+    icon: 'ok-circled',
+    color: 'green'
+  },
+  info: {
+    icon: 'info-circled',
+    color: 'blue'
+  },
+  warning: {
+    icon: 'attention-1',
+    color: 'orange'
+  }
+};
+exports.default = _default;
+},{}],"euwv":[function(require,module,exports) {
+"use strict";
+
+var _litElement = require("lit-element");
+
+_litElement.LitElement.prototype.emitEvent = function (eventName, detail = null) {
+  var event = new CustomEvent(eventName, {
+    bubbles: true,
+    composed: true,
+    detail: detail
+  });
+  this.dispatchEvent(event);
+};
+},{"lit-element":"bhxD"}],"Cw18":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+var _unsafeHtml = require("lit-html/directives/unsafe-html");
+
+var _makeBtn = _interopRequireWildcard(require("../dialog/make-btn"));
+
+require("../../helpers/lit-element/events");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+customElements.define('b-snackbar', class extends _litElement.LitElement {
+  static get properties() {
+    return {
+      msg: {
+        type: String
+      },
+      btns: {
+        type: Array
+      },
+      icon: {
+        type: String
+      }
+    };
+  }
+
+  static get styles() {
+    return _litElement.css`
+        :host {
+            padding: var(--b-snackbar-padding, .85em 1em);
+            display: grid;
+            grid-template-columns: auto 1fr max-content;
+            align-items: center;
+        }
+
+        .icon > b-icon,
+        .icon > .icon {
+            margin: -.5em 0;
+            margin-right: .75em;
+            --size: 1.2em;
+            vertical-align: middle;
+        }
+
+        .msg {
+            margin: 0.05em 0 -.05em; /* better alignment with icon and btns */
+        }
+
+        .btns {
+            margin-top: -0.05em;
+            margin-right: calc(-.5 * var(--padding));
+            margin-left: calc(-.5 * var(--padding));
+        }
+
+        .btns b-btn {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: -1em 0;
+            vertical-align: middle;
+        }
+
+        .btns b-btn[color=''] {
+            color: var(--b-notif-btn-color, #333);
+        }
+
+        :host([color]) .btns b-btn  {
+            color: var(--b-notif-btn-color, #333);
+        }
+
+        @media (hover){
+            .btns b-btn:hover {
+                --bgdColor: var(--b-notif-btn-bgd, rgba(0,0,0,.05));
+            }
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <div class="icon">${this.renderIcon()}</div>
+        <div class="msg">${this.msg}</div>
+        <div class="btns" @click=${this.onBtnClick}>
+            ${this.btns.map(btn => this.renderBtn(btn))}
+        </div>
+    `;
+  }
+
+  renderIcon() {
+    if (!this.icon) return '';
+    if (typeof this.icon == 'string') return _litElement.html`<b-icon name="${this.icon}"></b-icon>`;else return this.icon;
+  }
+
+  renderBtn(btn) {
+    return _litElement.html`${(0, _unsafeHtml.unsafeHTML)((0, _makeBtn.default)(btn))}`;
+  }
+
+  onBtnClick(e) {
+    e.stopPropagation();
+    let index = Array.from(e.currentTarget.children).indexOf(e.target);
+    let btnData = index > -1 ? this.btns[index] : e.target;
+    if (_makeBtn.cancelBtns.includes(btnData)) btnData = undefined;
+    this.emitEvent('click', btnData);
+  }
+
+});
+
+var _default = customElements.get('b-snackbar');
+
+exports.default = _default;
+},{"lit-element":"bhxD","lit-html/directives/unsafe-html":"jTPt","../dialog/make-btn":"TZ6L","../../helpers/lit-element/events":"euwv"}],"XAiK":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+var _controller = _interopRequireDefault(require("./controller"));
+
+var _device = _interopRequireDefault(require("../../util/device"));
+
+var _style = _interopRequireDefault(require("./style"));
+
+var _types = _interopRequireDefault(require("./types"));
+
+require("./snackbar");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// list of open notifs
+const NOTIFS = new Map();
+window.NOTIFS = NOTIFS;
+customElements.define('b-notif', class extends _litElement.LitElement {
+  static get styles() {
+    return _style.default;
+  }
+
+  static get properties() {
+    return {
+      nid: {
+        type: String,
+        reflect: true
+      },
+      msg: {
+        type: String
+      },
+      btns: {
+        type: Array
+      },
+      icon: {
+        type: String
+      },
+      color: {
+        type: String,
+        reflect: true
+      },
+      width: {
+        type: String
+      },
+      animation: {
+        type: String,
+        reflect: true
+      }
+    };
+  }
+
+  constructor(opts = {}) {
+    super();
+    this.onWindowFocus = this.onWindowFocus.bind(this);
+    this.onWindowBlur = this.onWindowBlur.bind(this);
+
+    let controller = _controller.default.get(opts.controller || 'main');
+
+    this.opts = Object.assign({
+      nid: String(Math.round(Math.random() * 10000)),
+      msg: '',
+      icon: '',
+      btns: [],
+      animation: _device.default.minScreenSize <= 699 ? 'grow' : 'slide',
+      animationForReplace: 'grow',
+      autoClose: 4000,
+      closeOnClick: true,
+      anchor: 'bottom-right',
+
+      //device.minScreenSize <= 699 ? 'bottom' : 'bottom-right',
+      onClose() {},
+
+      onClick() {}
+
+    }, _types.default[opts.type] || {}, controller.defaults || {}, opts);
+    let props = this.constructor.properties;
+
+    for (let key in this.opts) {
+      if (props[key] != undefined) this[key] = this.opts[key];
+    }
+
+    this.slot = this.opts.anchor;
+    this.addEventListener('click', this.onClick, false);
+    this.addEventListener(_device.default.isMobile ? 'touchdown' : 'mouseover', this.onMouseOver);
+    this.addEventListener(_device.default.isMobile ? 'touchend' : 'mouseout', this.onMouseOut);
+    if (this.opts.view) this.appendChild(this.opts.view);
+    let existingNotif = NOTIFS.get(this.nid);
+    NOTIFS.set(this.nid, this);
+
+    if (existingNotif) {
+      existingNotif.replaceWith(this);
+      return;
+    }
+
+    if (controller) controller.appendChild(this);
+  }
+
+  close(btn) {
+    return new Promise(resolve => {
+      this.style.height = this.getBoundingClientRect().height + 'px';
+      this.classList.remove('entered');
+      setTimeout(() => {
+        this.classList.add('exit');
+      }, 100);
+      setTimeout(() => {
+        this.remove();
+        NOTIFS.delete(this.nid);
+        this.opts.onClose(this);
+        resolve(btn);
+      }, 700);
+    });
+  }
+
+  replaceWith(el) {
+    let animation = el.animation; // let's reduce visual animation when replacing
+
+    if (animation == 'slide') {
+      this.animation = this.opts.animationForReplace;
+      el.animation = this.opts.animationForReplace;
+    }
+
+    this.classList.remove('entered'); // setTimeout(()=>{
+
+    super.replaceWith(el);
+    setTimeout(() => {
+      el.animation = animation;
+    }, 310); // },310)
+  }
+
+  onClick(btn) {
+    if (btn instanceof MouseEvent || window.TouchEvent && btn instanceof TouchEvent) btn = undefined;
+    if (this.opts.onClick(this, btn) !== false && this.opts.closeOnClick) this.close(btn);
+  }
+
+  onWindowFocus() {
+    this.autoClose(3000);
+  }
+
+  onWindowBlur() {// this.autoClose(false)
+  }
+
+  onMouseOver(e) {
+    e.stopPropagation();
+    this.autoClose(false);
+  }
+
+  onMouseOut(e) {
+    e.stopPropagation();
+    this.autoClose(3000);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('blur', this.onWindowBlur);
+    window.addEventListener('focus', this.onWindowFocus);
+    if (this.opts.width) this.style.width = this.opts.width;
+    setTimeout(() => {
+      this.classList.add('entered');
+    }, 100);
+    this.autoClose();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('blur', this.onWindowBlur);
+    window.removeEventListener('focus', this.onWindowFocus);
+  }
+
+  autoClose(start = true) {
+    clearTimeout(this._autoCloseTimeout);
+    if (!document.hasFocus()) return; // use the `autoClose` delay if no time given OR we've never started the autoClose
+
+    let delay = start === true || !this._autoCloseTimeout ? this.opts.autoClose : start; // requested to stop, or setting turned off
+
+    if (!start || !this.opts.autoClose) return;
+    this._autoCloseTimeout = setTimeout(() => {
+      this.close();
+    }, delay);
+  }
+
+  render() {
+    return _litElement.html`
+        <main>
+        <slot>
+            <b-snackbar
+                .icon=${this.icon}
+                .msg=${this.msg}
+                .btns=${this.btns}
+                ?color=${!!this.color}
+                @click=${this.onSnackbarClick}></b-snackbar>
+        </slot>
+        </main>
+    `;
+  }
+
+  onSnackbarClick(e) {
+    e.stopPropagation();
+    let data = e.constructor.name == 'CustomEvent' ? e.detail : undefined;
+    this.onClick(data);
+  }
+
+});
+
+var _default = customElements.get('b-notif');
+
+exports.default = _default;
+let notifClass = customElements.get('b-notif');
+
+for (let key in _types.default) {
+  if (!notifClass[key]) notifClass[key] = (msg, opts = {}) => {
+    if (typeof msg == 'string') {
+      opts = opts || {};
+      opts.msg = msg;
+    }
+
+    new Notif(Object.assign({}, _types.default[key], opts));
+  };
+}
+},{"lit-element":"bhxD","./controller":"sHUN","../../util/device":"la8o","./style":"HXsq","./types":"tUj8","./snackbar":"Cw18"}],"gE6T":[function(require,module,exports) {
 "use strict";
 
 require("../elements/icon");
@@ -37643,11 +38804,14 @@ var _dialog = _interopRequireDefault(require("../presenters/dialog"));
 
 var _menu = _interopRequireDefault(require("../presenters/menu"));
 
+var _notif = _interopRequireDefault(require("../presenters/notif"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _fileIcon.default)();
 window.Dialog = _dialog.default;
 window.Menu = _menu.default;
+window.Notif = _notif.default;
 
 function convertComments() {
   var tw = document.createTreeWalker(document, NodeFilter.SHOW_COMMENT, null, null);
@@ -37690,7 +38854,7 @@ history.replaceState = (f => function replaceState() {
 window.addEventListener('popstate', function () {
   convertComments();
 });
-},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"pV6C","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/carousel":"inC5","../elements/timer":"uEYO","../elements/empty-state":"dUnZ","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"VfwF","../elements/avatar":"DaYz","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../helpers/colors-list":"TMO9","../helpers/colors/index.less":"r4vn","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"tCYJ"}],"If2r":[function(require,module,exports) {
+},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"pV6C","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/carousel":"inC5","../elements/timer":"uEYO","../elements/empty-state":"dUnZ","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"VfwF","../elements/avatar":"DaYz","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../helpers/colors-list":"TMO9","../helpers/colors/index.less":"r4vn","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"tCYJ","../presenters/notif":"XAiK"}],"If2r":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -37812,6 +38976,6 @@ module.exports = function loadHTMLBundle(bundle) {
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("UMEN");b.register("html",require("RVwy"));b.load([["icons.svg.28577cf8.html","pxeq"]]).then(function(){require("gE6T");});
+var b=require("UMEN");b.register("html",require("RVwy"));b.load([["icons.svg.bc907dee.html","pxeq"]]).then(function(){require("gE6T");});
 },{}]},{},[0], null)
 //# sourceMappingURL=/bui.js.map

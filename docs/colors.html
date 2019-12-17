@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="assets/style.css?t=615badd5">
     <link rel="stylesheet" href="style.css?t=0174a9d9">
-    <link rel="stylesheet" href="bui.css?t=23936738">
+    <link rel="stylesheet" href="bui.css?t=2cc14b54">
     <script src="assets/script.js?t=42463e55"></script>
-    <script src="bui.js?t=95286d6a"></script>
+    <script src="bui.js?t=b728ab77"></script>
     <title>Colors - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -38,9 +38,13 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="presenters/panel/index.html">Panel</a>
                 </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersnotif" href="presenters/notif/index.html">Notif</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="presenters/popover/index.html">Popover</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="presenters/tabs/index.html">Tabs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersselection" href="presenters/selection/index.html">Selection</a>
                 </li>
               </ul>
             </li>
@@ -73,10 +77,10 @@
         <div class="markdown-body"><h1 id="colors">Colors</h1>
 <p>The list of colors is pulled from <a href="https://material.io/design/color/">material.io</a></p>
 <h4 id="using-the-colors">Using the colors</h4>
-<pre><code class="lang-css">@<span class="pl-k">import</span> <span class="pl-s">&apos;node_modules/blackstone-ui/helpers/colors.less&apos;</span>;
+<pre><code class="lang-css"><span class="pl-k">@import</span> <span class="pl-s">&apos;node_modules/blackstone-ui/helpers/colors.less&apos;</span>;
 
 <span class="hljs-selector-class">.my-div</span> {
-    <span class="pl-e">background</span>: <span class="pl-c1">var</span>(--gray-blue-50);
+    <span class="pl-e">background</span>: <span class="pl-c1">var</span>(--gray-blue-<span class="hljs-number">50</span>);
 }
 
 <span class="hljs-selector-tag">button</span> {
@@ -86,7 +90,7 @@
 </code></pre>
 <h4 id="changing-default-colors">Changing default colors</h4>
 <pre><code class="lang-css"><span class="hljs-selector-pseudo">:root</span> {
-    <span class="pl-e">--color-primary</span>: <span class="pl-c1">var</span>(--teal-400);
+    <span class="pl-e">--color-primary</span>: <span class="pl-c1">var</span>(--teal-<span class="hljs-number">400</span>);
     <span class="pl-e">--color-secondary</span>: <span class="pl-c1">var</span>(--amber);
     <span class="pl-e">--black</span>: <span class="hljs-number">#222</span>;
 }

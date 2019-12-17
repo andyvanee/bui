@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=23936738">
+    <link rel="stylesheet" href="../../bui.css?t=2cc14b54">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=95286d6a"></script>
+    <script src="../../bui.js?t=b728ab77"></script>
     <title>Popover - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -38,11 +38,15 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../../presenters/panel/index.html">Panel</a>
                 </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersnotif" href="../../presenters/notif/index.html">Notif</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title -active link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
                   <ul class="headings heading-list">
                     <li class="heading-item -depth-2"><a class="hlink link-rendering-views" href="#rendering-views">Rendering Views</a>
                       <ul class="heading-list -depth-2">
                         <li class="heading-item -depth-3"><a class="hlink link-default-opts" href="#default-opts">Default Opts</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-target" href="#target">Target</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-options" href="#options">Options</a>
                         </li>
@@ -51,6 +55,8 @@
                   </ul>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../../presenters/tabs/index.html">Tabs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersselection" href="../../presenters/selection/index.html">Selection</a>
                 </li>
               </ul>
             </li>
@@ -99,10 +105,14 @@ popover to display your view.</p>
 	<span class="hljs-attr">closeOnHide</span>: <span class="pl-c1">true</span>,
 	<span class="hljs-attr">maxHeight</span>: <span class="pl-s">&apos;auto&apos;</span>,
 	<span class="hljs-attr">maxHeightThreshold</span>: <span class="hljs-number">400</span>,
+	<span class="hljs-attr">overflowBoundry</span>: <span class="pl-s">&apos;scrollParent&apos;</span>,
 	<span class="hljs-attr">onClose</span>: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{},
 	<span class="hljs-attr">onKeydown</span>: <span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{}
 }
 </code></pre>
+<h3 id="target">Target</h3>
+<p>The target can be an element or a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent">MouseEvent</a>.
+If the target is a mouse event, the dropdown will appear where the mouse is placed.</p>
 <h3 id="options">Options</h3>
 <p><code>maxHeight</code> - (string) can be pixels, percent, or <code>vh</code></p>
 <p><code>overflowBoundry</code> - &#x2018;scrollParent&#x2019;, &#x2018;window&#x2019;, or an element</p>
@@ -112,7 +122,7 @@ popover to display your view.</p>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../../presenters/panel/index.html"><span class="title">Panel</span></a></div>
+          <div class="left"><a href="../../presenters/notif/index.html"><span class="title">Notif</span></a></div>
           <div class="right"><a href="../../presenters/tabs/index.html"><span class="label">Next: </span><span class="title">Tabs</span></a></div>
         </div>
       </div>

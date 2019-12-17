@@ -466,6 +466,68 @@
             ]
           },
           {
+            "title": "Notif",
+            "source": "presenters/notif/README.md",
+            "url": "presenters/notif/index.html",
+            "slug": "presentersnotif",
+            "headings": [
+              {
+                "title": "Options",
+                "depth": 2,
+                "id": "options",
+                "headings": [
+                  {
+                    "title": "nid",
+                    "depth": 3,
+                    "id": "nid"
+                  },
+                  {
+                    "title": "type",
+                    "depth": 3,
+                    "id": "type"
+                  },
+                  {
+                    "title": "animation",
+                    "depth": 3,
+                    "id": "animation"
+                  },
+                  {
+                    "title": "animationForReplace",
+                    "depth": 3,
+                    "id": "animationforreplace"
+                  },
+                  {
+                    "title": "anchor",
+                    "depth": 3,
+                    "id": "anchor"
+                  },
+                  {
+                    "title": "controller",
+                    "depth": 3,
+                    "id": "controller"
+                  }
+                ]
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods",
+                "headings": [
+                  {
+                    "title": "close",
+                    "depth": 3,
+                    "id": "close"
+                  }
+                ]
+              },
+              {
+                "title": "Tips & Principles",
+                "depth": 2,
+                "id": "tips-and-principles"
+              }
+            ]
+          },
+          {
             "title": "Popover",
             "source": "presenters/popover/README.md",
             "url": "presenters/popover/index.html",
@@ -480,6 +542,11 @@
                     "title": "Default Opts",
                     "depth": 3,
                     "id": "default-opts"
+                  },
+                  {
+                    "title": "Target",
+                    "depth": 3,
+                    "id": "target"
                   },
                   {
                     "title": "Options",
@@ -530,6 +597,105 @@
                 "title": "Custom Tab Bar",
                 "depth": 2,
                 "id": "custom-tab-bar"
+              }
+            ]
+          },
+          {
+            "title": "Selection",
+            "source": "presenters/selection/README.md",
+            "url": "presenters/selection/index.html",
+            "slug": "presentersselection",
+            "headings": [
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods",
+                "headings": [
+                  {
+                    "title": ".begin()",
+                    "depth": 3,
+                    "id": ".begin()"
+                  },
+                  {
+                    "title": ".end()",
+                    "depth": 3,
+                    "id": ".end()"
+                  },
+                  {
+                    "title": ".on(event, callback)",
+                    "depth": 3,
+                    "id": ".on(event-callback)"
+                  }
+                ]
+              },
+              {
+                "title": "Options",
+                "depth": 2,
+                "id": "options",
+                "headings": [
+                  {
+                    "title": "listElement",
+                    "depth": 3,
+                    "id": "listelement"
+                  },
+                  {
+                    "title": "itemTagName",
+                    "depth": 3,
+                    "id": "itemtagname"
+                  },
+                  {
+                    "title": "selectedAttr",
+                    "depth": 3,
+                    "id": "selectedattr"
+                  },
+                  {
+                    "title": "endWhenNoResults",
+                    "depth": 3,
+                    "id": "endwhennoresults"
+                  },
+                  {
+                    "title": "endOnEsc",
+                    "depth": 3,
+                    "id": "endonesc"
+                  },
+                  {
+                    "title": "autoScrollThreshold",
+                    "depth": 3,
+                    "id": "autoscrollthreshold"
+                  },
+                  {
+                    "title": "autoScrollAcceleration",
+                    "depth": 3,
+                    "id": "autoscrollacceleration"
+                  }
+                ]
+              },
+              {
+                "title": "Events",
+                "depth": 2,
+                "id": "events",
+                "headings": [
+                  {
+                    "title": "begin",
+                    "depth": 3,
+                    "id": "begin"
+                  },
+                  {
+                    "title": "end",
+                    "depth": 3,
+                    "id": "end"
+                  },
+                  {
+                    "title": "change",
+                    "depth": 3,
+                    "id": "change"
+                  }
+                ]
+              },
+              {
+                "title": "TODO",
+                "depth": 2,
+                "id": "todo"
               }
             ]
           }
@@ -608,6 +774,11 @@
                 "title": "Background Resume",
                 "depth": 2,
                 "id": "background-resume"
+              },
+              {
+                "title": "Touch Events",
+                "depth": 2,
+                "id": "touch-events"
               }
             ]
           },
@@ -1272,6 +1443,68 @@
         }
       ]
     },
+    "presenters/notif/index.html": {
+      "source": "presenters/notif/README.md",
+      "title": "Notif - Blackstone UI",
+      "pageTitle": "Notif",
+      "slug": "presentersnotif",
+      "headings": [
+        {
+          "title": "Options",
+          "depth": 2,
+          "id": "options",
+          "headings": [
+            {
+              "title": "nid",
+              "depth": 3,
+              "id": "nid"
+            },
+            {
+              "title": "type",
+              "depth": 3,
+              "id": "type"
+            },
+            {
+              "title": "animation",
+              "depth": 3,
+              "id": "animation"
+            },
+            {
+              "title": "animationForReplace",
+              "depth": 3,
+              "id": "animationforreplace"
+            },
+            {
+              "title": "anchor",
+              "depth": 3,
+              "id": "anchor"
+            },
+            {
+              "title": "controller",
+              "depth": 3,
+              "id": "controller"
+            }
+          ]
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods",
+          "headings": [
+            {
+              "title": "close",
+              "depth": 3,
+              "id": "close"
+            }
+          ]
+        },
+        {
+          "title": "Tips & Principles",
+          "depth": 2,
+          "id": "tips-and-principles"
+        }
+      ]
+    },
     "presenters/popover/index.html": {
       "source": "presenters/popover/README.md",
       "title": "Popover - Blackstone UI",
@@ -1287,6 +1520,11 @@
               "title": "Default Opts",
               "depth": 3,
               "id": "default-opts"
+            },
+            {
+              "title": "Target",
+              "depth": 3,
+              "id": "target"
             },
             {
               "title": "Options",
@@ -1337,6 +1575,105 @@
           "title": "Custom Tab Bar",
           "depth": 2,
           "id": "custom-tab-bar"
+        }
+      ]
+    },
+    "presenters/selection/index.html": {
+      "source": "presenters/selection/README.md",
+      "title": "Selection - Blackstone UI",
+      "pageTitle": "Selection",
+      "slug": "presentersselection",
+      "headings": [
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods",
+          "headings": [
+            {
+              "title": ".begin()",
+              "depth": 3,
+              "id": ".begin()"
+            },
+            {
+              "title": ".end()",
+              "depth": 3,
+              "id": ".end()"
+            },
+            {
+              "title": ".on(event, callback)",
+              "depth": 3,
+              "id": ".on(event-callback)"
+            }
+          ]
+        },
+        {
+          "title": "Options",
+          "depth": 2,
+          "id": "options",
+          "headings": [
+            {
+              "title": "listElement",
+              "depth": 3,
+              "id": "listelement"
+            },
+            {
+              "title": "itemTagName",
+              "depth": 3,
+              "id": "itemtagname"
+            },
+            {
+              "title": "selectedAttr",
+              "depth": 3,
+              "id": "selectedattr"
+            },
+            {
+              "title": "endWhenNoResults",
+              "depth": 3,
+              "id": "endwhennoresults"
+            },
+            {
+              "title": "endOnEsc",
+              "depth": 3,
+              "id": "endonesc"
+            },
+            {
+              "title": "autoScrollThreshold",
+              "depth": 3,
+              "id": "autoscrollthreshold"
+            },
+            {
+              "title": "autoScrollAcceleration",
+              "depth": 3,
+              "id": "autoscrollacceleration"
+            }
+          ]
+        },
+        {
+          "title": "Events",
+          "depth": 2,
+          "id": "events",
+          "headings": [
+            {
+              "title": "begin",
+              "depth": 3,
+              "id": "begin"
+            },
+            {
+              "title": "end",
+              "depth": 3,
+              "id": "end"
+            },
+            {
+              "title": "change",
+              "depth": 3,
+              "id": "change"
+            }
+          ]
+        },
+        {
+          "title": "TODO",
+          "depth": 2,
+          "id": "todo"
         }
       ]
     },
@@ -1410,6 +1747,11 @@
           "title": "Background Resume",
           "depth": 2,
           "id": "background-resume"
+        },
+        {
+          "title": "Touch Events",
+          "depth": 2,
+          "id": "touch-events"
         }
       ]
     },
@@ -1619,8 +1961,10 @@
     "presenters/list/README.md": "presenters/list/index.html",
     "presenters/menu/README.md": "presenters/menu/index.html",
     "presenters/panel/README.md": "presenters/panel/index.html",
+    "presenters/notif/README.md": "presenters/notif/index.html",
     "presenters/popover/README.md": "presenters/popover/index.html",
     "presenters/tabs/README.md": "presenters/tabs/index.html",
+    "presenters/selection/README.md": "presenters/selection/index.html",
     "util/README.md": "util/index.html",
     "helpers/README.md": "helpers/index.html",
     "helpers/backbone/relations/README.md": "helpers/backbone/relations/index.html",
@@ -1637,6 +1981,7 @@
     "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
     "docs/icons.svg.b0516ff5.html": "icons.svg.b0516ff5.html",
     "docs/icons.svg.b9327995.html": "icons.svg.b9327995.html",
+    "docs/icons.svg.bc907dee.html": "icons.svg.bc907dee.html",
     "docs/icons.svg.c6868b42.html": "icons.svg.c6868b42.html",
     "docs/icons.svg.f5352611.html": "icons.svg.f5352611.html",
     "docs/style.css": "style.css"
