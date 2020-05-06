@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=2cc14b54">
+    <link rel="stylesheet" href="../../bui.css?t=d210987c">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=b728ab77"></script>
+    <script src="../../bui.js?t=07312548"></script>
     <title>Menu - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -18,16 +18,12 @@
           <ul class="submenu">
             <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
             </li>
-            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+            <li class="menu-item -level-1 -parent"><span class="title">Components</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
-              <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
@@ -62,10 +58,16 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersselection" href="../../presenters/selection/index.html">Selection</a>
                 </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmentions" href="../../presenters/mentions/index.html">Mentions</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterscal" href="../../presenters/cal/index.html">Calendar</a>
+                </li>
               </ul>
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
                 </li>
                 <li class="menu-item -level-2 -parent"><a class="link title  link-helpers" href="../../helpers/index.html">Helpers</a>
@@ -74,11 +76,17 @@
                     </li>
                   </ul>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
-                </li>
                 <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-realtime" href="../../realtime/index.html">Realtime</a>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models (WIP)</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Server</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-server" href="../../server/index.html">Overview</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-serverrealtime" href="../../server/realtime/index.html">Realtime</a>
                 </li>
               </ul>
             </li>
@@ -143,6 +151,7 @@ selections, keyboard navigation, search bar, and loadings results via ajax.</p>
 	<span class="hljs-attr">multiple</span>: <span class="pl-c1">false</span>, <span class="pl-c">// more than one value selectable?</span>
 	<span class="hljs-attr">search</span>: <span class="hljs-number">20</span>, <span class="pl-c">// true (always show) or number of results for it to show</span>
 	<span class="hljs-attr">minW</span>: <span class="pl-c1">false</span>,
+    <span class="hljs-attr">maxW</span>: <span class="pl-c1">false</span>,
 	<span class="hljs-attr">width</span>: <span class="pl-c1">null</span>,
     <span class="hljs-attr">autoSelectFirst</span>: <span class="pl-c1">false</span>,
 	<span class="hljs-attr">jumpNav</span>: <span class="pl-c1">false</span>, <span class="pl-c">// true (always show) or number of results for it to show</span>
@@ -181,6 +190,7 @@ searching that reduces the results, you can opt to show a search bar.</p>
 <p>After creating a menu, you need to render it some where.
 You can use the built-in presenters to accomplish this.</p>
 <p><code>menu.modal(opts)</code></p>
+<p><code>menu.actionsheet(opts)</code></p>
 <p><code>menu.popover(target, opts)</code></p>
 <h4 id="promise-based">Promise based</h4>
 <p>The presenters return a promise which lets you do this:</p>

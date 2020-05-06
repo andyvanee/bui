@@ -5190,96 +5190,6 @@ class PaperElement extends _litElement.LitElement {
 
 exports.PaperElement = PaperElement;
 customElements.define('b-paper', PaperElement);
-},{"lit-element":"+bhx"}],"yukA":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-customElements.define('b-text', class extends _litElement.LitElement {
-  static get styles() {
-    return _litElement.css`
-        :host {
-            display: inline-block;
-        }
-
-        :host([block]) {
-            display: block;
-        }
-
-        :host([hidden]) {
-            display: none;
-        }
-
-        :host([clip]) {
-            max-width: 100%;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            vertical-align: text-bottom;
-        }
-
-        :host([bold]) { font-weight: bold; }
-        :host([italic]) { font-style: italic; }
-
-        :host([capitalize]) { text-transform: capitalize; }
-        :host([ucase]) { text-transform: uppercase; }
-        :host([lcase]) { text-transform: lowercase }
-
-        :host([align="left"]) { text-align: left; }
-        :host([align="right"]) { text-align: right; }
-        :host([align="center"]) { text-align: center; }
-        :host([align="justify"]) { text-align: justify; }
-
-        :host([xs]) { font-size: .65em; line-height: 1.1em; }
-        :host([sm]) { font-size: .8em; line-height: 1.1em; }
-        :host([md]) { font-size: 1.2em; line-height: 1.1em; }
-        :host([lg]) { font-size: 1.4em; line-height: 1.1em; }
-        :host([xl]) { font-size: 1.7em; line-height: 1.1em; }
-        :host([xxl]) { font-size: 2em; line-height: 1.1em; }
-
-        :host([tone="muted"]), :host([muted]) { color: rgba(var(--theme-rgb, 0,0,0),.4); }
-        :host([tone="critical"]) { color: var(--b-text-tone-critical, var(--red-A400, red)); }
-        :host([tone="warning"]) { color: var(--b-text-tone-warning, var(--orange, orange)); }
-        :host([tone="info"]) { color: var(--b-text-tone-info, var(--blue, blue)); }
-
-        @media (hover){
-            :host([link]:hover) {
-                color: var(--b-text-link-color, var(--theme, var(--blue, blue)));
-            }
-        }
-
-        :host([sup]) {
-            vertical-align: super;
-            margin-top: -1em;
-        }
-
-        :host([sub]) {
-            vertical-align: sub;
-            margin-bottom: -1em;
-        }
-    `;
-  }
-
-  firstUpdated() {
-    if (this.hasAttribute('clip') && !this.hasAttribute('title')) this.title = this.innerText;
-  }
-
-  render() {
-    return _litElement.html`
-        <slot></slot>
-    `;
-  }
-
-});
-
-var _default = customElements.get('b-text');
-
-exports.default = _default;
 },{"lit-element":"+bhx"}],"BALQ":[function(require,module,exports) {
 "use strict";
 
@@ -5350,134 +5260,6 @@ customElements.define('b-grid', class extends _litElement.LitElement {
 });
 
 var _default = customElements.get('b-grid');
-
-exports.default = _default;
-},{"lit-element":"+bhx"}],"inC5":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-/*
-    TODO:
-    - add sliding animation?
-*/
-customElements.define('b-carousel', class extends _litElement.LitElement {
-  static get properties() {
-    return {
-      views: {
-        type: Array
-      }
-    };
-  }
-
-  constructor() {
-    super();
-    this.views = [];
-    this.active = 0;
-  }
-
-  static get styles() {
-    return _litElement.css`
-        :host {
-            display: block;
-            position:relative;
-            --dotSize: 14px;
-            --dotPadding: 4px;
-            --dotMargin: 5px;
-            --dotExpand: scale(1.4);
-        }
-
-        [hidden] {
-            display: none;
-        }
-
-        nav {
-            display: flex;
-            margin: 1em 0;
-            justify-content: center;
-            align-items: center;
-        }
-
-        nav > div {
-            width: var(--dotSize);
-            height: var(--dotSize);
-            margin: var(--dotMargin);
-            padding: var(--dotPadding);
-            cursor: pointer;
-        }
-
-        nav > div > div {
-            height: 100%;
-            width: 100%;
-            border-radius: 20px;
-            background: #ccc;
-            transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-        }
-
-        nav > div:hover > div {
-            transform: var(--dotExpand);
-        }
-
-        nav > div[active] > div {
-            background: #2196F3;
-        }
-        
-        @media print {
-            nav {
-                display: none;
-            }
-
-            ::slotted(*) {
-                display: block !important
-            }
-        }
-    `;
-  }
-
-  render() {
-    return _litElement.html`
-        <slot></slot>
-        <nav ?hidden=${this.views.length <= 1}>${this.views.map((v, i) => _litElement.html`
-            <div i=${i} ?active=${i == this.active} @click=${this.navTo}>
-                <div></div>
-            </div>
-        `)}</nav>
-    `;
-  }
-
-  get active() {
-    return this.__active;
-  }
-
-  set active(val) {
-    this.__active = val;
-    this.views.forEach(v => v.hidden = true);
-    if (!this.views[val]) return;
-    this.views[val].hidden = false;
-    this.update();
-  }
-
-  navTo(e) {
-    let i = e.currentTarget.getAttribute('i');
-    this.active = i;
-  }
-
-  firstUpdated() {
-    let slot = this.shadowRoot.querySelector('slot');
-    slot.addEventListener('slotchange', e => {
-      this.views = slot.assignedElements();
-      this.active = 0;
-    });
-  }
-
-});
-
-var _default = customElements.get('b-carousel');
 
 exports.default = _default;
 },{"lit-element":"+bhx"}],"a2/B":[function(require,module,exports) {
@@ -10652,158 +10434,6 @@ customElements.define('b-ribbon', class extends _litElement.LitElement {
 var _default = customElements.get('b-ribbon');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"IOAQ":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-customElements.define('b-hr', class extends _litElement.LitElement {
-  static get styles() {
-    return _litElement.css`
-        :host {
-            --bgd: var(--b-hr-bgd, rgba(0,0,0,.1));
-
-            display: block;
-            margin: 1em auto;
-            height: 1px;
-            width: 100%;
-            background: var(--bgd);
-            
-            /* full width */
-            grid-column: 1/-1;
-        }
-
-        :host([short]) {
-            width: 180px;
-            max-width: 100%;
-        }
-
-        :host([vert]) {
-            display: inline-block;
-            vertical-align: middle;
-            min-height: 1em;
-            height: auto;
-            width: 1px;
-            margin: 0 .5em;
-            align-self: stretch;
-        }
-    `;
-  } // dont support slotted content yet
-
-
-  render() {
-    return _litElement.html``;
-  }
-
-});
-
-var _default = customElements.get('b-hr');
-
-exports.default = _default;
-},{"lit-element":"+bhx"}],"VANQ":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-/*
-    DEPRECATED
-*/
-customElements.define('b-sub', class extends _litElement.LitElement {
-  static get styles() {
-    return _litElement.css`
-        :host {
-            display: inline;
-            position:relative;
-            color: var(--b-sub-color, rgba(0,0,0,.4));
-            font-size: .8em;
-            font-weight: normal;
-        }
-
-        :host([ondark]) {
-            color: rgba(255,255,255,.4);
-        }
-    `;
-  }
-
-  render() {
-    return _litElement.html`
-        <slot></slot>
-    `;
-  }
-
-});
-
-var _default = customElements.get('b-sub');
-
-exports.default = _default;
-},{"lit-element":"+bhx"}],"29Vf":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-customElements.define('b-ts', class extends _litElement.LitElement {
-  static get styles() {
-    return _litElement.css`
-        :host {
-            display: inline-block;
-            white-space: nowrap;
-        }
-    `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this._updateInterval = setInterval(this.update.bind(this), 60 * 1000);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    clearInterval(this._updateInterval);
-  }
-
-  get date() {
-    return this.__date;
-  }
-
-  set date(date) {
-    this.__date = date;
-    if (date) this.title = this.date.format('l');
-    this.requestUpdate();
-  }
-
-  get displayTime() {
-    if (!this.date) return ''; // TODO: support different formats?
-    // TODO: this is a moment.js format...what if moment not used?
-
-    return this.date.fromNow();
-  }
-
-  render() {
-    return _litElement.html`
-        ${this.displayTime}
-    `;
-  }
-
-});
-
-var _default = customElements.get('b-ts');
-
-exports.default = _default;
 },{"lit-element":"+bhx"}],"Da++":[function(require,module,exports) {
 "use strict";
 
@@ -11005,7 +10635,159 @@ customElements.define('b-avatar', AvatarElement);
 var _default = customElements.get('b-avatar');
 
 exports.default = _default;
-},{}],"v5wz":[function(require,module,exports) {
+},{}],"IOAQ":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+customElements.define('b-hr', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            --bgd: var(--b-hr-bgd, rgba(0,0,0,.1));
+
+            display: block;
+            margin: 1em auto;
+            height: 1px;
+            width: 100%;
+            background: var(--bgd);
+            
+            /* full width */
+            grid-column: 1/-1;
+        }
+
+        :host([short]) {
+            width: 180px;
+            max-width: 100%;
+        }
+
+        :host([vert]) {
+            display: inline-block;
+            vertical-align: middle;
+            min-height: 1em;
+            height: auto;
+            width: 1px;
+            margin: 0 .5em;
+            align-self: stretch;
+        }
+    `;
+  } // dont support slotted content yet
+
+
+  render() {
+    return _litElement.html``;
+  }
+
+});
+
+var _default = customElements.get('b-hr');
+
+exports.default = _default;
+},{"lit-element":"+bhx"}],"VANQ":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+/*
+    DEPRECATED
+*/
+customElements.define('b-sub', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: inline;
+            position:relative;
+            color: var(--b-sub-color, rgba(0,0,0,.4));
+            font-size: .8em;
+            font-weight: normal;
+        }
+
+        :host([ondark]) {
+            color: rgba(255,255,255,.4);
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <slot></slot>
+    `;
+  }
+
+});
+
+var _default = customElements.get('b-sub');
+
+exports.default = _default;
+},{"lit-element":"+bhx"}],"29Vf":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+customElements.define('b-ts', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: inline-block;
+            white-space: nowrap;
+        }
+    `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._updateInterval = setInterval(this.update.bind(this), 60 * 1000);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearInterval(this._updateInterval);
+  }
+
+  get date() {
+    return this.__date;
+  }
+
+  set date(date) {
+    this.__date = date;
+    if (date) this.title = this.date.format('l');
+    this.requestUpdate();
+  }
+
+  get displayTime() {
+    if (!this.date) return ''; // TODO: support different formats?
+    // TODO: this is a moment.js format...what if moment not used?
+
+    return this.date.fromNow();
+  }
+
+  render() {
+    return _litElement.html`
+        ${this.displayTime}
+    `;
+  }
+
+});
+
+var _default = customElements.get('b-ts');
+
+exports.default = _default;
+},{"lit-element":"+bhx"}],"v5wz":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11999,7 +11781,1473 @@ customElements.define('b-audio', class extends _litElement.LitElement {
 var _default = customElements.get('b-audio');
 
 exports.default = _default;
-},{"lit-element":"+bhx","./icon":"ncPe","../presenters/form-control/controls/range-slider":"ZCfn","moment":"a2/B","../util/store":"2z4L"}],"/jTP":[function(require,module,exports) {
+},{"lit-element":"+bhx","./icon":"ncPe","../presenters/form-control/controls/range-slider":"ZCfn","moment":"a2/B","../util/store":"2z4L"}],"inC5":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+/*
+    TODO:
+    - add sliding animation?
+*/
+customElements.define('b-carousel', class extends _litElement.LitElement {
+  static get properties() {
+    return {
+      views: {
+        type: Array
+      }
+    };
+  }
+
+  constructor() {
+    super();
+    this.views = [];
+    this.active = 0;
+  }
+
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            position:relative;
+            --dotSize: 14px;
+            --dotPadding: 4px;
+            --dotMargin: 5px;
+            --dotExpand: scale(1.4);
+        }
+
+        [hidden] {
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            margin: 1em 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav > div {
+            width: var(--dotSize);
+            height: var(--dotSize);
+            margin: var(--dotMargin);
+            padding: var(--dotPadding);
+            cursor: pointer;
+        }
+
+        nav > div > div {
+            height: 100%;
+            width: 100%;
+            border-radius: 20px;
+            background: #ccc;
+            transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        }
+
+        nav > div:hover > div {
+            transform: var(--dotExpand);
+        }
+
+        nav > div[active] > div {
+            background: #2196F3;
+        }
+        
+        @media print {
+            nav {
+                display: none;
+            }
+
+            ::slotted(*) {
+                display: block !important
+            }
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <slot></slot>
+        <nav ?hidden=${this.views.length <= 1}>${this.views.map((v, i) => _litElement.html`
+            <div i=${i} ?active=${i == this.active} @click=${this.navTo}>
+                <div></div>
+            </div>
+        `)}</nav>
+    `;
+  }
+
+  get active() {
+    return this.__active;
+  }
+
+  set active(val) {
+    this.__active = val;
+    this.views.forEach(v => v.hidden = true);
+    if (!this.views[val]) return;
+    this.views[val].hidden = false;
+    this.update();
+  }
+
+  navTo(e) {
+    let i = e.currentTarget.getAttribute('i');
+    this.active = i;
+  }
+
+  firstUpdated() {
+    let slot = this.shadowRoot.querySelector('slot');
+    slot.addEventListener('slotchange', e => {
+      this.views = slot.assignedElements();
+      this.active = 0;
+    });
+  }
+
+});
+
+var _default = customElements.get('b-carousel');
+
+exports.default = _default;
+},{"lit-element":"+bhx"}],"xCna":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+customElements.define('b-timeline-horz', class extends _litElement.LitElement {
+  static get listeners() {
+    return {
+      model: {
+        'change': 'requestUpdate'
+      }
+    };
+  }
+
+  static get styles() {
+    return _litElement.css`
+        :host {
+            position:relative;
+            display: grid;
+            grid-template-columns: 4em max-content 1fr;
+            gap: 1em;
+        }
+
+        .date {
+            text-align: right;
+            line-height: 1em;
+            margin-top: .2em;
+        }
+
+        .date small {
+            opacity: .5;
+        }
+
+        :host([late]) .date {
+            color: var(--red);
+        }
+
+        .line {
+            display: flex;
+            justify-content: stretch;
+            flex-direction: column;
+        }
+
+        .line b-hr {
+            margin: 0 auto;
+            flex: 1;
+            --bgd: var(--theme-bgd-accent, #e5e5e5);
+            width: 3px;
+            display: var(--b-timeline-line-display, block);
+            /* min-height: 40px; */
+        }
+
+        :host([done]) .line b-hr {
+            --bgd: var(--green);
+            /* --bgd: linear-gradient(to bottom, var(--green) 50%, var(--theme-bgd-accent) 50%); */
+        }
+
+        .bubble {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 1.6em;
+            width: 1.6em;
+            border-radius: 1em;
+            background: var(--b-timeline-bubble-bgd, var(--theme-bgd-accent, #e5e5e5));
+            color: var(--theme-color-accent, #e5e5e5);
+            transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+
+        .bubble b-icon {
+            font-size: 1.6em;
+            color: var(--theme-color);
+        }
+
+        slot[name="bubble"]::slotted(b-icon) {
+            font-size: 1.6em;
+        }
+
+        slot[name="bubble"]::slotted(b-icon[name*="ok"]) {
+            color: var(--green);
+        }
+
+        :host([late]) .bubble {
+            background: none;
+        }
+
+        :host([started]) .bubble b-icon {
+            color: var(--blue);
+        }
+
+        :host([late]) .bubble b-icon {
+            color: var(--red);
+        }
+
+        :host([done]) .bubble b-icon {
+            color: var(--green);
+        }
+
+        .content {
+            padding-bottom: 1.6em;
+        }
+
+        @media (hover) {
+            .bubble:hover {
+                transform: scale(1.25);
+            }
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+         
+        <div class="date">
+            ${this.renderDate()}
+        </div>
+
+        <div class="line">
+            <div class="bubble" @click=${this.onBubbleClick}>
+                ${this.renderBubble()}
+            </div>
+            <b-hr vert></b-hr>
+        </div>
+        
+        <div class="content">
+            ${this.renderContent()}
+        </div>
+    `;
+  }
+
+  renderDate() {
+    return _litElement.html`<slot name="date"></slot>`;
+  }
+
+  renderBubble() {
+    return _litElement.html`<slot name="bubble"></slot>`;
+  }
+
+  renderContent() {
+    return _litElement.html`<slot></slot>`;
+  }
+
+  onBubbleClick() {}
+
+});
+
+var _default = customElements.get('b-timeline-horz');
+
+exports.default = _default;
+},{"lit-element":"+bhx"}],"u6Cc":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.fileIconLabels = exports.fileIconColors = void 0;
+
+var _litElement = require("lit-element");
+
+const fileIconColors = {
+  pdf: _litElement.css`:host([ext="pdf"]){ --bgd: #b40808; }`,
+  js: _litElement.css` :host([ext="js"]){ --bgd: #f8dc3d; --color: #333;}`,
+  json: _litElement.css`:host([ext="json"]){ --bgd: #f8dc3d; --color: #333;}`,
+  video: _litElement.css`:host([ext="mp4"]){ --bgd: var(--red);}`,
+  html: _litElement.css`:host([ext="html"]){ --bgd: #e54c21}`,
+  xml: _litElement.css`:host([ext="xml"]){ --bgd: #f26524}`,
+  onix: _litElement.css`:host([ext="onix"]){ --bgd: #626a7f;}`,
+  zip: _litElement.css`:host([ext="zip"]){ --bgd: var(--gray-600);}`,
+  jpg: _litElement.css`:host([ext="jpg"]){ --bgd: var(--blue); }`,
+  jpeg: _litElement.css`:host([ext="jpeg"]){ --bgd: var(--blue); }`,
+  png: _litElement.css`:host([ext="png"]){ --bgd: var(--blue); }`,
+  gif: _litElement.css`:host([ext="gif"]){ --bgd: var(--blue); }`,
+  wav: _litElement.css`:host([ext="wav"]){ --bgd: var(--deep-purple); }`,
+  mp3: _litElement.css`:host([ext="mp3"]){ --bgd: var(--deep-purple); }`,
+  flac: _litElement.css`:host([ext="flac"]){ --bgd: var(--deep-purple); }`,
+  m4a: _litElement.css`:host([ext="m4a"]){ --bgd: var(--deep-purple); }`,
+  // Microsoft
+  word: _litElement.css`
+        :host([ext="doc"]),
+        :host([ext="docx"]) {
+            --bgd: #0f52b7;
+        }
+    `,
+  excel: _litElement.css`
+        :host([ext="xls"]),
+        :host([ext="xlsx"]),
+        :host([ext="xlsm"]) {
+            --bgd: #0a8144;
+        }
+    `,
+  // Adobe
+  psd: _litElement.css`
+        :host([ext="psd"]) {
+            --bgd: #011c24;
+            --color: #00c8ff;
+            --dog-ear-bgd: var(--color);
+            --border-color: var(--color);
+        }
+    `,
+  indd: _litElement.css`
+        :host([ext="indd"]),
+        :host([ext="idml"]) {
+            --bgd: #2a020b;
+            --color: #ff3c95;
+            --dog-ear-bgd: var(--color);
+            --border-color: var(--color);
+        }
+    `,
+  icml: _litElement.css`
+        :host([ext="icml"]) {
+            --bgd: #2a0c2a;
+            --color: #eb72eb;
+            --dog-ear-bgd: var(--color);
+            --border-color: var(--color);
+        }
+    `,
+  ai: _litElement.css`
+        :host([ext="ai"]),
+        :host([ext="ait"]) {
+            --bgd: #251300;
+            --color: #fe7c00;
+            --dog-ear-bgd: var(--color);
+            --border-color: var(--color);
+        }
+    `,
+  pdf: _litElement.css`
+        :host([ext="pdf"]) {
+            --bgd: #2f1208;
+            --color: #fff;
+            --dog-ear-bgd: #fd3406;
+            --border-color: #fd3406;
+        }
+    `
+};
+exports.fileIconColors = fileIconColors;
+const fileIconLabels = {
+  'json': _litElement.html`<span>{ }</span>`,
+  'mp4': _litElement.html`<b-icon name="videocam"></b-icon>`,
+  'mp3': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
+  'wav': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
+  'flac': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
+  'html': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
+  'xml': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
+  'onix': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
+  'dpl': _litElement.html`<b-icon name="cd"></b-icon>`,
+  'iso': _litElement.html`<b-icon name="cd"></b-icon>`,
+  'zip': _litElement.html`<b-icon name="file-archive"></b-icon>`,
+  'epub': ext => _litElement.html`<b-icon name="book-open"></b-icon><sub>${ext}</sub>`
+};
+exports.fileIconLabels = fileIconLabels;
+
+function _default(customColors = {}, customLabels = {}) {
+  Object.assign(fileIconColors, customColors);
+  Object.assign(fileIconLabels, customLabels);
+  customElements.define('b-file-icon', class extends _litElement.LitElement {
+    static get properties() {
+      return {
+        ext: {
+          type: String,
+          reflect: true
+        }
+      };
+    }
+
+    static get styles() {
+      return [_litElement.css`
+        :host {
+            display: inline-block;
+            position:relative;
+            --color: var(--b-file-icon-color-default, #fff);
+            --bgd: var(--b-file-icon-bgd-default, #aaa);
+            --size: var(--b-file-icon-size, 2em);
+            --radius: var(--b-file-icon-radius, 0px);
+            --border-color: transparent;
+
+            width: calc(.8 * var(--size));
+            height: var(--size);
+            text-transform: uppercase;
+        }
+
+        main {
+            padding: 20%;
+            padding-top: 30%; /* appears more center */
+            box-sizing: border-box;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: var(--bgd);
+            border-radius: var(--radius);
+            border-bottom: calc(var(--size) * .02) solid rgba(0, 0, 0, 0.4);
+            -webkit-clip-path: polygon(0 0, 66% 0, 100% 26.4%, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 66% 0, 100% 26.4%, 100% 100%, 0 100%);
+
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--color);
+            box-shadow: 0 0 0 calc(.05 * var(--size)) var(--border-color) inset;
+        }
+
+        .dogear {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--dog-ear-bgd, rgba(0,0,0,.4));
+            border-radius: 0 0 0 var(--radius);
+
+            height: calc(.8 * var(--size) * .34);
+            width: calc(.8 * var(--size) * .34);
+            -webkit-clip-path: polygon(0 0, 0% 100%, 100% 100%);
+            clip-path: polygon(0 0, 0% 100%, 100% 100%);
+        }
+
+        label,
+        ::slotted(*) {
+            font-size: calc(var(--size) * .25);
+            line-height: .5em;
+        }
+
+        label > span,
+        label > b-icon {
+            font-size: 1.4em;
+        }
+
+        label sub {
+            font-size: .6em;
+            vertical-align: baseline;
+            line-height: 0em;
+        }
+
+        ::slotted(b-icon) {
+            /* font-size: 1em; */
+        }
+    `].concat(Object.values(fileIconColors));
+    }
+
+    render() {
+      return _litElement.html`
+        <main>
+            <div class="dogear"></div>
+            <slot name="label">
+                <label>${this.label}</label>
+            </slot>
+        </main>
+        <slot></slot>
+    `;
+    }
+
+    get label() {
+      let label = fileIconLabels[this.ext];
+      if (label) return typeof label == 'function' ? label(this.ext) : label;
+      return this.ext;
+    }
+
+  });
+}
+},{"lit-element":"+bhx"}],"AZEX":[function(require,module,exports) {
+var define;
+// Generated by CoffeeScript 1.10.0
+var slice = [].slice;
+
+(function (root, factory) {
+  if ('function' === typeof define && define.amd != null) {
+    return define([], factory);
+  } else if (typeof exports !== "undefined" && exports !== null) {
+    return module.exports = factory();
+  } else {
+    return root.UrlPattern = factory();
+  }
+})(this, function () {
+  var P, UrlPattern, astNodeContainsSegmentsForProvidedParams, astNodeToNames, astNodeToRegexString, baseAstNodeToRegexString, concatMap, defaultOptions, escapeForRegex, getParam, keysAndValuesToObject, newParser, regexGroupCount, stringConcatMap, stringify;
+
+  escapeForRegex = function (string) {
+    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  };
+
+  concatMap = function (array, f) {
+    var i, length, results;
+    results = [];
+    i = -1;
+    length = array.length;
+
+    while (++i < length) {
+      results = results.concat(f(array[i]));
+    }
+
+    return results;
+  };
+
+  stringConcatMap = function (array, f) {
+    var i, length, result;
+    result = '';
+    i = -1;
+    length = array.length;
+
+    while (++i < length) {
+      result += f(array[i]);
+    }
+
+    return result;
+  };
+
+  regexGroupCount = function (regex) {
+    return new RegExp(regex.toString() + '|').exec('').length - 1;
+  };
+
+  keysAndValuesToObject = function (keys, values) {
+    var i, key, length, object, value;
+    object = {};
+    i = -1;
+    length = keys.length;
+
+    while (++i < length) {
+      key = keys[i];
+      value = values[i];
+
+      if (value == null) {
+        continue;
+      }
+
+      if (object[key] != null) {
+        if (!Array.isArray(object[key])) {
+          object[key] = [object[key]];
+        }
+
+        object[key].push(value);
+      } else {
+        object[key] = value;
+      }
+    }
+
+    return object;
+  };
+
+  P = {};
+
+  P.Result = function (value, rest) {
+    this.value = value;
+    this.rest = rest;
+  };
+
+  P.Tagged = function (tag, value) {
+    this.tag = tag;
+    this.value = value;
+  };
+
+  P.tag = function (tag, parser) {
+    return function (input) {
+      var result, tagged;
+      result = parser(input);
+
+      if (result == null) {
+        return;
+      }
+
+      tagged = new P.Tagged(tag, result.value);
+      return new P.Result(tagged, result.rest);
+    };
+  };
+
+  P.regex = function (regex) {
+    return function (input) {
+      var matches, result;
+      matches = regex.exec(input);
+
+      if (matches == null) {
+        return;
+      }
+
+      result = matches[0];
+      return new P.Result(result, input.slice(result.length));
+    };
+  };
+
+  P.sequence = function () {
+    var parsers;
+    parsers = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+    return function (input) {
+      var i, length, parser, rest, result, values;
+      i = -1;
+      length = parsers.length;
+      values = [];
+      rest = input;
+
+      while (++i < length) {
+        parser = parsers[i];
+        result = parser(rest);
+
+        if (result == null) {
+          return;
+        }
+
+        values.push(result.value);
+        rest = result.rest;
+      }
+
+      return new P.Result(values, rest);
+    };
+  };
+
+  P.pick = function () {
+    var indexes, parsers;
+    indexes = arguments[0], parsers = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+    return function (input) {
+      var array, result;
+      result = P.sequence.apply(P, parsers)(input);
+
+      if (result == null) {
+        return;
+      }
+
+      array = result.value;
+      result.value = array[indexes];
+      return result;
+    };
+  };
+
+  P.string = function (string) {
+    var length;
+    length = string.length;
+    return function (input) {
+      if (input.slice(0, length) === string) {
+        return new P.Result(string, input.slice(length));
+      }
+    };
+  };
+
+  P.lazy = function (fn) {
+    var cached;
+    cached = null;
+    return function (input) {
+      if (cached == null) {
+        cached = fn();
+      }
+
+      return cached(input);
+    };
+  };
+
+  P.baseMany = function (parser, end, stringResult, atLeastOneResultRequired, input) {
+    var endResult, parserResult, rest, results;
+    rest = input;
+    results = stringResult ? '' : [];
+
+    while (true) {
+      if (end != null) {
+        endResult = end(rest);
+
+        if (endResult != null) {
+          break;
+        }
+      }
+
+      parserResult = parser(rest);
+
+      if (parserResult == null) {
+        break;
+      }
+
+      if (stringResult) {
+        results += parserResult.value;
+      } else {
+        results.push(parserResult.value);
+      }
+
+      rest = parserResult.rest;
+    }
+
+    if (atLeastOneResultRequired && results.length === 0) {
+      return;
+    }
+
+    return new P.Result(results, rest);
+  };
+
+  P.many1 = function (parser) {
+    return function (input) {
+      return P.baseMany(parser, null, false, true, input);
+    };
+  };
+
+  P.concatMany1Till = function (parser, end) {
+    return function (input) {
+      return P.baseMany(parser, end, true, true, input);
+    };
+  };
+
+  P.firstChoice = function () {
+    var parsers;
+    parsers = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+    return function (input) {
+      var i, length, parser, result;
+      i = -1;
+      length = parsers.length;
+
+      while (++i < length) {
+        parser = parsers[i];
+        result = parser(input);
+
+        if (result != null) {
+          return result;
+        }
+      }
+    };
+  };
+
+  newParser = function (options) {
+    var U;
+    U = {};
+    U.wildcard = P.tag('wildcard', P.string(options.wildcardChar));
+    U.optional = P.tag('optional', P.pick(1, P.string(options.optionalSegmentStartChar), P.lazy(function () {
+      return U.pattern;
+    }), P.string(options.optionalSegmentEndChar)));
+    U.name = P.regex(new RegExp("^[" + options.segmentNameCharset + "]+"));
+    U.named = P.tag('named', P.pick(1, P.string(options.segmentNameStartChar), P.lazy(function () {
+      return U.name;
+    })));
+    U.escapedChar = P.pick(1, P.string(options.escapeChar), P.regex(/^./));
+    U["static"] = P.tag('static', P.concatMany1Till(P.firstChoice(P.lazy(function () {
+      return U.escapedChar;
+    }), P.regex(/^./)), P.firstChoice(P.string(options.segmentNameStartChar), P.string(options.optionalSegmentStartChar), P.string(options.optionalSegmentEndChar), U.wildcard)));
+    U.token = P.lazy(function () {
+      return P.firstChoice(U.wildcard, U.optional, U.named, U["static"]);
+    });
+    U.pattern = P.many1(P.lazy(function () {
+      return U.token;
+    }));
+    return U;
+  };
+
+  defaultOptions = {
+    escapeChar: '\\',
+    segmentNameStartChar: ':',
+    segmentValueCharset: 'a-zA-Z0-9-_~ %',
+    segmentNameCharset: 'a-zA-Z0-9',
+    optionalSegmentStartChar: '(',
+    optionalSegmentEndChar: ')',
+    wildcardChar: '*'
+  };
+
+  baseAstNodeToRegexString = function (astNode, segmentValueCharset) {
+    if (Array.isArray(astNode)) {
+      return stringConcatMap(astNode, function (node) {
+        return baseAstNodeToRegexString(node, segmentValueCharset);
+      });
+    }
+
+    switch (astNode.tag) {
+      case 'wildcard':
+        return '(.*?)';
+
+      case 'named':
+        return "([" + segmentValueCharset + "]+)";
+
+      case 'static':
+        return escapeForRegex(astNode.value);
+
+      case 'optional':
+        return '(?:' + baseAstNodeToRegexString(astNode.value, segmentValueCharset) + ')?';
+    }
+  };
+
+  astNodeToRegexString = function (astNode, segmentValueCharset) {
+    if (segmentValueCharset == null) {
+      segmentValueCharset = defaultOptions.segmentValueCharset;
+    }
+
+    return '^' + baseAstNodeToRegexString(astNode, segmentValueCharset) + '$';
+  };
+
+  astNodeToNames = function (astNode) {
+    if (Array.isArray(astNode)) {
+      return concatMap(astNode, astNodeToNames);
+    }
+
+    switch (astNode.tag) {
+      case 'wildcard':
+        return ['_'];
+
+      case 'named':
+        return [astNode.value];
+
+      case 'static':
+        return [];
+
+      case 'optional':
+        return astNodeToNames(astNode.value);
+    }
+  };
+
+  getParam = function (params, key, nextIndexes, sideEffects) {
+    var index, maxIndex, result, value;
+
+    if (sideEffects == null) {
+      sideEffects = false;
+    }
+
+    value = params[key];
+
+    if (value == null) {
+      if (sideEffects) {
+        throw new Error("no values provided for key `" + key + "`");
+      } else {
+        return;
+      }
+    }
+
+    index = nextIndexes[key] || 0;
+    maxIndex = Array.isArray(value) ? value.length - 1 : 0;
+
+    if (index > maxIndex) {
+      if (sideEffects) {
+        throw new Error("too few values provided for key `" + key + "`");
+      } else {
+        return;
+      }
+    }
+
+    result = Array.isArray(value) ? value[index] : value;
+
+    if (sideEffects) {
+      nextIndexes[key] = index + 1;
+    }
+
+    return result;
+  };
+
+  astNodeContainsSegmentsForProvidedParams = function (astNode, params, nextIndexes) {
+    var i, length;
+
+    if (Array.isArray(astNode)) {
+      i = -1;
+      length = astNode.length;
+
+      while (++i < length) {
+        if (astNodeContainsSegmentsForProvidedParams(astNode[i], params, nextIndexes)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    switch (astNode.tag) {
+      case 'wildcard':
+        return getParam(params, '_', nextIndexes, false) != null;
+
+      case 'named':
+        return getParam(params, astNode.value, nextIndexes, false) != null;
+
+      case 'static':
+        return false;
+
+      case 'optional':
+        return astNodeContainsSegmentsForProvidedParams(astNode.value, params, nextIndexes);
+    }
+  };
+
+  stringify = function (astNode, params, nextIndexes) {
+    if (Array.isArray(astNode)) {
+      return stringConcatMap(astNode, function (node) {
+        return stringify(node, params, nextIndexes);
+      });
+    }
+
+    switch (astNode.tag) {
+      case 'wildcard':
+        return getParam(params, '_', nextIndexes, true);
+
+      case 'named':
+        return getParam(params, astNode.value, nextIndexes, true);
+
+      case 'static':
+        return astNode.value;
+
+      case 'optional':
+        if (astNodeContainsSegmentsForProvidedParams(astNode.value, params, nextIndexes)) {
+          return stringify(astNode.value, params, nextIndexes);
+        } else {
+          return '';
+        }
+
+    }
+  };
+
+  UrlPattern = function (arg1, arg2) {
+    var groupCount, options, parsed, parser, withoutWhitespace;
+
+    if (arg1 instanceof UrlPattern) {
+      this.isRegex = arg1.isRegex;
+      this.regex = arg1.regex;
+      this.ast = arg1.ast;
+      this.names = arg1.names;
+      return;
+    }
+
+    this.isRegex = arg1 instanceof RegExp;
+
+    if (!('string' === typeof arg1 || this.isRegex)) {
+      throw new TypeError('argument must be a regex or a string');
+    }
+
+    if (this.isRegex) {
+      this.regex = arg1;
+
+      if (arg2 != null) {
+        if (!Array.isArray(arg2)) {
+          throw new Error('if first argument is a regex the second argument may be an array of group names but you provided something else');
+        }
+
+        groupCount = regexGroupCount(this.regex);
+
+        if (arg2.length !== groupCount) {
+          throw new Error("regex contains " + groupCount + " groups but array of group names contains " + arg2.length);
+        }
+
+        this.names = arg2;
+      }
+
+      return;
+    }
+
+    if (arg1 === '') {
+      throw new Error('argument must not be the empty string');
+    }
+
+    withoutWhitespace = arg1.replace(/\s+/g, '');
+
+    if (withoutWhitespace !== arg1) {
+      throw new Error('argument must not contain whitespace');
+    }
+
+    options = {
+      escapeChar: (arg2 != null ? arg2.escapeChar : void 0) || defaultOptions.escapeChar,
+      segmentNameStartChar: (arg2 != null ? arg2.segmentNameStartChar : void 0) || defaultOptions.segmentNameStartChar,
+      segmentNameCharset: (arg2 != null ? arg2.segmentNameCharset : void 0) || defaultOptions.segmentNameCharset,
+      segmentValueCharset: (arg2 != null ? arg2.segmentValueCharset : void 0) || defaultOptions.segmentValueCharset,
+      optionalSegmentStartChar: (arg2 != null ? arg2.optionalSegmentStartChar : void 0) || defaultOptions.optionalSegmentStartChar,
+      optionalSegmentEndChar: (arg2 != null ? arg2.optionalSegmentEndChar : void 0) || defaultOptions.optionalSegmentEndChar,
+      wildcardChar: (arg2 != null ? arg2.wildcardChar : void 0) || defaultOptions.wildcardChar
+    };
+    parser = newParser(options);
+    parsed = parser.pattern(arg1);
+
+    if (parsed == null) {
+      throw new Error("couldn't parse pattern");
+    }
+
+    if (parsed.rest !== '') {
+      throw new Error("could only partially parse pattern");
+    }
+
+    this.ast = parsed.value;
+    this.regex = new RegExp(astNodeToRegexString(this.ast, options.segmentValueCharset));
+    this.names = astNodeToNames(this.ast);
+  };
+
+  UrlPattern.prototype.match = function (url) {
+    var groups, match;
+    match = this.regex.exec(url);
+
+    if (match == null) {
+      return null;
+    }
+
+    groups = match.slice(1);
+
+    if (this.names) {
+      return keysAndValuesToObject(this.names, groups);
+    } else {
+      return groups;
+    }
+  };
+
+  UrlPattern.prototype.stringify = function (params) {
+    if (params == null) {
+      params = {};
+    }
+
+    if (this.isRegex) {
+      throw new Error("can't stringify patterns generated from a regex");
+    }
+
+    if (params !== Object(params)) {
+      throw new Error("argument must be an object or undefined");
+    }
+
+    return stringify(this.ast, params, {});
+  };
+
+  UrlPattern.escapeForRegex = escapeForRegex;
+  UrlPattern.concatMap = concatMap;
+  UrlPattern.stringConcatMap = stringConcatMap;
+  UrlPattern.regexGroupCount = regexGroupCount;
+  UrlPattern.keysAndValuesToObject = keysAndValuesToObject;
+  UrlPattern.P = P;
+  UrlPattern.newParser = newParser;
+  UrlPattern.defaultOptions = defaultOptions;
+  UrlPattern.astNodeToRegexString = astNodeToRegexString;
+  UrlPattern.astNodeToNames = astNodeToNames;
+  UrlPattern.getParam = getParam;
+  UrlPattern.astNodeContainsSegmentsForProvidedParams = astNodeContainsSegmentsForProvidedParams;
+  UrlPattern.stringify = stringify;
+  return UrlPattern;
+});
+},{}],"TSI8":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.cleansePath = exports.normalizePath = exports.default = void 0;
+const config = {
+  APP_TITLE: document.title,
+  PATH_ROOT: location.pathname,
+  PATH_PREFIX: '',
+  clearInvalidPath: true
+};
+var _default = config; // normalize path (always begin with prefix and path root)
+
+exports.default = _default;
+
+const normalizePath = path => {
+  return path ? config.PATH_ROOT + config.PATH_PREFIX + cleansePath(path) : path;
+};
+
+exports.normalizePath = normalizePath;
+
+const cleansePath = path => {
+  return path.replace(new RegExp(`^(${config.PATH_ROOT})?(${config.PATH_PREFIX})?`), '');
+};
+
+exports.cleansePath = cleansePath;
+},{}],"WZSr":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _urlPattern = _interopRequireDefault(require("url-pattern"));
+
+var _config = require("./config");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// https://github.com/snd/url-pattern 
+class Route {
+  constructor(path, onChange) {
+    path = (0, _config.normalizePath)(path);
+    this.path = path;
+    this.patt = new _urlPattern.default(path);
+    this.onChange = onChange;
+  }
+
+  get params() {
+    return this.state ? this.state.params : {};
+  }
+
+  get rootPath() {
+    return this.patt.ast[0].value;
+  }
+
+  get isCurrent() {
+    return this.state && this.state.isCurrent;
+  }
+
+  makePath(params) {
+    return this.patt.stringify(params);
+  }
+
+  update(props) {
+    this.state && this.state.isCurrent && this.state.update(props);
+  }
+
+  matches(state) {
+    // array of states, get the last matched state in the list
+    if (Array.isArray(state)) {
+      let matchedState = null;
+
+      for (let i in state) {
+        if (this.matches(state[i])) matchedState = state[i];
+      }
+
+      return matchedState;
+    }
+
+    let params = state ? this.patt.match(state.path ? state.path : state) : false;
+
+    if (params) {
+      this.state = state;
+      state.params = params;
+      return state;
+    }
+
+    return null;
+  }
+
+  _change(oldState, newState, dir) {
+    oldState = this.matches(oldState);
+    newState = this.matches(newState); // TODO: change signature to pass newState first
+
+    if (oldState || newState) this.onChange(oldState, newState, dir);
+    return !!newState;
+  }
+
+}
+
+exports.default = Route;
+},{"url-pattern":"AZEX","./config":"TSI8"}],"phBv":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _config = _interopRequireWildcard(require("./config"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+class HistoryState {
+  constructor(parent, props) {
+    this.parent = parent;
+    if (!props.path) props.path = '';
+    let [path, query] = props.path.split('?');
+    let queryData = {};
+    this.query = new URLSearchParams(query || props.query || '');
+
+    if (query) {
+      this.query.forEach((v, k) => {
+        queryData[k] = v;
+      });
+    } // removing leading slash and #
+
+
+    props.path = (0, _config.cleansePath)(path);
+    this.props = Object.assign({
+      query: queryData,
+      title: _config.default.APP_TITLE
+    }, props);
+  }
+
+  get num() {
+    return this.props.num;
+  }
+
+  get isCurrent() {
+    return !history.state || history.state.num == this.num;
+  }
+
+  get isBefore() {
+    return history.state && history.state.num > this.num;
+  }
+
+  get isBack() {
+    return this.isBefore();
+  }
+
+  get isAfter() {
+    return !history.state || history.state.num < this.num;
+  }
+
+  get isForward() {
+    return this.isAfter();
+  }
+
+  get title() {
+    return this.props.title;
+  }
+
+  set title(title) {
+    this.update({
+      title: title
+    });
+  }
+
+  set path(path) {
+    path = (0, _config.cleansePath)(path);
+    this.update({
+      path: path
+    });
+  }
+
+  get path() {
+    return (0, _config.normalizePath)(this.props.path);
+  }
+
+  get normalizePath() {
+    let path = this.props.path ? this.path : _config.default.PATH_ROOT + _config.default.PATH_PREFIX; // return path
+
+    let query = this.query.toString();
+    return path + (query ? '?' + query : '');
+  }
+
+  push(props = {}) {
+    this.props = Object.assign(this.props, props);
+    history.pushState(this.props, null, this.normalizePath);
+    this.parent.save();
+    if (this.props.title && this.isCurrent) document.title = this.props.title;
+  }
+
+  update(props = {}) {
+    // do not let num be updated, this is set when newly created
+    delete props.num;
+    this.props = Object.assign(this.props, props);
+    this.parent.save();
+    if (!this.isCurrent) return;
+    history.replaceState(this.props, null, this.normalizePath);
+    if (this.props.title) document.title = this.props.title;
+  }
+
+  toJSON() {
+    return JSON.stringify(this.props);
+  }
+
+}
+
+exports.default = HistoryState;
+},{"./config":"TSI8"}],"OLbi":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _historyState = _interopRequireDefault(require("./history-state"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class HistoryStates {
+  constructor() {
+    let storedData = sessionStorage.getItem('history-states');
+    this.states = JSON.parse(storedData || '[]').map(props => new _historyState.default(this, JSON.parse(props)));
+    this._current = history.state && history.state.num || -1; // set initial state data
+
+    this.add({
+      path: location.pathname + location.hash + location.search
+    });
+  }
+
+  get length() {
+    return this.states.length;
+  }
+
+  get current() {
+    return this.get(this._current);
+  }
+
+  save() {
+    sessionStorage.setItem('history-states', JSON.stringify(this.states));
+  }
+
+  get(num, create = false, props = {}) {
+    if (!this.states[num] && create) {
+      props.num = num;
+      this.states[num] = new _historyState.default(this, props);
+    }
+
+    return this.states[num];
+  }
+
+  add(props = {}, push = false) {
+    let oldNum = this._current;
+    let num = history.state && history.state.num;
+
+    if (num == undefined || push) {
+      num = ++this._current; // remove trailing states as they are no longer valid
+
+      this.states.splice(num + 1).forEach(state => {
+        state.parent = null;
+      });
+    } // else if( push )
+    //     num++
+
+
+    let state = this.get(num, true, props); // or create
+
+    if (push) state.push(props);else state.update(props);
+    this._current = state.num;
+    let step = oldNum > this._current ? -1 : 1;
+    let oldStates = []; // console.log(oldNum, this._current);
+
+    while (oldNum != this._current) {
+      let oldState = this.get(oldNum);
+      if (oldState) oldStates.push(oldState);
+      oldNum += step;
+    } // console.log(oldStates);
+
+
+    return [state, oldStates];
+  }
+
+}
+
+exports.default = HistoryStates;
+},{"./history-state":"phBv"}],"38Qe":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.Router = void 0;
+
+var _route = _interopRequireDefault(require("./route"));
+
+var _historyStates = _interopRequireDefault(require("./history-states"));
+
+var _config = _interopRequireWildcard(require("./config"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const ROUTES = [];
+
+class Router {
+  // NOTE: this must be setup before anything uses router.add()
+  config(opts) {
+    if (opts.root != undefined) {
+      _config.default.PATH_ROOT = opts.root;
+      delete opts.root;
+    }
+
+    if (opts.prefix != undefined) {
+      _config.default.PATH_PREFIX = opts.prefix;
+      delete opts.prefix;
+    }
+
+    if (opts.title != undefined) {
+      _config.default.APP_TITLE = opts.title;
+      delete opts.title;
+    }
+
+    for (let key in opts) {
+      _config.default[key] = opts[key];
+    }
+  }
+
+  start(opts = {}) {
+    opts = Object.assign({
+      currentState: null,
+      requireState: false
+    }, opts);
+    this.states = new _historyStates.default(); // listen for state changes and change routes accordingly
+
+    window.addEventListener('popstate', e => {
+      if (opts.requireState && !e.state) return; // probably a sheetview change, ignore
+
+      let [newState, oldStates] = this.states.add();
+      window.dispatchEvent(new CustomEvent('router:popstate', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          path: newState.path,
+          state: newState,
+          oldStates: oldStates
+        }
+      }));
+
+      this._changeRoute(oldStates, newState);
+    }); // trigger initial route
+
+    this._changeRoute([], this.states.current); // update current state if no path
+
+
+    if (!this.states.current.path && opts.currentState) {
+      this.states.current.update(opts.currentState);
+    }
+  } // pushes new path/state onto stack (does not trigger route change)
+
+
+  push(path, props = {}) {
+    if (path instanceof _route.default) path = path.state ? path.state.props.path : path.rootPath;
+    props.path = path;
+    let [newState, oldStates] = this.states.add(props, true);
+    window.dispatchEvent(new CustomEvent('router:push', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        path: newState.path,
+        state: newState,
+        oldStates: oldStates
+      }
+    }));
+    return [newState, oldStates];
+  } // pushes new path/state and triggers route change
+
+
+  goTo(path, props) {
+    let [newState, oldStates] = this.push(path, props);
+
+    this._changeRoute(oldStates, newState);
+  }
+
+  _changeRoute(oldStates, newState) {
+    let dir = oldStates.length == 0 || oldStates[0].num < newState.num ? 'forward' : 'back';
+    let didMatch = false;
+    ROUTES.forEach(route => {
+      if (route._change(oldStates, newState, dir)) didMatch = true;
+    }); // if none of the routes matched, change current state path back to the root
+
+    if (!didMatch && _config.default.clearInvalidPath) this.states.current.path = _config.default.PATH_ROOT;
+  }
+
+  add(path, onChange) {
+    let route = new _route.default(path, onChange);
+    ROUTES.push(route);
+    return route;
+  }
+
+  get routes() {
+    return ROUTES.map(route => route.path);
+  }
+
+  get rootRoutes() {
+    return ROUTES.map(route => route.rootPath);
+  }
+
+} // singleton
+
+
+exports.Router = Router;
+
+var _default = new Router();
+
+exports.default = _default;
+},{"./route":"WZSr","./history-states":"OLbi","./config":"TSI8"}],"/jTP":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15062,980 +16310,7 @@ class Popover {
 }
 
 exports.default = Popover;
-},{"popper.js":"lo/u","../../util/device":"la8o","./style.less":"r4vn"}],"AZEX":[function(require,module,exports) {
-var define;
-// Generated by CoffeeScript 1.10.0
-var slice = [].slice;
-
-(function (root, factory) {
-  if ('function' === typeof define && define.amd != null) {
-    return define([], factory);
-  } else if (typeof exports !== "undefined" && exports !== null) {
-    return module.exports = factory();
-  } else {
-    return root.UrlPattern = factory();
-  }
-})(this, function () {
-  var P, UrlPattern, astNodeContainsSegmentsForProvidedParams, astNodeToNames, astNodeToRegexString, baseAstNodeToRegexString, concatMap, defaultOptions, escapeForRegex, getParam, keysAndValuesToObject, newParser, regexGroupCount, stringConcatMap, stringify;
-
-  escapeForRegex = function (string) {
-    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-  };
-
-  concatMap = function (array, f) {
-    var i, length, results;
-    results = [];
-    i = -1;
-    length = array.length;
-
-    while (++i < length) {
-      results = results.concat(f(array[i]));
-    }
-
-    return results;
-  };
-
-  stringConcatMap = function (array, f) {
-    var i, length, result;
-    result = '';
-    i = -1;
-    length = array.length;
-
-    while (++i < length) {
-      result += f(array[i]);
-    }
-
-    return result;
-  };
-
-  regexGroupCount = function (regex) {
-    return new RegExp(regex.toString() + '|').exec('').length - 1;
-  };
-
-  keysAndValuesToObject = function (keys, values) {
-    var i, key, length, object, value;
-    object = {};
-    i = -1;
-    length = keys.length;
-
-    while (++i < length) {
-      key = keys[i];
-      value = values[i];
-
-      if (value == null) {
-        continue;
-      }
-
-      if (object[key] != null) {
-        if (!Array.isArray(object[key])) {
-          object[key] = [object[key]];
-        }
-
-        object[key].push(value);
-      } else {
-        object[key] = value;
-      }
-    }
-
-    return object;
-  };
-
-  P = {};
-
-  P.Result = function (value, rest) {
-    this.value = value;
-    this.rest = rest;
-  };
-
-  P.Tagged = function (tag, value) {
-    this.tag = tag;
-    this.value = value;
-  };
-
-  P.tag = function (tag, parser) {
-    return function (input) {
-      var result, tagged;
-      result = parser(input);
-
-      if (result == null) {
-        return;
-      }
-
-      tagged = new P.Tagged(tag, result.value);
-      return new P.Result(tagged, result.rest);
-    };
-  };
-
-  P.regex = function (regex) {
-    return function (input) {
-      var matches, result;
-      matches = regex.exec(input);
-
-      if (matches == null) {
-        return;
-      }
-
-      result = matches[0];
-      return new P.Result(result, input.slice(result.length));
-    };
-  };
-
-  P.sequence = function () {
-    var parsers;
-    parsers = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-    return function (input) {
-      var i, length, parser, rest, result, values;
-      i = -1;
-      length = parsers.length;
-      values = [];
-      rest = input;
-
-      while (++i < length) {
-        parser = parsers[i];
-        result = parser(rest);
-
-        if (result == null) {
-          return;
-        }
-
-        values.push(result.value);
-        rest = result.rest;
-      }
-
-      return new P.Result(values, rest);
-    };
-  };
-
-  P.pick = function () {
-    var indexes, parsers;
-    indexes = arguments[0], parsers = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-    return function (input) {
-      var array, result;
-      result = P.sequence.apply(P, parsers)(input);
-
-      if (result == null) {
-        return;
-      }
-
-      array = result.value;
-      result.value = array[indexes];
-      return result;
-    };
-  };
-
-  P.string = function (string) {
-    var length;
-    length = string.length;
-    return function (input) {
-      if (input.slice(0, length) === string) {
-        return new P.Result(string, input.slice(length));
-      }
-    };
-  };
-
-  P.lazy = function (fn) {
-    var cached;
-    cached = null;
-    return function (input) {
-      if (cached == null) {
-        cached = fn();
-      }
-
-      return cached(input);
-    };
-  };
-
-  P.baseMany = function (parser, end, stringResult, atLeastOneResultRequired, input) {
-    var endResult, parserResult, rest, results;
-    rest = input;
-    results = stringResult ? '' : [];
-
-    while (true) {
-      if (end != null) {
-        endResult = end(rest);
-
-        if (endResult != null) {
-          break;
-        }
-      }
-
-      parserResult = parser(rest);
-
-      if (parserResult == null) {
-        break;
-      }
-
-      if (stringResult) {
-        results += parserResult.value;
-      } else {
-        results.push(parserResult.value);
-      }
-
-      rest = parserResult.rest;
-    }
-
-    if (atLeastOneResultRequired && results.length === 0) {
-      return;
-    }
-
-    return new P.Result(results, rest);
-  };
-
-  P.many1 = function (parser) {
-    return function (input) {
-      return P.baseMany(parser, null, false, true, input);
-    };
-  };
-
-  P.concatMany1Till = function (parser, end) {
-    return function (input) {
-      return P.baseMany(parser, end, true, true, input);
-    };
-  };
-
-  P.firstChoice = function () {
-    var parsers;
-    parsers = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-    return function (input) {
-      var i, length, parser, result;
-      i = -1;
-      length = parsers.length;
-
-      while (++i < length) {
-        parser = parsers[i];
-        result = parser(input);
-
-        if (result != null) {
-          return result;
-        }
-      }
-    };
-  };
-
-  newParser = function (options) {
-    var U;
-    U = {};
-    U.wildcard = P.tag('wildcard', P.string(options.wildcardChar));
-    U.optional = P.tag('optional', P.pick(1, P.string(options.optionalSegmentStartChar), P.lazy(function () {
-      return U.pattern;
-    }), P.string(options.optionalSegmentEndChar)));
-    U.name = P.regex(new RegExp("^[" + options.segmentNameCharset + "]+"));
-    U.named = P.tag('named', P.pick(1, P.string(options.segmentNameStartChar), P.lazy(function () {
-      return U.name;
-    })));
-    U.escapedChar = P.pick(1, P.string(options.escapeChar), P.regex(/^./));
-    U["static"] = P.tag('static', P.concatMany1Till(P.firstChoice(P.lazy(function () {
-      return U.escapedChar;
-    }), P.regex(/^./)), P.firstChoice(P.string(options.segmentNameStartChar), P.string(options.optionalSegmentStartChar), P.string(options.optionalSegmentEndChar), U.wildcard)));
-    U.token = P.lazy(function () {
-      return P.firstChoice(U.wildcard, U.optional, U.named, U["static"]);
-    });
-    U.pattern = P.many1(P.lazy(function () {
-      return U.token;
-    }));
-    return U;
-  };
-
-  defaultOptions = {
-    escapeChar: '\\',
-    segmentNameStartChar: ':',
-    segmentValueCharset: 'a-zA-Z0-9-_~ %',
-    segmentNameCharset: 'a-zA-Z0-9',
-    optionalSegmentStartChar: '(',
-    optionalSegmentEndChar: ')',
-    wildcardChar: '*'
-  };
-
-  baseAstNodeToRegexString = function (astNode, segmentValueCharset) {
-    if (Array.isArray(astNode)) {
-      return stringConcatMap(astNode, function (node) {
-        return baseAstNodeToRegexString(node, segmentValueCharset);
-      });
-    }
-
-    switch (astNode.tag) {
-      case 'wildcard':
-        return '(.*?)';
-
-      case 'named':
-        return "([" + segmentValueCharset + "]+)";
-
-      case 'static':
-        return escapeForRegex(astNode.value);
-
-      case 'optional':
-        return '(?:' + baseAstNodeToRegexString(astNode.value, segmentValueCharset) + ')?';
-    }
-  };
-
-  astNodeToRegexString = function (astNode, segmentValueCharset) {
-    if (segmentValueCharset == null) {
-      segmentValueCharset = defaultOptions.segmentValueCharset;
-    }
-
-    return '^' + baseAstNodeToRegexString(astNode, segmentValueCharset) + '$';
-  };
-
-  astNodeToNames = function (astNode) {
-    if (Array.isArray(astNode)) {
-      return concatMap(astNode, astNodeToNames);
-    }
-
-    switch (astNode.tag) {
-      case 'wildcard':
-        return ['_'];
-
-      case 'named':
-        return [astNode.value];
-
-      case 'static':
-        return [];
-
-      case 'optional':
-        return astNodeToNames(astNode.value);
-    }
-  };
-
-  getParam = function (params, key, nextIndexes, sideEffects) {
-    var index, maxIndex, result, value;
-
-    if (sideEffects == null) {
-      sideEffects = false;
-    }
-
-    value = params[key];
-
-    if (value == null) {
-      if (sideEffects) {
-        throw new Error("no values provided for key `" + key + "`");
-      } else {
-        return;
-      }
-    }
-
-    index = nextIndexes[key] || 0;
-    maxIndex = Array.isArray(value) ? value.length - 1 : 0;
-
-    if (index > maxIndex) {
-      if (sideEffects) {
-        throw new Error("too few values provided for key `" + key + "`");
-      } else {
-        return;
-      }
-    }
-
-    result = Array.isArray(value) ? value[index] : value;
-
-    if (sideEffects) {
-      nextIndexes[key] = index + 1;
-    }
-
-    return result;
-  };
-
-  astNodeContainsSegmentsForProvidedParams = function (astNode, params, nextIndexes) {
-    var i, length;
-
-    if (Array.isArray(astNode)) {
-      i = -1;
-      length = astNode.length;
-
-      while (++i < length) {
-        if (astNodeContainsSegmentsForProvidedParams(astNode[i], params, nextIndexes)) {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    switch (astNode.tag) {
-      case 'wildcard':
-        return getParam(params, '_', nextIndexes, false) != null;
-
-      case 'named':
-        return getParam(params, astNode.value, nextIndexes, false) != null;
-
-      case 'static':
-        return false;
-
-      case 'optional':
-        return astNodeContainsSegmentsForProvidedParams(astNode.value, params, nextIndexes);
-    }
-  };
-
-  stringify = function (astNode, params, nextIndexes) {
-    if (Array.isArray(astNode)) {
-      return stringConcatMap(astNode, function (node) {
-        return stringify(node, params, nextIndexes);
-      });
-    }
-
-    switch (astNode.tag) {
-      case 'wildcard':
-        return getParam(params, '_', nextIndexes, true);
-
-      case 'named':
-        return getParam(params, astNode.value, nextIndexes, true);
-
-      case 'static':
-        return astNode.value;
-
-      case 'optional':
-        if (astNodeContainsSegmentsForProvidedParams(astNode.value, params, nextIndexes)) {
-          return stringify(astNode.value, params, nextIndexes);
-        } else {
-          return '';
-        }
-
-    }
-  };
-
-  UrlPattern = function (arg1, arg2) {
-    var groupCount, options, parsed, parser, withoutWhitespace;
-
-    if (arg1 instanceof UrlPattern) {
-      this.isRegex = arg1.isRegex;
-      this.regex = arg1.regex;
-      this.ast = arg1.ast;
-      this.names = arg1.names;
-      return;
-    }
-
-    this.isRegex = arg1 instanceof RegExp;
-
-    if (!('string' === typeof arg1 || this.isRegex)) {
-      throw new TypeError('argument must be a regex or a string');
-    }
-
-    if (this.isRegex) {
-      this.regex = arg1;
-
-      if (arg2 != null) {
-        if (!Array.isArray(arg2)) {
-          throw new Error('if first argument is a regex the second argument may be an array of group names but you provided something else');
-        }
-
-        groupCount = regexGroupCount(this.regex);
-
-        if (arg2.length !== groupCount) {
-          throw new Error("regex contains " + groupCount + " groups but array of group names contains " + arg2.length);
-        }
-
-        this.names = arg2;
-      }
-
-      return;
-    }
-
-    if (arg1 === '') {
-      throw new Error('argument must not be the empty string');
-    }
-
-    withoutWhitespace = arg1.replace(/\s+/g, '');
-
-    if (withoutWhitespace !== arg1) {
-      throw new Error('argument must not contain whitespace');
-    }
-
-    options = {
-      escapeChar: (arg2 != null ? arg2.escapeChar : void 0) || defaultOptions.escapeChar,
-      segmentNameStartChar: (arg2 != null ? arg2.segmentNameStartChar : void 0) || defaultOptions.segmentNameStartChar,
-      segmentNameCharset: (arg2 != null ? arg2.segmentNameCharset : void 0) || defaultOptions.segmentNameCharset,
-      segmentValueCharset: (arg2 != null ? arg2.segmentValueCharset : void 0) || defaultOptions.segmentValueCharset,
-      optionalSegmentStartChar: (arg2 != null ? arg2.optionalSegmentStartChar : void 0) || defaultOptions.optionalSegmentStartChar,
-      optionalSegmentEndChar: (arg2 != null ? arg2.optionalSegmentEndChar : void 0) || defaultOptions.optionalSegmentEndChar,
-      wildcardChar: (arg2 != null ? arg2.wildcardChar : void 0) || defaultOptions.wildcardChar
-    };
-    parser = newParser(options);
-    parsed = parser.pattern(arg1);
-
-    if (parsed == null) {
-      throw new Error("couldn't parse pattern");
-    }
-
-    if (parsed.rest !== '') {
-      throw new Error("could only partially parse pattern");
-    }
-
-    this.ast = parsed.value;
-    this.regex = new RegExp(astNodeToRegexString(this.ast, options.segmentValueCharset));
-    this.names = astNodeToNames(this.ast);
-  };
-
-  UrlPattern.prototype.match = function (url) {
-    var groups, match;
-    match = this.regex.exec(url);
-
-    if (match == null) {
-      return null;
-    }
-
-    groups = match.slice(1);
-
-    if (this.names) {
-      return keysAndValuesToObject(this.names, groups);
-    } else {
-      return groups;
-    }
-  };
-
-  UrlPattern.prototype.stringify = function (params) {
-    if (params == null) {
-      params = {};
-    }
-
-    if (this.isRegex) {
-      throw new Error("can't stringify patterns generated from a regex");
-    }
-
-    if (params !== Object(params)) {
-      throw new Error("argument must be an object or undefined");
-    }
-
-    return stringify(this.ast, params, {});
-  };
-
-  UrlPattern.escapeForRegex = escapeForRegex;
-  UrlPattern.concatMap = concatMap;
-  UrlPattern.stringConcatMap = stringConcatMap;
-  UrlPattern.regexGroupCount = regexGroupCount;
-  UrlPattern.keysAndValuesToObject = keysAndValuesToObject;
-  UrlPattern.P = P;
-  UrlPattern.newParser = newParser;
-  UrlPattern.defaultOptions = defaultOptions;
-  UrlPattern.astNodeToRegexString = astNodeToRegexString;
-  UrlPattern.astNodeToNames = astNodeToNames;
-  UrlPattern.getParam = getParam;
-  UrlPattern.astNodeContainsSegmentsForProvidedParams = astNodeContainsSegmentsForProvidedParams;
-  UrlPattern.stringify = stringify;
-  return UrlPattern;
-});
-},{}],"TSI8":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.cleansePath = exports.normalizePath = exports.default = void 0;
-const config = {
-  APP_TITLE: document.title,
-  PATH_ROOT: location.pathname,
-  PATH_PREFIX: '',
-  clearInvalidPath: true
-};
-var _default = config; // normalize path (always begin with prefix and path root)
-
-exports.default = _default;
-
-const normalizePath = path => {
-  return path ? config.PATH_ROOT + config.PATH_PREFIX + cleansePath(path) : path;
-};
-
-exports.normalizePath = normalizePath;
-
-const cleansePath = path => {
-  return path.replace(new RegExp(`^(${config.PATH_ROOT})?(${config.PATH_PREFIX})?`), '');
-};
-
-exports.cleansePath = cleansePath;
-},{}],"WZSr":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _urlPattern = _interopRequireDefault(require("url-pattern"));
-
-var _config = require("./config");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// https://github.com/snd/url-pattern 
-class Route {
-  constructor(path, onChange) {
-    path = (0, _config.normalizePath)(path);
-    this.path = path;
-    this.patt = new _urlPattern.default(path);
-    this.onChange = onChange;
-  }
-
-  get params() {
-    return this.state ? this.state.params : {};
-  }
-
-  get rootPath() {
-    return this.patt.ast[0].value;
-  }
-
-  get isCurrent() {
-    return this.state && this.state.isCurrent;
-  }
-
-  makePath(params) {
-    return this.patt.stringify(params);
-  }
-
-  update(props) {
-    this.state && this.state.isCurrent && this.state.update(props);
-  }
-
-  matches(state) {
-    // array of states, get the last matched state in the list
-    if (Array.isArray(state)) {
-      let matchedState = null;
-
-      for (let i in state) {
-        if (this.matches(state[i])) matchedState = state[i];
-      }
-
-      return matchedState;
-    }
-
-    let params = state ? this.patt.match(state.path ? state.path : state) : false;
-
-    if (params) {
-      this.state = state;
-      state.params = params;
-      return state;
-    }
-
-    return null;
-  }
-
-  _change(oldState, newState, dir) {
-    oldState = this.matches(oldState);
-    newState = this.matches(newState); // TODO: change signature to pass newState first
-
-    if (oldState || newState) this.onChange(oldState, newState, dir);
-    return !!newState;
-  }
-
-}
-
-exports.default = Route;
-},{"url-pattern":"AZEX","./config":"TSI8"}],"phBv":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _config = _interopRequireWildcard(require("./config"));
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-class HistoryState {
-  constructor(parent, props) {
-    this.parent = parent;
-    if (!props.path) props.path = '';
-    let [path, query] = props.path.split('?');
-    let queryData = {};
-    this.query = new URLSearchParams(query || props.query || '');
-
-    if (query) {
-      this.query.forEach((v, k) => {
-        queryData[k] = v;
-      });
-    } // removing leading slash and #
-
-
-    props.path = (0, _config.cleansePath)(path);
-    this.props = Object.assign({
-      query: queryData,
-      title: _config.default.APP_TITLE
-    }, props);
-  }
-
-  get num() {
-    return this.props.num;
-  }
-
-  get isCurrent() {
-    return !history.state || history.state.num == this.num;
-  }
-
-  get isBefore() {
-    return history.state && history.state.num > this.num;
-  }
-
-  get isBack() {
-    return this.isBefore();
-  }
-
-  get isAfter() {
-    return !history.state || history.state.num < this.num;
-  }
-
-  get isForward() {
-    return this.isAfter();
-  }
-
-  get title() {
-    return this.props.title;
-  }
-
-  set title(title) {
-    this.update({
-      title: title
-    });
-  }
-
-  set path(path) {
-    path = (0, _config.cleansePath)(path);
-    this.update({
-      path: path
-    });
-  }
-
-  get path() {
-    return (0, _config.normalizePath)(this.props.path);
-  }
-
-  get normalizePath() {
-    let path = this.props.path ? this.path : _config.default.PATH_ROOT + _config.default.PATH_PREFIX; // return path
-
-    let query = this.query.toString();
-    return path + (query ? '?' + query : '');
-  }
-
-  push(props = {}) {
-    this.props = Object.assign(this.props, props);
-    history.pushState(this.props, null, this.normalizePath);
-    this.parent.save();
-    if (this.props.title && this.isCurrent) document.title = this.props.title;
-  }
-
-  update(props = {}) {
-    // do not let num be updated, this is set when newly created
-    delete props.num;
-    this.props = Object.assign(this.props, props);
-    this.parent.save();
-    if (!this.isCurrent) return;
-    history.replaceState(this.props, null, this.normalizePath);
-    if (this.props.title) document.title = this.props.title;
-  }
-
-  toJSON() {
-    return JSON.stringify(this.props);
-  }
-
-}
-
-exports.default = HistoryState;
-},{"./config":"TSI8"}],"OLbi":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _historyState = _interopRequireDefault(require("./history-state"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-class HistoryStates {
-  constructor() {
-    let storedData = sessionStorage.getItem('history-states');
-    this.states = JSON.parse(storedData || '[]').map(props => new _historyState.default(this, JSON.parse(props)));
-    this._current = history.state && history.state.num || -1; // set initial state data
-
-    this.add({
-      path: location.pathname + location.hash + location.search
-    });
-  }
-
-  get length() {
-    return this.states.length;
-  }
-
-  get current() {
-    return this.get(this._current);
-  }
-
-  save() {
-    sessionStorage.setItem('history-states', JSON.stringify(this.states));
-  }
-
-  get(num, create = false, props = {}) {
-    if (!this.states[num] && create) {
-      props.num = num;
-      this.states[num] = new _historyState.default(this, props);
-    }
-
-    return this.states[num];
-  }
-
-  add(props = {}, push = false) {
-    let oldNum = this._current;
-    let num = history.state && history.state.num;
-
-    if (num == undefined || push) {
-      num = ++this._current; // remove trailing states as they are no longer valid
-
-      this.states.splice(num + 1).forEach(state => {
-        state.parent = null;
-      });
-    } // else if( push )
-    //     num++
-
-
-    let state = this.get(num, true, props); // or create
-
-    if (push) state.push(props);else state.update(props);
-    this._current = state.num;
-    let step = oldNum > this._current ? -1 : 1;
-    let oldStates = []; // console.log(oldNum, this._current);
-
-    while (oldNum != this._current) {
-      let oldState = this.get(oldNum);
-      if (oldState) oldStates.push(oldState);
-      oldNum += step;
-    } // console.log(oldStates);
-
-
-    return [state, oldStates];
-  }
-
-}
-
-exports.default = HistoryStates;
-},{"./history-state":"phBv"}],"38Qe":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = exports.Router = void 0;
-
-var _route = _interopRequireDefault(require("./route"));
-
-var _historyStates = _interopRequireDefault(require("./history-states"));
-
-var _config = _interopRequireWildcard(require("./config"));
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const ROUTES = [];
-
-class Router {
-  // NOTE: this must be setup before anything uses router.add()
-  config(opts) {
-    if (opts.root != undefined) {
-      _config.default.PATH_ROOT = opts.root;
-      delete opts.root;
-    }
-
-    if (opts.prefix != undefined) {
-      _config.default.PATH_PREFIX = opts.prefix;
-      delete opts.prefix;
-    }
-
-    if (opts.title != undefined) {
-      _config.default.APP_TITLE = opts.title;
-      delete opts.title;
-    }
-
-    for (let key in opts) {
-      _config.default[key] = opts[key];
-    }
-  }
-
-  start(opts = {}) {
-    opts = Object.assign({
-      currentState: null,
-      requireState: false
-    }, opts);
-    this.states = new _historyStates.default(); // listen for state changes and change routes accordingly
-
-    window.addEventListener('popstate', e => {
-      if (opts.requireState && !e.state) return; // probably a sheetview change, ignore
-
-      let [newState, oldStates] = this.states.add();
-      window.dispatchEvent(new CustomEvent('router:popstate', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          path: newState.path,
-          state: newState,
-          oldStates: oldStates
-        }
-      }));
-
-      this._changeRoute(oldStates, newState);
-    }); // trigger initial route
-
-    this._changeRoute([], this.states.current); // update current state if no path
-
-
-    if (!this.states.current.path && opts.currentState) {
-      this.states.current.update(opts.currentState);
-    }
-  } // pushes new path/state onto stack (does not trigger route change)
-
-
-  push(path, props = {}) {
-    if (path instanceof _route.default) path = path.state ? path.state.props.path : path.rootPath;
-    props.path = path;
-    let [newState, oldStates] = this.states.add(props, true);
-    window.dispatchEvent(new CustomEvent('router:push', {
-      bubbles: true,
-      composed: true,
-      detail: {
-        path: newState.path,
-        state: newState,
-        oldStates: oldStates
-      }
-    }));
-    return [newState, oldStates];
-  } // pushes new path/state and triggers route change
-
-
-  goTo(path, props) {
-    let [newState, oldStates] = this.push(path, props);
-
-    this._changeRoute(oldStates, newState);
-  }
-
-  _changeRoute(oldStates, newState) {
-    let dir = oldStates.length == 0 || oldStates[0].num < newState.num ? 'forward' : 'back';
-    let didMatch = false;
-    ROUTES.forEach(route => {
-      if (route._change(oldStates, newState, dir)) didMatch = true;
-    }); // if none of the routes matched, change current state path back to the root
-
-    if (!didMatch && _config.default.clearInvalidPath) this.states.current.path = _config.default.PATH_ROOT;
-  }
-
-  add(path, onChange) {
-    let route = new _route.default(path, onChange);
-    ROUTES.push(route);
-    return route;
-  }
-
-  get routes() {
-    return ROUTES.map(route => route.path);
-  }
-
-  get rootRoutes() {
-    return ROUTES.map(route => route.rootPath);
-  }
-
-} // singleton
-
-
-exports.Router = Router;
-
-var _default = new Router();
-
-exports.default = _default;
-},{"./route":"WZSr","./history-states":"OLbi","./config":"TSI8"}],"R9Fe":[function(require,module,exports) {
+},{"popper.js":"lo/u","../../util/device":"la8o","./style.less":"r4vn"}],"R9Fe":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26453,7 +26728,136 @@ var supportsStandardArguments = function () {
 isStandardArguments.isLegacyArguments = isLegacyArguments; // for tests
 
 module.exports = supportsStandardArguments ? isStandardArguments : isLegacyArguments;
-},{}],"VxKF":[function(require,module,exports) {
+},{}],"2pTr":[function(require,module,exports) {
+"use strict";
+/* https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.is */
+
+var NumberIsNaN = function (value) {
+  return value !== value;
+};
+
+module.exports = function is(a, b) {
+  if (a === 0 && b === 0) {
+    return 1 / a === 1 / b;
+  } else if (a === b) {
+    return true;
+  } else if (NumberIsNaN(a) && NumberIsNaN(b)) {
+    return true;
+  }
+
+  return false;
+};
+},{}],"B6/o":[function(require,module,exports) {
+'use strict';
+
+/* eslint no-invalid-this: 1 */
+
+var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
+var slice = Array.prototype.slice;
+var toStr = Object.prototype.toString;
+var funcType = '[object Function]';
+
+module.exports = function bind(that) {
+    var target = this;
+    if (typeof target !== 'function' || toStr.call(target) !== funcType) {
+        throw new TypeError(ERROR_MESSAGE + target);
+    }
+    var args = slice.call(arguments, 1);
+
+    var bound;
+    var binder = function () {
+        if (this instanceof bound) {
+            var result = target.apply(
+                this,
+                args.concat(slice.call(arguments))
+            );
+            if (Object(result) === result) {
+                return result;
+            }
+            return this;
+        } else {
+            return target.apply(
+                that,
+                args.concat(slice.call(arguments))
+            );
+        }
+    };
+
+    var boundLength = Math.max(0, target.length - args.length);
+    var boundArgs = [];
+    for (var i = 0; i < boundLength; i++) {
+        boundArgs.push('$' + i);
+    }
+
+    bound = Function('binder', 'return function (' + boundArgs.join(',') + '){ return binder.apply(this,arguments); }')(binder);
+
+    if (target.prototype) {
+        var Empty = function Empty() {};
+        Empty.prototype = target.prototype;
+        bound.prototype = new Empty();
+        Empty.prototype = null;
+    }
+
+    return bound;
+};
+
+},{}],"58Ti":[function(require,module,exports) {
+'use strict';
+
+var implementation = require('./implementation');
+
+module.exports = Function.prototype.bind || implementation;
+
+},{"./implementation":"B6/o"}],"ar57":[function(require,module,exports) {
+'use strict';
+
+var bind = require('function-bind');
+
+module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
+},{"function-bind":"58Ti"}],"DhUb":[function(require,module,exports) {
+'use strict';
+
+var has = require('has');
+
+var regexExec = RegExp.prototype.exec;
+var gOPD = Object.getOwnPropertyDescriptor;
+
+var tryRegexExecCall = function tryRegexExec(value) {
+  try {
+    var lastIndex = value.lastIndex;
+    value.lastIndex = 0;
+    regexExec.call(value);
+    return true;
+  } catch (e) {
+    return false;
+  } finally {
+    value.lastIndex = lastIndex;
+  }
+};
+
+var toStr = Object.prototype.toString;
+var regexClass = '[object RegExp]';
+var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+
+module.exports = function isRegex(value) {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+
+  if (!hasToStringTag) {
+    return toStr.call(value) === regexClass;
+  }
+
+  var descriptor = gOPD(value, 'lastIndex');
+  var hasLastIndexDataProperty = descriptor && has(descriptor, 'value');
+
+  if (!hasLastIndexDataProperty) {
+    return false;
+  }
+
+  return tryRegexExecCall(value);
+};
+},{"has":"ar57"}],"VxKF":[function(require,module,exports) {
 'use strict';
 
 var keys = require('object-keys');
@@ -26522,544 +26926,15 @@ var defineProperties = function (object, map) {
 
 defineProperties.supportsDescriptors = !!supportsDescriptors;
 module.exports = defineProperties;
-},{"object-keys":"ywQn"}],"B6/o":[function(require,module,exports) {
+},{"object-keys":"ywQn"}],"1Hmk":[function(require,module,exports) {
 'use strict';
 
-/* eslint no-invalid-this: 1 */
-
-var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
-var slice = Array.prototype.slice;
-var toStr = Object.prototype.toString;
-var funcType = '[object Function]';
-
-module.exports = function bind(that) {
-    var target = this;
-    if (typeof target !== 'function' || toStr.call(target) !== funcType) {
-        throw new TypeError(ERROR_MESSAGE + target);
-    }
-    var args = slice.call(arguments, 1);
-
-    var bound;
-    var binder = function () {
-        if (this instanceof bound) {
-            var result = target.apply(
-                this,
-                args.concat(slice.call(arguments))
-            );
-            if (Object(result) === result) {
-                return result;
-            }
-            return this;
-        } else {
-            return target.apply(
-                that,
-                args.concat(slice.call(arguments))
-            );
-        }
-    };
-
-    var boundLength = Math.max(0, target.length - args.length);
-    var boundArgs = [];
-    for (var i = 0; i < boundLength; i++) {
-        boundArgs.push('$' + i);
-    }
-
-    bound = Function('binder', 'return function (' + boundArgs.join(',') + '){ return binder.apply(this,arguments); }')(binder);
-
-    if (target.prototype) {
-        var Empty = function Empty() {};
-        Empty.prototype = target.prototype;
-        bound.prototype = new Empty();
-        Empty.prototype = null;
-    }
-
-    return bound;
-};
-
-},{}],"58Ti":[function(require,module,exports) {
-'use strict';
-
-var implementation = require('./implementation');
-
-module.exports = Function.prototype.bind || implementation;
-
-},{"./implementation":"B6/o"}],"jYt2":[function(require,module,exports) {
-'use strict';
-/* eslint complexity: [2, 18], max-statements: [2, 33] */
-
-module.exports = function hasSymbols() {
-  if (typeof Symbol !== 'function' || typeof Object.getOwnPropertySymbols !== 'function') {
-    return false;
-  }
-
-  if (typeof Symbol.iterator === 'symbol') {
-    return true;
-  }
-
-  var obj = {};
-  var sym = Symbol('test');
-  var symObj = Object(sym);
-
-  if (typeof sym === 'string') {
-    return false;
-  }
-
-  if (Object.prototype.toString.call(sym) !== '[object Symbol]') {
-    return false;
-  }
-
-  if (Object.prototype.toString.call(symObj) !== '[object Symbol]') {
-    return false;
-  } // temp disabled per https://github.com/ljharb/object.assign/issues/17
-  // if (sym instanceof Symbol) { return false; }
-  // temp disabled per https://github.com/WebReflection/get-own-property-symbols/issues/4
-  // if (!(symObj instanceof Symbol)) { return false; }
-  // if (typeof Symbol.prototype.toString !== 'function') { return false; }
-  // if (String(sym) !== Symbol.prototype.toString.call(sym)) { return false; }
-
-
-  var symVal = 42;
-  obj[sym] = symVal;
-
-  for (sym in obj) {
-    return false;
-  } // eslint-disable-line no-restricted-syntax
-
-
-  if (typeof Object.keys === 'function' && Object.keys(obj).length !== 0) {
-    return false;
-  }
-
-  if (typeof Object.getOwnPropertyNames === 'function' && Object.getOwnPropertyNames(obj).length !== 0) {
-    return false;
-  }
-
-  var syms = Object.getOwnPropertySymbols(obj);
-
-  if (syms.length !== 1 || syms[0] !== sym) {
-    return false;
-  }
-
-  if (!Object.prototype.propertyIsEnumerable.call(obj, sym)) {
-    return false;
-  }
-
-  if (typeof Object.getOwnPropertyDescriptor === 'function') {
-    var descriptor = Object.getOwnPropertyDescriptor(obj, sym);
-
-    if (descriptor.value !== symVal || descriptor.enumerable !== true) {
-      return false;
-    }
-  }
-
-  return true;
-};
-},{}],"NS5K":[function(require,module,exports) {
-var global = arguments[3];
-'use strict';
-
-var origSymbol = global.Symbol;
-
-var hasSymbolSham = require('./shams');
-
-module.exports = function hasNativeSymbols() {
-  if (typeof origSymbol !== 'function') {
-    return false;
-  }
-
-  if (typeof Symbol !== 'function') {
-    return false;
-  }
-
-  if (typeof origSymbol('foo') !== 'symbol') {
-    return false;
-  }
-
-  if (typeof Symbol('bar') !== 'symbol') {
-    return false;
-  }
-
-  return hasSymbolSham();
-};
-},{"./shams":"jYt2"}],"LENn":[function(require,module,exports) {
-'use strict';
-/* globals
-	Atomics,
-	SharedArrayBuffer,
-*/
-
-var undefined;
-var $TypeError = TypeError;
-var $gOPD = Object.getOwnPropertyDescriptor;
-
-if ($gOPD) {
-  try {
-    $gOPD({}, '');
-  } catch (e) {
-    $gOPD = null; // this is IE 8, which has a broken gOPD
-  }
-}
-
-var throwTypeError = function () {
-  throw new $TypeError();
-};
-
-var ThrowTypeError = $gOPD ? function () {
-  try {
-    // eslint-disable-next-line no-unused-expressions, no-caller, no-restricted-properties
-    arguments.callee; // IE 8 does not throw here
-
-    return throwTypeError;
-  } catch (calleeThrows) {
-    try {
-      // IE 8 throws on Object.getOwnPropertyDescriptor(arguments, '')
-      return $gOPD(arguments, 'callee').get;
-    } catch (gOPDthrows) {
-      return throwTypeError;
-    }
-  }
-}() : throwTypeError;
-
-var hasSymbols = require('has-symbols')();
-
-var getProto = Object.getPrototypeOf || function (x) {
-  return x.__proto__;
-}; // eslint-disable-line no-proto
-
-
-var generator; // = function * () {};
-
-var generatorFunction = generator ? getProto(generator) : undefined;
-var asyncFn; // async function() {};
-
-var asyncFunction = asyncFn ? asyncFn.constructor : undefined;
-var asyncGen; // async function * () {};
-
-var asyncGenFunction = asyncGen ? getProto(asyncGen) : undefined;
-var asyncGenIterator = asyncGen ? asyncGen() : undefined;
-var TypedArray = typeof Uint8Array === 'undefined' ? undefined : getProto(Uint8Array);
-var INTRINSICS = {
-  '%Array%': Array,
-  '%ArrayBuffer%': typeof ArrayBuffer === 'undefined' ? undefined : ArrayBuffer,
-  '%ArrayBufferPrototype%': typeof ArrayBuffer === 'undefined' ? undefined : ArrayBuffer.prototype,
-  '%ArrayIteratorPrototype%': hasSymbols ? getProto([][Symbol.iterator]()) : undefined,
-  '%ArrayPrototype%': Array.prototype,
-  '%ArrayProto_entries%': Array.prototype.entries,
-  '%ArrayProto_forEach%': Array.prototype.forEach,
-  '%ArrayProto_keys%': Array.prototype.keys,
-  '%ArrayProto_values%': Array.prototype.values,
-  '%AsyncFromSyncIteratorPrototype%': undefined,
-  '%AsyncFunction%': asyncFunction,
-  '%AsyncFunctionPrototype%': asyncFunction ? asyncFunction.prototype : undefined,
-  '%AsyncGenerator%': asyncGen ? getProto(asyncGenIterator) : undefined,
-  '%AsyncGeneratorFunction%': asyncGenFunction,
-  '%AsyncGeneratorPrototype%': asyncGenFunction ? asyncGenFunction.prototype : undefined,
-  '%AsyncIteratorPrototype%': asyncGenIterator && hasSymbols && Symbol.asyncIterator ? asyncGenIterator[Symbol.asyncIterator]() : undefined,
-  '%Atomics%': typeof Atomics === 'undefined' ? undefined : Atomics,
-  '%Boolean%': Boolean,
-  '%BooleanPrototype%': Boolean.prototype,
-  '%DataView%': typeof DataView === 'undefined' ? undefined : DataView,
-  '%DataViewPrototype%': typeof DataView === 'undefined' ? undefined : DataView.prototype,
-  '%Date%': Date,
-  '%DatePrototype%': Date.prototype,
-  '%decodeURI%': decodeURI,
-  '%decodeURIComponent%': decodeURIComponent,
-  '%encodeURI%': encodeURI,
-  '%encodeURIComponent%': encodeURIComponent,
-  '%Error%': Error,
-  '%ErrorPrototype%': Error.prototype,
-  '%eval%': eval,
-  // eslint-disable-line no-eval
-  '%EvalError%': EvalError,
-  '%EvalErrorPrototype%': EvalError.prototype,
-  '%Float32Array%': typeof Float32Array === 'undefined' ? undefined : Float32Array,
-  '%Float32ArrayPrototype%': typeof Float32Array === 'undefined' ? undefined : Float32Array.prototype,
-  '%Float64Array%': typeof Float64Array === 'undefined' ? undefined : Float64Array,
-  '%Float64ArrayPrototype%': typeof Float64Array === 'undefined' ? undefined : Float64Array.prototype,
-  '%Function%': Function,
-  '%FunctionPrototype%': Function.prototype,
-  '%Generator%': generator ? getProto(generator()) : undefined,
-  '%GeneratorFunction%': generatorFunction,
-  '%GeneratorPrototype%': generatorFunction ? generatorFunction.prototype : undefined,
-  '%Int8Array%': typeof Int8Array === 'undefined' ? undefined : Int8Array,
-  '%Int8ArrayPrototype%': typeof Int8Array === 'undefined' ? undefined : Int8Array.prototype,
-  '%Int16Array%': typeof Int16Array === 'undefined' ? undefined : Int16Array,
-  '%Int16ArrayPrototype%': typeof Int16Array === 'undefined' ? undefined : Int8Array.prototype,
-  '%Int32Array%': typeof Int32Array === 'undefined' ? undefined : Int32Array,
-  '%Int32ArrayPrototype%': typeof Int32Array === 'undefined' ? undefined : Int32Array.prototype,
-  '%isFinite%': isFinite,
-  '%isNaN%': isNaN,
-  '%IteratorPrototype%': hasSymbols ? getProto(getProto([][Symbol.iterator]())) : undefined,
-  '%JSON%': typeof JSON === 'object' ? JSON : undefined,
-  '%JSONParse%': typeof JSON === 'object' ? JSON.parse : undefined,
-  '%Map%': typeof Map === 'undefined' ? undefined : Map,
-  '%MapIteratorPrototype%': typeof Map === 'undefined' || !hasSymbols ? undefined : getProto(new Map()[Symbol.iterator]()),
-  '%MapPrototype%': typeof Map === 'undefined' ? undefined : Map.prototype,
-  '%Math%': Math,
-  '%Number%': Number,
-  '%NumberPrototype%': Number.prototype,
-  '%Object%': Object,
-  '%ObjectPrototype%': Object.prototype,
-  '%ObjProto_toString%': Object.prototype.toString,
-  '%ObjProto_valueOf%': Object.prototype.valueOf,
-  '%parseFloat%': parseFloat,
-  '%parseInt%': parseInt,
-  '%Promise%': typeof Promise === 'undefined' ? undefined : Promise,
-  '%PromisePrototype%': typeof Promise === 'undefined' ? undefined : Promise.prototype,
-  '%PromiseProto_then%': typeof Promise === 'undefined' ? undefined : Promise.prototype.then,
-  '%Promise_all%': typeof Promise === 'undefined' ? undefined : Promise.all,
-  '%Promise_reject%': typeof Promise === 'undefined' ? undefined : Promise.reject,
-  '%Promise_resolve%': typeof Promise === 'undefined' ? undefined : Promise.resolve,
-  '%Proxy%': typeof Proxy === 'undefined' ? undefined : Proxy,
-  '%RangeError%': RangeError,
-  '%RangeErrorPrototype%': RangeError.prototype,
-  '%ReferenceError%': ReferenceError,
-  '%ReferenceErrorPrototype%': ReferenceError.prototype,
-  '%Reflect%': typeof Reflect === 'undefined' ? undefined : Reflect,
-  '%RegExp%': RegExp,
-  '%RegExpPrototype%': RegExp.prototype,
-  '%Set%': typeof Set === 'undefined' ? undefined : Set,
-  '%SetIteratorPrototype%': typeof Set === 'undefined' || !hasSymbols ? undefined : getProto(new Set()[Symbol.iterator]()),
-  '%SetPrototype%': typeof Set === 'undefined' ? undefined : Set.prototype,
-  '%SharedArrayBuffer%': typeof SharedArrayBuffer === 'undefined' ? undefined : SharedArrayBuffer,
-  '%SharedArrayBufferPrototype%': typeof SharedArrayBuffer === 'undefined' ? undefined : SharedArrayBuffer.prototype,
-  '%String%': String,
-  '%StringIteratorPrototype%': hasSymbols ? getProto(''[Symbol.iterator]()) : undefined,
-  '%StringPrototype%': String.prototype,
-  '%Symbol%': hasSymbols ? Symbol : undefined,
-  '%SymbolPrototype%': hasSymbols ? Symbol.prototype : undefined,
-  '%SyntaxError%': SyntaxError,
-  '%SyntaxErrorPrototype%': SyntaxError.prototype,
-  '%ThrowTypeError%': ThrowTypeError,
-  '%TypedArray%': TypedArray,
-  '%TypedArrayPrototype%': TypedArray ? TypedArray.prototype : undefined,
-  '%TypeError%': $TypeError,
-  '%TypeErrorPrototype%': $TypeError.prototype,
-  '%Uint8Array%': typeof Uint8Array === 'undefined' ? undefined : Uint8Array,
-  '%Uint8ArrayPrototype%': typeof Uint8Array === 'undefined' ? undefined : Uint8Array.prototype,
-  '%Uint8ClampedArray%': typeof Uint8ClampedArray === 'undefined' ? undefined : Uint8ClampedArray,
-  '%Uint8ClampedArrayPrototype%': typeof Uint8ClampedArray === 'undefined' ? undefined : Uint8ClampedArray.prototype,
-  '%Uint16Array%': typeof Uint16Array === 'undefined' ? undefined : Uint16Array,
-  '%Uint16ArrayPrototype%': typeof Uint16Array === 'undefined' ? undefined : Uint16Array.prototype,
-  '%Uint32Array%': typeof Uint32Array === 'undefined' ? undefined : Uint32Array,
-  '%Uint32ArrayPrototype%': typeof Uint32Array === 'undefined' ? undefined : Uint32Array.prototype,
-  '%URIError%': URIError,
-  '%URIErrorPrototype%': URIError.prototype,
-  '%WeakMap%': typeof WeakMap === 'undefined' ? undefined : WeakMap,
-  '%WeakMapPrototype%': typeof WeakMap === 'undefined' ? undefined : WeakMap.prototype,
-  '%WeakSet%': typeof WeakSet === 'undefined' ? undefined : WeakSet,
-  '%WeakSetPrototype%': typeof WeakSet === 'undefined' ? undefined : WeakSet.prototype
-};
-
-var bind = require('function-bind');
-
-var $replace = bind.call(Function.call, String.prototype.replace);
-/* adapted from https://github.com/lodash/lodash/blob/4.17.15/dist/lodash.js#L6735-L6744 */
-
-var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
-var reEscapeChar = /\\(\\)?/g;
-/** Used to match backslashes in property paths. */
-
-var stringToPath = function stringToPath(string) {
-  var result = [];
-  $replace(string, rePropName, function (match, number, quote, subString) {
-    result[result.length] = quote ? $replace(subString, reEscapeChar, '$1') : number || match;
-  });
-  return result;
-};
-/* end adaptation */
-
-
-var getBaseIntrinsic = function getBaseIntrinsic(name, allowMissing) {
-  if (!(name in INTRINSICS)) {
-    throw new SyntaxError('intrinsic ' + name + ' does not exist!');
-  } // istanbul ignore if // hopefully this is impossible to test :-)
-
-
-  if (typeof INTRINSICS[name] === 'undefined' && !allowMissing) {
-    throw new $TypeError('intrinsic ' + name + ' exists, but is not available. Please file an issue!');
-  }
-
-  return INTRINSICS[name];
-};
-
-module.exports = function GetIntrinsic(name, allowMissing) {
-  if (typeof name !== 'string' || name.length === 0) {
-    throw new TypeError('intrinsic name must be a non-empty string');
-  }
-
-  if (arguments.length > 1 && typeof allowMissing !== 'boolean') {
-    throw new TypeError('"allowMissing" argument must be a boolean');
-  }
-
-  var parts = stringToPath(name);
-  var value = getBaseIntrinsic('%' + (parts.length > 0 ? parts[0] : '') + '%', allowMissing);
-
-  for (var i = 1; i < parts.length; i += 1) {
-    if (value != null) {
-      if ($gOPD && i + 1 >= parts.length) {
-        var desc = $gOPD(value, parts[i]);
-
-        if (!allowMissing && !(parts[i] in value)) {
-          throw new $TypeError('base intrinsic for ' + name + ' exists, but the property is not available.');
-        }
-
-        value = desc ? desc.get || desc.value : value[parts[i]];
-      } else {
-        value = value[parts[i]];
-      }
-    }
-  }
-
-  return value;
-};
-},{"has-symbols":"NS5K","function-bind":"58Ti"}],"I+tp":[function(require,module,exports) {
-'use strict';
-
-var bind = require('function-bind');
-
-var GetIntrinsic = require('../GetIntrinsic');
-
-var $Function = GetIntrinsic('%Function%');
-var $apply = $Function.apply;
-var $call = $Function.call;
-
-module.exports = function callBind() {
-  return bind.apply($call, arguments);
-};
-
-module.exports.apply = function applyBind() {
-  return bind.apply($apply, arguments);
-};
-},{"function-bind":"58Ti","../GetIntrinsic":"LENn"}],"4md/":[function(require,module,exports) {
-'use strict';
-
-var numberIsNaN = function (value) {
-  return value !== value;
-};
-
-module.exports = function is(a, b) {
-  if (a === 0 && b === 0) {
-    return 1 / a === 1 / b;
-  }
-
-  if (a === b) {
-    return true;
-  }
-
-  if (numberIsNaN(a) && numberIsNaN(b)) {
-    return true;
-  }
-
-  return false;
-};
-},{}],"TyWm":[function(require,module,exports) {
-'use strict';
-
-var implementation = require('./implementation');
-
-module.exports = function getPolyfill() {
-  return typeof Object.is === 'function' ? Object.is : implementation;
-};
-},{"./implementation":"4md/"}],"Fi9R":[function(require,module,exports) {
-
-'use strict';
-
-var getPolyfill = require('./polyfill');
-
-var define = require('define-properties');
-
-module.exports = function shimObjectIs() {
-  var polyfill = getPolyfill();
-  define(Object, {
-    is: polyfill
-  }, {
-    is: function testObjectIs() {
-      return Object.is !== polyfill;
-    }
-  });
-  return polyfill;
-};
-},{"./polyfill":"TyWm","define-properties":"VxKF"}],"2pTr":[function(require,module,exports) {
-
-'use strict';
-
-var define = require('define-properties');
-
-var callBind = require('es-abstract/helpers/callBind');
-
-var implementation = require('./implementation');
-
-var getPolyfill = require('./polyfill');
-
-var shim = require('./shim');
-
-var polyfill = callBind(getPolyfill(), Object);
-define(polyfill, {
-  getPolyfill: getPolyfill,
-  implementation: implementation,
-  shim: shim
-});
-module.exports = polyfill;
-},{"define-properties":"VxKF","es-abstract/helpers/callBind":"I+tp","./implementation":"4md/","./polyfill":"TyWm","./shim":"Fi9R"}],"ar57":[function(require,module,exports) {
-'use strict';
-
-var bind = require('function-bind');
-
-module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
-},{"function-bind":"58Ti"}],"DhUb":[function(require,module,exports) {
-'use strict';
-
-var has = require('has');
-
-var regexExec = RegExp.prototype.exec;
-var gOPD = Object.getOwnPropertyDescriptor;
-
-var tryRegexExecCall = function tryRegexExec(value) {
-  try {
-    var lastIndex = value.lastIndex;
-    value.lastIndex = 0; // eslint-disable-line no-param-reassign
-
-    regexExec.call(value);
-    return true;
-  } catch (e) {
-    return false;
-  } finally {
-    value.lastIndex = lastIndex; // eslint-disable-line no-param-reassign
-  }
-};
-
-var toStr = Object.prototype.toString;
-var regexClass = '[object RegExp]';
-var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
-
-module.exports = function isRegex(value) {
-  if (!value || typeof value !== 'object') {
-    return false;
-  }
-
-  if (!hasToStringTag) {
-    return toStr.call(value) === regexClass;
-  }
-
-  var descriptor = gOPD(value, 'lastIndex');
-  var hasLastIndexDataProperty = descriptor && has(descriptor, 'value');
-
-  if (!hasLastIndexDataProperty) {
-    return false;
-  }
-
-  return tryRegexExecCall(value);
-};
-},{"has":"ar57"}],"1Hmk":[function(require,module,exports) {
-'use strict';
-
-var $Object = Object;
-var $TypeError = TypeError;
+var toObject = Object;
+var TypeErr = TypeError;
 
 module.exports = function flags() {
-  if (this != null && this !== $Object(this)) {
-    throw new $TypeError('RegExp.prototype.flags getter called on non-object');
+  if (this != null && this !== toObject(this)) {
+    throw new TypeErr('RegExp.prototype.flags getter called on non-object');
   }
 
   var result = '';
@@ -27097,16 +26972,16 @@ var implementation = require('./implementation');
 
 var supportsDescriptors = require('define-properties').supportsDescriptors;
 
-var $gOPD = Object.getOwnPropertyDescriptor;
-var $TypeError = TypeError;
+var gOPD = Object.getOwnPropertyDescriptor;
+var TypeErr = TypeError;
 
 module.exports = function getPolyfill() {
   if (!supportsDescriptors) {
-    throw new $TypeError('RegExp.prototype.flags requires a true ES5 environment that supports property descriptors');
+    throw new TypeErr('RegExp.prototype.flags requires a true ES5 environment that supports property descriptors');
   }
 
   if (/a/mig.flags === 'gim') {
-    var descriptor = $gOPD(RegExp.prototype, 'flags');
+    var descriptor = gOPD(RegExp.prototype, 'flags');
 
     if (descriptor && typeof descriptor.get === 'function' && typeof /a/.dotAll === 'boolean') {
       return descriptor.get;
@@ -27153,27 +27028,25 @@ module.exports = function shimFlags() {
 
 var define = require('define-properties');
 
-var callBind = require('es-abstract/helpers/callBind');
-
 var implementation = require('./implementation');
 
 var getPolyfill = require('./polyfill');
 
 var shim = require('./shim');
 
-var flagsBound = callBind(implementation);
+var flagsBound = Function.call.bind(implementation);
 define(flagsBound, {
   getPolyfill: getPolyfill,
   implementation: implementation,
   shim: shim
 });
 module.exports = flagsBound;
-},{"define-properties":"VxKF","es-abstract/helpers/callBind":"I+tp","./implementation":"1Hmk","./polyfill":"YWiL","./shim":"Kszl"}],"NyUK":[function(require,module,exports) {
+},{"define-properties":"VxKF","./implementation":"1Hmk","./polyfill":"YWiL","./shim":"Kszl"}],"NyUK":[function(require,module,exports) {
 'use strict';
 
 var getDay = Date.prototype.getDay;
 
-var tryDateObject = function tryDateGetDayCall(value) {
+var tryDateObject = function tryDateObject(value) {
   try {
     getDay.call(value);
     return true;
@@ -39470,333 +39343,7 @@ customElements.define('b-cal', class extends _litElement.LitElement {
 var _default = customElements.get('b-cal');
 
 exports.default = _default;
-},{"lit-element":"+bhx","../../elements/btn-group":"0pV6","../../helpers/lit-element/events":"euwv","moment":"a2/B","./day":"tqEd"}],"TMO9":[function(require,module,exports) {
-"use strict";
-
-var _litElement = require("lit-element");
-
-customElements.define('b-list-of-colors', class extends _litElement.LitElement {
-  static get styles() {
-    return _litElement.css`
-        :host {
-            display: grid;
-            --grids: 1fr 1fr 1fr 1fr;
-            grid-template-columns: var(--grids);
-            gap: 1em;
-        }
-
-        [group="default"] {
-            grid-column: 1/5;
-        }
-
-        [group="default"] .colors {
-            display: grid;
-            grid-template-columns: var(--grids);
-            gap: 1em;
-        }
-
-        .color {
-            border: 1px solid rgba(0,0,0,.12);
-            padding: .5em;
-            /* display: flex;
-            justify-content: space-between;
-            align-items: center; */
-        }
-
-        [num="900"] + [num] {
-            margin-top: .5em;
-        }
-
-        @media (max-width: 550px) {
-            :host {
-                --grids: 1fr 1fr;
-            }
-
-            [group="default"] {
-                grid-column: 1/3
-            }
-        }
-    `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.colors = [];
-
-    for (let sheet of document.styleSheets) {
-      let rules = null;
-
-      try {
-        rules = sheet.cssRules;
-      } catch (e) {}
-
-      if (rules) for (let rule of rules) {
-        if (rule.cssText.match(/:root { --color/)) {
-          let matches = rule.cssText.match(/--.[^:)]+: (.[^;]+);/g);
-          let colors = {};
-          matches.map(v => {
-            let [str, name, num, color] = v.match(/--(.[^\d(A\d)]+)(?:-(.+))?: (.[^;]+);/);
-            let key = name + (num ? '-' + num : '');
-
-            if (num) {
-              colors[name] = colors[name] || {
-                name: name,
-                colors: []
-              };
-              colors[name].colors.push({
-                key,
-                name,
-                num,
-                color
-              });
-            } else {
-              colors['default'] = colors['default'] || {
-                name: 'default',
-                colors: []
-              };
-              colors['default'].colors.push({
-                key,
-                name,
-                num,
-                color
-              });
-            }
-          });
-          this.colors = Object.values(colors);
-        }
-      }
-    }
-  }
-
-  render() {
-    return _litElement.html`
-        ${this.colors.map(g => _litElement.html`
-            <div group="${g.name}">
-                <h3>${g.name}</h3>
-                <div class="colors">
-                ${g.colors.map(c => _litElement.html`
-                    <div num=${c.num} key="${c.key}" class="color" style="background-color: var(--${c.key});">
-                        <div>${c.key}</div>
-                        <!-- <b-sub>${c.num ? c.color : ''}</b-sub> -->
-                    </div>
-                `)}
-                </div>
-            </div>
-        `)}
-    `;
-  }
-
-});
-},{"lit-element":"+bhx"}],"u6Cc":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = _default;
-exports.fileIconLabels = exports.fileIconColors = void 0;
-
-var _litElement = require("lit-element");
-
-const fileIconColors = {
-  pdf: _litElement.css`:host([ext="pdf"]){ --bgd: #b40808; }`,
-  js: _litElement.css` :host([ext="js"]){ --bgd: #f8dc3d; --color: #333;}`,
-  json: _litElement.css`:host([ext="json"]){ --bgd: #f8dc3d; --color: #333;}`,
-  video: _litElement.css`:host([ext="mp4"]){ --bgd: var(--red);}`,
-  html: _litElement.css`:host([ext="html"]){ --bgd: #e54c21}`,
-  xml: _litElement.css`:host([ext="xml"]){ --bgd: #f26524}`,
-  onix: _litElement.css`:host([ext="onix"]){ --bgd: #626a7f;}`,
-  zip: _litElement.css`:host([ext="zip"]){ --bgd: var(--gray-600);}`,
-  jpg: _litElement.css`:host([ext="jpg"]){ --bgd: var(--blue); }`,
-  jpeg: _litElement.css`:host([ext="jpeg"]){ --bgd: var(--blue); }`,
-  png: _litElement.css`:host([ext="png"]){ --bgd: var(--blue); }`,
-  gif: _litElement.css`:host([ext="gif"]){ --bgd: var(--blue); }`,
-  wav: _litElement.css`:host([ext="wav"]){ --bgd: var(--deep-purple); }`,
-  mp3: _litElement.css`:host([ext="mp3"]){ --bgd: var(--deep-purple); }`,
-  flac: _litElement.css`:host([ext="flac"]){ --bgd: var(--deep-purple); }`,
-  m4a: _litElement.css`:host([ext="m4a"]){ --bgd: var(--deep-purple); }`,
-  // Microsoft
-  word: _litElement.css`
-        :host([ext="doc"]),
-        :host([ext="docx"]) {
-            --bgd: #0f52b7;
-        }
-    `,
-  excel: _litElement.css`
-        :host([ext="xls"]),
-        :host([ext="xlsx"]),
-        :host([ext="xlsm"]) {
-            --bgd: #0a8144;
-        }
-    `,
-  // Adobe
-  psd: _litElement.css`
-        :host([ext="psd"]) {
-            --bgd: #011c24;
-            --color: #00c8ff;
-            --dog-ear-bgd: var(--color);
-            --border-color: var(--color);
-        }
-    `,
-  indd: _litElement.css`
-        :host([ext="indd"]),
-        :host([ext="idml"]) {
-            --bgd: #2a020b;
-            --color: #ff3c95;
-            --dog-ear-bgd: var(--color);
-            --border-color: var(--color);
-        }
-    `,
-  icml: _litElement.css`
-        :host([ext="icml"]) {
-            --bgd: #2a0c2a;
-            --color: #eb72eb;
-            --dog-ear-bgd: var(--color);
-            --border-color: var(--color);
-        }
-    `,
-  ai: _litElement.css`
-        :host([ext="ai"]),
-        :host([ext="ait"]) {
-            --bgd: #251300;
-            --color: #fe7c00;
-            --dog-ear-bgd: var(--color);
-            --border-color: var(--color);
-        }
-    `,
-  pdf: _litElement.css`
-        :host([ext="pdf"]) {
-            --bgd: #2f1208;
-            --color: #fff;
-            --dog-ear-bgd: #fd3406;
-            --border-color: #fd3406;
-        }
-    `
-};
-exports.fileIconColors = fileIconColors;
-const fileIconLabels = {
-  'json': _litElement.html`<span>{ }</span>`,
-  'mp4': _litElement.html`<b-icon name="videocam"></b-icon>`,
-  'mp3': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
-  'wav': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
-  'flac': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
-  'html': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
-  'xml': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
-  'onix': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
-  'dpl': _litElement.html`<b-icon name="cd"></b-icon>`,
-  'iso': _litElement.html`<b-icon name="cd"></b-icon>`,
-  'zip': _litElement.html`<b-icon name="file-archive"></b-icon>`,
-  'epub': ext => _litElement.html`<b-icon name="book-open"></b-icon><sub>${ext}</sub>`
-};
-exports.fileIconLabels = fileIconLabels;
-
-function _default(customColors = {}, customLabels = {}) {
-  Object.assign(fileIconColors, customColors);
-  Object.assign(fileIconLabels, customLabels);
-  customElements.define('b-file-icon', class extends _litElement.LitElement {
-    static get properties() {
-      return {
-        ext: {
-          type: String,
-          reflect: true
-        }
-      };
-    }
-
-    static get styles() {
-      return [_litElement.css`
-        :host {
-            display: inline-block;
-            position:relative;
-            --color: var(--b-file-icon-color-default, #fff);
-            --bgd: var(--b-file-icon-bgd-default, #aaa);
-            --size: var(--b-file-icon-size, 2em);
-            --radius: var(--b-file-icon-radius, 0px);
-            --border-color: transparent;
-
-            width: calc(.8 * var(--size));
-            height: var(--size);
-            text-transform: uppercase;
-        }
-
-        main {
-            padding: 20%;
-            padding-top: 30%; /* appears more center */
-            box-sizing: border-box;
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: var(--bgd);
-            border-radius: var(--radius);
-            border-bottom: calc(var(--size) * .02) solid rgba(0, 0, 0, 0.4);
-            -webkit-clip-path: polygon(0 0, 66% 0, 100% 26.4%, 100% 100%, 0 100%);
-            clip-path: polygon(0 0, 66% 0, 100% 26.4%, 100% 100%, 0 100%);
-
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--color);
-            box-shadow: 0 0 0 calc(.05 * var(--size)) var(--border-color) inset;
-        }
-
-        .dogear {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--dog-ear-bgd, rgba(0,0,0,.4));
-            border-radius: 0 0 0 var(--radius);
-
-            height: calc(.8 * var(--size) * .34);
-            width: calc(.8 * var(--size) * .34);
-            -webkit-clip-path: polygon(0 0, 0% 100%, 100% 100%);
-            clip-path: polygon(0 0, 0% 100%, 100% 100%);
-        }
-
-        label,
-        ::slotted(*) {
-            font-size: calc(var(--size) * .25);
-            line-height: .5em;
-        }
-
-        label > span,
-        label > b-icon {
-            font-size: 1.4em;
-        }
-
-        label sub {
-            font-size: .6em;
-            vertical-align: baseline;
-            line-height: 0em;
-        }
-
-        ::slotted(b-icon) {
-            /* font-size: 1em; */
-        }
-    `].concat(Object.values(fileIconColors));
-    }
-
-    render() {
-      return _litElement.html`
-        <main>
-            <div class="dogear"></div>
-            <slot name="label">
-                <label>${this.label}</label>
-            </slot>
-        </main>
-        <slot></slot>
-    `;
-    }
-
-    get label() {
-      let label = fileIconLabels[this.ext];
-      if (label) return typeof label == 'function' ? label(this.ext) : label;
-      return this.ext;
-    }
-
-  });
-}
-},{"lit-element":"+bhx"}],"sHUN":[function(require,module,exports) {
+},{"lit-element":"+bhx","../../elements/btn-group":"0pV6","../../helpers/lit-element/events":"euwv","moment":"a2/B","./day":"tqEd"}],"sHUN":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40478,8 +40025,134 @@ for (let key in _types.default) {
     return new Notif(Object.assign({}, _types.default[key], opts));
   };
 }
-},{"lit-element":"+bhx","./controller":"sHUN","../../util/device":"la8o","./style":"HXsq","./types":"tUj8","./snackbar":"Cw//"}],"gE6T":[function(require,module,exports) {
+},{"lit-element":"+bhx","./controller":"sHUN","../../util/device":"la8o","./style":"HXsq","./types":"tUj8","./snackbar":"Cw//"}],"H6j2":[function(require,module,exports) {
+module.exports = "README.f10fa81a.md";
+},{}],"dG7A":[function(require,module,exports) {
+module.exports = "README.9683e671.md";
+},{}],"TMO9":[function(require,module,exports) {
 "use strict";
+
+var _litElement = require("lit-element");
+
+customElements.define('b-list-of-colors', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: grid;
+            --grids: 1fr 1fr 1fr 1fr;
+            grid-template-columns: var(--grids);
+            gap: 1em;
+        }
+
+        [group="default"] {
+            grid-column: 1/5;
+        }
+
+        [group="default"] .colors {
+            display: grid;
+            grid-template-columns: var(--grids);
+            gap: 1em;
+        }
+
+        .color {
+            border: 1px solid rgba(0,0,0,.12);
+            padding: .5em;
+            /* display: flex;
+            justify-content: space-between;
+            align-items: center; */
+        }
+
+        [num="900"] + [num] {
+            margin-top: .5em;
+        }
+
+        @media (max-width: 550px) {
+            :host {
+                --grids: 1fr 1fr;
+            }
+
+            [group="default"] {
+                grid-column: 1/3
+            }
+        }
+    `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.colors = [];
+
+    for (let sheet of document.styleSheets) {
+      let rules = null;
+
+      try {
+        rules = sheet.cssRules;
+      } catch (e) {}
+
+      if (rules) for (let rule of rules) {
+        if (rule.cssText.match(/:root { --color/)) {
+          let matches = rule.cssText.match(/--.[^:)]+: (.[^;]+);/g);
+          let colors = {};
+          matches.map(v => {
+            let [str, name, num, color] = v.match(/--(.[^\d(A\d)]+)(?:-(.+))?: (.[^;]+);/);
+            let key = name + (num ? '-' + num : '');
+
+            if (num) {
+              colors[name] = colors[name] || {
+                name: name,
+                colors: []
+              };
+              colors[name].colors.push({
+                key,
+                name,
+                num,
+                color
+              });
+            } else {
+              colors['default'] = colors['default'] || {
+                name: 'default',
+                colors: []
+              };
+              colors['default'].colors.push({
+                key,
+                name,
+                num,
+                color
+              });
+            }
+          });
+          this.colors = Object.values(colors);
+        }
+      }
+    }
+  }
+
+  render() {
+    return _litElement.html`
+        ${this.colors.map(g => _litElement.html`
+            <div group="${g.name}">
+                <h3>${g.name}</h3>
+                <div class="colors">
+                ${g.colors.map(c => _litElement.html`
+                    <div num=${c.num} key="${c.key}" class="color" style="background-color: var(--${c.key});">
+                        <div>${c.key}</div>
+                        <!-- <b-sub>${c.num ? c.color : ''}</b-sub> -->
+                    </div>
+                `)}
+                </div>
+            </div>
+        `)}
+    `;
+  }
+
+});
+},{"lit-element":"+bhx"}],"lgAh":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
 require("../elements/icon");
 
@@ -40495,11 +40168,7 @@ require("../elements/uploader");
 
 require("../elements/paper");
 
-require("../elements/text");
-
 require("../elements/grid");
-
-require("../elements/carousel");
 
 require("../elements/timer");
 
@@ -40509,19 +40178,29 @@ require("../elements/label");
 
 require("../elements/ribbon");
 
+require("../elements/avatar");
+
 require("../elements/hr");
 
 require("../elements/sub");
 
 require("../elements/ts");
 
-require("../elements/avatar");
-
 require("../elements/code");
 
 require("../elements/embed");
 
 require("../elements/audio");
+
+require("../elements/carousel");
+
+require("../elements/timeline-horz");
+
+var _fileIcon = _interopRequireDefault(require("../elements/file-icon"));
+
+var _litElement = require("lit-element");
+
+var _router = _interopRequireDefault(require("../router"));
 
 require("../presenters/tabs");
 
@@ -40531,67 +40210,512 @@ require("../presenters/list");
 
 require("../presenters/cal");
 
-require("../helpers/colors-list");
-
-require("../styles/colors.less");
-
-var _fileIcon = _interopRequireDefault(require("../elements/file-icon"));
-
-var _dialog = _interopRequireDefault(require("../presenters/dialog"));
+var _panel = _interopRequireWildcard(require("../presenters/panel"));
 
 var _menu = _interopRequireDefault(require("../presenters/menu"));
 
+var _dialog = _interopRequireDefault(require("../presenters/dialog"));
+
 var _notif = _interopRequireDefault(require("../presenters/notif"));
+
+var _moment = _interopRequireDefault(require("moment"));
+
+var _README = _interopRequireDefault(require("../util/README.md"));
+
+var _README2 = _interopRequireDefault(require("../helpers/backbone/relations/README.md"));
+
+require("../styles/colors.less");
+
+require("../helpers/colors-list");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _fileIcon.default)();
+
+_router.default.config({
+  root: location.hostname.match('github') ? '/bui/' : '/',
+  prefix: '#/'
+});
+
+window.moment = _moment.default; // for <b-ts> demo
+
 window.Dialog = _dialog.default;
-window.Menu = _menu.default;
-window.Notif = _notif.default;
 
-function convertComments() {
-  var tw = document.createTreeWalker(document, NodeFilter.SHOW_COMMENT, null, null);
-  var comment;
-  var comments = [];
+window.showMenu = async function (el, renderTo = false) {
+  let menu = [{
+    divider: 'Group Title'
+  }, {
+    label: 'Menu Item 1',
+    val: '1'
+  }, {
+    label: 'Menu Item 2',
+    val: '2'
+  }, {
+    label: 'Menu Item 3',
+    val: '3'
+  }, 'divider', {
+    label: 'More',
+    menu: [{
+      label: 'Submenu 1',
+      val: 'more-1'
+    }, {
+      label: 'Submenu 2',
+      val: 'more-2'
+    }],
+    menuOpts: {
+      popover: {
+        align: 'right-start'
+      }
+    }
+  }, {
+    text: 'Look at the console after selecting a value'
+  }];
+  menu = new _menu.default(menu);
 
-  while (comment = tw.nextNode()) {
-    comments.push(comment);
+  if (renderTo) {
+    el.appendChild(menu.el);
+    menu.render();
+  } else {
+    let selected = await menu.popover(el);
+  }
+};
+
+showMenu(document.querySelector('#render-menu'), true);
+
+_panel.default.register('view-1', () => _litElement.html`
+    <b-panel-toolbar shadow>
+        <b-btn slot="right">Right Side</b-btn>
+        <span slot="left">
+            <b-hr vert></b-hr>
+            Left Content
+        </span>
+        <span slot="middle"> <b-label badge="red" style="vertical-align: top;">Badge</b-label></span>
+    </b-panel-toolbar>
+    <main style="flex:1">
+        <b-tabs layout="left">
+            <div title="View 1">Try using your browser's back button</div>
+            <div title="View 2">View 2 content</div>
+        </b-tabs>
+    </main>
+`, {
+  title: 'View 1'
+});
+
+customElements.define('view-two', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        main {
+            padding: 1em;
+            overflow: auto;
+        }
+    `;
   }
 
-  comments.forEach(com => {
-    let div = document.createElement('div');
-    div.classList.add('demo-block');
-    let str = com.textContent;
-    let strs = str.split("\n");
-    let type = strs.shift();
-    str = strs.join("\n");
-    div.innerHTML = str;
-    if (type) div.setAttribute('type', type);
-    let script = div.querySelector('script');
-    if (script) eval(script.innerText);
-    com.replaceWith(div);
+  render() {
+    return _litElement.html`
+        <b-panel-toolbar look="white" noshadow>
+            <b-btn slot="right" @click=${this.btnMenu}>Change Style</b-btn>
+        </b-panel-toolbar>
+        <main>
+            content
+        </main>
+    `;
+  }
+
+  async btnMenu(e) {
+    let selected = await new _menu.default([{
+      label: 'Modal',
+      opts: {
+        width: '600px',
+        height: '400px',
+        anchor: 'center'
+      }
+    }, {
+      label: 'Drawer',
+      opts: {
+        width: '600px',
+        height: '',
+        anchor: 'right'
+      }
+    }, {
+      label: 'Drawer Left ',
+      opts: {
+        width: '600px',
+        height: '',
+        anchor: 'left'
+      }
+    }, {
+      label: 'Slide Top ',
+      opts: {
+        width: '100%',
+        height: '50vh',
+        anchor: 'top'
+      }
+    }, 'divider', {
+      label: 'Reset',
+      icon: 'arrows-ccw',
+      opts: {
+        width: '100%',
+        height: '100%',
+        anchor: 'right'
+      }
+    }]).popover(e.target, {
+      align: 'bottom-end'
+    });
+
+    if (selected) {
+      console.log(selected);
+
+      for (let key in selected.opts) {
+        console.log(key);
+        this.panel[key] = selected.opts[key];
+      }
+    }
+  }
+
+});
+
+_panel.default.register('view-2', 'view-two', {
+  title: 'View 2'
+});
+
+_panel.default.register('view-2-small', 'view-two', {
+  title: 'View 2 Small',
+  width: '600px',
+  height: '400px',
+  anchor: 'center'
+});
+
+customElements.define('view-animate', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        main {
+            padding: 1em;
+            overflow: auto;
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <b-panel-toolbar look="white" noshadow></b-panel-toolbar>
+        <main>
+            <b-btn @click=${this.animate}>bounce</b-btn>
+            <b-btn @click=${this.animate}>shake</b-btn>
+        </main>
+    `;
+  }
+
+  animate(e) {
+    let fn = e.target.innerText;
+    this.panel[fn]();
+  }
+
+});
+
+_panel.default.register('view-animate', 'view-animate', {
+  title: 'View Animate',
+  width: '600px',
+  height: '400px',
+  anchor: 'center'
+});
+
+_panel.default.register('view-3', 'view-two', {
+  title: 'View 3',
+  controller: 'inset',
+  width: '400px',
+  anchor: 'right'
+});
+
+window.openModalPanel = () => {
+  (0, _panel.Modal)(() => _litElement.html`
+        <b-embed url="https://www.youtube.com/watch?v=sK1ODp0nDbM"></b-embed>
+    `, {
+    closeBtn: true,
+    width: '60vw'
+  });
+};
+
+let listData = [];
+let i = 0;
+
+while (i++ < 100) {
+  listData.push({
+    id: i,
+    label: 'Row ' + i,
+    date: new Date().getTime() + i * 10000000
   });
 }
 
-convertComments(); // popstate
+const listSorts = {
+  id: {
+    label: 'ID',
 
-history.pushState = (f => function pushState() {
-  var ret = f.apply(this, arguments);
-  convertComments();
-  return ret;
-})(history.pushState);
+    sortBy(m) {
+      return m.id;
+    }
 
-history.replaceState = (f => function replaceState() {
-  var ret = f.apply(this, arguments);
-  convertComments();
-  return ret;
-})(history.replaceState);
+  }
+};
+customElements.define('a-list-view', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            height: 340px;
+            /* margin: -2em; */
+            border-bottom: solid 1px rgba(0,0,0,.1);
+        }
 
-window.addEventListener('popstate', function () {
-  convertComments();
+        b-list {
+            height: 100%;
+            overflow: hidden;
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <b-list
+            key="a-list-view"
+            row="a-list-view-row"
+            .sorts=${listSorts}
+            .coll=${listData}
+        ></b-list>
+    `;
+  }
+
 });
-},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"0pV6","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/text":"yukA","../elements/grid":"BALQ","../elements/carousel":"inC5","../elements/timer":"u+eY","../elements/empty-state":"+2dU","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"29Vf","../elements/avatar":"Da++","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../presenters/cal":"YTQF","../helpers/colors-list":"TMO9","../styles/colors.less":"r4vn","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"0tCY","../presenters/notif":"XAiK"}],"I+C3":[function(require,module,exports) {
+customElements.define('a-list-view-row', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            padding: .5em 1em;
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        ${this.model.label}
+    `;
+  }
+
+});
+customElements.define('tab-divider', class extends _litElement.LitElement {
+  static get styles() {
+    return _litElement.css`
+        :host {
+            display: block;
+            color: inherit;
+            margin: 1em 0 0 0;
+            padding: 1em 1.2em .5em;
+            border-top: solid 1px rgba(0,0,0,.1);
+        }
+    `;
+  }
+
+  render() {
+    return _litElement.html`
+        <b-label><slot></slot></b-label>
+    `;
+  }
+
+});
+customElements.define('b-util-info', class extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = _README.default;
+  }
+
+});
+customElements.define('b-backbone-relations', class extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = _README2.default;
+  }
+
+}); // import formControlDocs from '../presenters/form-control/README.md'
+// document.querySelector('#form-control-docs').innerHTML = formControlDocs
+// import listDocs from '../presenters/list/README.md'
+// document.querySelector('#list-docs').innerHTML = listDocs
+
+window.dialogs = {
+  async success(el) {
+    _dialog.default.success().modal();
+  },
+
+  async warn(el) {
+    _dialog.default.warn({
+      title: 'Ooops',
+      msg: 'That is not supported'
+    }).modal();
+  },
+
+  async error(el) {
+    _dialog.default.error({
+      title: 'Error',
+      msg: 'Something went wrong'
+    }).modal();
+  },
+
+  async errorPopover(el) {
+    _dialog.default.error({
+      title: 'Error',
+      msg: 'Something went wrong'
+    }).popover(el);
+  },
+
+  async confirm(el) {
+    if (await _dialog.default.confirm().modal()) console.log('confimed');
+  },
+
+  async confirmDelete(el) {
+    if (await _dialog.default.confirmDelete().popover(el)) console.log('confimed delete');
+  }
+
+};
+document.querySelector('#dialog-success').appendChild(_dialog.default.success().el);
+document.querySelector('#dialog-warn').appendChild(_dialog.default.warn({
+  title: 'Ooops',
+  msg: 'That is not supported'
+}).el);
+document.querySelector('#dialog-error').appendChild(_dialog.default.error({
+  title: 'Error',
+  msg: 'Something went wrong'
+}).el);
+
+window.openView = el => {
+  event.preventDefault();
+
+  _router.default.goTo(el.getAttribute('href'));
+};
+
+customElements.define('notif-demo', class extends _litElement.LitElement {
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return _litElement.html`
+        <style>
+            notif-demo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 400px;
+                max-height: 100vh;
+                /* position: relative; */
+            }
+
+            notif-demo b-notifs {
+                top: 6em;
+            }
+        </style>
+        <b-notifs name="demo"></b-notifs>
+        <b-btn @click=${this.replay} text hidden>Replay Notifs</b-btn>
+    `;
+  }
+
+  firstUpdated() {
+    this.notif({
+      msg: 'A simple notification',
+      autoClose: false,
+      closeOnClick: false
+    }, 500);
+    this.showNotifs();
+  }
+
+  replay(e) {
+    e.currentTarget.hidden = true;
+    this.showNotifs();
+  }
+
+  showNotifs() {
+    this.notif({
+      msg: 'Top left, grow animation',
+      anchor: 'top-left',
+      animation: 'grow'
+    }, 1000);
+    this.notif({
+      msg: 'Top right, fade animation',
+      anchor: 'top-right',
+      animation: 'fade'
+    }, 2000);
+    this.notif({
+      msg: 'Bottom left',
+      anchor: 'bottom-left'
+    }, 3000);
+    this.notif({
+      icon: 'upload-cloud',
+      nid: 'uploading',
+      msg: 'File Uploading...',
+      autoClose: false,
+      closeOnClick: false
+    }, 4000);
+    this.notif({
+      type: 'success',
+      msg: 'File Uploaded',
+      autoClose: 3000,
+      nid: 'uploading',
+      btns: [{
+        label: 'View',
+        color: 'primary'
+      }]
+    }, 6000);
+    this.notif({
+      msg: 'Photo moved to trash',
+      autoClose: 6000,
+      btns: [{
+        label: 'Undo',
+        color: 'primary'
+      }]
+    }, 5000);
+    this.notif({
+      type: 'info',
+      msg: 'Info type notif'
+    }, 8000);
+    this.notif({
+      type: 'error',
+      msg: 'Error type notif'
+    }, 9000);
+    this.notif({
+      type: 'failed',
+      msg: 'Failed type notif'
+    }, 10000);
+    this.notif({
+      type: 'warning',
+      msg: 'Warning type notif'
+    }, 11000);
+    this.notif({
+      type: 'success',
+      msg: 'Success type notif',
+      onClose: () => {
+        this.querySelector('b-btn').hidden = false;
+      }
+    }, 12000);
+  }
+
+  notif(opts, delay) {
+    setTimeout(() => {
+      new _notif.default(Object.assign({
+        controller: 'demo'
+      }, opts));
+    }, delay);
+  }
+
+});
+
+var _default = customElements.get('notif-demo');
+
+exports.default = _default;
+window.addEventListener('load', e => {
+  // setTimeout(()=>{
+  _router.default.start(); // }, 0)
+
+});
+},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"0pV6","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/grid":"BALQ","../elements/timer":"u+eY","../elements/empty-state":"+2dU","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/avatar":"Da++","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"29Vf","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../elements/carousel":"inC5","../elements/timeline-horz":"xCna","../elements/file-icon":"u6Cc","lit-element":"+bhx","../router":"38Qe","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../presenters/cal":"YTQF","../presenters/panel":"cmZt","../presenters/menu":"0tCY","../presenters/dialog":"pos3","../presenters/notif":"XAiK","moment":"a2/B","../util/README.md":"H6j2","../helpers/backbone/relations/README.md":"dG7A","../styles/colors.less":"r4vn","../helpers/colors-list":"TMO9"}],"I+C3":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -40713,6 +40837,6 @@ module.exports = function loadHTMLBundle(bundle) {
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("/1fi");b.register("html",require("PzH6"));b.load([["icons.svg.99a755f0.html","pxeq"]]).then(function(){require("gE6T");});
+var b=require("/1fi");b.register("html",require("PzH6"));b.load([["icons.svg.99a755f0.html","pxeq"]]).then(function(){require("lgAh");});
 },{}]},{},[0], null)
-//# sourceMappingURL=/bui.map
+//# sourceMappingURL=demo.5333d7c0.map

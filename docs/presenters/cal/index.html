@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../bui.css?t=d210987c">
     <script src="../../assets/script.js?t=42463e55"></script>
     <script src="../../bui.js?t=07312548"></script>
-    <title>Popover - Blackstone UI</title>
+    <title>Calendar - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -36,19 +36,7 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersnotif" href="../../presenters/notif/index.html">Notif</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title -active link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
-                  <ul class="headings heading-list">
-                    <li class="heading-item -depth-2"><a class="hlink link-rendering-views" href="#rendering-views">Rendering Views</a>
-                      <ul class="heading-list -depth-2">
-                        <li class="heading-item -depth-3"><a class="hlink link-default-opts" href="#default-opts">Default Opts</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-target" href="#target">Target</a>
-                        </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-options" href="#options">Options</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../../presenters/tabs/index.html">Tabs</a>
                 </li>
@@ -56,7 +44,17 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersmentions" href="../../presenters/mentions/index.html">Mentions</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-presenterscal" href="../../presenters/cal/index.html">Calendar</a>
+                <li class="menu-item -level-2"><a class="link title -active link-presenterscal" href="../../presenters/cal/index.html">Calendar</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-properties" href="#properties">Properties</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-methods" href="#methods">Methods</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-events" href="#events">Events</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-slots" href="#slots">Slots</a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>
@@ -89,49 +87,52 @@
           </ul>
         </li>
       </div>
-      <div class="body page-presenterspopover">
+      <div class="body page-presenterscal">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><h1 id="popover">Popover</h1>
-<p>Uses <a href="https://popper.js.org">popper.js</a> to display views as a popover
-over a partiuclar target</p>
-<h2 id="rendering-views">Rendering Views</h2>
-<p>Popover should only be used as the presenter of views and not be
-responsible for rendering or controlling the view.</p>
-<p>Use views like <code>Menu</code> and <code>Dialog</code> or roll your own and then use
-popover to display your view.</p>
-<pre><code class="lang-js"><span class="pl-k">let</span> view = <span class="pl-k">new</span> MyView()
-<span class="pl-k">let</span> popover = <span class="pl-k">new</span> Popover(target, view, opts)
+        <div class="markdown-body"><h1 id="calendar">Calendar</h1>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;bui/presenters/cal&apos;</span>
 </code></pre>
-<h3 id="default-opts">Default Opts</h3>
-<pre><code class="lang-js"><span class="pl-k">const</span> DefaultOpts = {
-	<span class="hljs-attr">align</span>: <span class="pl-s">&apos;bottom&apos;</span>,
-	<span class="hljs-attr">className</span>: <span class="pl-s">&apos;&apos;</span>,
-	<span class="hljs-attr">clickToggles</span>: <span class="pl-c1">true</span>,
-	<span class="hljs-attr">closeOnHide</span>: <span class="pl-c1">true</span>,
-	<span class="hljs-attr">maxHeight</span>: <span class="pl-s">&apos;auto&apos;</span>,
-	<span class="hljs-attr">maxHeightThreshold</span>: <span class="hljs-number">400</span>,
-	<span class="hljs-attr">overflowBoundry</span>: <span class="pl-s">&apos;scrollParent&apos;</span>,
-	<span class="hljs-attr">onClose</span>: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>{},
-	<span class="hljs-attr">onKeydown</span>: <span class="hljs-function"><span class="hljs-params">e</span>=&gt;</span>{}
-}
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-cal</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;2020-04-07&quot;</span>&gt;</span>
+        Something for this day
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-cal</span>&gt;</span>
 </code></pre>
-<h3 id="target">Target</h3>
-<p>The target can be an element or a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent">MouseEvent</a>.
-If the target is a mouse event, the dropdown will appear where the mouse is placed.</p>
-<h3 id="options">Options</h3>
-<p><code>maxHeight</code> - (string) can be pixels, percent, or <code>vh</code></p>
-<p><code>overflowBoundry</code> - &#x2018;scrollParent&#x2019;, &#x2018;window&#x2019;, or an element</p>
-<blockquote>
-<p>Note: you may want to set <code>maxHeight</code> as well</p>
-</blockquote>
+<!--
+<b-cal date="2020-04-1" style="min-height:740px">
+    <div slot="2020-04-07">
+        Something for this day
+    </div>
+</b-cal>
+-->
+<h2 id="properties">Properties</h2>
+<ul>
+<li><code>date</code> - accepts a string, moment date, or object (ex: {month:3})</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<ul>
+<li><code>nextMonth()</code></li>
+<li><code>prevMonth()</code></li>
+<li><code>goToToday()</code></li>
+</ul>
+<h2 id="events">Events</h2>
+<ul>
+<li><code>date-changed</code> - <code>event.detail</code> will be the date range</li>
+</ul>
+<h2 id="slots">Slots</h2>
+<ul>
+<li><code>after-title</code></li>
+<li><code>before-nav</code></li>
+<li><code>after-nav</code></li>
+</ul>
 
         </div>
         <div class="footer-nav">
-          <div class="left"><a href="../../presenters/notif/index.html"><span class="title">Notif</span></a></div>
-          <div class="right"><a href="../../presenters/tabs/index.html"><span class="label">Next: </span><span class="title">Tabs</span></a></div>
+          <div class="left"><a href="../../presenters/mentions/index.html"><span class="title">Mentions</span></a></div>
+          <div class="right"><a href="../../colors.html"><span class="label">Next: </span><span class="title">Colors</span></a></div>
         </div>
       </div>
     </div>

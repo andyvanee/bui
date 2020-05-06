@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../bui.css?t=2cc14b54">
+    <link rel="stylesheet" href="../bui.css?t=d210987c">
     <script src="../assets/script.js?t=42463e55"></script>
-    <script src="../bui.js?t=b728ab77"></script>
+    <script src="../bui.js?t=07312548"></script>
     <title>Helpers - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -18,16 +18,12 @@
           <ul class="submenu">
             <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Blackstone UI</a>
             </li>
-            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../elements/index.html">Elements</a>
+            <li class="menu-item -level-1 -parent"><span class="title">Components</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-elements" href="../elements/index.html">Elements</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-icons" href="../icons.html">Icons</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-colors" href="../colors.html">Colors</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
-              <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../presenters/dialog/index.html">Dialog</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../presenters/form-control/index.html">Form Control</a>
@@ -46,10 +42,16 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersselection" href="../presenters/selection/index.html">Selection</a>
                 </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmentions" href="../presenters/mentions/index.html">Mentions</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterscal" href="../presenters/cal/index.html">Calendar</a>
+                </li>
               </ul>
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../colors.html">Colors</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-util" href="../util/index.html">Util</a>
                 </li>
                 <li class="menu-item -level-2 -parent"><a class="link title -active link-helpers" href="../helpers/index.html">Helpers</a>
@@ -60,9 +62,11 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-events" href="#events">Events</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-subviews" href="#subviews">Subviews</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-get" href="#get">Get</a>
                         </li>
-                        <li class="heading-item -depth-3"><a class="hlink link-model" href="#model">Model</a>
+                        <li class="heading-item -depth-3"><a class="hlink link-model-coll" href="#model-coll">Model / Coll</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-subviews" href="#subviews">Subviews</a>
                         </li>
                       </ul>
                     </li>
@@ -72,6 +76,8 @@
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-attribute-types" href="#attribute-types">Attribute Types</a>
                         </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-relations" href="#relations">Relations</a>
+                        </li>
                       </ul>
                     </li>
                   </ul>
@@ -80,11 +86,17 @@
                     </li>
                   </ul>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models</a>
-                </li>
                 <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-realtime" href="../realtime/index.html">Realtime</a>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models (WIP)</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Server</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-server" href="../server/index.html">Overview</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-serverrealtime" href="../server/realtime/index.html">Realtime</a>
                 </li>
               </ul>
             </li>
@@ -97,9 +109,16 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="helpers">Helpers</h1>
+<p>Helpers extend existing tools and libraries with added functionality. Typically helpers only need to be imported once and may be done on the root JS file.</p>
+<hr>
 <h2 id="litelement">LitElement</h2>
 <p>Extend LitElement to fit our needs. I like doing this so that we dont have to create unnecessary subclasses</p>
+<pre><code class="lang-js"><span class="pl-c">// include all lit-element helpers</span>
+<span class="pl-k">import</span> <span class="pl-s">&apos;bui/helpers/lit-element&apos;</span>
+</code></pre>
 <h3 id="listeners">Listeners</h3>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;bui/helpers/lit-element/listeners&apos;</span>
+</code></pre>
 <p>Adds support for listening to Backbone Model/Collection/ChildCollection
 events and responding. Most events should just be calling <code>update</code> which
 will rerender the view.</p>
@@ -111,8 +130,14 @@ will rerender the view.</p>
         <span class="pl-s">&apos;reset&apos;</span>: <span class="pl-s">&apos;update&apos;</span>
     }
 }}
+
+<span class="pl-c">// ^ equivalent to:</span>
+<span class="pl-k">this</span>.model.on(<span class="pl-s">&apos;change reset&apos;</span>, <span class="pl-k">this</span>.update.bind(<span class="pl-k">this</span>))
+<span class="pl-k">this</span>.model.get(<span class="pl-s">&apos;child-collection&apos;</span>).on(<span class="pl-s">&apos;reset&apos;</span>, <span class="pl-k">this</span>.update.bind(<span class="pl-k">this</span>))
 </code></pre>
 <h3 id="events">Events</h3>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;bui/helpers/lit-element/events&apos;</span>
+</code></pre>
 <p>To simplify event dispatching from inside the shadow dom, an <code>emitEvent</code>
 method has been added to lit-element</p>
 <pre><code class="lang-js"><span class="pl-k">this</span>.emitEvent(eventName, detail)
@@ -120,7 +145,30 @@ method has been added to lit-element</p>
 </code></pre>
 <p>The emitted event with have <code>bubbles: true</code> and <code>composed: true</code> so that the even
 will bubble up and out of the shadow dom</p>
+<h3 id="get">Get</h3>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;bui/helpers/lit-element/get&apos;</span>
+</code></pre>
+<p>Shortcut to <code>this.model.get()</code> that also supports <code>defaultValue</code></p>
+<pre><code class="lang-js"><span class="pl-k">this</span>.get(<span class="pl-s">&apos;some_key&apos;</span>, <span class="pl-s">&apos;default Value&apos;</span>)
+</code></pre>
+<h3 id="model-coll">Model / Coll</h3>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;bui/helpers/lit-element/model&apos;</span>
+<span class="pl-k">import</span> <span class="pl-s">&apos;bui/helpers/lit-element/coll&apos;</span>
+</code></pre>
+<p>A common pattern is to pass a model object to the custom element. This extension
+will unbind and rebind listeners (if using that extension; see above) and then
+call <code>onModelChange</code> to let you hook into the update and do something (like fetch data)</p>
+<pre><code class="lang-js">onModelChange(model){
+    <span class="pl-k">if</span>( model )
+        model.fetch()
+}
+</code></pre>
 <h3 id="subviews">Subviews</h3>
+<blockquote>
+<p>Considering DEPRECATION</p>
+</blockquote>
+<pre><code class="lang-js"><span class="pl-k">import</span> <span class="pl-s">&apos;bui/helpers/lit-element/sv&apos;</span>
+</code></pre>
 <p>Sometimes a linked subview needs to be created and we&#x2019;d like to keep
 and reuse it rather than recreate it each time (for example, a view
 that pops over an element to edit)</p>
@@ -130,15 +178,7 @@ that pops over an element to edit)</p>
 <span class="pl-c">// the view will be created if it doesn&apos;t exist</span>
 <span class="pl-k">this</span>.sv(<span class="pl-s">&apos;edit&apos;</span>, <span class="pl-s">&apos;my-edit-view&apos;</span>)
 </code></pre>
-<h3 id="model">Model</h3>
-<p>A common pattern is to pass a model object to the custom element. This extension
-will unbind and rebind listeners (if using that extension; see above) and then
-call <code>onModelChange</code> to let you hook into the update and do something (like fetch data)</p>
-<pre><code class="lang-js">onModelChange(model){
-    <span class="pl-k">if</span>( model )
-        model.fetch()
-}
-</code></pre>
+<hr>
 <h2 id="backbone.js">Backbone.js</h2>
 <p>If you want to use Backbone.js for managing data (models/collections) there are some helpers
 to improve the workflow.</p>
@@ -199,6 +239,11 @@ Backbone.registerModelAttrType(<span class="pl-s">&apos;date&apos;</span>, val=&
 <span class="pl-c">//....</span>
 myModel.get(<span class="pl-s">&apos;ts_created&apos;</span>).fromNow()
 </code></pre>
+<h3 id="relations">Relations</h3>
+<p>Any non-trivial app will require models contain nested children. This helper aids in the implementation
+of related models and collections. Children classes are only created when accessed and will pull data
+from the parent model&#x2019;s attributes or a specificed lookup collection.</p>
+<p><a href="backbone/relations/index.html">Read more on Relations</a></p>
 
         </div>
         <div class="footer-nav">

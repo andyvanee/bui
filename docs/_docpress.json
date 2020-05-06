@@ -35,130 +35,132 @@
         ]
       },
       {
-        "title": "Elements",
-        "source": "elements/README.md",
-        "url": "elements/index.html",
-        "slug": "elements",
-        "headings": [
-          {
-            "title": "<b-paper>",
-            "depth": 2,
-            "id": "lessb-papergreater"
-          },
-          {
-            "title": "<b-btn>",
-            "depth": 2,
-            "id": "lessb-btngreater"
-          },
-          {
-            "title": "<b-btn-group>",
-            "depth": 2,
-            "id": "lessb-btn-groupgreater"
-          },
-          {
-            "title": "<b-icon>",
-            "depth": 2,
-            "id": "lessb-icongreater"
-          },
-          {
-            "title": "<b-file-icon>",
-            "depth": 2,
-            "id": "lessb-file-icongreater"
-          },
-          {
-            "title": "<b-hr>",
-            "depth": 2,
-            "id": "lessb-hrgreater"
-          },
-          {
-            "title": "<b-sub>",
-            "depth": 2,
-            "id": "lessb-subgreater"
-          },
-          {
-            "title": "<b-ts>",
-            "depth": 2,
-            "id": "lessb-tsgreater"
-          },
-          {
-            "title": "<b-label>",
-            "depth": 2,
-            "id": "lessb-labelgreater"
-          },
-          {
-            "title": "<b-ribbon>",
-            "depth": 2,
-            "id": "lessb-ribbongreater"
-          },
-          {
-            "title": "<b-avatar>",
-            "depth": 2,
-            "id": "lessb-avatargreater"
-          },
-          {
-            "title": "<b-empty-state>",
-            "depth": 2,
-            "id": "lessb-empty-stategreater"
-          },
-          {
-            "title": "<b-spinner>",
-            "depth": 2,
-            "id": "lessb-spinnergreater"
-          },
-          {
-            "title": "<b-spinner-overlay>",
-            "depth": 2,
-            "id": "lessb-spinner-overlaygreater"
-          },
-          {
-            "title": "<b-uploader>",
-            "depth": 2,
-            "id": "lessb-uploadergreater"
-          },
-          {
-            "title": "<b-code>",
-            "depth": 2,
-            "id": "lessb-codegreater"
-          },
-          {
-            "title": "<b-embed>",
-            "depth": 2,
-            "id": "lessb-embedgreater"
-          },
-          {
-            "title": "<b-audio>",
-            "depth": 2,
-            "id": "lessb-audiogreater"
-          },
-          {
-            "title": "<b-carousel>",
-            "depth": 2,
-            "id": "lessb-carouselgreater"
-          },
-          {
-            "title": "<b-timer>",
-            "depth": 2,
-            "id": "lessb-timergreater"
-          }
-        ],
+        "title": "Components",
         "sections": [
+          {
+            "title": "Elements",
+            "source": "elements/README.md",
+            "url": "elements/index.html",
+            "slug": "elements",
+            "headings": [
+              {
+                "title": "<b-paper>",
+                "depth": 2,
+                "id": "lessb-papergreater"
+              },
+              {
+                "title": "<b-grid>",
+                "depth": 2,
+                "id": "lessb-gridgreater"
+              },
+              {
+                "title": "<b-text>",
+                "depth": 2,
+                "id": "lessb-textgreater"
+              },
+              {
+                "title": "<b-btn>",
+                "depth": 2,
+                "id": "lessb-btngreater"
+              },
+              {
+                "title": "<b-btn-group>",
+                "depth": 2,
+                "id": "lessb-btn-groupgreater"
+              },
+              {
+                "title": "<b-icon>",
+                "depth": 2,
+                "id": "lessb-icongreater"
+              },
+              {
+                "title": "<b-file-icon>",
+                "depth": 2,
+                "id": "lessb-file-icongreater"
+              },
+              {
+                "title": "<b-hr>",
+                "depth": 2,
+                "id": "lessb-hrgreater"
+              },
+              {
+                "title": "<b-sub>` DEPRECATED",
+                "depth": 2,
+                "id": "lessb-subgreater-deprecated"
+              },
+              {
+                "title": "<b-ts>",
+                "depth": 2,
+                "id": "lessb-tsgreater"
+              },
+              {
+                "title": "<b-label>",
+                "depth": 2,
+                "id": "lessb-labelgreater"
+              },
+              {
+                "title": "<b-ribbon>",
+                "depth": 2,
+                "id": "lessb-ribbongreater"
+              },
+              {
+                "title": "<b-avatar>",
+                "depth": 2,
+                "id": "lessb-avatargreater"
+              },
+              {
+                "title": "<b-empty-state>",
+                "depth": 2,
+                "id": "lessb-empty-stategreater"
+              },
+              {
+                "title": "<b-spinner>",
+                "depth": 2,
+                "id": "lessb-spinnergreater"
+              },
+              {
+                "title": "<b-spinner-overlay>",
+                "depth": 2,
+                "id": "lessb-spinner-overlaygreater"
+              },
+              {
+                "title": "<b-uploader>",
+                "depth": 2,
+                "id": "lessb-uploadergreater"
+              },
+              {
+                "title": "<b-code>",
+                "depth": 2,
+                "id": "lessb-codegreater"
+              },
+              {
+                "title": "<b-embed>",
+                "depth": 2,
+                "id": "lessb-embedgreater"
+              },
+              {
+                "title": "<b-audio>",
+                "depth": 2,
+                "id": "lessb-audiogreater"
+              },
+              {
+                "title": "<b-carousel>",
+                "depth": 2,
+                "id": "lessb-carouselgreater"
+              },
+              {
+                "title": "<b-timer>",
+                "depth": 2,
+                "id": "lessb-timergreater"
+              }
+            ]
+          },
           {
             "title": "Icons",
             "source": "docs/icons.md",
             "url": "icons.html",
             "slug": "icons"
           },
-          {
-            "title": "Colors",
-            "source": "docs/colors.md",
-            "url": "colors.html",
-            "slug": "colors"
-          }
-        ]
-      },
-      {
-        "title": "Presenters",
-        "sections": [
           {
             "title": "Dialog",
             "source": "presenters/dialog/README.md",
@@ -269,6 +271,11 @@
                 "id": "creating-the-list"
               },
               {
+                "title": "List Row",
+                "depth": 2,
+                "id": "list-row"
+              },
+              {
                 "title": "List Options",
                 "depth": 2,
                 "id": "list-options"
@@ -313,6 +320,11 @@
                 ]
               },
               {
+                "title": "Layouts",
+                "depth": 2,
+                "id": "layouts"
+              },
+              {
                 "title": "Other Views",
                 "depth": 2,
                 "id": "other-views",
@@ -323,9 +335,19 @@
                     "id": "header"
                   },
                   {
+                    "title": "Empty (view)",
+                    "depth": 3,
+                    "id": "empty-(view)"
+                  },
+                  {
                     "title": "Divider",
                     "depth": 3,
                     "id": "divider"
+                  },
+                  {
+                    "title": "Export Button",
+                    "depth": 3,
+                    "id": "export-button"
                   },
                   {
                     "title": "Slots",
@@ -462,6 +484,11 @@
                 "title": "Modal",
                 "depth": 2,
                 "id": "modal"
+              },
+              {
+                "title": "ActionSheet",
+                "depth": 2,
+                "id": "actionsheet"
               }
             ]
           },
@@ -594,6 +621,11 @@
                 "id": "menu-slots"
               },
               {
+                "title": "No Tab Bar",
+                "depth": 2,
+                "id": "no-tab-bar"
+              },
+              {
                 "title": "Custom Tab Bar",
                 "depth": 2,
                 "id": "custom-tab-bar"
@@ -698,6 +730,62 @@
                 "id": "todo"
               }
             ]
+          },
+          {
+            "title": "Mentions",
+            "source": "presenters/mentions/README.md",
+            "url": "presenters/mentions/index.html",
+            "slug": "presentersmentions",
+            "headings": [
+              {
+                "title": "Options",
+                "depth": 2,
+                "id": "options"
+              },
+              {
+                "title": "Values",
+                "depth": 2,
+                "id": "values"
+              },
+              {
+                "title": "Default Values",
+                "depth": 2,
+                "id": "default-values"
+              },
+              {
+                "title": "Mention Element",
+                "depth": 2,
+                "id": "mention-element"
+              }
+            ]
+          },
+          {
+            "title": "Calendar",
+            "source": "presenters/cal/README.md",
+            "url": "presenters/cal/index.html",
+            "slug": "presenterscal",
+            "headings": [
+              {
+                "title": "Properties",
+                "depth": 2,
+                "id": "properties"
+              },
+              {
+                "title": "Methods",
+                "depth": 2,
+                "id": "methods"
+              },
+              {
+                "title": "Events",
+                "depth": 2,
+                "id": "events"
+              },
+              {
+                "title": "Slots",
+                "depth": 2,
+                "id": "slots"
+              }
+            ]
           }
         ]
       },
@@ -705,25 +793,46 @@
         "title": "Extras",
         "sections": [
           {
+            "title": "Colors",
+            "source": "docs/colors.md",
+            "url": "colors.html",
+            "slug": "colors"
+          },
+          {
             "title": "Util",
             "source": "util/README.md",
             "url": "util/index.html",
             "slug": "util",
             "headings": [
               {
+                "title": "AJAX",
+                "depth": 2,
+                "id": "ajax"
+              },
+              {
+                "title": "Background Resume",
+                "depth": 2,
+                "id": "background-resume"
+              },
+              {
+                "title": "colorScheme",
+                "depth": 2,
+                "id": "colorscheme"
+              },
+              {
+                "title": "device",
+                "depth": 2,
+                "id": "device"
+              },
+              {
                 "title": "normalizeText",
                 "depth": 2,
                 "id": "normalizetext"
               },
               {
-                "title": "titleize",
+                "title": "pick",
                 "depth": 2,
-                "id": "titleize"
-              },
-              {
-                "title": "sortString",
-                "depth": 2,
-                "id": "sortstring"
+                "id": "pick"
               },
               {
                 "title": "Promise.series",
@@ -731,9 +840,14 @@
                 "id": "promise.series"
               },
               {
-                "title": "device",
+                "title": "sortString",
                 "depth": 2,
-                "id": "device"
+                "id": "sortstring"
+              },
+              {
+                "title": "titleize",
+                "depth": 2,
+                "id": "titleize"
               },
               {
                 "title": "store",
@@ -761,19 +875,14 @@
                 "id": "csvtoarray"
               },
               {
+                "title": "range",
+                "depth": 2,
+                "id": "range"
+              },
+              {
                 "title": "readFile",
                 "depth": 2,
                 "id": "readfile"
-              },
-              {
-                "title": "AJAX",
-                "depth": 2,
-                "id": "ajax"
-              },
-              {
-                "title": "Background Resume",
-                "depth": 2,
-                "id": "background-resume"
               },
               {
                 "title": "Touch Events",
@@ -804,14 +913,19 @@
                     "id": "events"
                   },
                   {
+                    "title": "Get",
+                    "depth": 3,
+                    "id": "get"
+                  },
+                  {
+                    "title": "Model / Coll",
+                    "depth": 3,
+                    "id": "model-coll"
+                  },
+                  {
                     "title": "Subviews",
                     "depth": 3,
                     "id": "subviews"
-                  },
-                  {
-                    "title": "Model",
-                    "depth": 3,
-                    "id": "model"
                   }
                 ]
               },
@@ -829,6 +943,11 @@
                     "title": "Attribute Types",
                     "depth": 3,
                     "id": "attribute-types"
+                  },
+                  {
+                    "title": "Relations",
+                    "depth": 3,
+                    "id": "relations"
                   }
                 ]
               }
@@ -873,19 +992,6 @@
                     "id": "license"
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "title": "Models",
-            "source": "models/README.md",
-            "url": "models/index.html",
-            "slug": "models",
-            "headings": [
-              {
-                "title": "Collection",
-                "depth": 2,
-                "id": "collection"
               }
             ]
           },
@@ -967,11 +1073,71 @@
             ]
           },
           {
-            "title": "Realtime",
-            "source": "realtime/README.md",
-            "url": "realtime/index.html",
-            "slug": "realtime",
+            "title": "Models (WIP)",
+            "source": "models/README.md",
+            "url": "models/index.html",
+            "slug": "models",
             "headings": [
+              {
+                "title": "Collection",
+                "depth": 2,
+                "id": "collection"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Server",
+        "sections": [
+          {
+            "title": "Overview",
+            "source": "server/README.md",
+            "url": "server/index.html",
+            "slug": "server",
+            "headings": [
+              {
+                "title": "DB",
+                "depth": 2,
+                "id": "db",
+                "headings": [
+                  {
+                    "title": "db.parseWhere()",
+                    "depth": 3,
+                    "id": "db.parsewhere()"
+                  }
+                ]
+              },
+              {
+                "title": "API",
+                "depth": 2,
+                "id": "api"
+              },
+              {
+                "title": "Model",
+                "depth": 2,
+                "id": "model"
+              }
+            ]
+          },
+          {
+            "title": "Realtime",
+            "source": "server/realtime/README.md",
+            "url": "server/realtime/index.html",
+            "slug": "serverrealtime",
+            "headings": [
+              {
+                "title": "Sync",
+                "depth": 2,
+                "id": "sync",
+                "headings": [
+                  {
+                    "title": "Backbone Collection Sync",
+                    "depth": 3,
+                    "id": "backbone-collection-sync"
+                  }
+                ]
+              },
               {
                 "title": "Views",
                 "depth": 2,
@@ -1029,6 +1195,16 @@
           "id": "lessb-papergreater"
         },
         {
+          "title": "<b-grid>",
+          "depth": 2,
+          "id": "lessb-gridgreater"
+        },
+        {
+          "title": "<b-text>",
+          "depth": 2,
+          "id": "lessb-textgreater"
+        },
+        {
           "title": "<b-btn>",
           "depth": 2,
           "id": "lessb-btngreater"
@@ -1054,9 +1230,9 @@
           "id": "lessb-hrgreater"
         },
         {
-          "title": "<b-sub>",
+          "title": "<b-sub>` DEPRECATED",
           "depth": 2,
-          "id": "lessb-subgreater"
+          "id": "lessb-subgreater-deprecated"
         },
         {
           "title": "<b-ts>",
@@ -1130,12 +1306,6 @@
       "title": "Icons - Blackstone UI",
       "pageTitle": "Icons",
       "slug": "icons"
-    },
-    "colors.html": {
-      "source": "docs/colors.md",
-      "title": "Colors - Blackstone UI",
-      "pageTitle": "Colors",
-      "slug": "colors"
     },
     "presenters/dialog/index.html": {
       "source": "presenters/dialog/README.md",
@@ -1247,6 +1417,11 @@
           "id": "creating-the-list"
         },
         {
+          "title": "List Row",
+          "depth": 2,
+          "id": "list-row"
+        },
+        {
           "title": "List Options",
           "depth": 2,
           "id": "list-options"
@@ -1291,6 +1466,11 @@
           ]
         },
         {
+          "title": "Layouts",
+          "depth": 2,
+          "id": "layouts"
+        },
+        {
           "title": "Other Views",
           "depth": 2,
           "id": "other-views",
@@ -1301,9 +1481,19 @@
               "id": "header"
             },
             {
+              "title": "Empty (view)",
+              "depth": 3,
+              "id": "empty-(view)"
+            },
+            {
               "title": "Divider",
               "depth": 3,
               "id": "divider"
+            },
+            {
+              "title": "Export Button",
+              "depth": 3,
+              "id": "export-button"
             },
             {
               "title": "Slots",
@@ -1440,6 +1630,11 @@
           "title": "Modal",
           "depth": 2,
           "id": "modal"
+        },
+        {
+          "title": "ActionSheet",
+          "depth": 2,
+          "id": "actionsheet"
         }
       ]
     },
@@ -1572,6 +1767,11 @@
           "id": "menu-slots"
         },
         {
+          "title": "No Tab Bar",
+          "depth": 2,
+          "id": "no-tab-bar"
+        },
+        {
           "title": "Custom Tab Bar",
           "depth": 2,
           "id": "custom-tab-bar"
@@ -1677,6 +1877,68 @@
         }
       ]
     },
+    "presenters/mentions/index.html": {
+      "source": "presenters/mentions/README.md",
+      "title": "Mentions - Blackstone UI",
+      "pageTitle": "Mentions",
+      "slug": "presentersmentions",
+      "headings": [
+        {
+          "title": "Options",
+          "depth": 2,
+          "id": "options"
+        },
+        {
+          "title": "Values",
+          "depth": 2,
+          "id": "values"
+        },
+        {
+          "title": "Default Values",
+          "depth": 2,
+          "id": "default-values"
+        },
+        {
+          "title": "Mention Element",
+          "depth": 2,
+          "id": "mention-element"
+        }
+      ]
+    },
+    "presenters/cal/index.html": {
+      "source": "presenters/cal/README.md",
+      "title": "Calendar - Blackstone UI",
+      "pageTitle": "Calendar",
+      "slug": "presenterscal",
+      "headings": [
+        {
+          "title": "Properties",
+          "depth": 2,
+          "id": "properties"
+        },
+        {
+          "title": "Methods",
+          "depth": 2,
+          "id": "methods"
+        },
+        {
+          "title": "Events",
+          "depth": 2,
+          "id": "events"
+        },
+        {
+          "title": "Slots",
+          "depth": 2,
+          "id": "slots"
+        }
+      ]
+    },
+    "colors.html": {
+      "source": "docs/colors.md",
+      "title": "Colors - Blackstone UI",
+      "pageTitle": "Colors",
+      "slug": "colors"
+    },
     "util/index.html": {
       "source": "util/README.md",
       "title": "Util - Blackstone UI",
@@ -1684,19 +1946,34 @@
       "slug": "util",
       "headings": [
         {
+          "title": "AJAX",
+          "depth": 2,
+          "id": "ajax"
+        },
+        {
+          "title": "Background Resume",
+          "depth": 2,
+          "id": "background-resume"
+        },
+        {
+          "title": "colorScheme",
+          "depth": 2,
+          "id": "colorscheme"
+        },
+        {
+          "title": "device",
+          "depth": 2,
+          "id": "device"
+        },
+        {
           "title": "normalizeText",
           "depth": 2,
           "id": "normalizetext"
         },
         {
-          "title": "titleize",
+          "title": "pick",
           "depth": 2,
-          "id": "titleize"
-        },
-        {
-          "title": "sortString",
-          "depth": 2,
-          "id": "sortstring"
+          "id": "pick"
         },
         {
           "title": "Promise.series",
@@ -1704,9 +1981,14 @@
           "id": "promise.series"
         },
         {
-          "title": "device",
+          "title": "sortString",
           "depth": 2,
-          "id": "device"
+          "id": "sortstring"
+        },
+        {
+          "title": "titleize",
+          "depth": 2,
+          "id": "titleize"
         },
         {
           "title": "store",
@@ -1734,19 +2016,14 @@
           "id": "csvtoarray"
         },
         {
+          "title": "range",
+          "depth": 2,
+          "id": "range"
+        },
+        {
           "title": "readFile",
           "depth": 2,
           "id": "readfile"
-        },
-        {
-          "title": "AJAX",
-          "depth": 2,
-          "id": "ajax"
-        },
-        {
-          "title": "Background Resume",
-          "depth": 2,
-          "id": "background-resume"
         },
         {
           "title": "Touch Events",
@@ -1777,14 +2054,19 @@
               "id": "events"
             },
             {
+              "title": "Get",
+              "depth": 3,
+              "id": "get"
+            },
+            {
+              "title": "Model / Coll",
+              "depth": 3,
+              "id": "model-coll"
+            },
+            {
               "title": "Subviews",
               "depth": 3,
               "id": "subviews"
-            },
-            {
-              "title": "Model",
-              "depth": 3,
-              "id": "model"
             }
           ]
         },
@@ -1802,6 +2084,11 @@
               "title": "Attribute Types",
               "depth": 3,
               "id": "attribute-types"
+            },
+            {
+              "title": "Relations",
+              "depth": 3,
+              "id": "relations"
             }
           ]
         }
@@ -1844,19 +2131,6 @@
           "title": "License",
           "depth": 2,
           "id": "license"
-        }
-      ]
-    },
-    "models/index.html": {
-      "source": "models/README.md",
-      "title": "Models - Blackstone UI",
-      "pageTitle": "Models",
-      "slug": "models",
-      "headings": [
-        {
-          "title": "Collection",
-          "depth": 2,
-          "id": "collection"
         }
       ]
     },
@@ -1937,12 +2211,67 @@
         }
       ]
     },
-    "realtime/index.html": {
-      "source": "realtime/README.md",
+    "models/index.html": {
+      "source": "models/README.md",
+      "title": "Models (WIP) - Blackstone UI",
+      "pageTitle": "Models (WIP)",
+      "slug": "models",
+      "headings": [
+        {
+          "title": "Collection",
+          "depth": 2,
+          "id": "collection"
+        }
+      ]
+    },
+    "server/index.html": {
+      "source": "server/README.md",
+      "title": "Overview - Blackstone UI",
+      "pageTitle": "Overview",
+      "slug": "server",
+      "headings": [
+        {
+          "title": "DB",
+          "depth": 2,
+          "id": "db",
+          "headings": [
+            {
+              "title": "db.parseWhere()",
+              "depth": 3,
+              "id": "db.parsewhere()"
+            }
+          ]
+        },
+        {
+          "title": "API",
+          "depth": 2,
+          "id": "api"
+        },
+        {
+          "title": "Model",
+          "depth": 2,
+          "id": "model"
+        }
+      ]
+    },
+    "server/realtime/index.html": {
+      "source": "server/realtime/README.md",
       "title": "Realtime - Blackstone UI",
       "pageTitle": "Realtime",
-      "slug": "realtime",
+      "slug": "serverrealtime",
       "headings": [
+        {
+          "title": "Sync",
+          "depth": 2,
+          "id": "sync",
+          "headings": [
+            {
+              "title": "Backbone Collection Sync",
+              "depth": 3,
+              "id": "backbone-collection-sync"
+            }
+          ]
+        },
         {
           "title": "Views",
           "depth": 2,
@@ -1955,7 +2284,6 @@
     "README.md": "index.html",
     "elements/README.md": "elements/index.html",
     "docs/icons.md": "icons.html",
-    "docs/colors.md": "colors.html",
     "presenters/dialog/README.md": "presenters/dialog/index.html",
     "presenters/form-control/README.md": "presenters/form-control/index.html",
     "presenters/list/README.md": "presenters/list/index.html",
@@ -1965,23 +2293,28 @@
     "presenters/popover/README.md": "presenters/popover/index.html",
     "presenters/tabs/README.md": "presenters/tabs/index.html",
     "presenters/selection/README.md": "presenters/selection/index.html",
+    "presenters/mentions/README.md": "presenters/mentions/index.html",
+    "presenters/cal/README.md": "presenters/cal/index.html",
+    "docs/colors.md": "colors.html",
     "util/README.md": "util/index.html",
     "helpers/README.md": "helpers/index.html",
     "helpers/backbone/relations/README.md": "helpers/backbone/relations/index.html",
-    "models/README.md": "models/index.html",
     "router/README.md": "router/index.html",
-    "realtime/README.md": "realtime/index.html",
-    "docs/bui.css": "bui.css",
+    "models/README.md": "models/index.html",
+    "server/README.md": "server/index.html",
+    "server/realtime/README.md": "server/realtime/index.html",
     "docs/bui.css.map": "bui.css.map",
+    "docs/bui.css": "bui.css",
     "docs/bui.js": "bui.js",
     "docs/bui.js.map": "bui.js.map",
+    "docs/bui.map": "bui.map",
     "docs/icons.svg.28577cf8.html": "icons.svg.28577cf8.html",
     "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
+    "docs/icons.svg.99a755f0.html": "icons.svg.99a755f0.html",
     "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
     "docs/icons.svg.b0516ff5.html": "icons.svg.b0516ff5.html",
     "docs/icons.svg.b9327995.html": "icons.svg.b9327995.html",
-    "docs/icons.svg.bc907dee.html": "icons.svg.bc907dee.html",
     "docs/icons.svg.c6868b42.html": "icons.svg.c6868b42.html",
     "docs/icons.svg.f5352611.html": "icons.svg.f5352611.html",
     "docs/style.css": "style.css"

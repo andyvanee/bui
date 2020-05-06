@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=2cc14b54">
+    <link rel="stylesheet" href="../../bui.css?t=d210987c">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=b728ab77"></script>
+    <script src="../../bui.js?t=07312548"></script>
     <title>Form Control - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -18,16 +18,12 @@
           <ul class="submenu">
             <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
             </li>
-            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+            <li class="menu-item -level-1 -parent"><span class="title">Components</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
-              <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title -active link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
@@ -70,10 +66,16 @@
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersselection" href="../../presenters/selection/index.html">Selection</a>
                 </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmentions" href="../../presenters/mentions/index.html">Mentions</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterscal" href="../../presenters/cal/index.html">Calendar</a>
+                </li>
               </ul>
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
                 </li>
                 <li class="menu-item -level-2 -parent"><a class="link title  link-helpers" href="../../helpers/index.html">Helpers</a>
@@ -82,11 +84,17 @@
                     </li>
                   </ul>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
-                </li>
                 <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-realtime" href="../../realtime/index.html">Realtime</a>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models (WIP)</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Server</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-server" href="../../server/index.html">Overview</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-serverrealtime" href="../../server/realtime/index.html">Realtime</a>
                 </li>
               </ul>
             </li>
@@ -173,6 +181,7 @@ control.addEventListener(<span class="pl-s">&apos;change&apos;</span>, e=&gt;{
 <ul>
 <li><code>required</code></li>
 <li><code>multiline</code></li>
+<li><code>html</code> use html <code>&lt;p&gt;</code> tags for new lines</li>
 <li><code>pattern=&quot;int&quot;</code> - regexp or preset</li>
 <li><code>max=&quot;10&quot;</code> - max length of chars</li>
 <li><code>type=&quot;date&quot;</code></li>
@@ -181,6 +190,14 @@ control.addEventListener(<span class="pl-s">&apos;change&apos;</span>, e=&gt;{
 <li><code>input</code></li>
 <li><code>name</code> - useful for autofill (must use <code>input</code>)</li>
 <li><code>autocomplete</code> (must use <code>input</code>)</li>
+<li><code>change-delay</code> will trigger change after stopped typing</li>
+</ul>
+<h4 id="events">Events</h4>
+<ul>
+<li><code>change</code></li>
+<li><code>submit</code></li>
+<li><code>enterkey</code> (DEPRECATED, use submit)</li>
+<li><code>esckey</code></li>
 </ul>
 <h4 id="input-type">Input type</h4>
 <p><code>text-field</code> defaults to using <code>contenteditable</code> which allows the field to grow and shrink
@@ -190,6 +207,8 @@ as <code>password</code>. For this purpose the <code>input</code> attribute can 
 <span class="hljs-tag">&lt;<span class="hljs-name">text-field</span> <span class="hljs-attr">input</span>=<span class="pl-s">&quot;email&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">text-field</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">text-field</span> <span class="hljs-attr">input</span>=<span class="pl-s">&quot;tel&quot;</span> <span class="hljs-attr">name</span>=<span class="pl-s">&quot;phone&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">text-field</span>&gt;</span>
 </code></pre>
+<h4 id="multiline">Multiline</h4>
+<p>In this mode the enter key will create new lines instead of submitting/saving the value. Holding <code>ctrl/cmd</code> and enter will trigger the submit event.</p>
 <h2 id="lessrich-text-fieldgreater"><code>&lt;rich-text-field&gt;</code></h2>
 <p>Similar to the <code>text-field</code> but with <a href="https://quilljs.com">quill.js</a> enabled for rich text editing.</p>
 <p>The field will also auto convert some special characters (such as 3 periods to an ellipsis) using
@@ -228,6 +247,7 @@ may still have some issues in certain browsers &#x2013; see <a href="https://git
 <li><code>chip</code> - show selected values as &#x201C;chips&#x201D;</li>
 <li><code>menu-max-height</code></li>
 <li><code>menu-align</code></li>
+<li><code>no-arrow</code></li>
 </ul>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">form-control</span> <span class="hljs-attr">material</span>=<span class="pl-s">&quot;filled&quot;</span> <span class="hljs-attr">label</span>=<span class="pl-s">&quot;Select an option&quot;</span>&gt;</span>
 	<span class="hljs-tag">&lt;<span class="hljs-name">select-field</span> <span class="hljs-attr">show-empty</span>&gt;</span>
@@ -332,6 +352,7 @@ html`<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form-c
 <h4 id="properties">Properties</h4>
 <ul>
 <li><code>.validateChange(m, changes, key, val)</code> - adjust or prevent changes from happening</li>
+<li><code>.onChange(changes)</code></li>
 </ul>
 <h2 id="extras">Extras</h2>
 <h3 id="lessdate-pickergreater"><code>&lt;date-picker&gt;</code></h3>

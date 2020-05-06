@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
-    <link rel="stylesheet" href="../../bui.css?t=2cc14b54">
+    <link rel="stylesheet" href="../../bui.css?t=d210987c">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=b728ab77"></script>
+    <script src="../../bui.js?t=07312548"></script>
     <title>Selection - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -18,16 +18,12 @@
           <ul class="submenu">
             <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
             </li>
-            <li class="menu-item -level-1 -parent"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+            <li class="menu-item -level-1 -parent"><span class="title">Components</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item -level-1 -parent"><span class="title">Presenters</span>
-              <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
@@ -88,10 +84,16 @@
                     </li>
                   </ul>
                 </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmentions" href="../../presenters/mentions/index.html">Mentions</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterscal" href="../../presenters/cal/index.html">Calendar</a>
+                </li>
               </ul>
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
               <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
+                </li>
                 <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
                 </li>
                 <li class="menu-item -level-2 -parent"><a class="link title  link-helpers" href="../../helpers/index.html">Helpers</a>
@@ -100,11 +102,17 @@
                     </li>
                   </ul>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models</a>
-                </li>
                 <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-realtime" href="../../realtime/index.html">Realtime</a>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models (WIP)</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Server</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-server" href="../../server/index.html">Overview</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-serverrealtime" href="../../server/realtime/index.html">Realtime</a>
                 </li>
               </ul>
             </li>
@@ -121,13 +129,13 @@
 selects items from a long press and drag; auto scrolls on mobile; selects range of items
 from a click and shfit+click (like a native desktop file explorer)</p>
 <p><img src="/presenters/selection/screenshot.gif" alt="screenshot"></p>
-<pre><code class="lang-js"><span class="pl-k">let</span> bulkSelect = <span class="pl-k">new</span> Selection(listEl, <span class="pl-s">&apos;tag-name-of-item&apos;</span>, opts={})
+<pre><code class="lang-js"><span class="pl-k">let</span> selection = <span class="pl-k">new</span> Selection(listEl, <span class="pl-s">&apos;tag-name-of-item&apos;</span>, opts={})
 
-bulkSelect.begin()
+selection.begin()
 
 <span class="pl-c">// ... later</span>
-bulkSelect.result.length
-bulkSelect.result.models
+selection.result.length
+selection.result.models
 </code></pre>
 <h2 id="methods">Methods</h2>
 <h3 id=".begin()"><code>.begin()</code></h3>
@@ -194,7 +202,7 @@ sel.on(<span class="pl-s">&apos;change&apos;</span>, result=&gt;{
         </div>
         <div class="footer-nav">
           <div class="left"><a href="../../presenters/tabs/index.html"><span class="title">Tabs</span></a></div>
-          <div class="right"><a href="../../util/index.html"><span class="label">Next: </span><span class="title">Util</span></a></div>
+          <div class="right"><a href="../../presenters/mentions/index.html"><span class="label">Next: </span><span class="title">Mentions</span></a></div>
         </div>
       </div>
     </div>
