@@ -1097,21 +1097,46 @@
             "slug": "server",
             "headings": [
               {
-                "title": "DB",
+                "title": "Methods",
                 "depth": 2,
-                "id": "db",
+                "id": "methods",
                 "headings": [
+                  {
+                    "title": "Utilities",
+                    "depth": 3,
+                    "id": "utilities"
+                  },
+                  {
+                    "title": "db.query()",
+                    "depth": 3,
+                    "id": "db.query()"
+                  },
+                  {
+                    "title": "db.transactionalQuery()",
+                    "depth": 3,
+                    "id": "db.transactionalquery()"
+                  },
                   {
                     "title": "db.parseWhere()",
                     "depth": 3,
                     "id": "db.parsewhere()"
+                  },
+                  {
+                    "title": "db.updateOnDuplicate()",
+                    "depth": 3,
+                    "id": "db.updateonduplicate()"
+                  },
+                  {
+                    "title": "db.bulkInsert()",
+                    "depth": 3,
+                    "id": "db.bulkinsert()"
                   }
                 ]
               },
               {
-                "title": "API",
+                "title": "Results",
                 "depth": 2,
-                "id": "api"
+                "id": "results"
               },
               {
                 "title": "Model",
@@ -2231,21 +2256,46 @@
       "slug": "server",
       "headings": [
         {
-          "title": "DB",
+          "title": "Methods",
           "depth": 2,
-          "id": "db",
+          "id": "methods",
           "headings": [
+            {
+              "title": "Utilities",
+              "depth": 3,
+              "id": "utilities"
+            },
+            {
+              "title": "db.query()",
+              "depth": 3,
+              "id": "db.query()"
+            },
+            {
+              "title": "db.transactionalQuery()",
+              "depth": 3,
+              "id": "db.transactionalquery()"
+            },
             {
               "title": "db.parseWhere()",
               "depth": 3,
               "id": "db.parsewhere()"
+            },
+            {
+              "title": "db.updateOnDuplicate()",
+              "depth": 3,
+              "id": "db.updateonduplicate()"
+            },
+            {
+              "title": "db.bulkInsert()",
+              "depth": 3,
+              "id": "db.bulkinsert()"
             }
           ]
         },
         {
-          "title": "API",
+          "title": "Results",
           "depth": 2,
-          "id": "api"
+          "id": "results"
         },
         {
           "title": "Model",
@@ -2303,17 +2353,18 @@
     "models/README.md": "models/index.html",
     "server/README.md": "server/index.html",
     "server/realtime/README.md": "server/realtime/index.html",
-    "docs/bui.css.map": "bui.css.map",
     "docs/bui.css": "bui.css",
     "docs/bui.js": "bui.js",
     "docs/bui.js.map": "bui.js.map",
+    "docs/bui.css.map": "bui.css.map",
     "docs/bui.map": "bui.map",
     "docs/icons.svg.28577cf8.html": "icons.svg.28577cf8.html",
     "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
-    "docs/icons.svg.99a755f0.html": "icons.svg.99a755f0.html",
     "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
     "docs/icons.svg.b0516ff5.html": "icons.svg.b0516ff5.html",
+    "docs/icons.svg.99a755f0.html": "icons.svg.99a755f0.html",
+    "docs/icons.svg.9af7d01a.html": "icons.svg.9af7d01a.html",
     "docs/icons.svg.b9327995.html": "icons.svg.b9327995.html",
     "docs/icons.svg.c6868b42.html": "icons.svg.c6868b42.html",
     "docs/icons.svg.f5352611.html": "icons.svg.f5352611.html",

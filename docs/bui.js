@@ -5,8 +5,6 @@
 //
 // anything defined in a previous bundle is accessed via the
 // orig method which is the require for previous bundles
-
-// eslint-disable-next-line no-global-assign
 parcelRequire = (function (modules, cache, entry, globalName) {
   // Save the require from previous bundle to this closure if any
   var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
@@ -77,8 +75,16 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     }, {}];
   };
 
+  var error;
   for (var i = 0; i < entry.length; i++) {
-    newRequire(entry[i]);
+    try {
+      newRequire(entry[i]);
+    } catch (e) {
+      // Save first error but execute all entries
+      if (!error) {
+        error = e;
+      }
+    }
   }
 
   if (entry.length) {
@@ -103,6 +109,13 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   // Override the current require with this new one
+  parcelRequire = newRequire;
+
+  if (error) {
+    // throw error from earlier, _after updating parcelRequire_
+    throw error;
+  }
+
   return newRequire;
 })({"uWh2":[function(require,module,exports) {
 "use strict";
@@ -180,7 +193,7 @@ const isDirective = o => {
 };
 
 exports.isDirective = isDirective;
-},{}],"2ytx":[function(require,module,exports) {
+},{}],"ytxR":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -718,7 +731,7 @@ class TemplateInstance {
 }
 
 exports.TemplateInstance = TemplateInstance;
-},{"./dom.js":"2ytx","./template.js":"Av0K"}],"cVNN":[function(require,module,exports) {
+},{"./dom.js":"ytxR","./template.js":"Av0K"}],"cVNN":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -853,7 +866,7 @@ class SVGTemplateResult extends TemplateResult {
 }
 
 exports.SVGTemplateResult = SVGTemplateResult;
-},{"./dom.js":"2ytx","./template.js":"Av0K"}],"atl2":[function(require,module,exports) {
+},{"./dom.js":"ytxR","./template.js":"Av0K"}],"atl2":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1406,7 +1419,7 @@ const getOptions = o => o && (eventOptionsSupported ? {
   passive: o.passive,
   once: o.once
 } : o.capture);
-},{"./directive.js":"uWh2","./dom.js":"2ytx","./part.js":"pnLb","./template-instance.js":"bn5t","./template-result.js":"cVNN","./template.js":"Av0K"}],"52LB":[function(require,module,exports) {
+},{"./directive.js":"uWh2","./dom.js":"ytxR","./part.js":"pnLb","./template-instance.js":"bn5t","./template-result.js":"cVNN","./template.js":"Av0K"}],"LBiL":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1609,7 +1622,7 @@ const render = (result, container, options) => {
 };
 
 exports.render = render;
-},{"./dom.js":"2ytx","./parts.js":"atl2","./template-factory.js":"gbKZ"}],"SP/d":[function(require,module,exports) {
+},{"./dom.js":"ytxR","./parts.js":"atl2","./template-factory.js":"gbKZ"}],"SPDu":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1853,7 +1866,7 @@ exports.html = html;
 const svg = (strings, ...values) => new _templateResult.SVGTemplateResult(strings, values, 'svg', _defaultTemplateProcessor.defaultTemplateProcessor);
 
 exports.svg = svg;
-},{"./lib/default-template-processor.js":"52LB","./lib/template-result.js":"cVNN","./lib/directive.js":"uWh2","./lib/dom.js":"2ytx","./lib/part.js":"pnLb","./lib/parts.js":"atl2","./lib/render.js":"Fhpq","./lib/template-factory.js":"gbKZ","./lib/template-instance.js":"bn5t","./lib/template.js":"Av0K"}],"NXoq":[function(require,module,exports) {
+},{"./lib/default-template-processor.js":"LBiL","./lib/template-result.js":"cVNN","./lib/directive.js":"uWh2","./lib/dom.js":"ytxR","./lib/part.js":"pnLb","./lib/parts.js":"atl2","./lib/render.js":"Fhpq","./lib/template-factory.js":"gbKZ","./lib/template-instance.js":"bn5t","./lib/template.js":"Av0K"}],"NXoq":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2382,7 +2395,7 @@ const render = (result, container, options) => {
 };
 
 exports.render = render;
-},{"./dom.js":"2ytx","./modify-template.js":"NXoq","./render.js":"Fhpq","./template-factory.js":"gbKZ","./template-instance.js":"bn5t","./template.js":"Av0K","../lit-html.js":"SP/d"}],"fKvB":[function(require,module,exports) {
+},{"./dom.js":"ytxR","./modify-template.js":"NXoq","./render.js":"Fhpq","./template-factory.js":"gbKZ","./template-instance.js":"bn5t","./template.js":"Av0K","../lit-html.js":"SPDu"}],"fKvB":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3110,7 +3123,7 @@ _a = finalized;
  */
 
 UpdatingElement[_a] = true;
-},{}],"4Fzp":[function(require,module,exports) {
+},{}],"FzpZ":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3432,7 +3445,7 @@ const css = (strings, ...values) => {
 };
 
 exports.css = css;
-},{}],"+bhx":[function(require,module,exports) {
+},{}],"bhxD":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3736,7 +3749,7 @@ LitElement['finalized'] = true;
  */
 
 LitElement.render = _shadyRender.render;
-},{"lit-html":"SP/d","lit-html/lib/shady-render.js":"eBH8","./lib/updating-element.js":"fKvB","./lib/decorators.js":"4Fzp","lit-html/lit-html.js":"SP/d","./lib/css-tag.js":"ZFCR"}],"ncPe":[function(require,module,exports) {
+},{"lit-html":"SPDu","lit-html/lib/shady-render.js":"eBH8","./lib/updating-element.js":"fKvB","./lib/decorators.js":"FzpZ","lit-html/lit-html.js":"SPDu","./lib/css-tag.js":"ZFCR"}],"ncPe":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3797,13 +3810,9 @@ const svgIcons = new SvgIcons();
 exports.svgIcons = svgIcons;
 
 class IconElement extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({
-      mode: 'open'
-    });
-    let temp = document.createElement('template');
-    temp.innerHTML = `<style>
+  // not ideal...
+  get styles() {
+    return `
 		:host {
 			display: inline-flex;
 			vertical-align: middle;
@@ -3849,6 +3858,17 @@ class IconElement extends HTMLElement {
 		:host([name="arrows-ccw"][spin]) svg {
 			animation: 1600ms rotate360CCW infinite linear;
 		}
+		`;
+  }
+
+  constructor() {
+    super();
+    this.attachShadow({
+      mode: 'open'
+    });
+    let temp = document.createElement('template');
+    temp.innerHTML = `<style>
+		${this.styles}
 		</style>
 		<slot></slot>
 		`;
@@ -3912,7 +3932,7 @@ class IconList extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
 		:host {
 			display: block;
 			column-count: 6;
@@ -3955,8 +3975,8 @@ class IconList extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
-		${svgIcons.names.map(name => _litElement.html`
+    return (0, _litElement.html)`
+		${svgIcons.names.map(name => (0, _litElement.html)`
 			<div>
 				<b-icon name=${name}></b-icon> <small>${name}</small>
 			</div>
@@ -3968,7 +3988,7 @@ class IconList extends _litElement.LitElement {
 
 exports.IconList = IconList;
 customElements.define('b-icon-list', IconList);
-},{"lit-element":"+bhx","./icons.svg.html":"pxeq"}],"EnCN":[function(require,module,exports) {
+},{"lit-element":"bhxD","./icons.svg.html":"pxeq"}],"EnCN":[function(require,module,exports) {
 /*
 	SVG and idea taken from https://ant.design/components/button/
 	
@@ -4057,7 +4077,7 @@ class BtnElement extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
     
         :host{
             --red: var(--red-700);
@@ -4372,13 +4392,13 @@ class BtnElement extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <div class="hover"></div>
         <main>
             <span>
                 <b-spinner></b-spinner>
                 <slot name="icon">
-                    ${this.icon ? _litElement.html`<b-icon name="${this.icon}"></b-icon>` : ''}
+                    ${this.icon ? (0, _litElement.html)`<b-icon name="${this.icon}"></b-icon>` : ''}
                 </slot>
             </span>
             <slot></slot>
@@ -4402,7 +4422,7 @@ class BtnElement extends _litElement.LitElement {
 
 exports.default = BtnElement;
 customElements.define('b-btn', BtnElement);
-},{"lit-element":"+bhx","./spinner":"EnCN","./icon":"ncPe"}],"0pV6":[function(require,module,exports) {
+},{"lit-element":"bhxD","./spinner":"EnCN","./icon":"ncPe"}],"pV6C":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4414,7 +4434,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-btn-group', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: inline-flex;
         }
@@ -4436,7 +4456,7 @@ customElements.define('b-btn-group', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <slot></slot>
     `;
   }
@@ -4446,7 +4466,7 @@ customElements.define('b-btn-group', class extends _litElement.LitElement {
 var _default = customElements.get('b-btn-group');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"eyVY":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"eyVY":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4496,7 +4516,7 @@ class SpinnerOverlayElement extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
 		:host {
 			--spinnerBgd: var(--b-spinner-overlay-bgd, rgba(255,255,255 ,.6));
             --spinnerColor: inherit;
@@ -4563,7 +4583,7 @@ class SpinnerOverlayElement extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
 		<main>
 			<b-spinner></b-spinner>
 			<label>${this.label}</label>
@@ -4575,7 +4595,7 @@ class SpinnerOverlayElement extends _litElement.LitElement {
 
 exports.SpinnerOverlayElement = SpinnerOverlayElement;
 customElements.define('b-spinner-overlay', SpinnerOverlayElement);
-},{"lit-element":"+bhx","./spinner":"EnCN"}],"5EqR":[function(require,module,exports) {
+},{"lit-element":"bhxD","./spinner":"EnCN"}],"EqRM":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4703,7 +4723,7 @@ class UploaderElement extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             --hoverBgd: rgba(255,236,179 ,.7);
             --uploadingBgd: rgba(238,238,238 ,.8);
@@ -4801,7 +4821,7 @@ class UploaderElement extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <input class="choose" type="file" @click=${e => e.stopPropagation()} @change=${this._inputChange} accept=${this.accept} ?multiple=${this.multiple}>
         <div class="placeholder">${this.placeholder}</div>
         <div class="progress">
@@ -5019,7 +5039,7 @@ const dirEntries = dir => {
     });
   });
 };
-},{"lit-element":"+bhx","../util/ajax.js":"5EqR","../util/file.ext.js":"trgA"}],"Yy3A":[function(require,module,exports) {
+},{"lit-element":"bhxD","../util/ajax.js":"EqRM","../util/file.ext.js":"trgA"}],"Yy3A":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5050,7 +5070,7 @@ class PaperElement extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             box-sizing: border-box;
             display: block;
@@ -5097,6 +5117,10 @@ class PaperElement extends _litElement.LitElement {
         :host([outline]) {
             box-shadow: none;
             border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        :host([noshadow]) {
+            box-shadow: none;
         }
 
         :host([dense]) {
@@ -5181,7 +5205,7 @@ class PaperElement extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <slot></slot>
     `;
   }
@@ -5190,7 +5214,7 @@ class PaperElement extends _litElement.LitElement {
 
 exports.PaperElement = PaperElement;
 customElements.define('b-paper', PaperElement);
-},{"lit-element":"+bhx"}],"yukA":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"yukA":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5202,7 +5226,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-text', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: inline-block;
         }
@@ -5248,7 +5272,8 @@ customElements.define('b-text', class extends _litElement.LitElement {
         :host([tone="info"]) { color: var(--b-text-tone-info, var(--blue, blue)); }
 
         @media (hover){
-            :host([link]:hover) {
+            :host([link]:hover),
+            :host([href]:hover) {
                 color: var(--b-text-link-color, var(--theme, var(--blue, blue)));
             }
         }
@@ -5270,7 +5295,7 @@ customElements.define('b-text', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <slot></slot>
     `;
   }
@@ -5280,7 +5305,7 @@ customElements.define('b-text', class extends _litElement.LitElement {
 var _default = customElements.get('b-text');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"BALQ":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"BALQ":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5292,7 +5317,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-grid', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -5323,6 +5348,14 @@ customElements.define('b-grid', class extends _litElement.LitElement {
         :host([cols="2,1,1"]) { grid-template-columns: 2fr 1fr 1fr; }
         :host([cols="1,1,2"]) { grid-template-columns: 1fr 1fr 2fr; }
 
+        @media (max-width:699px){
+            :host([cols-mobile="1"]) { grid-template-columns: 1fr; }
+            :host([cols-mobile="2"]) { grid-template-columns: repeat(2, 1fr); }
+            :host([cols-mobile="3"]) { grid-template-columns: repeat(3, 1fr); }
+            :host([cols-mobile="2,1"]) { grid-template-columns: 2fr 1fr; }
+            :host([cols-mobile="1,2"]) { grid-template-columns: 1fr 2fr; }
+        }
+
         :host([gap="0"]), :host([gap="none"]) { gap: 0; }
         :host([gap=".5"]) { gap: .5em; }
         :host([gap="1"]) { gap: 1em; }
@@ -5342,7 +5375,7 @@ customElements.define('b-grid', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <slot></slot>
     `;
   }
@@ -5352,7 +5385,7 @@ customElements.define('b-grid', class extends _litElement.LitElement {
 var _default = customElements.get('b-grid');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"inC5":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"inC5":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5382,7 +5415,7 @@ customElements.define('b-carousel', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: block;
             position:relative;
@@ -5440,9 +5473,9 @@ customElements.define('b-carousel', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <slot></slot>
-        <nav ?hidden=${this.views.length <= 1}>${this.views.map((v, i) => _litElement.html`
+        <nav ?hidden=${this.views.length <= 1}>${this.views.map((v, i) => (0, _litElement.html)`
             <div i=${i} ?active=${i == this.active} @click=${this.navTo}>
                 <div></div>
             </div>
@@ -5480,7 +5513,7 @@ customElements.define('b-carousel', class extends _litElement.LitElement {
 var _default = customElements.get('b-carousel');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"a2/B":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"a2Bw":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 //! moment.js
@@ -10086,7 +10119,7 @@ var global = arguments[3];
 
 })));
 
-},{}],"u+eY":[function(require,module,exports) {
+},{}],"uEYO":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10140,7 +10173,7 @@ class TimerElement extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: inline-flex;
 			--zeroColor: rgba(0,0,0,.5);
@@ -10174,13 +10207,13 @@ class TimerElement extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
 		<unit class="hours" value="${this.hours}">${this.hours}</unit>
 		<span>:</span>
 		<unit class="minutes" value="${this.minutes}">${this.minutes}</unit>
 		<span>:</span>
 		<unit class="seconds" value="${this.seconds}">${this.seconds}</unit>
-		${this.ms ? _litElement.html`<unit class="ms">.${this.milliseconds}</unit>` : ''}
+		${this.ms ? (0, _litElement.html)`<unit class="ms">.${this.milliseconds}</unit>` : ''}
     `;
   }
 
@@ -10241,7 +10274,7 @@ class TimerElement extends _litElement.LitElement {
 
 exports.TimerElement = TimerElement;
 customElements.define('b-timer', TimerElement);
-},{"lit-element":"+bhx","moment":"a2/B"}],"+2dU":[function(require,module,exports) {
+},{"lit-element":"bhxD","moment":"a2Bw"}],"dUnZ":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10264,7 +10297,7 @@ class EmptyState extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: flex;
             flex-direction: column;
@@ -10313,7 +10346,7 @@ class EmptyState extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <slot>${this.value}</slot>
     `;
   }
@@ -10322,7 +10355,7 @@ class EmptyState extends _litElement.LitElement {
 
 exports.default = EmptyState;
 customElements.define('b-empty-state', EmptyState);
-},{"lit-element":"+bhx"}],"DcCw":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"DcCw":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10351,7 +10384,7 @@ class Label extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             position: relative;
             z-index: 1;
@@ -10508,7 +10541,7 @@ class Label extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <div class="bgd"></div>
         <b-hr></b-hr>
         <slot></slot>
@@ -10520,7 +10553,7 @@ class Label extends _litElement.LitElement {
 
 exports.default = Label;
 customElements.define('b-label', Label);
-},{"lit-element":"+bhx"}],"jV4C":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"jV4C":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10556,7 +10589,7 @@ customElements.define('b-ribbon', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             --width: 4em;
             --height: 1em;
@@ -10636,7 +10669,7 @@ customElements.define('b-ribbon', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <div class="wrap">
             <div class="ribbon">
                 <div class="inner">
@@ -10652,7 +10685,7 @@ customElements.define('b-ribbon', class extends _litElement.LitElement {
 var _default = customElements.get('b-ribbon');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"IOAQ":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"IOAQ":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10664,7 +10697,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-hr', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             --bgd: var(--b-hr-bgd, rgba(0,0,0,.1));
 
@@ -10697,7 +10730,7 @@ customElements.define('b-hr', class extends _litElement.LitElement {
 
 
   render() {
-    return _litElement.html``;
+    return (0, _litElement.html)``;
   }
 
 });
@@ -10705,7 +10738,7 @@ customElements.define('b-hr', class extends _litElement.LitElement {
 var _default = customElements.get('b-hr');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"VANQ":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"VANQ":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10720,7 +10753,7 @@ var _litElement = require("lit-element");
 */
 customElements.define('b-sub', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: inline;
             position:relative;
@@ -10736,7 +10769,7 @@ customElements.define('b-sub', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <slot></slot>
     `;
   }
@@ -10746,7 +10779,7 @@ customElements.define('b-sub', class extends _litElement.LitElement {
 var _default = customElements.get('b-sub');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"29Vf":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"VfwF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10758,7 +10791,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-ts', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: inline-block;
             white-space: nowrap;
@@ -10782,7 +10815,7 @@ customElements.define('b-ts', class extends _litElement.LitElement {
 
   set date(date) {
     this.__date = date;
-    if (date) this.title = this.date.format('l');
+    if (date) this.title = this.date.format('LT l');
     this.requestUpdate();
   }
 
@@ -10794,7 +10827,7 @@ customElements.define('b-ts', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         ${this.displayTime}
     `;
   }
@@ -10804,7 +10837,7 @@ customElements.define('b-ts', class extends _litElement.LitElement {
 var _default = customElements.get('b-ts');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"Da++":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"DaYz":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11017,23 +11050,24 @@ var _litElement = require("lit-element");
 
 customElements.define('b-code', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
 
         :host {
-            background: var(--gray-100);
+            background: var(--theme-bgd-accent, #ccc);
             border-radius: 3px;
             color: initial;
             padding: 0 .3em;
         }
 
         code {
-            color: inherit;
+            color: var(--theme-color, inherit);
         }
 
         :host([block]) {
             display: block;
             font-family: monospace;
             padding: 1em;
+            overflow-x: auto;
         }
 
         :host([block]) code {
@@ -11048,7 +11082,7 @@ customElements.define('b-code', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <code><slot></slot></code>
     `;
   }
@@ -11058,7 +11092,7 @@ customElements.define('b-code', class extends _litElement.LitElement {
 var _default = customElements.get('b-code');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"bpDM":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"bpDM":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11080,7 +11114,7 @@ customElements.define('b-embed', class Embed extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: block;
             position:relative;
@@ -11105,7 +11139,7 @@ customElements.define('b-embed', class Embed extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <main>
             <iframe src='${this.formattedURL}' 
                     frameborder='0' 
@@ -11135,7 +11169,7 @@ customElements.define('b-embed', class Embed extends _litElement.LitElement {
 var _default = customElements.get('b-embed');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"ZCfn":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"ZCfn":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11186,7 +11220,7 @@ customElements.define('range-slider', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             --size: 2px;
             --thumbSize: 14px;
@@ -11407,7 +11441,7 @@ customElements.define('range-slider', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <rail></rail>
         <track style="left:${this._minLeft}%; width:${this._trackLength}%"></track>
         <thumb min ?active=${this._active == 'min'} style="left:${this._minLeft}%">
@@ -11488,7 +11522,7 @@ customElements.define('range-slider', class extends _litElement.LitElement {
 var _default = customElements.get('range-slider');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"2z4L":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"z4Ln":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11625,7 +11659,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: block;
             position:relative;
@@ -11736,7 +11770,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <main @mouseenter=${this.onHover} @mouseleave=${this.onHoverLeave}>
             <audio
                 @loadedmetadata=${this.audioLoaded}
@@ -11999,7 +12033,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
 var _default = customElements.get('b-audio');
 
 exports.default = _default;
-},{"lit-element":"+bhx","./icon":"ncPe","../presenters/form-control/controls/range-slider":"ZCfn","moment":"a2/B","../util/store":"2z4L"}],"/jTP":[function(require,module,exports) {
+},{"lit-element":"bhxD","./icon":"ncPe","../presenters/form-control/controls/range-slider":"ZCfn","moment":"a2Bw","../util/store":"z4Ln"}],"jTPt":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12060,7 +12094,7 @@ const unsafeHTML = (0, _litHtml.directive)(value => part => {
   });
 });
 exports.unsafeHTML = unsafeHTML;
-},{"../lib/parts.js":"atl2","../lit-html.js":"SP/d"}],"lo/u":[function(require,module,exports) {
+},{"../lib/parts.js":"atl2","../lit-html.js":"SPDu"}],"loUd":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
 
@@ -14670,6 +14704,53 @@ Popper.placements = placements;
 Popper.Defaults = Defaults;
 var _default = Popper;
 exports.default = _default;
+},{}],"FgfO":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// https://blog.roomanna.com/09-24-2011/dynamically-coloring-a-favicon
+let favicon;
+
+var _default = (color = false, method = "lighten") => {
+  let icon = document.querySelector("link[rel='icon']");
+
+  if (!favicon) {
+    ;
+    favicon = icon.cloneNode();
+  }
+
+  if (!color) {
+    icon.type = favicon.type;
+    icon.href = favicon.href;
+    return;
+  }
+
+  function onImageLoaded() {
+    let canvas = document.createElement("canvas");
+    let size = img.naturalHeight;
+    let radius = size / 2;
+    canvas.width = size;
+    canvas.height = size;
+    let context = canvas.getContext("2d");
+    context.drawImage(img, 0, 0);
+    context.globalCompositeOperation = method;
+    context.fillStyle = color;
+    context.arc(radius, radius, radius, 0, 2 * Math.PI, false);
+    context.fill();
+    icon.type = "image/x-icon";
+    icon.href = canvas.toDataURL();
+  }
+
+  ;
+  var img = document.createElement("img");
+  img.addEventListener("load", onImageLoaded);
+  img.src = favicon.href;
+};
+
+exports.default = _default;
 },{}],"la8o":[function(require,module,exports) {
 "use strict";
 
@@ -14677,6 +14758,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.colorScheme = exports.default = void 0;
+
+var _colorizeFavicon = _interopRequireDefault(require("./colorize-favicon"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 const UA = navigator.userAgent;
 const device = {
   get is_ios() {
@@ -14793,11 +14879,69 @@ const colorScheme = {
     this._watchers.forEach(cb => {
       cb(mode);
     });
+  },
+
+  apply({
+    colorizeFaviconComposition = 'light'
+  } = {}) {
+    localStorage.setItem('theme-colorize-icon', colorizeFaviconComposition);
+    this.onChange(this.setTheme);
+    this.setTheme();
+    this.setAccent();
+  },
+
+  get theme() {
+    return localStorage.getItem('theme');
+  },
+
+  get accent() {
+    return localStorage.getItem('theme-accent');
+  },
+
+  setTheme(theme) {
+    const html = document.documentElement;
+    let metaThemeColor = document.head.querySelector('meta[name="theme-color"]'); // create the meta theme color if not found
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
+
+    if (!metaThemeColor) {
+      metaThemeColor = document.createElement('meta');
+      metaThemeColor.setAttribute('name', 'theme-color');
+      document.head.appendChild(metaThemeColor);
+    }
+
+    html.removeAttribute('light');
+    html.removeAttribute('dark');
+    if (theme === undefined) theme = localStorage.getItem('theme') || 'system';
+    localStorage.setItem('theme', theme);
+    if (theme == 'system') theme = this.isDarkMode ? 'dark' : 'light';
+    html.setAttribute(theme, '');
+    metaThemeColor.content = getComputedStyle(document.body).getPropertyValue('--theme-bgd');
+  },
+
+  setAccent(accent) {
+    const html = document.documentElement;
+    let colorizeFaviconComposition = localStorage.getItem('theme-colorize-icon');
+
+    if (accent === undefined) {
+      accent = localStorage.getItem('theme-accent');
+    } else {
+      localStorage.setItem('theme-accent', accent);
+    }
+
+    if (accent) {
+      html.style.setProperty('--theme', `var(--${accent}, #${accent})`);
+      html.style.setProperty('--theme-chosen', `var(--${accent}, #${accent})`);
+      if (colorizeFaviconComposition) (0, _colorizeFavicon.default)(getComputedStyle(document.body).getPropertyValue('--theme'), colorizeFaviconComposition);
+    } else {
+      html.style.removeProperty('--theme');
+      html.style.removeProperty('--theme-chosen');
+      (0, _colorizeFavicon.default)(false);
+    }
   }
 
 };
 exports.colorScheme = colorScheme;
-},{}],"r4vn":[function(require,module,exports) {
+},{"./colorize-favicon":"FgfO"}],"r4vn":[function(require,module,exports) {
 
 },{}],"Soyf":[function(require,module,exports) {
 "use strict";
@@ -15037,6 +15181,7 @@ class Popover {
     let bottom = data.offsets.reference.bottom;
     data.instance.modifiers.forEach(m => {
       if (m.name == 'preventOverflow' && m.boundaries) {
+        // TODO: needs improvement when alignmen is not bottom-*
         let h = (m.boundaries.height || window.innerHeight) - bottom - arrowH * 2;
         if (bottom > m.boundaries.height / 2) h = top - arrowH * 2;
         this.maxHeight = h;
@@ -15062,7 +15207,7 @@ class Popover {
 }
 
 exports.default = Popover;
-},{"popper.js":"lo/u","../../util/device":"la8o","./style.less":"r4vn"}],"AZEX":[function(require,module,exports) {
+},{"popper.js":"loUd","../../util/device":"la8o","./style.less":"r4vn"}],"AZEX":[function(require,module,exports) {
 var define;
 // Generated by CoffeeScript 1.10.0
 var slice = [].slice;
@@ -15726,7 +15871,9 @@ exports.default = void 0;
 
 var _config = _interopRequireWildcard(require("./config"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 class HistoryState {
   constructor(parent, props) {
@@ -15904,7 +16051,7 @@ class HistoryStates {
 }
 
 exports.default = HistoryStates;
-},{"./history-state":"phBv"}],"38Qe":[function(require,module,exports) {
+},{"./history-state":"phBv"}],"Qeq3":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15918,7 +16065,9 @@ var _historyStates = _interopRequireDefault(require("./history-states"));
 
 var _config = _interopRequireWildcard(require("./config"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16069,7 +16218,7 @@ class PanelController extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             position: relative;
             /* z-index: 10; */
@@ -16132,7 +16281,7 @@ class PanelController extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`        
+    return (0, _litElement.html)`        
         <slot></slot>
     `;
   }
@@ -16274,7 +16423,7 @@ customElements.define('b-panels', PanelController);
 var _default = customElements.get('b-panels');
 
 exports.default = _default;
-},{"lit-element":"+bhx","../menu":"0tCY","../../router":"38Qe","../../util/device":"la8o"}],"ZNP1":[function(require,module,exports) {
+},{"lit-element":"bhxD","../menu":"tCYJ","../../router":"Qeq3","../../util/device":"la8o"}],"ZNP1":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16304,7 +16453,7 @@ class PanelToolbar extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: grid;
             grid-template-columns: 1fr max-content 1fr;
@@ -16394,7 +16543,7 @@ class PanelToolbar extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <div class="left">
             <slot name="close-btn">
                 <b-btn outline icon="cancel-1" title="Right+click for quick jump menu"
@@ -16429,7 +16578,7 @@ customElements.define('b-panel-toolbar', PanelToolbar);
 var _default = customElements.get('b-panel-toolbar');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"cmZt":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"cmZt":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16602,14 +16751,15 @@ class Panel extends _litElement.LitElement {
     let defaultOpts = Object.assign({}, PanelDefaults);
 
     if (opts.type == 'modal') {
-      defaultOpts.width = 'auto';
-      defaultOpts.height = 'auto';
+      defaultOpts.width = '';
+      defaultOpts.height = '';
       defaultOpts.anchor = 'center';
+      defaultOpts.animation = 'scale';
     }
 
     if (opts.type == 'actionsheet') {
       defaultOpts.width = '100%';
-      defaultOpts.height = 'auto';
+      defaultOpts.height = '';
       defaultOpts.anchor = 'bottom';
     }
 
@@ -16704,9 +16854,9 @@ class Panel extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <div class="backdrop"></div>
-        <main style="width:${this.width}; height:${this.height}">
+        <main style="${this.width ? `width:${this.width};` : ''}${this.height ? `height:${this.height};` : ''}">
             <b-btn icon="cancel-1" pill class="modal-close-btn" @click=${this.close} ?hidden=${this.closeBtn !== true}></b-btn>
             <slot></slot>
             ${this.html}
@@ -16874,7 +17024,7 @@ class Panel extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             pointer-events: initial;
             display: flex;
@@ -16907,7 +17057,6 @@ class Panel extends _litElement.LitElement {
             overflow: visible;
             display: flex;
             flex-direction: column;
-            height: 100%;
             background: var(--b-panel-bgd, #fff);
             box-shadow: var(--b-panel-shadow, rgba(0,0,0,.2) 0 3px 10px);
             border-radius: var(--radius-top) var(--radius-top) var(--radius-bottom) var(--radius-bottom);
@@ -16921,6 +17070,8 @@ class Panel extends _litElement.LitElement {
 
         :host([type="actionsheet"]) main {
             max-width: var(--b-panel-actionsheet-max-w, 500px);
+            margin-bottom: 0;
+            max-height: var(--b-panel-actionsheet-max-h, 70vh);
             /* --radius: 12px; */
         }
 
@@ -16947,12 +17098,14 @@ class Panel extends _litElement.LitElement {
 
         :host([anchor="right"]) > main {
             transform: translateX(100px);
+            height: 100%;
         }
 
         :host([anchor="left"]) > main {
             right: auto;
             left: 0;
             transform: translateX(-100px);
+            height: 100%;
         }
 
         :host([anchor="center"]) > main,
@@ -17119,7 +17272,7 @@ customElements.define('b-panel', Panel);
 var _default = customElements.get('b-panel');
 
 exports.default = _default;
-},{"lit-element":"+bhx","./controller":"R9Fe","../../router":"38Qe","../../router/route":"WZSr","../../util/device":"la8o","./toolbar":"ZNP1","../../elements/btn":"DABr"}],"TZ6L":[function(require,module,exports) {
+},{"lit-element":"bhxD","./controller":"R9Fe","../../router":"Qeq3","../../router/route":"WZSr","../../util/device":"la8o","./toolbar":"ZNP1","../../elements/btn":"DABr"}],"TZ6L":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17199,7 +17352,9 @@ var _popover = _interopRequireDefault(require("../popover"));
 
 var _makeBtn = _interopRequireWildcard(require("./make-btn"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17410,7 +17565,7 @@ class Dialog {
 }
 
 exports.default = Dialog;
-},{"lit-html":"SP/d","../../util/device":"la8o","../panel":"cmZt","../popover":"Soyf","./make-btn":"TZ6L","./style.less":"r4vn"}],"pos3":[function(require,module,exports) {
+},{"lit-html":"SPDu","../../util/device":"la8o","../panel":"cmZt","../popover":"Soyf","./make-btn":"TZ6L","./style.less":"r4vn"}],"pos3":[function(require,module,exports) {
 const Dialog = require('./dialog').default;
 
 module.exports = Dialog;
@@ -18195,7 +18350,7 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-const styles = _litElement.css`
+const styles = (0, _litElement.css)`
 
 :host {
 	opacity: 0;
@@ -18301,7 +18456,7 @@ customElements.define('touch-ripple', TouchRippleElement);
 var _default = customElements.get('touch-ripple');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"jNfL":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"jNfL":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18313,7 +18468,7 @@ var _litElement = require("lit-element");
 
 require("./touch-ripple");
 
-const styles = _litElement.css`
+const styles = (0, _litElement.css)`
 
 :host {
 	--size: 1.6em;
@@ -18521,7 +18676,7 @@ customElements.define('check-box', CheckBoxElement);
 var _default = customElements.get('check-box');
 
 exports.default = _default;
-},{"lit-element":"+bhx","./touch-ripple":"uH6r"}],"h8fl":[function(require,module,exports) {
+},{"lit-element":"bhxD","./touch-ripple":"uH6r"}],"h8fl":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18540,7 +18695,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /*
 	Select Field
 */
-const styles = _litElement.css`
+const styles = (0, _litElement.css)`
 
 :host(:not([disabled])) {
 	cursor: pointer;
@@ -18557,6 +18712,7 @@ main > svg {
 	height: 1em;
 	width: 1em;
 	flex-shrink: 0;
+	fill: var(--theme-color-accent, #333);
 }
 
 slot#options {
@@ -18849,7 +19005,9 @@ class SelectFieldElement extends HTMLElement {
       maxHeight: this.getAttribute('menu-max-height') || 'auto',
       maxWidth: this.getAttribute('menu-max-width') || 'none',
       overflowBoundry: this.getAttribute('menu-overflow') ? 'window' : null,
-      adjustForMobile: this.getAttribute('adjust-for-mobile') == 'false' ? false : true
+      adjustForMobile: this.getAttribute('adjust-for-mobile') == 'false' ? false : {
+        type: 'actionsheet'
+      }
     };
     if (!menu || menu.length == 0) menu = [{
       'divider': 'No options available'
@@ -18881,7 +19039,7 @@ customElements.define('select-field', SelectFieldElement);
 var _default = customElements.get('select-field');
 
 exports.default = _default;
-},{"lit-element":"+bhx","../../menu":"0tCY","../../../util/device":"la8o"}],"0tCY":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../menu":"tCYJ","../../../util/device":"la8o"}],"tCYJ":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19112,9 +19270,9 @@ class Menu {
   render() {
     let showJumpNav = this.opts.jumpNav === true || typeof this.opts.jumpNav == 'number' && this.displayMenu.length >= this.opts.jumpNav;
     this._active = this.opts.autoSelectFirst ? 0 : null;
-    (0, _litHtml.render)(_litHtml.html`
+    (0, _litHtml.render)((0, _litHtml.html)`
 
-			${this.searchIsOn ? _litHtml.html`
+			${this.searchIsOn ? (0, _litHtml.html)`
 				<div class="menu-search-bar">
 					<b-icon name="${this.searchIcon}"></b-icon>
 					<b-spinner hidden></b-spinner>
@@ -19124,7 +19282,7 @@ class Menu {
 
 			<div class="results">
 				
-				${showJumpNav ? _litHtml.html`
+				${showJumpNav ? (0, _litHtml.html)`
 					<alphabet-jump-nav>
 						<span style="color: red">'alphabet-jump-nav' custom element not loaded</span>
 					</alphabet-jump-nav>` : ''}
@@ -19139,16 +19297,16 @@ class Menu {
   }
 
   renderItem(m, i) {
-    if (m == 'divider' || m.label == 'divider' && m.val == 'divider') return _litHtml.html`<b-hr></b-hr>`;
-    if (m.divider) return _litHtml.html`<div class="menu-divider">${m.divider}</div>`;
-    if (m.text) return _litHtml.html`<div class="menu-text">${m.text}</div>`;
-    if (m.title) return _litHtml.html`<div class="menu-title"><h2>${m.title}</h2></div>`; // capture menu item index for use in resolve (if so desired)
+    if (m == 'divider' || m.label == 'divider' && m.val == 'divider') return (0, _litHtml.html)`<b-hr></b-hr>`;
+    if (m.divider) return (0, _litHtml.html)`<div class="menu-divider">${m.divider}</div>`;
+    if (m.text) return (0, _litHtml.html)`<div class="menu-text">${m.text}</div>`;
+    if (m.title) return (0, _litHtml.html)`<div class="menu-title"><h2>${m.title}</h2></div>`; // capture menu item index for use in resolve (if so desired)
 
     m.index = i;
     let icon = '';
-    if (m.icon && typeof m.icon == 'string') icon = _litHtml.html`<b-icon name="${m.icon}"></b-icon>`;else if (m.icon) icon = _litHtml.html`<span class="icon">${m.icon}</span>`;
-    let checkbox = this.opts.multiple && !m.clearsAll || m.selected ? _litHtml.html`<check-box ?checked=${m.selected}></check-box>` : '';
-    let menuIcon = m.menu && this.opts.hasMenuIcon ? _litHtml.html`<b-icon class="has-menu" name="${this.opts.hasMenuIcon}"></b-icon>` : '';
+    if (m.icon && typeof m.icon == 'string') icon = (0, _litHtml.html)`<b-icon name="${m.icon}"></b-icon>`;else if (m.icon) icon = (0, _litHtml.html)`<span class="icon">${m.icon}</span>`;
+    let checkbox = this.opts.multiple && !m.clearsAll || m.selected ? (0, _litHtml.html)`<check-box ?checked=${m.selected}></check-box>` : '';
+    let menuIcon = m.menu && this.opts.hasMenuIcon ? (0, _litHtml.html)`<b-icon class="has-menu" name="${this.opts.hasMenuIcon}"></b-icon>` : '';
 
     if (m.selections) {
       let selections = m.selections;
@@ -19156,7 +19314,7 @@ class Menu {
         label: 'unset',
         val: ''
       }].concat(selections);
-      checkbox = _litHtml.html`<select-field 
+      checkbox = (0, _litHtml.html)`<select-field 
 							.options=${selections} 
 							placeholder="unset"
 							@change=${this.selectOptionsChanged.bind(this)}
@@ -19184,14 +19342,14 @@ class Menu {
     let dataTitle = (m.dataTitle || m.label + ' ' + m.description).trim().toLowerCase();
     let label = m.label && m.label.constructor.name == 'TemplateResult' ? m.label : (0, _unsafeHtml.unsafeHTML)(m.label || '');
     let description = m.description && m.description.constructor.name == 'TemplateResult' ? m.description : (0, _unsafeHtml.unsafeHTML)(m.description || '');
-    return _litHtml.html`
+    return (0, _litHtml.html)`
 			<div class="menu-item ${m.className}" val=${m.val} index=${i}
 				data-title=${dataTitle}
 				?active=${this._active == i}
 				?icon-only=${!m.label && !m.description} ?selected=${m.selected}>
 				${checkbox}
 				${icon}
-				${m.view && m.view instanceof HTMLElement ? m.view : _litHtml.html`
+				${m.view && m.view instanceof HTMLElement ? m.view : (0, _litHtml.html)`
 					<span class="mi-content">
 						<div class="mi-label">${label}</div>
 						<div class="mi-description">${description}</div>
@@ -19381,10 +19539,15 @@ class Menu {
 
 
   popover(target, opts = {}) {
-    if (opts.adjustForMobile && _device.default.isMobile && !_device.default.isiPad) return this.modal(Object.assign({
-      btns: ['cancel', 'done'],
-      anchor: this.searchIsOn ? 'top' : 'center'
-    }, typeof opts.adjustForMobile == 'object' ? opts.adjustForMobile : {}));
+    if (opts.adjustForMobile && _device.default.isMobile && !_device.default.isiPad) {
+      let modalOpts = {
+        btns: ['cancel', 'done']
+      };
+      if (this.searchIsOn) modalOpts.anchor = 'top';
+      if (typeof opts.adjustForMobile == 'object') modalOpts = Object.assign(modalOpts, opts.adjustForMobile);
+      return this.modal(modalOpts);
+    }
+
     this.render();
     let onClose = opts.onClose;
 
@@ -19413,8 +19576,8 @@ class Menu {
   panel(opts = {}) {
     this.render();
     opts = Object.assign({
-      type: 'modal',
-      animation: 'scale'
+      type: 'modal' // animation: 'scale'
+
     }, opts);
     opts.onKeydown = this.onKeydown.bind(this);
     let onClose = opts.onClose;
@@ -19446,7 +19609,7 @@ class Menu {
 }
 
 exports.default = Menu;
-},{"lit-html":"SP/d","lit-html/directives/unsafe-html":"/jTP","../popover":"Soyf","../dialog":"pos3","../panel":"cmZt","fuse.js":"Wp9p","../form-control/controls/check-box":"jNfL","../form-control/controls/select-field":"h8fl","../../util/device":"la8o","./style.less":"r4vn"}],"7P61":[function(require,module,exports) {
+},{"lit-html":"SPDu","lit-html/directives/unsafe-html":"jTPt","../popover":"Soyf","../dialog":"pos3","../panel":"cmZt","fuse.js":"Wp9p","../form-control/controls/check-box":"jNfL","../form-control/controls/select-field":"h8fl","../../util/device":"la8o","./style.less":"r4vn"}],"P61z":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19493,7 +19656,7 @@ class TabView {
   }
 
   render(onClick) {
-    return this.canDisplay ? _litHtml.html`
+    return this.canDisplay ? (0, _litHtml.html)`
             <div class="tab-bar-item" ?active=${this.active} .tabView=${this} @click=${onClick}>
                 <slot name="menu:${this.id}">${this.title}</slot>
             </div>
@@ -19565,7 +19728,7 @@ class TabView {
 }
 
 exports.default = TabView;
-},{"lit-html":"SP/d"}],"jVU8":[function(require,module,exports) {
+},{"lit-html":"SPDu"}],"jVU8":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19631,7 +19794,7 @@ class TabViews extends Map {
 }
 
 exports.default = TabViews;
-},{"./view":"7P61"}],"u9vI":[function(require,module,exports) {
+},{"./view":"P61z"}],"u9vI":[function(require,module,exports) {
 /**
  * Checks if `value` is the
  * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
@@ -19682,7 +19845,7 @@ var root = freeGlobal || freeSelf || Function('return this')();
 
 module.exports = root;
 
-},{"./_freeGlobal":"j3D9"}],"0pJf":[function(require,module,exports) {
+},{"./_freeGlobal":"j3D9"}],"pJf5":[function(require,module,exports) {
 var root = require('./_root');
 
 /**
@@ -20140,7 +20303,7 @@ function debounce(func, wait, options) {
 
 module.exports = debounce;
 
-},{"./isObject":"u9vI","./now":"0pJf","./toNumber":"iS0Z"}],"BsQP":[function(require,module,exports) {
+},{"./isObject":"u9vI","./now":"pJf5","./toNumber":"iS0Z"}],"BsQP":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20168,7 +20331,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
         reflect: true
       },
       layout: {
-        type: 'String',
+        type: String,
         reflect: true
       },
       singlemenu: {
@@ -20204,7 +20367,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
 
           views.push(..._views);
           node.textContent = '';
-        } else if (node.slot || node.nodeName == '#comment') {// ignore views that have a slot name
+        } else if (node.slot || ['#comment', 'SCRIPT', 'STYLE'].includes(node.nodeName)) {// ignore views that have a slot name
         } else if (node.title) {
           views.push(node);
         } else {
@@ -20245,7 +20408,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             position: relative;
             display: grid;
@@ -20254,7 +20417,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
 
             --menuBgd: none;
             --menuFontSize: 1em;
-            --contentPadding: 2em;
+            --contentPadding: var(--view-gutter);
             --menuItemPadding: .75em 1em;
             --menuItemRadius: 4px;
             --inactiveColor: var(--b-tabs-inactive-color, rgba(0,0,0,.4));
@@ -20456,7 +20619,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
   }
 
   renderTabBar() {
-    if (['none', 'false'].includes(this.getAttribute('tab-bar'))) return _litElement.html`<div></div>`;
+    if (['none', 'false'].includes(this.getAttribute('tab-bar'))) return (0, _litElement.html)`<div></div>`;
 
     if (this.getAttribute('tab-bar')) {
       if (!this.__customTabBar) {
@@ -20475,7 +20638,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
 
       return this.__customTabBar;
     } else {
-      return _litElement.html`
+      return (0, _litElement.html)`
             <header class="tab-bar">
                 <slot name="menu:before"></slot>
                 <div class="tab-bar-item single-menu" active @click=${this.popoverMenu}>
@@ -20489,7 +20652,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         ${this.renderTabBar()}
         <slot class="content"></slot>
     `;
@@ -20555,7 +20718,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
 var _default = customElements.get('b-tabs');
 
 exports.default = _default;
-},{"lit-element":"+bhx","../menu":"0tCY","./views":"jVU8","./view":"7P61","lodash/debounce":"CXfR"}],"ZQnj":[function(require,module,exports) {
+},{"lit-element":"bhxD","../menu":"tCYJ","./views":"jVU8","./view":"P61z","lodash/debounce":"CXfR"}],"ZQnj":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20644,18 +20807,16 @@ class FormHandler extends HTMLElement {
   }
 
   set model(model) {
-    if (!model) {
-      if (this.model) {
-        this.model.off('sync', null, this);
-        this.model.off('change', null, this);
-        this.model.off('edited', null, this);
-        delete this._model;
-      }
+    if (model == this.model) return;
 
-      return;
+    if (this.model) {
+      this.model.off('sync', null, this);
+      this.model.off('change', null, this);
+      this.model.off('edited', null, this);
+      delete this._model;
     }
 
-    if (model == this.model) return;
+    if (!model) return;
     this._model = model;
     this.model._editedAttrs = this.model._editedAttrs || {};
     this.model.on('sync', this.onModelSync, this);
@@ -20804,7 +20965,7 @@ customElements.define('form-handler', FormHandler);
 var _default = customElements.get('form-handler');
 
 exports.default = _default;
-},{"../../util/store":"2z4L"}],"Sclr":[function(require,module,exports) {
+},{"../../util/store":"z4Ln"}],"Sclr":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20814,7 +20975,7 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-var _default = _litElement.css`
+var _default = (0, _litElement.css)`
 slot#value {
 	display: none;
 }
@@ -21323,7 +21484,7 @@ slot[name="help"] {
 `;
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"299p":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"pZT1":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21338,7 +21499,7 @@ var _default = (el, val) => {
 };
 
 exports.default = _default;
-},{}],"8hx3":[function(require,module,exports) {
+},{}],"hx3P":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21470,7 +21631,7 @@ const onKeyDown = e => {
 
   if ((0, _stopMaxLength.default)(e, e.target, e.target.value)) e.preventDefault();
 };
-},{"./setValueAttrs":"299p","./validatePattern":"8hx3","./stopMaxLength":"h6i7"}],"swB1":[function(require,module,exports) {
+},{"./setValueAttrs":"pZT1","./validatePattern":"hx3P","./stopMaxLength":"h6i7"}],"swB1":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21690,7 +21851,7 @@ var _litElement = require("lit-element");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const styles = _litElement.css`
+const styles = (0, _litElement.css)`
 
 :host {
     display: inline-block;
@@ -22161,7 +22322,7 @@ customElements.define('date-picker', DatePickerElement);
 var _default = customElements.get('date-picker');
 
 exports.default = _default;
-},{"moment":"a2/B","lit-element":"+bhx"}],"E0RO":[function(require,module,exports) {
+},{"moment":"a2Bw","lit-element":"bhxD"}],"E0RO":[function(require,module,exports) {
 /*
     HTML Cleaner
 
@@ -22266,7 +22427,12 @@ function cleanNode(parent, node) {
       parent.appendChild(node); // keep tags we want
       // TODO: make list of tags an option?
     } else if (['#text', 'p', 'br', 'b', 'strong', 'em', 'i', 'ul', 'ol', 'li'].includes(node.nodeName.toLowerCase())) {
-      // if( parent.tagName == 'P' )
+      // make sure inline elements dont start with a <br> tag ie <br><i><br> as this will parse to <p><i><br> and break Quill
+      if (['i', 'b', 'strong', 'em'].includes(node.nodeName.toLowerCase())) {
+        if (node.childNodes[0] && node.childNodes[0].nodeName == 'BR') node.childNodes[0].remove();
+      } // if( parent.tagName == 'P' )
+
+
       parent.appendChild(node); // remove tags we dont want, but keep their contents
       // example: <font>we want to keep this text and any <b>good</b> tags</font>
     } else {
@@ -22497,7 +22663,7 @@ function arrayMap(array, iteratee) {
 
 module.exports = arrayMap;
 
-},{}],"p/0c":[function(require,module,exports) {
+},{}],"p0cq":[function(require,module,exports) {
 /**
  * Checks if `value` is classified as an `Array` object.
  *
@@ -22525,7 +22691,7 @@ var isArray = Array.isArray;
 
 module.exports = isArray;
 
-},{}],"3w4y":[function(require,module,exports) {
+},{}],"w4yJ":[function(require,module,exports) {
 var Symbol = require('./_Symbol'),
     arrayMap = require('./_arrayMap'),
     isArray = require('./isArray'),
@@ -22564,7 +22730,7 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{"./_Symbol":"wppe","./_arrayMap":"BblM","./isArray":"p/0c","./isSymbol":"bgO7"}],"A8RV":[function(require,module,exports) {
+},{"./_Symbol":"wppe","./_arrayMap":"BblM","./isArray":"p0cq","./isSymbol":"bgO7"}],"A8RV":[function(require,module,exports) {
 var baseToString = require('./_baseToString');
 
 /**
@@ -22594,7 +22760,7 @@ function toString(value) {
 
 module.exports = toString;
 
-},{"./_baseToString":"3w4y"}],"Chbn":[function(require,module,exports) {
+},{"./_baseToString":"w4yJ"}],"Chbn":[function(require,module,exports) {
 /**
  * The base implementation of `_.slice` without an iteratee call guard.
  *
@@ -22627,7 +22793,7 @@ function baseSlice(array, start, end) {
 
 module.exports = baseSlice;
 
-},{}],"5Kr2":[function(require,module,exports) {
+},{}],"Kr2C":[function(require,module,exports) {
 var baseSlice = require('./_baseSlice');
 
 /**
@@ -22689,7 +22855,7 @@ function asciiToArray(string) {
 
 module.exports = asciiToArray;
 
-},{}],"NN+K":[function(require,module,exports) {
+},{}],"NNKx":[function(require,module,exports) {
 /** Used to compose unicode character classes. */
 var rsAstralRange = '\\ud800-\\udfff',
     rsComboMarksRange = '\\u0300-\\u036f',
@@ -22751,7 +22917,7 @@ function stringToArray(string) {
 
 module.exports = stringToArray;
 
-},{"./_asciiToArray":"ACee","./_hasUnicode":"oxMD","./_unicodeToArray":"NN+K"}],"prUu":[function(require,module,exports) {
+},{"./_asciiToArray":"ACee","./_hasUnicode":"oxMD","./_unicodeToArray":"NNKx"}],"prUu":[function(require,module,exports) {
 var castSlice = require('./_castSlice'),
     hasUnicode = require('./_hasUnicode'),
     stringToArray = require('./_stringToArray'),
@@ -22786,7 +22952,7 @@ function createCaseFirst(methodName) {
 
 module.exports = createCaseFirst;
 
-},{"./_castSlice":"5Kr2","./_hasUnicode":"oxMD","./_stringToArray":"smkV","./toString":"A8RV"}],"SwE8":[function(require,module,exports) {
+},{"./_castSlice":"Kr2C","./_hasUnicode":"oxMD","./_stringToArray":"smkV","./toString":"A8RV"}],"SwE8":[function(require,module,exports) {
 var createCaseFirst = require('./_createCaseFirst');
 
 /**
@@ -22852,7 +23018,7 @@ var _default = str => {
 };
 
 exports.default = _default;
-},{"lodash/capitalize":"NEda"}],"9TuE":[function(require,module,exports) {
+},{"lodash/capitalize":"NEda"}],"TuEj":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22920,7 +23086,7 @@ var _default = (ts = 0) => {
 };
 
 exports.default = _default;
-},{}],"+xBz":[function(require,module,exports) {
+},{}],"xBze":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22992,7 +23158,7 @@ var _toCSV = _interopRequireDefault(require("./toCSV"));
 var _wait = _interopRequireDefault(require("./wait"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./htmlCleaner":"E0RO","./normalizeText":"hNKD","./csvToArray":"E8jA","./plural":"Zwl6","./readFile":"MqKw","./titleize":"NUHt","./toCSV":"9TuE","./wait":"DKKB"}],"2ezN":[function(require,module,exports) {
+},{"./htmlCleaner":"E0RO","./normalizeText":"hNKD","./csvToArray":"E8jA","./plural":"Zwl6","./readFile":"MqKw","./titleize":"NUHt","./toCSV":"TuEj","./wait":"DKKB"}],"ezNL":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23018,7 +23184,7 @@ var _util = require("../../../util");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const styles = _litElement.css`
+const styles = (0, _litElement.css)`
 :host {
 	display: inline-block;
 	contain: layout;
@@ -23549,7 +23715,7 @@ customElements.define('text-field', TextFieldElement);
 var _default = customElements.get('text-field');
 
 exports.default = _default;
-},{"lit-element":"+bhx","moment":"a2/B","../../dialog":"pos3","./date-picker":"VxKk","../util/setValueAttrs":"299p","../util/validatePattern":"8hx3","../util/stopMaxLength":"h6i7","../../../util":"+xBz"}],"d7Am":[function(require,module,exports) {
+},{"lit-element":"bhxD","moment":"a2Bw","../../dialog":"pos3","./date-picker":"VxKk","../util/setValueAttrs":"pZT1","../util/validatePattern":"hx3P","../util/stopMaxLength":"h6i7","../../../util":"xBze"}],"d7Am":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23559,7 +23725,7 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-var _default = _litElement.css`
+var _default = (0, _litElement.css)`
 
 rich-text-field {
 	z-index: 1000;
@@ -23681,7 +23847,7 @@ rich-text-field:focus-within toolbar {
 `;
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"CQm3":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"CQm3":[function(require,module,exports) {
 var define;
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -26252,7 +26418,7 @@ module.exports = function isArguments(value) {
 
   return isArgs;
 };
-},{}],"orz+":[function(require,module,exports) {
+},{}],"orz8":[function(require,module,exports) {
 'use strict';
 
 var keysShim;
@@ -26424,7 +26590,7 @@ keysShim.shim = function shimObjectKeys() {
 };
 
 module.exports = keysShim;
-},{"./isArguments":"uTT0","./implementation":"orz+"}],"6ord":[function(require,module,exports) {
+},{"./isArguments":"uTT0","./implementation":"orz8"}],"ordk":[function(require,module,exports) {
 'use strict';
 
 var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
@@ -26522,7 +26688,7 @@ var defineProperties = function (object, map) {
 
 defineProperties.supportsDescriptors = !!supportsDescriptors;
 module.exports = defineProperties;
-},{"object-keys":"ywQn"}],"B6/o":[function(require,module,exports) {
+},{"object-keys":"ywQn"}],"B6OE":[function(require,module,exports) {
 'use strict';
 
 /* eslint no-invalid-this: 1 */
@@ -26576,14 +26742,14 @@ module.exports = function bind(that) {
     return bound;
 };
 
-},{}],"58Ti":[function(require,module,exports) {
+},{}],"TiwC":[function(require,module,exports) {
 'use strict';
 
 var implementation = require('./implementation');
 
 module.exports = Function.prototype.bind || implementation;
 
-},{"./implementation":"B6/o"}],"jYt2":[function(require,module,exports) {
+},{"./implementation":"B6OE"}],"jYt2":[function(require,module,exports) {
 'use strict';
 /* eslint complexity: [2, 18], max-statements: [2, 33] */
 
@@ -26913,7 +27079,7 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 
   return value;
 };
-},{"has-symbols":"NS5K","function-bind":"58Ti"}],"I+tp":[function(require,module,exports) {
+},{"has-symbols":"NS5K","function-bind":"TiwC"}],"ITpX":[function(require,module,exports) {
 'use strict';
 
 var bind = require('function-bind');
@@ -26931,7 +27097,7 @@ module.exports = function callBind() {
 module.exports.apply = function applyBind() {
   return bind.apply($apply, arguments);
 };
-},{"function-bind":"58Ti","../GetIntrinsic":"LENn"}],"4md/":[function(require,module,exports) {
+},{"function-bind":"TiwC","../GetIntrinsic":"LENn"}],"md3r":[function(require,module,exports) {
 'use strict';
 
 var numberIsNaN = function (value) {
@@ -26961,7 +27127,7 @@ var implementation = require('./implementation');
 module.exports = function getPolyfill() {
   return typeof Object.is === 'function' ? Object.is : implementation;
 };
-},{"./implementation":"4md/"}],"Fi9R":[function(require,module,exports) {
+},{"./implementation":"md3r"}],"Fi9R":[function(require,module,exports) {
 
 'use strict';
 
@@ -26980,7 +27146,7 @@ module.exports = function shimObjectIs() {
   });
   return polyfill;
 };
-},{"./polyfill":"TyWm","define-properties":"VxKF"}],"2pTr":[function(require,module,exports) {
+},{"./polyfill":"TyWm","define-properties":"VxKF"}],"pTr6":[function(require,module,exports) {
 
 'use strict';
 
@@ -27001,13 +27167,13 @@ define(polyfill, {
   shim: shim
 });
 module.exports = polyfill;
-},{"define-properties":"VxKF","es-abstract/helpers/callBind":"I+tp","./implementation":"4md/","./polyfill":"TyWm","./shim":"Fi9R"}],"ar57":[function(require,module,exports) {
+},{"define-properties":"VxKF","es-abstract/helpers/callBind":"ITpX","./implementation":"md3r","./polyfill":"TyWm","./shim":"Fi9R"}],"ar57":[function(require,module,exports) {
 'use strict';
 
 var bind = require('function-bind');
 
 module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
-},{"function-bind":"58Ti"}],"DhUb":[function(require,module,exports) {
+},{"function-bind":"TiwC"}],"DhUb":[function(require,module,exports) {
 'use strict';
 
 var has = require('has');
@@ -27051,7 +27217,7 @@ module.exports = function isRegex(value) {
 
   return tryRegexExecCall(value);
 };
-},{"has":"ar57"}],"1Hmk":[function(require,module,exports) {
+},{"has":"ar57"}],"HmkM":[function(require,module,exports) {
 'use strict';
 
 var $Object = Object;
@@ -27115,7 +27281,7 @@ module.exports = function getPolyfill() {
 
   return implementation;
 };
-},{"./implementation":"1Hmk","define-properties":"VxKF"}],"Kszl":[function(require,module,exports) {
+},{"./implementation":"HmkM","define-properties":"VxKF"}],"Kszl":[function(require,module,exports) {
 'use strict';
 
 var supportsDescriptors = require('define-properties').supportsDescriptors;
@@ -27147,7 +27313,7 @@ module.exports = function shimFlags() {
 
   return polyfill;
 };
-},{"define-properties":"VxKF","./polyfill":"YWiL"}],"DbQ/":[function(require,module,exports) {
+},{"define-properties":"VxKF","./polyfill":"YWiL"}],"DbQL":[function(require,module,exports) {
 
 'use strict';
 
@@ -27168,7 +27334,7 @@ define(flagsBound, {
   shim: shim
 });
 module.exports = flagsBound;
-},{"define-properties":"VxKF","es-abstract/helpers/callBind":"I+tp","./implementation":"1Hmk","./polyfill":"YWiL","./shim":"Kszl"}],"NyUK":[function(require,module,exports) {
+},{"define-properties":"VxKF","es-abstract/helpers/callBind":"ITpX","./implementation":"HmkM","./polyfill":"YWiL","./shim":"Kszl"}],"NyUK":[function(require,module,exports) {
 'use strict';
 
 var getDay = Date.prototype.getDay;
@@ -27307,7 +27473,7 @@ function objEquiv(a, b, opts) {
 
 module.exports = deepEqual;
 
-},{"object-keys":"ywQn","is-arguments":"6ord","object-is":"2pTr","is-regex":"DhUb","regexp.prototype.flags":"DbQ/","is-date-object":"NyUK"}],"dgPI":[function(require,module,exports) {
+},{"object-keys":"ywQn","is-arguments":"ordk","object-is":"pTr6","is-regex":"DhUb","regexp.prototype.flags":"DbQL","is-date-object":"NyUK"}],"dgPI":[function(require,module,exports) {
 'use strict';
 
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -28036,7 +28202,7 @@ Break.blotName = 'break';
 Break.tagName = 'BR';
 var _default = Break;
 exports.default = _default;
-},{"parchment":"CQm3"}],"E/MK":[function(require,module,exports) {
+},{"parchment":"CQm3"}],"EMK6":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28113,7 +28279,7 @@ Inline.order = ['cursor', 'inline', // Must be lower
 ];
 var _default = Inline;
 exports.default = _default;
-},{"./text":"E/MK","parchment":"CQm3"}],"ehqu":[function(require,module,exports) {
+},{"./text":"EMK6","parchment":"CQm3"}],"ehqu":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28316,7 +28482,7 @@ function bubbleFormats(blot, formats = {}) {
 
   return bubbleFormats(blot.parent, formats);
 }
-},{"extend":"dgPI","quill-delta":"BYft","parchment":"CQm3","./break":"WpVR","./inline":"xisp","./text":"E/MK"}],"DdcE":[function(require,module,exports) {
+},{"extend":"dgPI","quill-delta":"BYft","parchment":"CQm3","./break":"WpVR","./inline":"xisp","./text":"EMK6"}],"DdcE":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28458,7 +28624,7 @@ exports.default = CodeBlock;
 CodeBlock.blotName = 'code-block';
 CodeBlock.tagName = 'PRE';
 CodeBlock.TAB = '  ';
-},{"quill-delta":"BYft","parchment":"CQm3","../blots/block":"ehqu","../blots/inline":"xisp","../blots/text":"E/MK"}],"ffqL":[function(require,module,exports) {
+},{"quill-delta":"BYft","parchment":"CQm3","../blots/block":"ehqu","../blots/inline":"xisp","../blots/text":"EMK6"}],"ffqL":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28596,7 +28762,7 @@ Cursor.CONTENTS = "\uFEFF"; // Zero width no break space
 
 var _default = Cursor;
 exports.default = _default;
-},{"parchment":"CQm3","./text":"E/MK"}],"prL8":[function(require,module,exports) {
+},{"parchment":"CQm3","./text":"EMK6"}],"yh9p":[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -28664,7 +28830,8 @@ function toByteArray (b64) {
     ? validLen - 4
     : validLen
 
-  for (var i = 0; i < len; i += 4) {
+  var i
+  for (i = 0; i < len; i += 4) {
     tmp =
       (revLookup[b64.charCodeAt(i)] << 18) |
       (revLookup[b64.charCodeAt(i + 1)] << 12) |
@@ -28749,7 +28916,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],"iism":[function(require,module,exports) {
+},{}],"JgNJ":[function(require,module,exports) {
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -28835,20 +29002,20 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],"2BOv":[function(require,module,exports) {
+},{}],"REa7":[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],"XyCw":[function(require,module,exports) {
+},{}],"dskh":[function(require,module,exports) {
 
 var global = arguments[3];
 /*!
  * The buffer module from node.js, for the browser.
  *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @author   Feross Aboukhadijeh <http://feross.org>
  * @license  MIT
  */
 /* eslint-disable no-proto */
@@ -30635,7 +30802,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":"prL8","ieee754":"iism","isarray":"2BOv","buffer":"XyCw"}],"nTXV":[function(require,module,exports) {
+},{"base64-js":"yh9p","ieee754":"JgNJ","isarray":"REa7","buffer":"dskh"}],"nTXV":[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var clone = function () {
   'use strict';
@@ -30908,7 +31075,7 @@ var clone = function () {
 if (typeof module === 'object' && module.exports) {
   module.exports = clone;
 }
-},{"buffer":"XyCw"}],"tTqF":[function(require,module,exports) {
+},{"buffer":"dskh"}],"tTqF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30936,7 +31103,9 @@ var _deepEqual = _interopRequireDefault(require("deep-equal"));
 
 var _extend = _interopRequireDefault(require("extend"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31227,7 +31396,7 @@ function normalizeDelta(delta) {
 
 var _default = Editor;
 exports.default = _default;
-},{"quill-delta":"BYft","quill-delta/lib/op":"Eba4","parchment":"CQm3","../formats/code":"DdcE","../blots/cursor":"ffqL","../blots/block":"ehqu","../blots/break":"WpVR","clone":"nTXV","deep-equal":"koiw","extend":"dgPI"}],"2JJl":[function(require,module,exports) {
+},{"quill-delta":"BYft","quill-delta/lib/op":"Eba4","parchment":"CQm3","../formats/code":"DdcE","../blots/cursor":"ffqL","../blots/block":"ehqu","../blots/break":"WpVR","clone":"nTXV","deep-equal":"koiw","extend":"dgPI"}],"JJlS":[function(require,module,exports) {
 'use strict';
 
 var has = Object.prototype.hasOwnProperty
@@ -31569,7 +31738,7 @@ debug.level = namespace.level = function (newLevel) {
 
 var _default = namespace;
 exports.default = _default;
-},{}],"WV+H":[function(require,module,exports) {
+},{}],"WVH7":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31978,7 +32147,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 let debug = (0, _logger.default)('quill:events');
 const EVENTS = [_shadowSelectionPolyfill.SHADOW_SELECTIONCHANGE, 'mousedown', 'mouseup', 'click'];
 const EMITTERS = [];
-const supportsRootNode = 'getRootNode' in document;
+const supportsRootNode = ('getRootNode' in document);
 EVENTS.forEach(function (eventName) {
   document.addEventListener(eventName, (...args) => {
     EMITTERS.forEach(em => {
@@ -32059,7 +32228,7 @@ Emitter.sources = {
 };
 var _default = Emitter;
 exports.default = _default;
-},{"eventemitter3":"2JJl","./logger":"X7fV","./shadow-selection-polyfill":"WV+H"}],"+ntk":[function(require,module,exports) {
+},{"eventemitter3":"JJlS","./logger":"X7fV","./shadow-selection-polyfill":"WVH7"}],"ntkb":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32494,7 +32663,7 @@ function contains(parent, descendant) {
 
   return parent.contains(descendant);
 }
-},{"parchment":"CQm3","clone":"nTXV","deep-equal":"koiw","./emitter":"GJzd","./logger":"X7fV","./shadow-selection-polyfill":"WV+H"}],"ks5f":[function(require,module,exports) {
+},{"parchment":"CQm3","clone":"nTXV","deep-equal":"koiw","./emitter":"GJzd","./logger":"X7fV","./shadow-selection-polyfill":"WVH7"}],"ks5f":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32563,7 +32732,9 @@ var _logger = _interopRequireDefault(require("./logger"));
 
 var _theme = _interopRequireDefault(require("./theme"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33103,7 +33274,7 @@ function shiftRange(range, index, length, source) {
 
   return new _selection.Range(start, end - start);
 }
-},{"./polyfill":"y7Ne","quill-delta":"BYft","./editor":"tTqF","./emitter":"GJzd","./module":"+ntk","parchment":"CQm3","./selection":"owE4","extend":"dgPI","./logger":"X7fV","./theme":"ks5f"}],"6tnf":[function(require,module,exports) {
+},{"./polyfill":"y7Ne","quill-delta":"BYft","./editor":"tTqF","./emitter":"GJzd","./module":"ntkb","parchment":"CQm3","./selection":"owE4","extend":"dgPI","./logger":"X7fV","./theme":"ks5f"}],"tnfo":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33115,7 +33286,9 @@ var _parchment = _interopRequireDefault(require("parchment"));
 
 var _block = _interopRequireWildcard(require("./block"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33215,7 +33388,7 @@ class Embed extends _parchment.default.Embed {
 
 var _default = Embed;
 exports.default = _default;
-},{"parchment":"CQm3","./text":"E/MK"}],"FLS8":[function(require,module,exports) {
+},{"parchment":"CQm3","./text":"EMK6"}],"FLS8":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33235,7 +33408,9 @@ var _code = _interopRequireDefault(require("../formats/code"));
 
 var _container = _interopRequireDefault(require("./container"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33431,7 +33606,7 @@ Scroll.defaultChild = 'block';
 Scroll.allowedChildren = [_block.default, _block.BlockEmbed, _container.default];
 var _default = Scroll;
 exports.default = _default;
-},{"parchment":"CQm3","../core/emitter":"GJzd","./block":"ehqu","./break":"WpVR","../formats/code":"DdcE","./container":"6tnf"}],"y5y/":[function(require,module,exports) {
+},{"parchment":"CQm3","../core/emitter":"GJzd","./block":"ehqu","./break":"WpVR","../formats/code":"DdcE","./container":"tnfo"}],"y5yF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33988,7 +34163,7 @@ function matchText(node, delta) {
 
   return delta.insert(text);
 }
-},{"extend":"dgPI","quill-delta":"BYft","parchment":"CQm3","../core/quill":"karo","../core/logger":"X7fV","../core/module":"+ntk","../formats/align":"y5y/","../formats/background":"ioe5","../formats/code":"DdcE","../formats/color":"Wxff","../formats/direction":"kk7L","../formats/font":"VBCP","../formats/size":"TDsq"}],"p1wc":[function(require,module,exports) {
+},{"extend":"dgPI","quill-delta":"BYft","parchment":"CQm3","../core/quill":"karo","../core/logger":"X7fV","../core/module":"ntkb","../formats/align":"y5yF","../formats/background":"ioe5","../formats/code":"DdcE","../formats/color":"Wxff","../formats/direction":"kk7L","../formats/font":"VBCP","../formats/size":"TDsq"}],"p1wc":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34143,7 +34318,7 @@ function getLastChangeIndex(delta) {
 
   return changeIndex;
 }
-},{"parchment":"CQm3","../core/quill":"karo","../core/module":"+ntk"}],"fCAC":[function(require,module,exports) {
+},{"parchment":"CQm3","../core/quill":"karo","../core/module":"ntkb"}],"fCAC":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34747,7 +34922,7 @@ function normalize(binding) {
 
   return binding;
 }
-},{"clone":"nTXV","deep-equal":"koiw","extend":"dgPI","quill-delta":"BYft","quill-delta/lib/op":"Eba4","parchment":"CQm3","../core/quill":"karo","../core/logger":"X7fV","../core/module":"+ntk"}],"qOpY":[function(require,module,exports) {
+},{"clone":"nTXV","deep-equal":"koiw","extend":"dgPI","quill-delta":"BYft","quill-delta/lib/op":"Eba4","parchment":"CQm3","../core/quill":"karo","../core/logger":"X7fV","../core/module":"ntkb"}],"qOpY":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34781,7 +34956,9 @@ var _history = _interopRequireDefault(require("./modules/history"));
 
 var _keyboard = _interopRequireDefault(require("./modules/keyboard"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34804,7 +34981,7 @@ _parchment.default.register(_block.default, _break.default, _cursor.default, _in
 
 var _default = _quill.default;
 exports.default = _default;
-},{"parchment":"CQm3","./core/quill":"karo","./blots/block":"ehqu","./blots/break":"WpVR","./blots/container":"6tnf","./blots/cursor":"ffqL","./blots/embed":"UVAQ","./blots/inline":"xisp","./blots/scroll":"FLS8","./blots/text":"E/MK","./modules/clipboard":"tAeH","./modules/history":"p1wc","./modules/keyboard":"fCAC"}],"5/Uj":[function(require,module,exports) {
+},{"parchment":"CQm3","./core/quill":"karo","./blots/block":"ehqu","./blots/break":"WpVR","./blots/container":"tnfo","./blots/cursor":"ffqL","./blots/embed":"UVAQ","./blots/inline":"xisp","./blots/scroll":"FLS8","./blots/text":"EMK6","./modules/clipboard":"tAeH","./modules/history":"p1wc","./modules/keyboard":"fCAC"}],"UjOo":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34825,7 +35002,7 @@ var _module = _interopRequireDefault(require("../core/module"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const supportsRootNode = 'getRootNode' in document;
+const supportsRootNode = ('getRootNode' in document);
 let debug = (0, _logger.default)('quill:toolbar');
 
 class Toolbar extends _module.default {
@@ -35108,7 +35285,7 @@ Toolbar.DEFAULTS = {
     }
   }
 };
-},{"quill-delta":"BYft","parchment":"CQm3","../core/quill":"karo","../core/logger":"X7fV","../core/module":"+ntk"}],"BIiT":[function(require,module,exports) {
+},{"quill-delta":"BYft","parchment":"CQm3","../core/quill":"karo","../core/logger":"X7fV","../core/module":"ntkb"}],"BIiT":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35143,7 +35320,7 @@ Bold.blotName = 'bold';
 Bold.tagName = ['STRONG', 'B'];
 var _default = Bold;
 exports.default = _default;
-},{"../blots/inline":"xisp"}],"4WGr":[function(require,module,exports) {
+},{"../blots/inline":"xisp"}],"WGr4":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35161,7 +35338,7 @@ Italic.blotName = 'italic';
 Italic.tagName = ['EM', 'I'];
 var _default = Italic;
 exports.default = _default;
-},{"./bold":"BIiT"}],"ao6/":[function(require,module,exports) {
+},{"./bold":"BIiT"}],"ao68":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35314,7 +35491,7 @@ List.scope = _parchment.default.Scope.BLOCK_BLOT;
 List.tagName = ['OL', 'UL'];
 List.defaultChild = 'list-item';
 List.allowedChildren = [ListItem];
-},{"parchment":"CQm3","../blots/block":"ehqu","../blots/container":"6tnf"}],"t5Za":[function(require,module,exports) {
+},{"parchment":"CQm3","../blots/block":"ehqu","../blots/container":"tnfo"}],"t5Za":[function(require,module,exports) {
 "use strict";
 
 var _core = _interopRequireDefault(require("quill/core"));
@@ -35330,8 +35507,10 @@ const Delta = _core.default.import('delta'); // helpful: https://github.com/quil
 
 class BUIClipboard extends _clipboard.default {
   onPaste(e) {
-    e.preventDefault();
-    const dirtyHtml = e.clipboardData.getData('text/html');
+    e.preventDefault(); // only supporting these 2 types see https://www.w3.org/TR/clipboard-apis/#mandatory-data-types
+
+    var copyType = e.clipboardData.types.includes('text/html') ? 'text/html' : 'text/plain';
+    const dirtyHtml = e.clipboardData.getData(copyType);
     this.insertHTML(dirtyHtml, true);
   }
 
@@ -35354,7 +35533,7 @@ _core.default.debug('error');
 _core.default.register({
   'modules/clipboard': BUIClipboard
 });
-},{"quill/core":"qOpY","quill/modules/clipboard":"tAeH","../../../../util":"+xBz"}],"IkMa":[function(require,module,exports) {
+},{"quill/core":"qOpY","quill/modules/clipboard":"tAeH","../../../../util":"xBze"}],"IkMa":[function(require,module,exports) {
 "use strict";
 
 var _core = _interopRequireDefault(require("quill/core"));
@@ -35477,7 +35656,9 @@ require("./divider");
 
 var _break = require("./break");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35493,7 +35674,7 @@ _core.default.register({
   'formats/list': _list.default,
   'formats/list-item': _list.ListItem
 });
-},{"quill/core":"qOpY","quill/modules/toolbar":"5/Uj","quill/formats/bold":"BIiT","quill/formats/italic":"4WGr","quill/formats/list":"ao6/","./clipboard":"t5Za","./divider":"IkMa","./break":"ZpO7"}],"k1zW":[function(require,module,exports) {
+},{"quill/core":"qOpY","quill/modules/toolbar":"UjOo","quill/formats/bold":"BIiT","quill/formats/italic":"WGr4","quill/formats/list":"ao68","./clipboard":"t5Za","./divider":"IkMa","./break":"ZpO7"}],"k1zW":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35576,7 +35757,7 @@ class RichTextField extends HTMLElement {
   }
 
   html() {
-    return _litHtml.html`
+    return (0, _litHtml.html)`
         <style>${_style.default.cssText}</style>
         <textarea class="view-source"></textarea>
         <main class="ql-editor">${this.__value ? (0, _unsafeHtml.unsafeHTML)(this.__value) : ''}</main>
@@ -35814,7 +35995,7 @@ customElements.define('rich-text-field', RichTextField);
 var _default = customElements.get('rich-text-field');
 
 exports.default = _default;
-},{"lit-html":"SP/d","lit-html/directives/unsafe-html.js":"/jTP","../../../../util":"+xBz","../../../menu":"0tCY","./style":"d7Am","./quill":"COD5"}],"GLLF":[function(require,module,exports) {
+},{"lit-html":"SPDu","lit-html/directives/unsafe-html.js":"jTPt","../../../../util":"xBze","../../../menu":"tCYJ","./style":"d7Am","./quill":"COD5"}],"GLLF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35824,7 +36005,7 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-const styles = _litElement.css`
+const styles = (0, _litElement.css)`
 
 :host {
 	--size: 1.6em;
@@ -35947,7 +36128,7 @@ customElements.define('radio-btn', RadioBtnElement);
 var _default = customElements.get('radio-btn');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"mCnW":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"mCnW":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36069,7 +36250,7 @@ require("./controls/radio-group");
 require("./controls/touch-ripple");
 
 require("./controls/range-slider");
-},{"./form-handler":"ZQnj","./form-control":"swB1","./controls/text-field":"2ezN","./controls/rich-text-field":"k1zW","./controls/select-field":"h8fl","./controls/check-box":"jNfL","./controls/radio-btn":"GLLF","./controls/radio-group":"mCnW","./controls/touch-ripple":"uH6r","./controls/range-slider":"ZCfn"}],"Wr69":[function(require,module,exports) {
+},{"./form-handler":"ZQnj","./form-control":"swB1","./controls/text-field":"ezNL","./controls/rich-text-field":"k1zW","./controls/select-field":"h8fl","./controls/check-box":"jNfL","./controls/radio-btn":"GLLF","./controls/radio-group":"mCnW","./controls/touch-ripple":"uH6r","./controls/range-slider":"ZCfn"}],"Wr69":[function(require,module,exports) {
 
 /**
  * Expose `Emitter`.
@@ -36416,7 +36597,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 customElements.define('b-list-filter-view-date', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: grid;
             position:relative;
@@ -36485,7 +36666,7 @@ customElements.define('b-list-filter-view-date', class extends _litElement.LitEl
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
 
         <b-btn text md @click=${this.clearDates}>Clear</b-btn>
         <b-hr></b-hr>
@@ -36628,7 +36809,7 @@ customElements.define('b-list-filter-view-date', class extends _litElement.LitEl
 var _default = customElements.get('b-list-filter-view-date');
 
 exports.default = _default;
-},{"lit-element":"+bhx","moment":"a2/B"}],"7J1Y":[function(require,module,exports) {
+},{"lit-element":"bhxD","moment":"a2Bw"}],"J1Yi":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36644,7 +36825,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 customElements.define('b-list-filter-view-input', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: grid;
             position:relative;
@@ -36674,7 +36855,7 @@ customElements.define('b-list-filter-view-input', class extends _litElement.LitE
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <form-control material="filled" style="width:${(this.get('width'), '200px')}">
             <text-field reset-invalid placeholder="${this.get('placeholder')}" @enterkey=${this.onEnter}></text-field>
             <span slot="help">${this.get('helpText')}</span>
@@ -36722,7 +36903,7 @@ customElements.define('b-list-filter-view-input', class extends _litElement.LitE
 var _default = customElements.get('b-list-filter-view-input');
 
 exports.default = _default;
-},{"lit-element":"+bhx","moment":"a2/B"}],"vufV":[function(require,module,exports) {
+},{"lit-element":"bhxD","moment":"a2Bw"}],"vufV":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36734,7 +36915,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-list-filter-view-slider', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: grid;
             position:relative;
@@ -36763,7 +36944,7 @@ customElements.define('b-list-filter-view-slider', class extends _litElement.Lit
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         
         <b-btn text @click=${this.clearVal}>Clear</b-btn>
 
@@ -36814,7 +36995,7 @@ customElements.define('b-list-filter-view-slider', class extends _litElement.Lit
 var _default = customElements.get('b-list-filter-view-slider');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"HGW8":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"HGW8":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36845,9 +37026,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const CustomViews = {
   'date': _filterViewDate.default,
   'input': _filterViewInput.default,
-  'slider': _filterViewSlider.default // do NOT include 0 or false as unset values
+  'slider': _filterViewSlider.default
+}; // do NOT include 0 or false as unset values
 
-};
 const unsetValues = [undefined, null, ''];
 
 const defaultSearch = model => {
@@ -36989,9 +37170,9 @@ class Filters extends Map {
 
   set searchOptions(opts) {
     if (opts === false) this.__searchOptions = {
-      data: false // turns search off
+      data: false
+    }; // turns search off
 
-    };
     if (typeof opts == 'object') this.__searchOptions = opts;
   }
 
@@ -37084,9 +37265,8 @@ class Filter {
     values = values.map(v => {
       if (typeof v == 'string' && !['divider'].includes(v)) v = {
         label: v,
-        val: v // make "unset" values uniform
-
-      };
+        val: v
+      }; // make "unset" values uniform
 
       if (typeof v == 'object' && unsetValues.includes(v.val)) {
         v.val = null;
@@ -37271,7 +37451,7 @@ class Filter {
 exports.Filter = Filter;
 (0, _componentEmitter.default)(Filters.prototype);
 (0, _componentEmitter.default)(Filter.prototype);
-},{"../../menu":"0tCY","../../dialog":"pos3","../../popover":"Soyf","../../../util/titleize":"NUHt","fuse.js":"Wp9p","component-emitter":"Wr69","../toolbar/filter-view-date":"YNHW","../toolbar/filter-view-input":"7J1Y","../toolbar/filter-view-slider":"vufV"}],"4sAK":[function(require,module,exports) {
+},{"../../menu":"tCYJ","../../dialog":"pos3","../../popover":"Soyf","../../../util/titleize":"NUHt","fuse.js":"Wp9p","component-emitter":"Wr69","../toolbar/filter-view-date":"YNHW","../toolbar/filter-view-input":"J1Yi","../toolbar/filter-view-slider":"vufV"}],"sAKI":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37386,7 +37566,7 @@ class Sorts extends Map {
       };
     });
     menu.push({
-      text: _litElement.html`Sorts will be applied in the order they are chosen.`
+      text: (0, _litElement.html)`Sorts will be applied in the order they are chosen.`
     });
     let selected = await new _menu.default(menu, {
       className: 'b-list-sort-menu',
@@ -37459,7 +37639,7 @@ class Sort {
   }
 
 }
-},{"lit-element":"+bhx","../../menu":"0tCY","../../../util/titleize":"NUHt","../../../util/device":"la8o","component-emitter":"Wr69"}],"ZTm8":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../menu":"tCYJ","../../../util/titleize":"NUHt","../../../util/device":"la8o","component-emitter":"Wr69"}],"ZTm8":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37521,7 +37701,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-list-sort-btn', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: block
         }
@@ -37578,13 +37758,13 @@ customElements.define('b-list-sort-btn', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <b-btn text class="sorts" @click=${this.sortMenu}>
             <main>
                 <b-label xs>Sort</b-label>
 
                 <div>
-                    ${this.sorts.active.map(sort => _litElement.html`
+                    ${this.sorts.active.map(sort => (0, _litElement.html)`
                         <span class="sort" .sort=${sort}>
                             <b-icon name="${sort.isDesc ? 'sort-alt-down' : 'sort-alt-up'}"></b-icon> ${sort.label}
                         </span>
@@ -37625,14 +37805,14 @@ customElements.define('b-list-sort-btn', class extends _litElement.LitElement {
 var _default = customElements.get('b-list-sort-btn');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"pUXj":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"pUXj":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("lit-element");
 
 customElements.define('b-list-sort-dir-btn', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: block
         }
@@ -37655,7 +37835,7 @@ customElements.define('b-list-sort-dir-btn', class extends _litElement.LitElemen
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <b-btn clear icon="${this.item.desc ? 'sort-alt-down' : 'sort-alt-up'}" @click=${this.onClick}></b-btn>
     `;
   }
@@ -37667,7 +37847,7 @@ customElements.define('b-list-sort-dir-btn', class extends _litElement.LitElemen
   }
 
 });
-},{"lit-element":"+bhx"}],"7zIY":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"zIYl":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37679,7 +37859,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-list-filter-btn', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: inline-block;
         }
@@ -37718,12 +37898,12 @@ customElements.define('b-list-filter-btn', class extends _litElement.LitElement 
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <b-btn text ?active=${this.filter.isActive} @click=${this.showMenu}>
             <main>
                 <b-label xs>${this.filter.label}</b-label>
                 <div>
-                    ${this.filter.icon ? _litElement.html`<b-icon name="${this.filter.icon}"></b-icon>` : ''}
+                    ${this.filter.icon ? (0, _litElement.html)`<b-icon name="${this.filter.icon}"></b-icon>` : ''}
                     ${this.filter.valueLabel}
                 </div>
             </main>
@@ -37751,7 +37931,7 @@ customElements.define('b-list-filter-btn', class extends _litElement.LitElement 
 var _default = customElements.get('b-list-filter-btn');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"x6cT":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"x6cT":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37782,7 +37962,7 @@ customElements.define('b-list-filters', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: flex;
             align-items: center;
@@ -37809,11 +37989,11 @@ customElements.define('b-list-filters', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <b-btn icon="layers" ?hidden=${!this.queuing} title="Apply queued filters" text
             @click=${this.applyQueuedFilters}>${this.queuing}</b-btn>
         
-        ${this.filters.map(filter => _litElement.html`
+        ${this.filters.map(filter => (0, _litElement.html)`
             <b-list-filter-btn ?active=${filter.isActive} .filter=${filter}></b-list-filter-btn>
         `)}
         
@@ -37860,7 +38040,7 @@ customElements.define('b-list-filters', class extends _litElement.LitElement {
 var _default = customElements.get('b-list-filters');
 
 exports.default = _default;
-},{"lit-element":"+bhx","./filter-btn":"7zIY"}],"XQL9":[function(require,module,exports) {
+},{"lit-element":"bhxD","./filter-btn":"zIYl"}],"XQL9":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37929,7 +38109,7 @@ customElements.define('b-list-search-bar', class extends _litElement.LitElement 
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: block
         }
@@ -37971,7 +38151,7 @@ customElements.define('b-list-search-bar', class extends _litElement.LitElement 
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <form-control>
             <text-field placeholder="${this.placeholder}" bubble-keypress single-line></text-field>
             <b-icon @click=${this.focus} name="search" slot="prefix"></b-icon>
@@ -37993,7 +38173,7 @@ customElements.define('b-list-search-bar', class extends _litElement.LitElement 
 var _default = customElements.get('b-list-search-bar');
 
 exports.default = _default;
-},{"lit-element":"+bhx","../../form-control/form-control":"swB1","../../form-control/controls/text-field":"2ezN"}],"iwaU":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../form-control/form-control":"swB1","../../form-control/controls/text-field":"ezNL"}],"iwaU":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38032,7 +38212,7 @@ customElements.define('b-list-toolbar', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: flex;
             align-items: center;
@@ -38098,18 +38278,18 @@ customElements.define('b-list-toolbar', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <slot name="before"></slot>
 
         <div class="count">${this.count}</div>
 
         <div class="scroller">
 
-            ${!this.sorts ? '' : _litElement.html`
+            ${!this.sorts ? '' : (0, _litElement.html)`
                 <b-list-sort-btn .sorts=${this.sorts}></b-list-sort-btn>
             `}
             
-            ${!this.filters ? '' : _litElement.html`
+            ${!this.filters ? '' : (0, _litElement.html)`
                 <b-list-filters .filters=${this.filters}></b-list-filters>
             `}
 
@@ -38117,11 +38297,11 @@ customElements.define('b-list-toolbar', class extends _litElement.LitElement {
         
         <div class="after">
 
-            ${!this.filters || !this.filters.showSearch ? '' : _litElement.html`
+            ${!this.filters || !this.filters.showSearch ? '' : (0, _litElement.html)`
             <b-list-search-bar @keydown=${this.onKeyDown} placeholder=${this.filters.searchOptions.placeholder}></b-list-search-bar>
             `}
 
-            ${!this.layouts ? '' : _litElement.html`
+            ${!this.layouts ? '' : (0, _litElement.html)`
                 <b-list-layout-btn .layouts=${this.layouts} pill text></b-list-layout-btn>
             `}
 
@@ -38162,14 +38342,14 @@ customElements.define('b-list-toolbar', class extends _litElement.LitElement {
 var _default = customElements.get('b-list-toolbar');
 
 exports.default = _default;
-},{"lit-element":"+bhx","../../popover":"Soyf","./sort-btn":"FOqU","./sort-dir-btn":"pUXj","./filters-view":"x6cT","./layout-btn":"XQL9","./search":"uCjH"}],"55xA":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../popover":"Soyf","./sort-btn":"FOqU","./sort-dir-btn":"pUXj","./filters-view":"x6cT","./layout-btn":"XQL9","./search":"uCjH"}],"xA0J":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("lit-element");
 
 customElements.define('b-list-selection-bar', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: block;
             position:absolute;
@@ -38226,8 +38406,8 @@ customElements.define('b-list-selection-bar', class extends _litElement.LitEleme
   }
 
   render() {
-    return _litElement.html`
-        ${this.selection ? _litElement.html`
+    return (0, _litElement.html)`
+        ${this.selection ? (0, _litElement.html)`
 
             <div>
                 <b-btn class="cancel-btn" icon="cancel-1" @click=${this.end} outline></b-btn>
@@ -38251,7 +38431,7 @@ customElements.define('b-list-selection-bar', class extends _litElement.LitEleme
   }
 
 });
-},{"lit-element":"+bhx"}],"2zwr":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"zwrR":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38380,7 +38560,7 @@ customElements.define('b-infinite-list', class extends _litElement.LitElement {
 var _default = customElements.get('b-infinite-list');
 
 exports.default = _default;
-},{"lit-element":"+bhx","../../elements/empty-state":"+2dU"}],"yvN8":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../elements/empty-state":"dUnZ"}],"yvN8":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("lit-element");
@@ -38403,7 +38583,7 @@ _litElement.LitElement.prototype.$$ = function (query) {
 _litElement.LitElement.prototype.$$all = function (query) {
   return this.shadowRoot ? this.shadowRoot.querySelectorAll(query) : this.querySelectorAll(query);
 };
-},{"lit-element":"+bhx"}],"a+R3":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"aR3g":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38415,7 +38595,7 @@ var _componentEmitter = _interopRequireDefault(require("component-emitter"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const isTouch = 'ontouchstart' in window;
+const isTouch = ('ontouchstart' in window);
 
 class ResultMap extends Map {
   get models() {
@@ -38852,7 +39032,7 @@ customElements.define('b-list', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: grid;
             grid-template-rows: auto auto 1fr;
@@ -38934,7 +39114,7 @@ customElements.define('b-list', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
 
         <style>${this.customStyles || ''}</style>
         
@@ -39140,7 +39320,7 @@ customElements.define('b-list', class extends _litElement.LitElement {
 var _default = customElements.get('b-list');
 
 exports.default = _default;
-},{"lit-element":"+bhx","./data/source":"zXhY","./data/filters":"HGW8","./data/sorts":"4sAK","./data/layouts":"ZTm8","./toolbar":"iwaU","./toolbar/selection-bar":"55xA","./infinite-list":"2zwr","../../elements/spinner-overlay":"eyVY","../../helpers/lit-element/selectors":"yvN8","../selection":"a+R3"}],"euwv":[function(require,module,exports) {
+},{"lit-element":"bhxD","./data/source":"zXhY","./data/filters":"HGW8","./data/sorts":"sAKI","./data/layouts":"ZTm8","./toolbar":"iwaU","./toolbar/selection-bar":"xA0J","./infinite-list":"zwrR","../../elements/spinner-overlay":"eyVY","../../helpers/lit-element/selectors":"yvN8","../selection":"aR3g"}],"euwv":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("lit-element");
@@ -39153,7 +39333,7 @@ _litElement.LitElement.prototype.emitEvent = function (eventName, detail = null)
   });
   this.dispatchEvent(event);
 };
-},{"lit-element":"+bhx"}],"tqEd":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"tqEd":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39165,7 +39345,7 @@ var _litElement = require("lit-element");
 
 customElements.define('b-cal-day', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: grid;
             grid-template-rows: auto 1fr;
@@ -39216,7 +39396,7 @@ customElements.define('b-cal-day', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
 
         <header>
             <div class="date">
@@ -39259,7 +39439,7 @@ customElements.define('b-cal-day', class extends _litElement.LitElement {
 var _default = customElements.get('b-cal-day');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"YTQF":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"YTQF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39288,7 +39468,7 @@ customElements.define('b-cal', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             /* height: 100%; */
             display: grid;
@@ -39426,7 +39606,7 @@ customElements.define('b-cal', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <header>
             <div class="title">
                 <h1>${this.date.format('MMMM YYYY')}</h1>
@@ -39442,17 +39622,17 @@ customElements.define('b-cal', class extends _litElement.LitElement {
                 <slot name="after-nav"></slot>
             </div>
 
-            <div class="weekdays">${this.weekdays.map((str, i) => _litElement.html`
-                ${i == 0 || i == 6 ? _litElement.html`
+            <div class="weekdays">${this.weekdays.map((str, i) => (0, _litElement.html)`
+                ${i == 0 || i == 6 ? (0, _litElement.html)`
                     <div @click=${this.toggleCollapseWeekend}>${str}</div>
-                ` : _litElement.html`
+                ` : (0, _litElement.html)`
                     <div>${str}</div>
                 `}
             `)}</div>
 
         </header>
         <main>
-        ${this.days.map(date => _litElement.html`
+        ${this.days.map(date => (0, _litElement.html)`
             <b-cal-day .caldate=${this._date} .date=${date}>
                 <slot name="${date.format('YYYY-MM-DD')}"></slot>
             </b-cal-day>
@@ -39470,14 +39650,14 @@ customElements.define('b-cal', class extends _litElement.LitElement {
 var _default = customElements.get('b-cal');
 
 exports.default = _default;
-},{"lit-element":"+bhx","../../elements/btn-group":"0pV6","../../helpers/lit-element/events":"euwv","moment":"a2/B","./day":"tqEd"}],"TMO9":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../elements/btn-group":"pV6C","../../helpers/lit-element/events":"euwv","moment":"a2Bw","./day":"tqEd"}],"TMO9":[function(require,module,exports) {
 "use strict";
 
 var _litElement = require("lit-element");
 
 customElements.define('b-list-of-colors', class extends _litElement.LitElement {
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: grid;
             --grids: 1fr 1fr 1fr 1fr;
@@ -39569,12 +39749,12 @@ customElements.define('b-list-of-colors', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
-        ${this.colors.map(g => _litElement.html`
+    return (0, _litElement.html)`
+        ${this.colors.map(g => (0, _litElement.html)`
             <div group="${g.name}">
                 <h3>${g.name}</h3>
                 <div class="colors">
-                ${g.colors.map(c => _litElement.html`
+                ${g.colors.map(c => (0, _litElement.html)`
                     <div num=${c.num} key="${c.key}" class="color" style="background-color: var(--${c.key});">
                         <div>${c.key}</div>
                         <!-- <b-sub>${c.num ? c.color : ''}</b-sub> -->
@@ -39587,7 +39767,7 @@ customElements.define('b-list-of-colors', class extends _litElement.LitElement {
   }
 
 });
-},{"lit-element":"+bhx"}],"u6Cc":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"u6Cc":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39599,30 +39779,30 @@ exports.fileIconLabels = exports.fileIconColors = void 0;
 var _litElement = require("lit-element");
 
 const fileIconColors = {
-  pdf: _litElement.css`:host([ext="pdf"]){ --bgd: #b40808; }`,
-  js: _litElement.css` :host([ext="js"]){ --bgd: #f8dc3d; --color: #333;}`,
-  json: _litElement.css`:host([ext="json"]){ --bgd: #f8dc3d; --color: #333;}`,
-  video: _litElement.css`:host([ext="mp4"]){ --bgd: var(--red);}`,
-  html: _litElement.css`:host([ext="html"]){ --bgd: #e54c21}`,
-  xml: _litElement.css`:host([ext="xml"]){ --bgd: #f26524}`,
-  onix: _litElement.css`:host([ext="onix"]){ --bgd: #626a7f;}`,
-  zip: _litElement.css`:host([ext="zip"]){ --bgd: var(--gray-600);}`,
-  jpg: _litElement.css`:host([ext="jpg"]){ --bgd: var(--blue); }`,
-  jpeg: _litElement.css`:host([ext="jpeg"]){ --bgd: var(--blue); }`,
-  png: _litElement.css`:host([ext="png"]){ --bgd: var(--blue); }`,
-  gif: _litElement.css`:host([ext="gif"]){ --bgd: var(--blue); }`,
-  wav: _litElement.css`:host([ext="wav"]){ --bgd: var(--deep-purple); }`,
-  mp3: _litElement.css`:host([ext="mp3"]){ --bgd: var(--deep-purple); }`,
-  flac: _litElement.css`:host([ext="flac"]){ --bgd: var(--deep-purple); }`,
-  m4a: _litElement.css`:host([ext="m4a"]){ --bgd: var(--deep-purple); }`,
+  pdf: (0, _litElement.css)`:host([ext="pdf"]){ --bgd: #b40808; }`,
+  js: (0, _litElement.css)` :host([ext="js"]){ --bgd: #f8dc3d; --color: #333;}`,
+  json: (0, _litElement.css)`:host([ext="json"]){ --bgd: #f8dc3d; --color: #333;}`,
+  video: (0, _litElement.css)`:host([ext="mp4"]){ --bgd: var(--red);}`,
+  html: (0, _litElement.css)`:host([ext="html"]){ --bgd: #e54c21}`,
+  xml: (0, _litElement.css)`:host([ext="xml"]){ --bgd: #f26524}`,
+  onix: (0, _litElement.css)`:host([ext="onix"]){ --bgd: #626a7f;}`,
+  zip: (0, _litElement.css)`:host([ext="zip"]){ --bgd: var(--gray-600);}`,
+  jpg: (0, _litElement.css)`:host([ext="jpg"]){ --bgd: var(--blue); }`,
+  jpeg: (0, _litElement.css)`:host([ext="jpeg"]){ --bgd: var(--blue); }`,
+  png: (0, _litElement.css)`:host([ext="png"]){ --bgd: var(--blue); }`,
+  gif: (0, _litElement.css)`:host([ext="gif"]){ --bgd: var(--blue); }`,
+  wav: (0, _litElement.css)`:host([ext="wav"]){ --bgd: var(--deep-purple); }`,
+  mp3: (0, _litElement.css)`:host([ext="mp3"]){ --bgd: var(--deep-purple); }`,
+  flac: (0, _litElement.css)`:host([ext="flac"]){ --bgd: var(--deep-purple); }`,
+  m4a: (0, _litElement.css)`:host([ext="m4a"]){ --bgd: var(--deep-purple); }`,
   // Microsoft
-  word: _litElement.css`
+  word: (0, _litElement.css)`
         :host([ext="doc"]),
         :host([ext="docx"]) {
             --bgd: #0f52b7;
         }
     `,
-  excel: _litElement.css`
+  excel: (0, _litElement.css)`
         :host([ext="xls"]),
         :host([ext="xlsx"]),
         :host([ext="xlsm"]) {
@@ -39630,7 +39810,7 @@ const fileIconColors = {
         }
     `,
   // Adobe
-  psd: _litElement.css`
+  psd: (0, _litElement.css)`
         :host([ext="psd"]) {
             --bgd: #011c24;
             --color: #00c8ff;
@@ -39638,7 +39818,7 @@ const fileIconColors = {
             --border-color: var(--color);
         }
     `,
-  indd: _litElement.css`
+  indd: (0, _litElement.css)`
         :host([ext="indd"]),
         :host([ext="idml"]) {
             --bgd: #2a020b;
@@ -39647,7 +39827,7 @@ const fileIconColors = {
             --border-color: var(--color);
         }
     `,
-  icml: _litElement.css`
+  icml: (0, _litElement.css)`
         :host([ext="icml"]) {
             --bgd: #2a0c2a;
             --color: #eb72eb;
@@ -39655,7 +39835,7 @@ const fileIconColors = {
             --border-color: var(--color);
         }
     `,
-  ai: _litElement.css`
+  ai: (0, _litElement.css)`
         :host([ext="ai"]),
         :host([ext="ait"]) {
             --bgd: #251300;
@@ -39664,7 +39844,7 @@ const fileIconColors = {
             --border-color: var(--color);
         }
     `,
-  pdf: _litElement.css`
+  pdf: (0, _litElement.css)`
         :host([ext="pdf"]) {
             --bgd: #2f1208;
             --color: #fff;
@@ -39675,18 +39855,18 @@ const fileIconColors = {
 };
 exports.fileIconColors = fileIconColors;
 const fileIconLabels = {
-  'json': _litElement.html`<span>{ }</span>`,
-  'mp4': _litElement.html`<b-icon name="videocam"></b-icon>`,
-  'mp3': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
-  'wav': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
-  'flac': ext => _litElement.html`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
-  'html': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
-  'xml': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
-  'onix': ext => _litElement.html`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
-  'dpl': _litElement.html`<b-icon name="cd"></b-icon>`,
-  'iso': _litElement.html`<b-icon name="cd"></b-icon>`,
-  'zip': _litElement.html`<b-icon name="file-archive"></b-icon>`,
-  'epub': ext => _litElement.html`<b-icon name="book-open"></b-icon><sub>${ext}</sub>`
+  'json': (0, _litElement.html)`<span>{ }</span>`,
+  'mp4': (0, _litElement.html)`<b-icon name="videocam"></b-icon>`,
+  'mp3': ext => (0, _litElement.html)`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
+  'wav': ext => (0, _litElement.html)`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
+  'flac': ext => (0, _litElement.html)`<b-icon name="music"></b-icon><sub>${ext}</sub>`,
+  'html': ext => (0, _litElement.html)`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
+  'xml': ext => (0, _litElement.html)`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
+  'onix': ext => (0, _litElement.html)`<b-icon name="code"></b-icon><sub>${ext}</sub>`,
+  'dpl': (0, _litElement.html)`<b-icon name="cd"></b-icon>`,
+  'iso': (0, _litElement.html)`<b-icon name="cd"></b-icon>`,
+  'zip': (0, _litElement.html)`<b-icon name="file-archive"></b-icon>`,
+  'epub': ext => (0, _litElement.html)`<b-icon name="book-open"></b-icon><sub>${ext}</sub>`
 };
 exports.fileIconLabels = fileIconLabels;
 
@@ -39704,7 +39884,7 @@ function _default(customColors = {}, customLabels = {}) {
     }
 
     static get styles() {
-      return [_litElement.css`
+      return [(0, _litElement.css)`
         :host {
             display: inline-block;
             position:relative;
@@ -39777,7 +39957,7 @@ function _default(customColors = {}, customLabels = {}) {
     }
 
     render() {
-      return _litElement.html`
+      return (0, _litElement.html)`
         <main>
             <div class="dogear"></div>
             <slot name="label">
@@ -39796,7 +39976,7 @@ function _default(customColors = {}, customLabels = {}) {
 
   });
 }
-},{"lit-element":"+bhx"}],"sHUN":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"sHUN":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39843,7 +40023,7 @@ customElements.define('b-notifs', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             display: block;
             pointer-events: none;
@@ -39942,7 +40122,7 @@ customElements.define('b-notifs', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <div class="bottom">
             <slot name="bottom-left"></slot>
             <slot name="bottom"></slot>
@@ -39963,7 +40143,7 @@ customElements.define('b-notifs', class extends _litElement.LitElement {
 var _default = customElements.get('b-notifs');
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"HXsq":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"HXsq":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39973,7 +40153,7 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-var _default = _litElement.css`
+var _default = (0, _litElement.css)`
 :host {
     display: block;
     position:relative;
@@ -40092,7 +40272,7 @@ slot {
 `;
 
 exports.default = _default;
-},{"lit-element":"+bhx"}],"tUj8":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"tUj8":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40124,7 +40304,7 @@ var _default = {
   }
 };
 exports.default = _default;
-},{}],"Cw//":[function(require,module,exports) {
+},{}],"Cw18":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40140,7 +40320,9 @@ var _makeBtn = _interopRequireWildcard(require("../dialog/make-btn"));
 
 require("../../helpers/lit-element/events");
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 customElements.define('b-snackbar', class extends _litElement.LitElement {
   static get properties() {
@@ -40158,7 +40340,7 @@ customElements.define('b-snackbar', class extends _litElement.LitElement {
   }
 
   static get styles() {
-    return _litElement.css`
+    return (0, _litElement.css)`
         :host {
             padding: var(--b-snackbar-padding, .85em 1em);
             display: grid;
@@ -40212,7 +40394,7 @@ customElements.define('b-snackbar', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <div class="icon">${this.renderIcon()}</div>
         <div class="msg">${this.msg}</div>
         <div class="btns" @click=${this.onBtnClick}>
@@ -40223,11 +40405,11 @@ customElements.define('b-snackbar', class extends _litElement.LitElement {
 
   renderIcon() {
     if (!this.icon) return '';
-    if (typeof this.icon == 'string') return _litElement.html`<b-icon name="${this.icon}"></b-icon>`;else return this.icon;
+    if (typeof this.icon == 'string') return (0, _litElement.html)`<b-icon name="${this.icon}"></b-icon>`;else return this.icon;
   }
 
   renderBtn(btn) {
-    return _litElement.html`${(0, _unsafeHtml.unsafeHTML)((0, _makeBtn.default)(btn))}`;
+    return (0, _litElement.html)`${(0, _unsafeHtml.unsafeHTML)((0, _makeBtn.default)(btn))}`;
   }
 
   onBtnClick(e) {
@@ -40243,7 +40425,7 @@ customElements.define('b-snackbar', class extends _litElement.LitElement {
 var _default = customElements.get('b-snackbar');
 
 exports.default = _default;
-},{"lit-element":"+bhx","lit-html/directives/unsafe-html":"/jTP","../dialog/make-btn":"TZ6L","../../helpers/lit-element/events":"euwv"}],"XAiK":[function(require,module,exports) {
+},{"lit-element":"bhxD","lit-html/directives/unsafe-html":"jTPt","../dialog/make-btn":"TZ6L","../../helpers/lit-element/events":"euwv"}],"XAiK":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40440,7 +40622,7 @@ customElements.define('b-notif', class extends _litElement.LitElement {
   }
 
   render() {
-    return _litElement.html`
+    return (0, _litElement.html)`
         <main>
         <slot>
             <b-snackbar
@@ -40478,7 +40660,7 @@ for (let key in _types.default) {
     return new Notif(Object.assign({}, _types.default[key], opts));
   };
 }
-},{"lit-element":"+bhx","./controller":"sHUN","../../util/device":"la8o","./style":"HXsq","./types":"tUj8","./snackbar":"Cw//"}],"gE6T":[function(require,module,exports) {
+},{"lit-element":"bhxD","./controller":"sHUN","../../util/device":"la8o","./style":"HXsq","./types":"tUj8","./snackbar":"Cw18"}],"gE6T":[function(require,module,exports) {
 "use strict";
 
 require("../elements/icon");
@@ -40591,7 +40773,7 @@ history.replaceState = (f => function replaceState() {
 window.addEventListener('popstate', function () {
   convertComments();
 });
-},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"0pV6","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/text":"yukA","../elements/grid":"BALQ","../elements/carousel":"inC5","../elements/timer":"u+eY","../elements/empty-state":"+2dU","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"29Vf","../elements/avatar":"Da++","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../presenters/cal":"YTQF","../helpers/colors-list":"TMO9","../styles/colors.less":"r4vn","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"0tCY","../presenters/notif":"XAiK"}],"I+C3":[function(require,module,exports) {
+},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"pV6C","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/text":"yukA","../elements/grid":"BALQ","../elements/carousel":"inC5","../elements/timer":"uEYO","../elements/empty-state":"dUnZ","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"VfwF","../elements/avatar":"DaYz","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../presenters/cal":"YTQF","../helpers/colors-list":"TMO9","../styles/colors.less":"r4vn","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"tCYJ","../presenters/notif":"XAiK"}],"FheM":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -40607,7 +40789,7 @@ function getBundleURL() {
   try {
     throw new Error();
   } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
     if (matches) {
       return getBaseURL(matches[0]);
@@ -40618,12 +40800,12 @@ function getBundleURL() {
 }
 
 function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
 }
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"/1fi":[function(require,module,exports) {
+},{}],"TUK3":[function(require,module,exports) {
 var getBundleURL = require('./bundle-url').getBundleURL;
 
 function loadBundlesLazy(bundles) {
@@ -40706,13 +40888,13 @@ LazyPromise.prototype.catch = function (onError) {
   if (this.promise === null) this.promise = new Promise(this.executor);
   return this.promise.catch(onError);
 };
-},{"./bundle-url":"I+C3"}],"PzH6":[function(require,module,exports) {
+},{"./bundle-url":"FheM"}],"A3BY":[function(require,module,exports) {
 module.exports = function loadHTMLBundle(bundle) {
   return fetch(bundle).then(function (res) {
     return res.text();
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("/1fi");b.register("html",require("PzH6"));b.load([["icons.svg.99a755f0.html","pxeq"]]).then(function(){require("gE6T");});
+var b=require("TUK3");b.register("html",require("A3BY"));b.load([["icons.svg.9af7d01a.html","pxeq"]]).then(function(){require("gE6T");});
 },{}]},{},[0], null)
-//# sourceMappingURL=/bui.map
+//# sourceMappingURL=/bui.js.map
