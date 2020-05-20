@@ -3963,7 +3963,7 @@ class IconList extends _litElement.LitElement {
 		}
 
 		small {
-			color: rgba(0,0,0,.5);
+			color: var(--theme-color-accent);
 		}
 
 		@media (max-width: 550px) {
@@ -4288,6 +4288,7 @@ class BtnElement extends _litElement.LitElement {
         }
 
         :host([color^="primary"])  { --color: var(--color-primary); }
+        :host([color^="theme"])  { --color: var(--theme); }
         :host([color^="black"])  { --color: var(--black); }
         :host([color^="white"])  { --color: var(--white); --textColor: var(--black); }
         :host([color^="orange"]) { --color: var(--orange); }
@@ -5267,6 +5268,7 @@ customElements.define('b-text', class extends _litElement.LitElement {
         :host([xxl]) { font-size: 2em; line-height: 1.1em; }
 
         :host([tone="muted"]), :host([muted]) { color: rgba(var(--theme-rgb, 0,0,0),.4); }
+        :host([tone="theme"]) { color: var(--theme); }
         :host([tone="critical"]) { color: var(--b-text-tone-critical, var(--red-A400, red)); }
         :host([tone="warning"]) { color: var(--b-text-tone-warning, var(--orange, orange)); }
         :host([tone="info"]) { color: var(--b-text-tone-info, var(--blue, blue)); }
@@ -14882,9 +14884,9 @@ const colorScheme = {
   },
 
   apply({
-    colorizeFaviconComposition = 'light'
+    colorizeFaviconComposition = ''
   } = {}) {
-    localStorage.setItem('theme-colorize-icon', colorizeFaviconComposition);
+    localStorage.setItem('theme-colorize-icon', colorizeFaviconComposition || localStorage.getItem('theme-colorize-icon') || 'lighten');
     this.onChange(this.setTheme);
     this.setTheme();
     this.setAccent();
@@ -17272,7 +17274,336 @@ customElements.define('b-panel', Panel);
 var _default = customElements.get('b-panel');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./controller":"R9Fe","../../router":"Qeq3","../../router/route":"WZSr","../../util/device":"la8o","./toolbar":"ZNP1","../../elements/btn":"DABr"}],"TZ6L":[function(require,module,exports) {
+},{"lit-element":"bhxD","./controller":"R9Fe","../../router":"Qeq3","../../router/route":"WZSr","../../util/device":"la8o","./toolbar":"ZNP1","../../elements/btn":"DABr"}],"sHUN":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+const NotifControllers = {};
+customElements.define('b-notifs', class extends _litElement.LitElement {
+  // createRenderRoot(){ return this }
+  static get(name = 'main') {
+    if (name == 'main' && !NotifControllers[name]) {
+      let controller = document.createElement('b-notifs');
+      controller.setAttribute('name', 'main');
+      document.body.appendChild(controller);
+      NotifControllers[name] = controller;
+    }
+
+    return NotifControllers[name];
+  }
+
+  get name() {
+    return this.hasAttribute('name') ? this.getAttribute('name') : undefined;
+  }
+
+  constructor() {
+    super();
+
+    if (this.name) {
+      if (NotifControllers[this.name]) console.warn('A `b-notifs` controller already exists with the name: ', this.name);else NotifControllers[this.name] = this;
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.name) delete NotifControllers[this.name];
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.name && !NotifControllers[this.name]) NotifControllers[this.name] = this;
+  }
+
+  static get styles() {
+    return (0, _litElement.css)`
+        :host {
+            display: block;
+            pointer-events: none;
+            
+            overflow: hidden;
+            position:absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 1200;
+            --padding: var(--b-notif-padding, 1em);
+        }
+
+        :host([name="main"]) {
+            position: fixed;
+            top: env(safe-area-inset-top);
+            left: env(safe-area-inset-left);
+            bottom: env(safe-area-inset-bottom);
+            right: env(safe-area-inset-right);
+        }
+
+        @media (max-width:699px), (max-height: 699px) {
+            :host {
+                position: fixed;
+                top: env(safe-area-inset-top);
+                left: env(safe-area-inset-left);
+                bottom: env(safe-area-inset-bottom);
+                right: env(safe-area-inset-right);
+            }
+        }
+
+        slot {
+            position: absolute;
+            display: flex;
+        }
+
+        slot[name="top"],
+        slot[name="bottom"] {
+            width: 100%;
+            align-items: center;
+        }
+
+        slot[name*="top"] {
+            top: 0;
+            flex-direction: column;
+            padding-top: var(--padding);
+        }
+
+        slot[name*="bottom"] {
+            bottom: 0;
+            flex-direction: column-reverse;
+            padding-bottom: var(--padding);
+        }
+
+        slot[name*="left"] {
+            left: 0;
+            padding-left: var(--padding);
+            align-items: flex-start;
+        }
+
+        slot[name*="right"] {
+            right: 0;
+            padding-right: var(--padding);
+            align-items: flex-end;
+        }
+
+        @media (max-width:699px) {
+            slot {
+                padding: 0 !important;
+                position: static !important;
+                --b-notif-width: 100%;
+            }
+
+            .top {
+                position: absolute;
+                top: 0;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                padding: var(--padding);
+                box-sizing: border-box;
+            }
+
+            .bottom {
+                position: absolute;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                padding: var(--padding);
+                box-sizing: border-box;
+            }
+        }
+    `;
+  }
+
+  render() {
+    return (0, _litElement.html)`
+        <div class="bottom">
+            <slot name="bottom-left"></slot>
+            <slot name="bottom"></slot>
+            <slot name="bottom-right"></slot>
+        </div>
+
+        <div class="top">
+            <slot name="top-left"></slot>
+            <slot name="top"></slot>
+            <slot name="top-right"></slot>
+        </div>
+        
+    `;
+  }
+
+});
+
+var _default = customElements.get('b-notifs');
+
+exports.default = _default;
+},{"lit-element":"bhxD"}],"HXsq":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+var _default = (0, _litElement.css)`
+:host {
+    display: block;
+    position:relative;
+    pointer-events: all;
+    width: var(--b-notif-width, 300px);
+    max-width: 100%;
+
+    /* overflow: hidden; */
+
+    transition: 
+        height 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms,
+        opacity 300ms,
+        transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    opacity: 0;
+    will-change: transform; 
+}
+
+:host([slot*="right"]) { transform: translateX(100%); }
+:host([slot*="left"]) { transform: translateX(-100%); }
+:host([slot="top"]) { transform: translateY(-100%); }
+:host([slot="bottom"]) { transform: translateY(100%); }
+
+:host([animation="grow"]) {
+    transform: scale(.8)
+}
+
+:host([animation="bounce"]) {
+    transform: none;
+}
+
+:host([animation="bounce"].entered) {
+    animation-name: bounce;
+    animation-duration: 700ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-fill-mode: forwards;
+}
+
+:host([animation="fade"]) {
+    transform: none;
+}
+
+:host([slot*="top"]) {
+    --spacing-bottom: var(--padding);
+}
+
+:host([slot*="bottom"]) {
+    --spacing-top: var(--padding);
+}
+
+:host(.entered) {
+    opacity: 1;
+    transform: none;
+}
+
+:host(.exit) {
+    height: 0 !important;
+}
+
+:host([color="red"]) {
+    --b-notif-color: #fff;
+    --b-notif-bgd: var(--red);
+}
+
+:host([color="blue"]) {
+    --b-notif-color: #fff;
+    --b-notif-bgd: var(--blue);
+}
+
+:host([color="green"]) {
+    --b-notif-color: #fff;
+    --b-notif-bgd: var(--green);
+}
+
+:host([color="orange"]) {
+    --b-notif-color: #fff;
+    --b-notif-bgd: var(--orange);
+}
+
+:host([color="amber"]) {
+    --b-notif-color: var(--gray-900);
+    --b-notif-bgd: var(--amber);
+}
+
+main {
+    --radius: var(--b-notif-radius, 4px);
+    border-radius: var(--radius);
+    color: var(--b-notif-color, #fff);
+    background: var(--b-notif-bgd, #333);
+    margin-top: var(--spacing-top, 0);
+    margin-bottom: var(--spacing-bottom, 0);
+
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),
+                0px 6px 10px 0px rgba(0,0,0,0.14),
+                0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+
+slot {
+    display: block;
+}
+
+
+:host {
+    --b-notif-btn-color: var(--b-notif-color);
+}
+
+:host([color]) {
+    --b-notif-btn-bgd: rgba(255,255,255,.1);
+}
+
+@keyframes bounce {
+  0% { transform: scale(0.8); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(.9); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
+`;
+
+exports.default = _default;
+},{"lit-element":"bhxD"}],"tUj8":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  alert: {},
+  error: {
+    icon: 'attention-circle',
+    color: 'red',
+    animation: 'bounce'
+  },
+  failed: {
+    icon: 'cancel-circled',
+    color: 'red'
+  },
+  success: {
+    icon: 'ok-circled',
+    color: 'green'
+  },
+  info: {
+    icon: 'info-circled',
+    color: 'blue'
+  },
+  warning: {
+    icon: 'attention-1',
+    color: 'orange'
+  }
+};
+exports.default = _default;
+},{}],"TZ6L":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17334,7 +17665,376 @@ function makeBtn(opts = {}, i) {
 
   return `<b-btn ${text && 'text'} icon="${icon}" color="${color}" class="${className}">${label}</b-btn>`; // return `<span class="btn ${className} ${color} ${icon}">${label}</span>`
 }
-},{}],"HbKK":[function(require,module,exports) {
+},{}],"euwv":[function(require,module,exports) {
+"use strict";
+
+var _litElement = require("lit-element");
+
+_litElement.LitElement.prototype.emitEvent = function (eventName, detail = null) {
+  var event = new CustomEvent(eventName, {
+    bubbles: true,
+    composed: true,
+    detail: detail
+  });
+  this.dispatchEvent(event);
+};
+},{"lit-element":"bhxD"}],"Cw18":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+var _unsafeHtml = require("lit-html/directives/unsafe-html");
+
+var _makeBtn = _interopRequireWildcard(require("../dialog/make-btn"));
+
+require("../../helpers/lit-element/events");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+customElements.define('b-snackbar', class extends _litElement.LitElement {
+  static get properties() {
+    return {
+      msg: {
+        type: String
+      },
+      btns: {
+        type: Array
+      },
+      icon: {
+        type: String
+      }
+    };
+  }
+
+  static get styles() {
+    return (0, _litElement.css)`
+        :host {
+            padding: var(--b-snackbar-padding, .85em 1em);
+            display: grid;
+            grid-template-columns: auto 1fr max-content;
+            align-items: center;
+        }
+
+        .icon {
+            line-height: 0;
+        }
+
+        .icon > b-icon,
+        .icon > .icon {
+            margin: -.5em 0;
+            margin-right: .75em;
+            --size: 1.2em;
+            vertical-align: middle;
+        }
+
+        .msg {
+            margin: 0.05em 0 -.05em; /* better alignment with icon and btns */
+        }
+
+        .btns {
+            margin-top: -0.05em;
+            margin-right: calc(-.5 * var(--padding));
+            margin-left: calc(-.5 * var(--padding));
+        }
+
+        .btns b-btn {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: -1em 0;
+            vertical-align: middle;
+        }
+
+        .btns b-btn[color=''] {
+            color: var(--b-notif-btn-color, #fff);
+        }
+
+        :host([color]) .btns b-btn  {
+            color: var(--b-notif-btn-color, #fff);
+        }
+
+        @media (hover){
+            .btns b-btn:hover {
+                --bgdColor: var(--b-notif-btn-bgd, rgba(0,0,0,.05));
+            }
+        }
+    `;
+  }
+
+  render() {
+    return (0, _litElement.html)`
+        <div class="icon">${this.renderIcon()}</div>
+        <div class="msg">${this.msg}</div>
+        <div class="btns" @click=${this.onBtnClick}>
+            ${this.btns.map(btn => this.renderBtn(btn))}
+        </div>
+    `;
+  }
+
+  renderIcon() {
+    if (!this.icon) return '';
+    if (typeof this.icon == 'string') return (0, _litElement.html)`<b-icon name="${this.icon}"></b-icon>`;else return this.icon;
+  }
+
+  renderBtn(btn) {
+    return (0, _litElement.html)`${(0, _unsafeHtml.unsafeHTML)((0, _makeBtn.default)(btn))}`;
+  }
+
+  onBtnClick(e) {
+    e.stopPropagation();
+    let index = Array.from(e.currentTarget.children).indexOf(e.target);
+    let btnData = index > -1 ? this.btns[index] : e.target;
+    if (_makeBtn.cancelBtns.includes(btnData)) btnData = undefined;
+    this.emitEvent('click', btnData);
+  }
+
+});
+
+var _default = customElements.get('b-snackbar');
+
+exports.default = _default;
+},{"lit-element":"bhxD","lit-html/directives/unsafe-html":"jTPt","../dialog/make-btn":"TZ6L","../../helpers/lit-element/events":"euwv"}],"XAiK":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+var _controller = _interopRequireDefault(require("./controller"));
+
+var _device = _interopRequireDefault(require("../../util/device"));
+
+var _style = _interopRequireDefault(require("./style"));
+
+var _types = _interopRequireDefault(require("./types"));
+
+require("./snackbar");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// list of open notifs
+const NOTIFS = new Map();
+window.NOTIFS = NOTIFS;
+customElements.define('b-notif', class extends _litElement.LitElement {
+  static get styles() {
+    return _style.default;
+  }
+
+  static get properties() {
+    return {
+      nid: {
+        type: String,
+        reflect: true
+      },
+      msg: {
+        type: String
+      },
+      btns: {
+        type: Array
+      },
+      icon: {
+        type: String
+      },
+      color: {
+        type: String,
+        reflect: true
+      },
+      width: {
+        type: String
+      },
+      animation: {
+        type: String,
+        reflect: true
+      }
+    };
+  }
+
+  constructor(opts = {}) {
+    super();
+    this.onWindowFocus = this.onWindowFocus.bind(this);
+    this.onWindowBlur = this.onWindowBlur.bind(this);
+
+    let controller = _controller.default.get(opts.controller || 'main');
+
+    this.opts = Object.assign({
+      nid: String(Math.round(Math.random() * 10000)),
+      msg: '',
+      icon: '',
+      btns: [],
+      animation: _device.default.minScreenSize <= 699 ? 'grow' : 'slide',
+      animationForReplace: 'grow',
+      autoClose: 4000,
+      closeOnClick: true,
+      anchor: 'bottom-right',
+
+      //device.minScreenSize <= 699 ? 'bottom' : 'bottom-right',
+      onClose() {},
+
+      onClick() {}
+
+    }, _types.default[opts.type] || {}, controller.defaults || {}, opts);
+    let props = this.constructor.properties;
+
+    for (let key in this.opts) {
+      if (props[key] != undefined) this[key] = this.opts[key];
+    }
+
+    this.slot = this.opts.anchor;
+    this.addEventListener('click', this.onClick, false);
+    this.addEventListener(_device.default.isMobile ? 'touchdown' : 'mouseover', this.onMouseOver);
+    this.addEventListener(_device.default.isMobile ? 'touchend' : 'mouseout', this.onMouseOut);
+
+    if (this.opts.view) {
+      this.appendChild(this.opts.view);
+      this.opts.view.notif = this;
+    }
+
+    let existingNotif = NOTIFS.get(this.nid);
+    NOTIFS.set(this.nid, this);
+
+    if (existingNotif) {
+      existingNotif.replaceWith(this);
+      return;
+    }
+
+    if (controller) controller.appendChild(this);
+  }
+
+  close(btn) {
+    return new Promise(resolve => {
+      this.style.height = this.getBoundingClientRect().height + 'px';
+      this.classList.remove('entered');
+      setTimeout(() => {
+        this.classList.add('exit');
+      }, 100);
+      setTimeout(() => {
+        this.remove();
+        NOTIFS.delete(this.nid);
+        this.opts.onClose(this);
+        if (this.opts.view) delete this.opts.view.notif;
+        resolve(btn);
+      }, 700);
+    });
+  }
+
+  replaceWith(el) {
+    let animation = el.animation; // let's reduce visual animation when replacing
+
+    if (animation == 'slide') {
+      this.animation = this.opts.animationForReplace;
+      el.animation = this.opts.animationForReplace;
+    }
+
+    this.classList.remove('entered'); // setTimeout(()=>{
+
+    super.replaceWith(el);
+    this.opts.onClose(this);
+    if (this.opts.view) delete this.opts.view.notif;
+    setTimeout(() => {
+      el.animation = animation;
+    }, 310); // },310)
+  }
+
+  onClick(btn) {
+    if (btn instanceof MouseEvent || window.TouchEvent && btn instanceof TouchEvent) btn = undefined;
+    if (this.opts.onClick(this, btn) !== false && this.opts.closeOnClick) this.close(btn);
+  }
+
+  onWindowFocus() {
+    this.autoClose(3000);
+  }
+
+  onWindowBlur() {// this.autoClose(false)
+  }
+
+  onMouseOver(e) {
+    e.stopPropagation();
+    this.autoClose(false);
+  }
+
+  onMouseOut(e) {
+    e.stopPropagation();
+    this.autoClose(3000);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('blur', this.onWindowBlur);
+    window.addEventListener('focus', this.onWindowFocus);
+    if (this.opts.width) this.style.width = this.opts.width;
+    setTimeout(() => {
+      this.classList.add('entered');
+    }, 100);
+    this.autoClose();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('blur', this.onWindowBlur);
+    window.removeEventListener('focus', this.onWindowFocus);
+  }
+
+  autoClose(start = true) {
+    clearTimeout(this._autoCloseTimeout);
+    if (!document.hasFocus()) return; // use the `autoClose` delay if no time given OR we've never started the autoClose
+
+    let delay = start === true || !this._autoCloseTimeout ? this.opts.autoClose : start; // requested to stop, or setting turned off
+
+    if (!start || !this.opts.autoClose) return;
+    this._autoCloseTimeout = setTimeout(() => {
+      this.close();
+    }, delay);
+  }
+
+  render() {
+    return (0, _litElement.html)`
+        <main>
+        <slot>
+            <b-snackbar
+                .icon=${this.icon}
+                .msg=${this.msg}
+                .btns=${this.btns}
+                ?color=${!!this.color}
+                @click=${this.onSnackbarClick}></b-snackbar>
+        </slot>
+        </main>
+    `;
+  }
+
+  onSnackbarClick(e) {
+    e.stopPropagation();
+    let data = e.constructor.name == 'CustomEvent' ? e.detail : undefined;
+    this.onClick(data);
+  }
+
+});
+
+var _default = customElements.get('b-notif');
+
+exports.default = _default;
+let notifClass = customElements.get('b-notif');
+
+for (let key in _types.default) {
+  if (!notifClass[key]) notifClass[key] = (msg, opts = {}) => {
+    if (typeof msg == 'string') {
+      opts = opts || {};
+      opts.msg = msg;
+    }
+
+    let Notif = customElements.get('b-notif');
+    return new Notif(Object.assign({}, _types.default[key], opts));
+  };
+}
+},{"lit-element":"bhxD","./controller":"sHUN","../../util/device":"la8o","./style":"HXsq","./types":"tUj8","./snackbar":"Cw18"}],"HbKK":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17347,6 +18047,8 @@ var _litHtml = require("lit-html");
 var _device = _interopRequireDefault(require("../../util/device"));
 
 var _panel = _interopRequireDefault(require("../panel"));
+
+var _notif = _interopRequireDefault(require("../notif"));
 
 var _popover = _interopRequireDefault(require("../popover"));
 
@@ -17553,19 +18255,20 @@ class Dialog {
   notif(opts) {
     opts = Object.assign({
       autoClose: this.opts.btns ? false : 3000,
-      clickRemoves: !this.opts.btns,
-      onAutoClose: () => {
+      closeOnClick: !this.opts.btns,
+      onClose: () => {
         this.resolve(false);
       }
     }, opts);
-    this.presenter = app.msgs.add(this.el, opts);
+    opts.view = this.el;
+    this.presenter = new _notif.default(opts);
     return this.promise;
   }
 
 }
 
 exports.default = Dialog;
-},{"lit-html":"SPDu","../../util/device":"la8o","../panel":"cmZt","../popover":"Soyf","./make-btn":"TZ6L","./style.less":"r4vn"}],"pos3":[function(require,module,exports) {
+},{"lit-html":"SPDu","../../util/device":"la8o","../panel":"cmZt","../notif":"XAiK","../popover":"Soyf","./make-btn":"TZ6L","./style.less":"r4vn"}],"pos3":[function(require,module,exports) {
 const Dialog = require('./dialog').default;
 
 module.exports = Dialog;
@@ -21178,6 +21881,7 @@ slot[name="help"] {
 /* remove autofill blue/yellow background */
 ::slotted(input:-webkit-autofill) {
     -webkit-box-shadow:0 0 0 50px var(--bgd) inset;
+	-webkit-text-fill-color: var(--theme-color);
 }
 
 ::slotted(input:-webkit-autofill:focus) {
@@ -22482,11 +23186,78 @@ var _default = (str = '') => {
 };
 
 exports.default = _default;
+},{}],"dMpr":[function(require,module,exports) {
+// https://jonlabelle.com/snippets/view/javascript/calculate-mean-median-mode-and-range-in-javascript
+module.exports = {
+  /**
+   * The "median" is the "middle" value in the list of numbers.
+   *
+   * @param {Array} numbers An array of numbers.
+   * @return {Number} The calculated median value from the specified numbers.
+   */
+  median(numbers) {
+    // median of [3, 5, 4, 4, 1, 1, 2, 3] = 3
+    var median = 0,
+        numsLen = numbers.length;
+    numbers.sort();
+
+    if (numsLen % 2 === 0 // is even
+    ) {
+        // average of two middle numbers
+        median = (numbers[numsLen / 2 - 1] + numbers[numsLen / 2]) / 2;
+      } else {
+      // is odd
+      // middle number only
+      median = numbers[(numsLen - 1) / 2];
+    }
+
+    return median;
+  },
+
+  /**
+   * The "mode" is the number that is repeated most often.
+   *
+   * For example, the "mode" of [3, 5, 4, 4, 1, 1, 2, 3] is [1, 3, 4].
+   *
+   * @param {Array} numbers An array of numbers.
+   * @return {Array} The mode of the specified numbers.
+   */
+  mode(numbers) {
+    // as result can be bimodal or multi-modal,
+    // the returned result is provided as an array
+    // mode of [3, 5, 4, 4, 1, 1, 2, 3] = [1, 3, 4]
+    var modes = [],
+        count = [],
+        i,
+        number,
+        maxIndex = 0;
+
+    for (i = 0; i < numbers.length; i += 1) {
+      number = numbers[i];
+      count[number] = (count[number] || 0) + 1;
+
+      if (count[number] > maxIndex) {
+        maxIndex = count[number];
+      }
+    }
+
+    for (i in count) if (count.hasOwnProperty(i)) {
+      if (count[i] === maxIndex) {
+        modes.push(Number(i));
+      }
+    }
+
+    return modes;
+  }
+
+};
 },{}],"E8jA":[function(require,module,exports) {
 // ref: http://stackoverflow.com/a/1293163/2343
 // This will parse a delimited string into an array of
 // arrays. The default delimiter is the comma, but this
 // can be overriden in the second argument.
+const mode = require('./math').mode;
+
 module.exports = (strData, {
   strDelimiter = ',',
   hasHeader = true
@@ -22536,6 +23307,21 @@ module.exports = (strData, {
     arrData[arrData.length - 1].push(strMatchedValue);
   }
 
+  let header = [];
+  let footer = [];
+  let foundRow = false;
+  let rowLengths = arrData.map(r => r.length);
+  let rowLength = mode(rowLengths)[0];
+  arrData = arrData.filter(row => {
+    if (row.length < rowLength) {
+      if (row[0] && foundRow) footer.push(row);else if (row[0]) header.push(row);
+      return false;
+    }
+
+    foundRow = true;
+    return true;
+  });
+
   if (hasHeader) {
     let header = arrData.shift();
     arrData = arrData.map(line => {
@@ -22543,12 +23329,14 @@ module.exports = (strData, {
       header.forEach((key, i) => obj[key] = line[i]);
       return obj;
     });
-  } // Return the parsed data.
+  }
 
+  arrData.header = header;
+  arrData.footer = footer; // Return the parsed data.
 
   return arrData;
 };
-},{}],"Zwl6":[function(require,module,exports) {
+},{"./math":"dMpr"}],"Zwl6":[function(require,module,exports) {
 /*
 	Plural - create singular or plural sentence based on number given (all numbers but 1 return plural sentence)
 
@@ -39320,20 +40108,7 @@ customElements.define('b-list', class extends _litElement.LitElement {
 var _default = customElements.get('b-list');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./data/source":"zXhY","./data/filters":"HGW8","./data/sorts":"sAKI","./data/layouts":"ZTm8","./toolbar":"iwaU","./toolbar/selection-bar":"xA0J","./infinite-list":"zwrR","../../elements/spinner-overlay":"eyVY","../../helpers/lit-element/selectors":"yvN8","../selection":"aR3g"}],"euwv":[function(require,module,exports) {
-"use strict";
-
-var _litElement = require("lit-element");
-
-_litElement.LitElement.prototype.emitEvent = function (eventName, detail = null) {
-  var event = new CustomEvent(eventName, {
-    bubbles: true,
-    composed: true,
-    detail: detail
-  });
-  this.dispatchEvent(event);
-};
-},{"lit-element":"bhxD"}],"tqEd":[function(require,module,exports) {
+},{"lit-element":"bhxD","./data/source":"zXhY","./data/filters":"HGW8","./data/sorts":"sAKI","./data/layouts":"ZTm8","./toolbar":"iwaU","./toolbar/selection-bar":"xA0J","./infinite-list":"zwrR","../../elements/spinner-overlay":"eyVY","../../helpers/lit-element/selectors":"yvN8","../selection":"aR3g"}],"tqEd":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39976,691 +40751,7 @@ function _default(customColors = {}, customLabels = {}) {
 
   });
 }
-},{"lit-element":"bhxD"}],"sHUN":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-const NotifControllers = {};
-customElements.define('b-notifs', class extends _litElement.LitElement {
-  // createRenderRoot(){ return this }
-  static get(name = 'main') {
-    if (name == 'main' && !NotifControllers[name]) {
-      let controller = document.createElement('b-notifs');
-      controller.setAttribute('name', 'main');
-      document.body.appendChild(controller);
-      NotifControllers[name] = controller;
-    }
-
-    return NotifControllers[name];
-  }
-
-  get name() {
-    return this.hasAttribute('name') ? this.getAttribute('name') : undefined;
-  }
-
-  constructor() {
-    super();
-
-    if (this.name) {
-      if (NotifControllers[this.name]) console.warn('A `b-notifs` controller already exists with the name: ', this.name);else NotifControllers[this.name] = this;
-    }
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    if (this.name) delete NotifControllers[this.name];
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    if (this.name && !NotifControllers[this.name]) NotifControllers[this.name] = this;
-  }
-
-  static get styles() {
-    return (0, _litElement.css)`
-        :host {
-            display: block;
-            pointer-events: none;
-            
-            overflow: hidden;
-            position:absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            z-index: 1200;
-            --padding: var(--b-notif-padding, 1em);
-        }
-
-        :host([name="main"]) {
-            position: fixed;
-            top: env(safe-area-inset-top);
-            left: env(safe-area-inset-left);
-            bottom: env(safe-area-inset-bottom);
-            right: env(safe-area-inset-right);
-        }
-
-        @media (max-width:699px), (max-height: 699px) {
-            :host {
-                position: fixed;
-                top: env(safe-area-inset-top);
-                left: env(safe-area-inset-left);
-                bottom: env(safe-area-inset-bottom);
-                right: env(safe-area-inset-right);
-            }
-        }
-
-        slot {
-            position: absolute;
-            display: flex;
-        }
-
-        slot[name="top"],
-        slot[name="bottom"] {
-            width: 100%;
-            align-items: center;
-        }
-
-        slot[name*="top"] {
-            top: 0;
-            flex-direction: column;
-            padding-top: var(--padding);
-        }
-
-        slot[name*="bottom"] {
-            bottom: 0;
-            flex-direction: column-reverse;
-            padding-bottom: var(--padding);
-        }
-
-        slot[name*="left"] {
-            left: 0;
-            padding-left: var(--padding);
-            align-items: flex-start;
-        }
-
-        slot[name*="right"] {
-            right: 0;
-            padding-right: var(--padding);
-            align-items: flex-end;
-        }
-
-        @media (max-width:699px) {
-            slot {
-                padding: 0 !important;
-                position: static !important;
-                --b-notif-width: 100%;
-            }
-
-            .top {
-                position: absolute;
-                top: 0;
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                padding: var(--padding);
-                box-sizing: border-box;
-            }
-
-            .bottom {
-                position: absolute;
-                bottom: 0;
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                padding: var(--padding);
-                box-sizing: border-box;
-            }
-        }
-    `;
-  }
-
-  render() {
-    return (0, _litElement.html)`
-        <div class="bottom">
-            <slot name="bottom-left"></slot>
-            <slot name="bottom"></slot>
-            <slot name="bottom-right"></slot>
-        </div>
-
-        <div class="top">
-            <slot name="top-left"></slot>
-            <slot name="top"></slot>
-            <slot name="top-right"></slot>
-        </div>
-        
-    `;
-  }
-
-});
-
-var _default = customElements.get('b-notifs');
-
-exports.default = _default;
-},{"lit-element":"bhxD"}],"HXsq":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-var _default = (0, _litElement.css)`
-:host {
-    display: block;
-    position:relative;
-    pointer-events: all;
-    width: var(--b-notif-width, 300px);
-    max-width: 100%;
-
-    /* overflow: hidden; */
-
-    transition: 
-        height 300ms cubic-bezier(0.4, 0, 0.2, 1) 300ms,
-        opacity 300ms,
-        transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
-
-    opacity: 0;
-    will-change: transform; 
-}
-
-:host([slot*="right"]) { transform: translateX(100%); }
-:host([slot*="left"]) { transform: translateX(-100%); }
-:host([slot="top"]) { transform: translateY(-100%); }
-:host([slot="bottom"]) { transform: translateY(100%); }
-
-:host([animation="grow"]) {
-    transform: scale(.8)
-}
-
-:host([animation="bounce"]) {
-    transform: none;
-}
-
-:host([animation="bounce"].entered) {
-    animation-name: bounce;
-    animation-duration: 700ms;
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    animation-fill-mode: forwards;
-}
-
-:host([animation="fade"]) {
-    transform: none;
-}
-
-:host([slot*="top"]) {
-    --spacing-bottom: var(--padding);
-}
-
-:host([slot*="bottom"]) {
-    --spacing-top: var(--padding);
-}
-
-:host(.entered) {
-    opacity: 1;
-    transform: none;
-}
-
-:host(.exit) {
-    height: 0 !important;
-}
-
-:host([color="red"]) {
-    --b-notif-color: #fff;
-    --b-notif-bgd: var(--red);
-}
-
-:host([color="blue"]) {
-    --b-notif-color: #fff;
-    --b-notif-bgd: var(--blue);
-}
-
-:host([color="green"]) {
-    --b-notif-color: #fff;
-    --b-notif-bgd: var(--green);
-}
-
-:host([color="orange"]) {
-    --b-notif-color: #fff;
-    --b-notif-bgd: var(--orange);
-}
-
-:host([color="amber"]) {
-    --b-notif-color: var(--gray-900);
-    --b-notif-bgd: var(--amber);
-}
-
-main {
-    border-radius: var(--b-notif-radius, 4px);
-    color: var(--b-notif-color, #fff);
-    background: var(--b-notif-bgd, #333);
-    margin-top: var(--spacing-top, 0);
-    margin-bottom: var(--spacing-bottom, 0);
-
-    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),
-                0px 6px 10px 0px rgba(0,0,0,0.14),
-                0px 1px 18px 0px rgba(0,0,0,0.12);
-}
-
-slot {
-    display: block;
-}
-
-
-:host {
-    --b-notif-btn-color: var(--b-notif-color);
-}
-
-:host([color]) {
-    --b-notif-btn-bgd: rgba(255,255,255,.1);
-}
-
-@keyframes bounce {
-  0% { transform: scale(0.8); }
-  14% { transform: scale(1.1); }
-  28% { transform: scale(.9); }
-  42% { transform: scale(1.1); }
-  70% { transform: scale(1); }
-`;
-
-exports.default = _default;
-},{"lit-element":"bhxD"}],"tUj8":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  alert: {},
-  error: {
-    icon: 'attention-circle',
-    color: 'red',
-    animation: 'bounce'
-  },
-  failed: {
-    icon: 'cancel-circled',
-    color: 'red'
-  },
-  success: {
-    icon: 'ok-circled',
-    color: 'green'
-  },
-  info: {
-    icon: 'info-circled',
-    color: 'blue'
-  },
-  warning: {
-    icon: 'attention-1',
-    color: 'orange'
-  }
-};
-exports.default = _default;
-},{}],"Cw18":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-var _unsafeHtml = require("lit-html/directives/unsafe-html");
-
-var _makeBtn = _interopRequireWildcard(require("../dialog/make-btn"));
-
-require("../../helpers/lit-element/events");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-customElements.define('b-snackbar', class extends _litElement.LitElement {
-  static get properties() {
-    return {
-      msg: {
-        type: String
-      },
-      btns: {
-        type: Array
-      },
-      icon: {
-        type: String
-      }
-    };
-  }
-
-  static get styles() {
-    return (0, _litElement.css)`
-        :host {
-            padding: var(--b-snackbar-padding, .85em 1em);
-            display: grid;
-            grid-template-columns: auto 1fr max-content;
-            align-items: center;
-        }
-
-        .icon {
-            line-height: 0;
-        }
-
-        .icon > b-icon,
-        .icon > .icon {
-            margin: -.5em 0;
-            margin-right: .75em;
-            --size: 1.2em;
-            vertical-align: middle;
-        }
-
-        .msg {
-            margin: 0.05em 0 -.05em; /* better alignment with icon and btns */
-        }
-
-        .btns {
-            margin-top: -0.05em;
-            margin-right: calc(-.5 * var(--padding));
-            margin-left: calc(-.5 * var(--padding));
-        }
-
-        .btns b-btn {
-            font-weight: bold;
-            text-transform: uppercase;
-            margin: -1em 0;
-            vertical-align: middle;
-        }
-
-        .btns b-btn[color=''] {
-            color: var(--b-notif-btn-color, #fff);
-        }
-
-        :host([color]) .btns b-btn  {
-            color: var(--b-notif-btn-color, #fff);
-        }
-
-        @media (hover){
-            .btns b-btn:hover {
-                --bgdColor: var(--b-notif-btn-bgd, rgba(0,0,0,.05));
-            }
-        }
-    `;
-  }
-
-  render() {
-    return (0, _litElement.html)`
-        <div class="icon">${this.renderIcon()}</div>
-        <div class="msg">${this.msg}</div>
-        <div class="btns" @click=${this.onBtnClick}>
-            ${this.btns.map(btn => this.renderBtn(btn))}
-        </div>
-    `;
-  }
-
-  renderIcon() {
-    if (!this.icon) return '';
-    if (typeof this.icon == 'string') return (0, _litElement.html)`<b-icon name="${this.icon}"></b-icon>`;else return this.icon;
-  }
-
-  renderBtn(btn) {
-    return (0, _litElement.html)`${(0, _unsafeHtml.unsafeHTML)((0, _makeBtn.default)(btn))}`;
-  }
-
-  onBtnClick(e) {
-    e.stopPropagation();
-    let index = Array.from(e.currentTarget.children).indexOf(e.target);
-    let btnData = index > -1 ? this.btns[index] : e.target;
-    if (_makeBtn.cancelBtns.includes(btnData)) btnData = undefined;
-    this.emitEvent('click', btnData);
-  }
-
-});
-
-var _default = customElements.get('b-snackbar');
-
-exports.default = _default;
-},{"lit-element":"bhxD","lit-html/directives/unsafe-html":"jTPt","../dialog/make-btn":"TZ6L","../../helpers/lit-element/events":"euwv"}],"XAiK":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _litElement = require("lit-element");
-
-var _controller = _interopRequireDefault(require("./controller"));
-
-var _device = _interopRequireDefault(require("../../util/device"));
-
-var _style = _interopRequireDefault(require("./style"));
-
-var _types = _interopRequireDefault(require("./types"));
-
-require("./snackbar");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// list of open notifs
-const NOTIFS = new Map();
-window.NOTIFS = NOTIFS;
-customElements.define('b-notif', class extends _litElement.LitElement {
-  static get styles() {
-    return _style.default;
-  }
-
-  static get properties() {
-    return {
-      nid: {
-        type: String,
-        reflect: true
-      },
-      msg: {
-        type: String
-      },
-      btns: {
-        type: Array
-      },
-      icon: {
-        type: String
-      },
-      color: {
-        type: String,
-        reflect: true
-      },
-      width: {
-        type: String
-      },
-      animation: {
-        type: String,
-        reflect: true
-      }
-    };
-  }
-
-  constructor(opts = {}) {
-    super();
-    this.onWindowFocus = this.onWindowFocus.bind(this);
-    this.onWindowBlur = this.onWindowBlur.bind(this);
-
-    let controller = _controller.default.get(opts.controller || 'main');
-
-    this.opts = Object.assign({
-      nid: String(Math.round(Math.random() * 10000)),
-      msg: '',
-      icon: '',
-      btns: [],
-      animation: _device.default.minScreenSize <= 699 ? 'grow' : 'slide',
-      animationForReplace: 'grow',
-      autoClose: 4000,
-      closeOnClick: true,
-      anchor: 'bottom-right',
-
-      //device.minScreenSize <= 699 ? 'bottom' : 'bottom-right',
-      onClose() {},
-
-      onClick() {}
-
-    }, _types.default[opts.type] || {}, controller.defaults || {}, opts);
-    let props = this.constructor.properties;
-
-    for (let key in this.opts) {
-      if (props[key] != undefined) this[key] = this.opts[key];
-    }
-
-    this.slot = this.opts.anchor;
-    this.addEventListener('click', this.onClick, false);
-    this.addEventListener(_device.default.isMobile ? 'touchdown' : 'mouseover', this.onMouseOver);
-    this.addEventListener(_device.default.isMobile ? 'touchend' : 'mouseout', this.onMouseOut);
-
-    if (this.opts.view) {
-      this.appendChild(this.opts.view);
-      this.opts.view.notif = this;
-    }
-
-    let existingNotif = NOTIFS.get(this.nid);
-    NOTIFS.set(this.nid, this);
-
-    if (existingNotif) {
-      existingNotif.replaceWith(this);
-      return;
-    }
-
-    if (controller) controller.appendChild(this);
-  }
-
-  close(btn) {
-    return new Promise(resolve => {
-      this.style.height = this.getBoundingClientRect().height + 'px';
-      this.classList.remove('entered');
-      setTimeout(() => {
-        this.classList.add('exit');
-      }, 100);
-      setTimeout(() => {
-        this.remove();
-        NOTIFS.delete(this.nid);
-        this.opts.onClose(this);
-        if (this.opts.view) delete this.opts.view.notif;
-        resolve(btn);
-      }, 700);
-    });
-  }
-
-  replaceWith(el) {
-    let animation = el.animation; // let's reduce visual animation when replacing
-
-    if (animation == 'slide') {
-      this.animation = this.opts.animationForReplace;
-      el.animation = this.opts.animationForReplace;
-    }
-
-    this.classList.remove('entered'); // setTimeout(()=>{
-
-    super.replaceWith(el);
-    this.opts.onClose(this);
-    if (this.opts.view) delete this.opts.view.notif;
-    setTimeout(() => {
-      el.animation = animation;
-    }, 310); // },310)
-  }
-
-  onClick(btn) {
-    if (btn instanceof MouseEvent || window.TouchEvent && btn instanceof TouchEvent) btn = undefined;
-    if (this.opts.onClick(this, btn) !== false && this.opts.closeOnClick) this.close(btn);
-  }
-
-  onWindowFocus() {
-    this.autoClose(3000);
-  }
-
-  onWindowBlur() {// this.autoClose(false)
-  }
-
-  onMouseOver(e) {
-    e.stopPropagation();
-    this.autoClose(false);
-  }
-
-  onMouseOut(e) {
-    e.stopPropagation();
-    this.autoClose(3000);
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    window.addEventListener('blur', this.onWindowBlur);
-    window.addEventListener('focus', this.onWindowFocus);
-    if (this.opts.width) this.style.width = this.opts.width;
-    setTimeout(() => {
-      this.classList.add('entered');
-    }, 100);
-    this.autoClose();
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    window.removeEventListener('blur', this.onWindowBlur);
-    window.removeEventListener('focus', this.onWindowFocus);
-  }
-
-  autoClose(start = true) {
-    clearTimeout(this._autoCloseTimeout);
-    if (!document.hasFocus()) return; // use the `autoClose` delay if no time given OR we've never started the autoClose
-
-    let delay = start === true || !this._autoCloseTimeout ? this.opts.autoClose : start; // requested to stop, or setting turned off
-
-    if (!start || !this.opts.autoClose) return;
-    this._autoCloseTimeout = setTimeout(() => {
-      this.close();
-    }, delay);
-  }
-
-  render() {
-    return (0, _litElement.html)`
-        <main>
-        <slot>
-            <b-snackbar
-                .icon=${this.icon}
-                .msg=${this.msg}
-                .btns=${this.btns}
-                ?color=${!!this.color}
-                @click=${this.onSnackbarClick}></b-snackbar>
-        </slot>
-        </main>
-    `;
-  }
-
-  onSnackbarClick(e) {
-    e.stopPropagation();
-    let data = e.constructor.name == 'CustomEvent' ? e.detail : undefined;
-    this.onClick(data);
-  }
-
-});
-
-var _default = customElements.get('b-notif');
-
-exports.default = _default;
-let notifClass = customElements.get('b-notif');
-
-for (let key in _types.default) {
-  if (!notifClass[key]) notifClass[key] = (msg, opts = {}) => {
-    if (typeof msg == 'string') {
-      opts = opts || {};
-      opts.msg = msg;
-    }
-
-    let Notif = customElements.get('b-notif');
-    return new Notif(Object.assign({}, _types.default[key], opts));
-  };
-}
-},{"lit-element":"bhxD","./controller":"sHUN","../../util/device":"la8o","./style":"HXsq","./types":"tUj8","./snackbar":"Cw18"}],"gE6T":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"gE6T":[function(require,module,exports) {
 "use strict";
 
 require("../elements/icon");
