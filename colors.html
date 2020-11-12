@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="bui.css?t=968c6b38">
     <script src="assets/script.js?t=42463e55"></script>
     <script src="bui.js?t=b780e518"></script>
-    <title>Blackstone UI</title>
+    <title>Colors - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -16,17 +16,7 @@
       <div class="menu toc-menu">
         <li class="menu-item -level-0 -parent">
           <ul class="submenu">
-            <li class="menu-item -level-1"><a class="link title -active link-index" href="index.html">Blackstone UI</a>
-              <ul class="headings heading-list">
-                <li class="heading-item -depth-2"><a class="hlink link-installation" href="#installation">Installation</a>
-                </li>
-                <li class="heading-item -depth-2"><a class="hlink link-overview" href="#overview">Overview</a>
-                </li>
-                <li class="heading-item -depth-2"><a class="hlink link-run-the-demo" href="#run-the-demo">Run the Demo</a>
-                </li>
-                <li class="heading-item -depth-2"><a class="hlink link-developing" href="#developing">Developing</a>
-                </li>
-              </ul>
+            <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Blackstone UI</a>
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Components</span>
               <ul class="submenu">
@@ -60,7 +50,7 @@
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
               <ul class="submenu">
-                <li class="menu-item -level-2"><a class="link title  link-colors" href="colors.html">Colors</a>
+                <li class="menu-item -level-2"><a class="link title -active link-colors" href="colors.html">Colors</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-util" href="util/index.html">Util</a>
                 </li>
@@ -87,59 +77,39 @@
           </ul>
         </li>
       </div>
-      <div class="body page-index">
+      <div class="body page-colors">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><p align="center">
-  <a href="https://github.com/kjantzer/bui" rel="noopener" target="_blank">
-    <img width="200" src="https://raw.githubusercontent.com/kjantzer/bui/master/logo.png">
-  </a>
-</p>
-<h1 align="center" id="blackstone-ui-(bui)">Blackstone UI (BUI)</h1>
-<div align="center">
-<p><a href="https://www.npmjs.com/package/blackstone-ui"><img src="https://img.shields.io/badge/npm-v3.0.0-blue" alt="demo"></a>
-<a href="https://bui.js.org"><img src="https://img.shields.io/badge/-Demo-blue" alt="demo"></a>
-<a href="https://bui.js.org/docs/"><img src="https://img.shields.io/badge/-Documentation-black" alt="docs"></a></p>
-</div>
-<p>Web components for creating interfaces - built with <a href="https://lit-html.polymer-project.org/">lit-html</a> and <a href="https://lit-element.polymer-project.org/">lit-element</a> by <a href="https://blackstonepublishing.com">Blackstone Publishing</a></p>
-<p><a href="https://bui.js.org"><img src="https://repository-images.githubusercontent.com/204566076/10c85c80-9b40-11ea-8331-e9678c241682" alt="preview"></a></p>
-<h2 id="installation">Installation</h2>
-<p>Blackstone-UI is available as an <a href="https://www.npmjs.com/package/blackstone-ui">npm package</a></p>
-<pre><code>npm install blackstone-ui --save
-</code></pre>
-<p>Or if you want the latest cutting-edge version</p>
-<pre><code>npm install https://github.com/kjantzer/bui.git --save
-</code></pre>
-<h2 id="overview">Overview</h2>
-<p>Web components (or custom elements) allow us to encapsalate
-logic, designs, and features in html elements. Along with custom
-elements, various &#x201C;presenters&#x201D; (or views) have been created
-for all the ways an app needs to display data</p>
-<ul>
-<li><a href="elements/index.html">Elements</a> - common building-block elements</li>
-<li>Presenters - ways to present views and data</li>
-<li><a href="util/index.html">Util</a> - utility methods</li>
-<li><a href="router/index.html">Router</a> - manages the url and triggers views</li>
-<li><a href="elements/index.html">Helpers</a> - helper/extensions</li>
-</ul>
-<h2 id="run-the-demo">Run the Demo</h2>
-<p>You can run the demo locally by fist installing the parcel bundler (globally) then start the demo</p>
-<pre><code>$ npm install -g parcel-bundler
-$ npm start
-</code></pre>
-<h2 id="developing">Developing</h2>
-<p><a href="https://lit-html.polymer-project.org">lit-html</a> and <a href="https://lit-element.polymer-project.org">lit-element</a>
-are being used to create and render custom elements. The beauty in these tools
-is that they are simply syntactic sugar for native web technologies</p>
-<p><code>lit-html</code> - this is a templating tool that replaces a need for something like mustache.js</p>
-<p><code>lit-element</code> - this is a base class for that makes it easier to make custom elements removing
-a lot of the boilerplate code usually needed.</p>
+        <div class="markdown-body"><h1 id="colors">Colors</h1>
+<p>The list of colors is pulled from <a href="https://material.io/design/color/">material.io</a></p>
+<h4 id="using-the-colors">Using the colors</h4>
+<pre><code class="lang-css"><span class="pl-k">@import</span> <span class="pl-s">&apos;~bui/styles/colors.less&apos;</span>;
 
+<span class="hljs-selector-class">.my-div</span> {
+    <span class="pl-e">background</span>: <span class="pl-c1">var</span>(--gray-blue-<span class="hljs-number">50</span>);
+}
+
+<span class="hljs-selector-tag">button</span> {
+    <span class="pl-e">background</span>: <span class="pl-c1">var</span>(--color-primary);
+    <span class="pl-e">color</span>: <span class="pl-c1">var</span>(--white);
+}
+</code></pre>
+<h4 id="changing-default-colors">Changing default colors</h4>
+<pre><code class="lang-css"><span class="hljs-selector-pseudo">:root</span> {
+    <span class="pl-e">--color-primary</span>: <span class="pl-c1">var</span>(--teal-<span class="hljs-number">400</span>);
+    <span class="pl-e">--color-secondary</span>: <span class="pl-c1">var</span>(--amber);
+    <span class="pl-e">--black</span>: <span class="hljs-number">#222</span>;
+}
+</code></pre>
+<!--plain
+<b-list-of-colors></b-list-of-colors>
+-->
         </div>
         <div class="footer-nav">
-          <div class="right"><a href="elements/index.html"><span class="label">Next: </span><span class="title">Elements</span></a></div>
+          <div class="left"><a href="presenters/cal/index.html"><span class="title">Calendar</span></a></div>
+          <div class="right"><a href="util/index.html"><span class="label">Next: </span><span class="title">Util</span></a></div>
         </div>
       </div>
     </div>

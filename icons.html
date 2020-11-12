@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="bui.css?t=968c6b38">
     <script src="assets/script.js?t=42463e55"></script>
     <script src="bui.js?t=b780e518"></script>
-    <title>Blackstone UI</title>
+    <title>Icons - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
   <body class="-menu-visible">
@@ -16,23 +16,13 @@
       <div class="menu toc-menu">
         <li class="menu-item -level-0 -parent">
           <ul class="submenu">
-            <li class="menu-item -level-1"><a class="link title -active link-index" href="index.html">Blackstone UI</a>
-              <ul class="headings heading-list">
-                <li class="heading-item -depth-2"><a class="hlink link-installation" href="#installation">Installation</a>
-                </li>
-                <li class="heading-item -depth-2"><a class="hlink link-overview" href="#overview">Overview</a>
-                </li>
-                <li class="heading-item -depth-2"><a class="hlink link-run-the-demo" href="#run-the-demo">Run the Demo</a>
-                </li>
-                <li class="heading-item -depth-2"><a class="hlink link-developing" href="#developing">Developing</a>
-                </li>
-              </ul>
+            <li class="menu-item -level-1"><a class="link title  link-index" href="index.html">Blackstone UI</a>
             </li>
             <li class="menu-item -level-1 -parent"><span class="title">Components</span>
               <ul class="submenu">
                 <li class="menu-item -level-2"><a class="link title  link-elements" href="elements/index.html">Elements</a>
                 </li>
-                <li class="menu-item -level-2"><a class="link title  link-icons" href="icons.html">Icons</a>
+                <li class="menu-item -level-2"><a class="link title -active link-icons" href="icons.html">Icons</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="presenters/dialog/index.html">Dialog</a>
                 </li>
@@ -87,59 +77,20 @@
           </ul>
         </li>
       </div>
-      <div class="body page-index">
+      <div class="body page-icons">
         <div class="header-nav">
           <div class="right">
           </div>
         </div>
-        <div class="markdown-body"><p align="center">
-  <a href="https://github.com/kjantzer/bui" rel="noopener" target="_blank">
-    <img width="200" src="https://raw.githubusercontent.com/kjantzer/bui/master/logo.png">
-  </a>
-</p>
-<h1 align="center" id="blackstone-ui-(bui)">Blackstone UI (BUI)</h1>
-<div align="center">
-<p><a href="https://www.npmjs.com/package/blackstone-ui"><img src="https://img.shields.io/badge/npm-v3.0.0-blue" alt="demo"></a>
-<a href="https://bui.js.org"><img src="https://img.shields.io/badge/-Demo-blue" alt="demo"></a>
-<a href="https://bui.js.org/docs/"><img src="https://img.shields.io/badge/-Documentation-black" alt="docs"></a></p>
-</div>
-<p>Web components for creating interfaces - built with <a href="https://lit-html.polymer-project.org/">lit-html</a> and <a href="https://lit-element.polymer-project.org/">lit-element</a> by <a href="https://blackstonepublishing.com">Blackstone Publishing</a></p>
-<p><a href="https://bui.js.org"><img src="https://repository-images.githubusercontent.com/204566076/10c85c80-9b40-11ea-8331-e9678c241682" alt="preview"></a></p>
-<h2 id="installation">Installation</h2>
-<p>Blackstone-UI is available as an <a href="https://www.npmjs.com/package/blackstone-ui">npm package</a></p>
-<pre><code>npm install blackstone-ui --save
-</code></pre>
-<p>Or if you want the latest cutting-edge version</p>
-<pre><code>npm install https://github.com/kjantzer/bui.git --save
-</code></pre>
-<h2 id="overview">Overview</h2>
-<p>Web components (or custom elements) allow us to encapsalate
-logic, designs, and features in html elements. Along with custom
-elements, various &#x201C;presenters&#x201D; (or views) have been created
-for all the ways an app needs to display data</p>
-<ul>
-<li><a href="elements/index.html">Elements</a> - common building-block elements</li>
-<li>Presenters - ways to present views and data</li>
-<li><a href="util/index.html">Util</a> - utility methods</li>
-<li><a href="router/index.html">Router</a> - manages the url and triggers views</li>
-<li><a href="elements/index.html">Helpers</a> - helper/extensions</li>
-</ul>
-<h2 id="run-the-demo">Run the Demo</h2>
-<p>You can run the demo locally by fist installing the parcel bundler (globally) then start the demo</p>
-<pre><code>$ npm install -g parcel-bundler
-$ npm start
-</code></pre>
-<h2 id="developing">Developing</h2>
-<p><a href="https://lit-html.polymer-project.org">lit-html</a> and <a href="https://lit-element.polymer-project.org">lit-element</a>
-are being used to create and render custom elements. The beauty in these tools
-is that they are simply syntactic sugar for native web technologies</p>
-<p><code>lit-html</code> - this is a templating tool that replaces a need for something like mustache.js</p>
-<p><code>lit-element</code> - this is a base class for that makes it easier to make custom elements removing
-a lot of the boilerplate code usually needed.</p>
-
+        <div class="markdown-body"><h1 id="icons">Icons</h1>
+<p>Icons are saved as svg symbol references. These can be generated here: <a href="https://icomoon.io/app">https://icomoon.io/app</a></p>
+<!--plain
+<b-icon-list cols="3"></b-icon-list>
+-->
         </div>
         <div class="footer-nav">
-          <div class="right"><a href="elements/index.html"><span class="label">Next: </span><span class="title">Elements</span></a></div>
+          <div class="left"><a href="elements/index.html"><span class="title">Elements</span></a></div>
+          <div class="right"><a href="presenters/dialog/index.html"><span class="label">Next: </span><span class="title">Dialog</span></a></div>
         </div>
       </div>
     </div>

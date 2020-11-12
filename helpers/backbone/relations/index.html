@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../../../style.css?t=0174a9d9">
+    <link rel="stylesheet" href="../../../bui.css?t=968c6b38">
+    <script src="../../../assets/script.js?t=42463e55"></script>
+    <script src="../../../bui.js?t=b780e518"></script>
+    <title>Backbone.js Relations - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../../../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Components</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-elements" href="../../../elements/index.html">Elements</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../../../icons.html">Icons</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../../../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../../../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../../../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../../../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersnotif" href="../../../presenters/notif/index.html">Notif</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../../../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../../../presenters/tabs/index.html">Tabs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersselection" href="../../../presenters/selection/index.html">Selection</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmentions" href="../../../presenters/mentions/index.html">Mentions</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterscal" href="../../../presenters/cal/index.html">Calendar</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../../colors.html">Colors</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../../../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2 -parent"><a class="link title  link-helpers" href="../../../helpers/index.html">Helpers</a>
+                  <ul class="submenu">
+                    <li class="menu-item -level-3"><a class="link title -active link-helpersbackbonerelations" href="../../../helpers/backbone/relations/index.html">Backbone.js Relations</a>
+                      <ul class="headings heading-list">
+                        <li class="heading-item -depth-2"><a class="hlink link-collection-relation" href="#collection-relation">Collection Relation</a>
+                        </li>
+                        <li class="heading-item -depth-2"><a class="hlink link-model-relation" href="#model-relation">Model Relation</a>
+                        </li>
+                        <li class="heading-item -depth-2"><a class="hlink link-documentation" href="#documentation">Documentation</a>
+                          <ul class="heading-list -depth-2">
+                            <li class="heading-item -depth-3"><a class="hlink link-dot-notation" href="#dot-notation">Dot Notation</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li class="heading-item -depth-2"><a class="hlink link-changelog" href="#changelog">Changelog</a>
+                        </li>
+                        <li class="heading-item -depth-2"><a class="hlink link-license" href="#license">License</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../../../router/index.html">Router</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../../models/index.html">Models (WIP)</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Server</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-server" href="../../../server/index.html">Overview</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-serverrealtime" href="../../../server/realtime/index.html">Realtime</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-helpersbackbonerelations">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="backbone-relations">Backbone Relations</h1>
+<blockquote>
+<p>Formerly &#x201C;Backbone Child Collections&#x201D;</p>
+</blockquote>
+<p><img src="https://img.shields.io/badge/Version-1.2.0-blue.svg" alt="Version 1.2.0"></p>
+<blockquote>
+<p>Create lazy-loading relations between Backbone.js models and collections with minimal effort. Perfect for REST APIs</p>
+</blockquote>
+<h2 id="collection-relation">Collection Relation</h2>
+<p>Let&#x2019;s define and create a model with a collection</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> Employees = Backbone.ChildCollection.extend({
+	<span class="pl-c">// url path will be appended to the url of the parent model</span>
+	<span class="hljs-attr">urlPath</span>: <span class="pl-s">&apos;employees&apos;</span>
+})
+
+<span class="pl-k">var</span> Company = Backbone.Model.extend({
+	<span class="hljs-attr">urlRoot</span>: <span class="pl-s">&apos;/api/company&apos;</span>
+	
+	<span class="hljs-attr">name</span>: <span class="pl-s">&apos;company&apos;</span>, <span class="pl-c">// see below how this is used</span>
+	
+	<span class="pl-c">// setup all child collections with a key</span>
+	<span class="hljs-attr">collections</span>: {
+		<span class="pl-s">&apos;employees&apos;</span>: Employees
+	}
+});
+
+<span class="pl-c">// instantiate a new model</span>
+<span class="pl-k">var</span> myCompany = <span class="pl-k">new</span> Company({<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="pl-s">&apos;My Company&apos;</span>});
+</code></pre>
+<p>The url for child collections is created automatically using the URL from parent models</p>
+<pre><code class="lang-js"><span class="pl-c1">console</span>.log( myCompany.get(<span class="pl-s">&apos;employees&apos;</span>).url() ) <span class="pl-c">// = /api/company/1/employees</span>
+</code></pre>
+<p>The collections have a reference to the parent model</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> employeeColl = myCompany.get(<span class="pl-s">&apos;employees&apos;</span>);
+
+<span class="pl-c1">console</span>.log( employeeColl.parentModel == myCompany ) <span class="pl-c">// true</span>
+</code></pre>
+<p>Here&#x2019;s some more use cases.</p>
+<pre><code class="lang-js"><span class="pl-c">// create employee models &#x2013; POST: /api/company/1/employees</span>
+myCompany.get(<span class="pl-s">&apos;employees&apos;</span>).create([
+	{<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="pl-s">&apos;John Doe&apos;</span>},
+	{<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="pl-s">&apos;Jane Doe&apos;</span>}
+])
+
+<span class="pl-c">// there&apos;s more than one to access children</span>
+<span class="pl-k">var</span> firstEmployee = myCompany.get(<span class="pl-s">&apos;employees&apos;</span>).first()
+<span class="pl-c">//var firstEmployee = myCompany.get(&apos;employees.first&apos;)</span>
+<span class="pl-c">//var firstEmployee = myCompany.get(&apos;employees.at0&apos;)</span>
+<span class="pl-c">//var firstEmployee = myCompany.get(&apos;employees.1&apos;) // ID</span>
+
+<span class="pl-c">// child models inside the child collections can traverse to the parent model</span>
+firstEmployee.collection.parentModel == myCompany <span class="pl-c">// true</span>
+
+<span class="pl-c">// of if you give the parent model a `name`, you can do this</span>
+firstEmployee.get(<span class="pl-s">&apos;company&apos;</span>) == myCompany <span class="pl-c">// true</span>
+
+</code></pre>
+<h2 id="model-relation">Model Relation</h2>
+<pre><code class="lang-js"><span class="pl-c">// Setup a computer model with a link to a single employee model</span>
+<span class="pl-k">var</span> Computer = Backbone.Model.extend({
+	<span class="hljs-attr">models</span>: {
+		<span class="pl-s">&apos;employee&apos;</span>: {<span class="hljs-attr">id</span>: <span class="pl-s">&apos;employee_id&apos;</span>, <span class="hljs-attr">coll</span>: myCompany.get(<span class="pl-s">&apos;employees&apos;</span>)}
+	}
+});
+
+<span class="pl-k">var</span> computer = <span class="pl-k">new</span> Computer({<span class="pl-s">&apos;employee_id&apos;</span>:<span class="pl-s">&apos;1&apos;</span>})
+
+<span class="pl-c1">console</span>.log( computer.get(<span class="pl-s">&apos;employee&apos;</span>) ) <span class="pl-c">// John Doe Model</span>
+<span class="pl-c1">console</span>.log( computer.get(<span class="pl-s">&apos;employee&apos;</span>).get(<span class="pl-s">&apos;name&apos;</span>) ) <span class="pl-c">// &quot;John Doe&quot;</span>
+
+</code></pre>
+<blockquote>
+<p>Note: a model can have both collections <em>and</em> models defined.</p>
+</blockquote>
+<h2 id="documentation">Documentation</h2>
+<h4 id="model-attributes-and-collection-keys">Model Attributes and Collection Keys</h4>
+<p>Model attributes and collection keys should not conflict unless you are wanting to preload the collection with data. If they keys are the same, the child collection with be returned and not the model attribute. However, if the model attribute is an array it will be added to the child collection.</p>
+<pre><code class="lang-js"><span class="pl-k">var</span> jsonModelData = {
+	<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>,
+	<span class="hljs-attr">name</span>: <span class="pl-s">&apos;My Company&apos;</span>,
+	
+	<span class="pl-c">// this matches the child collection key,</span>
+	<span class="pl-c">// so when `get(employees)` is used, this data will be converted into a real collection</span>
+	<span class="hljs-attr">employees</span>: [
+		{<span class="hljs-attr">name</span>: <span class="pl-s">&apos;Bob&apos;</span>},
+		{<span class="hljs-attr">name</span>: <span class="pl-s">&apos;Jill&apos;</span>}
+	]
+}
+
+<span class="pl-c">// using the example from above...</span>
+<span class="pl-k">var</span> myCompany = <span class="pl-k">new</span> Company(jsonModelData);
+
+<span class="pl-c">// returns collection with two employees, Bob and Jill</span>
+myCompany.get(<span class="pl-s">&apos;employees&apos;</span>);
+</code></pre>
+<h4 id="collections-setup">Collections setup</h4>
+<p>You start by putting a list of <code>collections</code> on your model. <em>Multiple structures are supported.</em></p>
+<pre><code class="lang-js">collections: {
+        <span class="pl-s">&apos;employees&apos;</span>: <span class="pl-s">&apos;employees&apos;</span>, <span class="pl-c">// urlPath will be set with generic ChildCollection</span>
+        <span class="pl-s">&apos;employees&apos;</span>: EmployeesColl,
+        <span class="pl-s">&apos;employees&apos;</span>: {
+                <span class="hljs-attr">collection</span>: EmployeesColl,
+                ... <span class="pl-c">// any other options listed here will be passed to collection on init</span>
+        },
+        <span class="pl-s">&apos;employees&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>)</span>{ <span class="pl-k">return</span> EmployeesColl },
+        <span class="pl-s">&apos;employees&apos;</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params"></span>)</span>{ <span class="pl-k">return</span> {
+                <span class="hljs-attr">collection</span>: EmployeesColl,
+        }}
+}
+</code></pre>
+<p>As of v0.12.0, child collections can be nested under a group name. This can be helpful when your collections grow in number and you&#x2019;d like to organize.</p>
+<pre><code class="lang-js"> <span class="pl-c">// group-coll.js</span>
+ <span class="pl-c1">module</span>.exports = {
+	 <span class="pl-s">&apos;one&apos;</span>: Coll1
+	 <span class="pl-s">&apos;two&apos;</span>: Coll2
+ }
+ 
+ <span class="pl-c">// model.js</span>
+ <span class="hljs-attr">collections</span>: {
+	 <span class="pl-s">&apos;employees&apos;</span>: EmployeesColl,
+	 <span class="pl-s">&apos;group&apos;</span>: <span class="pl-c1">require</span>(<span class="pl-s">&apos;./group-coll&apos;</span>)
+ }
+ 
+ <span class="pl-c">// using</span>
+ model.get(<span class="pl-s">&apos;employees&apos;</span>)
+ model.get(<span class="pl-s">&apos;group/one&apos;</span>)
+ model.get(<span class="pl-s">&apos;group/two&apos;</span>)
+</code></pre>
+<h4 id="models-setup">Models setup</h4>
+<p>Sometimes you may want to translate a related ID to a real Model. To do this, setup <code>models</code>. Like Collections, you can specify a hash or a function that returns a hash</p>
+<pre><code class="lang-js"><span class="pl-c">/* assuming your model looks like:
+	{
+		id: 1, 
+		employee_id: 1,
+		more: &apos;attrs&apos;
+	}
+*/</span>
+<span class="hljs-attr">models</span>: {
+	<span class="pl-s">&apos;employee&apos;</span>: {
+		<span class="hljs-attr">id</span>: <span class="pl-s">&apos;employee_id&apos;</span>, <span class="pl-c">// the attribute on the model,</span>
+		
+		<span class="pl-c">// where to lookup the id</span>
+		<span class="hljs-attr">coll</span>: EmployeesColl <span class="pl-c">// instance</span>
+		<span class="hljs-attr">coll</span>: <span class="pl-s">&apos;EmployeesColl&apos;</span> <span class="pl-c">// string name of instance on this model or global window (useful when instance not defined on load)</span>
+		<span class="hljs-attr">coll</span>: <span class="hljs-function"><span class="pl-k">function</span>(<span class="hljs-params">id, key</span>)</span>{ <span class="pl-c">// you can also choose to lookup the model with a custom function instead</span>
+			<span class="pl-k">return</span> MyLookupCollection.findASpecialModel(id)
+		},
+		
+		<span class="pl-c">// optional</span>
+		<span class="hljs-attr">fetch</span>: <span class="pl-c1">true</span> <span class="pl-c">// if `id` isn&apos;t found, it will be fetched from server</span>
+	}
+}
+
+<span class="pl-c">// later: `.get(&apos;employee&apos;)` == model</span>
+</code></pre>
+<p>Models will also work by having the entire model attributes rather than just and ID. Like so&#x2026;</p>
+<pre><code class="lang-js"><span class="pl-c">/* assuming your model looks like:
+	{
+		id: 1, 
+		employee: {
+			id: 1,
+			name: &apos;John Doe&apos;,
+			more: &apos;attrs&apos;
+		},
+		more: &apos;attrs&apos;
+	}
+*/</span>
+<span class="hljs-attr">models</span>: {
+	<span class="pl-s">&apos;employee&apos;</span>: Employee <span class="pl-c">// will turn the attrs into a real Model</span>
+}
+
+<span class="pl-c">// later: `.get(&apos;employee&apos;)` == model</span>
+</code></pre>
+<h4 id="properties-and-methods-available">Properties and methods available</h4>
+<p><code>[Collection/Model].parentModel</code> &#x2013; a reference to the parent model of this collection/model</p>
+<p><code>Model.refColl</code> - a reference to the collection they were fetched from. Only set when a child model is setup with a <code>coll</code> option</p>
+<p><code>Collection.urlPath</code> &#x2013; the path to be appended to the URL of the parent model.</p>
+<p><code>[Collection/Model].hasFetched</code> (BOOL) &#x2013; Is set to <code>true</code> after a <code>fetch</code> happens.</p>
+<p><code>[Collection/Model].isFetching</code> (BOOL) &#x2013; Will be set to <code>true</code> while the <code>fetch</code> method is happening.</p>
+<p><code>Collection.fetchOnce()</code> &#x2013; Fetches collection if it has not been fetched yet. (Tests for <code>hasFetched</code>)</p>
+<p><code>Collection.timeSinceLastFetch()</code> - Time in miliseconds since last fetched</p>
+<p><code>Collection.stale</code> - if set, <code>fetch</code> will only make request once data is given <code>ms</code> stale.</p>
+<p><code>Collection.fetch({stale:10000})</code> - Overrides <code>.stale</code> option to signify when the collection data becomes stale. A <code>fetch</code> request will not follow through until the data is stale.</p>
+<p><code>Model.needsFetching</code></p>
+<h3 id="dot-notation">Dot Notation</h3>
+<p>Dot notation is supported when getting child collections and models.</p>
+<pre><code class="lang-js"><span class="pl-c">// collections can return a specific model by providing an index</span>
+myCompany.get(<span class="pl-s">&apos;employees.at0.name&apos;</span>)
+<span class="pl-c">// aka</span>
+myCompany.get(<span class="pl-s">&apos;employees&apos;</span>).at(<span class="hljs-number">0</span>).get(<span class="pl-s">&apos;name&apos;</span>)
+
+<span class="pl-c">// `first` and `last` are also supported</span>
+myCompany.get(<span class="pl-s">&apos;employees.first.name&apos;</span>)
+myCompany.get(<span class="pl-s">&apos;employees.last.name&apos;</span>)
+
+<span class="pl-c">// as is model ID</span>
+myCompany.get(<span class="pl-s">&apos;employees.1.name&apos;</span>)
+</code></pre>
+<p>A benefit of using dot notation is if a nested item does not exist a fatal error <em>will not</em> occur.</p>
+<p><strong>Opt Out:</strong> if you ever need to disable dot notation, pass a second parameter:<br>
+<code>.get(&apos;file.jpg&apos;, {dotnotation:false})</code><br>
+or escape with square brackets:<br>
+<code>.get(&apos;files.file[.]jpg&apos;)</code></p>
+<h2 id="changelog">Changelog</h2>
+<h4 id="next-ver-11218">next ver - 11/2/18</h4>
+<ul>
+<li>added <code>getBefore(model)</code> and <code>getAfter(model)</code> to collections</li>
+</ul>
+<h4 id="v1.2.0-10418">v1.2.0 - 10/4/18</h4>
+<ul>
+<li>can set a <code>defaultID</code> in a child model definition for when the attribute is null or undefined</li>
+</ul>
+<h4 id="v1.1.0-91418">v1.1.0 - 9/14/18</h4>
+<ul>
+<li>child model lookup via <code>coll</code> property can be a custom function.</li>
+</ul>
+<h4 id="v1.0.0-62618">v1.0.0 - 6/26/18</h4>
+<ul>
+<li>ready for commonjs loaders such as Webpack</li>
+</ul>
+<h4 id="v0.12.0-62518">v0.12.0 - 6/25/18</h4>
+<ul>
+<li>child <code>collections</code> can be grouped under a common key &#x2013; helpful for organized modular loading</li>
+<li>child models have reference to collection they fetched from via <code>refColl</code></li>
+</ul>
+<h4 id="v0.11.1">v0.11.1</h4>
+<ul>
+<li><code>id</code> is not longer required, the key name will be used to find the ID on the model attributes</li>
+<li>if model <code>info.coll</code> is a string, it will also check for it on the window</li>
+</ul>
+<h4 id="v0.11.0">v0.11.0</h4>
+<ul>
+<li>dot notation logic changed: index retrieval must be prefixed with &#x201C;at&#x201D;. ex: <code>at0</code>. If not, a normal <code>get()</code> will happen</li>
+<li>access to parentModel via <code>name</code> will traverse all the way to the top (previously limited to first parentModel)</li>
+<li>getOrFetch accepts <code>silent</code> option</li>
+<li>model info defined as a function will be called in context of model</li>
+<li>model info.coll can be a string which will retrieved with dot notation</li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT &#xA9; <a href="http://kevinjantzer.com">Kevin Jantzer</a> - Blackstone Publishing</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../../../helpers/index.html"><span class="title">Helpers</span></a></div>
+          <div class="right"><a href="../../../router/index.html"><span class="label">Next: </span><span class="title">Router</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

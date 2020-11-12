@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../style.css?t=0174a9d9">
+    <link rel="stylesheet" href="../bui.css?t=968c6b38">
+    <script src="../assets/script.js?t=42463e55"></script>
+    <script src="../bui.js?t=b780e518"></script>
+    <title>Overview - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Components</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-elements" href="../elements/index.html">Elements</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../icons.html">Icons</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersnotif" href="../presenters/notif/index.html">Notif</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterstabs" href="../presenters/tabs/index.html">Tabs</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersselection" href="../presenters/selection/index.html">Selection</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmentions" href="../presenters/mentions/index.html">Mentions</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterscal" href="../presenters/cal/index.html">Calendar</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../colors.html">Colors</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2 -parent"><a class="link title  link-helpers" href="../helpers/index.html">Helpers</a>
+                  <ul class="submenu">
+                    <li class="menu-item -level-3"><a class="link title  link-helpersbackbonerelations" href="../helpers/backbone/relations/index.html">Backbone.js Relations</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../router/index.html">Router</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../models/index.html">Models (WIP)</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Server</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title -active link-server" href="../server/index.html">Overview</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-model" href="#model">Model</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-serverrealtime" href="../server/realtime/index.html">Realtime</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-server">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="api">API</h1>
+<pre><code class="lang-js"><span class="pl-k">const</span> app = <span class="pl-c1">require</span>(<span class="pl-s">&apos;express&apos;</span>)();
+<span class="pl-k">const</span> API = <span class="pl-c1">require</span>(<span class="pl-s">&apos;bui/server/api&apos;</span>)
+<span class="pl-k">const</span> Sync = <span class="pl-c1">require</span>(<span class="pl-s">&apos;bui/server/realtime/server/sync&apos;</span>)
+
+<span class="pl-k">new</span> API(app, [
+    MyClass,
+    AnotherClass
+], {
+    <span class="hljs-attr">root</span>: <span class="pl-s">&apos;/api&apos;</span> <span class="pl-c">// prefix all APIs,</span>
+    <span class="hljs-attr">sync</span>: <span class="pl-k">new</span> Sync(io) <span class="pl-c">// optionally support realtime syncing</span>
+})
+
+<span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyClass</span> </span>{
+
+    <span class="pl-c">// required</span>
+    <span class="pl-k">static</span> <span class="pl-k">get</span> api(){<span class="pl-k">return</span> {
+        <span class="hljs-attr">root</span>: <span class="pl-c1">null</span> <span class="pl-c">// optional root to append to each route path</span>
+        <span class="hljs-attr">idParam</span>: <span class="pl-s">&apos;id&apos;</span> <span class="pl-c">// used in creation of apiPathPattern (used by Sync)</span>
+        <span class="hljs-attr">requiresAuthentication</span>: <span class="pl-c1">true</span>, <span class="pl-c">// routes default to private, change to make all public</span>
+        <span class="hljs-attr">routes</span>: [
+            [<span class="pl-s">&apos;get&apos;</span>, <span class="pl-s">&apos;/url-path&apos;</span>, <span class="pl-s">&apos;methodName&apos;</span>],
+            [<span class="pl-s">&apos;get&apos;</span>, <span class="pl-s">&apos;/url-path-public&apos;</span>, <span class="pl-s">&apos;methodName&apos;</span>, {<span class="hljs-attr">requiresAuthentication</span>:<span class="pl-c1">false</span>}]
+        ]
+    }}
+
+    <span class="pl-c">// optionally prevent model from being accessible via API</span>
+    <span class="pl-k">get</span> canAccess(){ 
+        <span class="pl-c">// if( this.req.user.id != 1 ) return false</span>
+        <span class="pl-k">return</span> <span class="pl-c1">true</span>
+    }
+
+    methodName(req){
+        <span class="pl-c">// do something</span>
+        <span class="pl-k">return</span> <span class="pl-s">&apos;the value&apos;</span>
+    }
+}
+</code></pre>
+<h2 id="model">Model</h2>
+<p>Models are only useful if they can query the database</p>
+<pre><code class="lang-js"><span class="pl-k">const</span> Model = <span class="pl-c1">require</span>(<span class="pl-s">&apos;bui/server/model&apos;</span>)
+
+Model.setDB(requre(<span class="pl-s">&apos;./my-db-class&apos;</span>))
+</code></pre>
+<pre><code class="lang-js"><span class="pl-k">const</span> Model = <span class="pl-c1">require</span>(<span class="pl-s">&apos;bui/server/model&apos;</span>)
+
+<span class="pl-c1">module</span>.exports = <span class="hljs-class"><span class="pl-k">class</span> <span class="pl-ent">MyModel</span> <span class="pl-k">extends</span> <span class="pl-ent">Model</span> </span>{
+
+    <span class="pl-c">// API config for the API class (above) to use</span>
+    <span class="pl-k">static</span> <span class="pl-k">get</span> api(){<span class="pl-k">return</span> {
+        <span class="hljs-attr">root</span>: <span class="pl-s">&apos;/my-model&apos;</span>,
+        <span class="hljs-attr">sync</span>: <span class="pl-c1">false</span>, <span class="pl-c">// API path will be the sync path</span>
+        <span class="hljs-attr">routes</span>: [
+            [<span class="pl-s">&apos;get&apos;</span>, <span class="pl-s">&apos;/:id?&apos;</span>, <span class="pl-s">&apos;find&apos;</span>]
+        ]
+    }}
+
+    <span class="pl-k">get</span> config(){ <span class="pl-k">return</span> {
+        <span class="hljs-attr">table</span>: <span class="pl-s">&apos;my_table&apos;</span>,
+        <span class="hljs-attr">tableAlias</span>: <span class="pl-c1">false</span>,
+        <span class="hljs-attr">idAttribute</span>: <span class="pl-s">&apos;id&apos;</span>,
+        <span class="hljs-attr">orderBy</span>: <span class="pl-s">&apos;&apos;</span>,
+        <span class="hljs-attr">limit</span>: <span class="pl-s">&apos;&apos;</span>,
+        <span class="hljs-attr">jsonFields</span>: [] <span class="pl-c">// will parse and encode on find/update/create</span>
+    }}
+
+    <span class="pl-c">// alter the where clause</span>
+    findWhere(where, opts){
+        <span class="pl-c">// defaults to noop</span>
+    }
+
+    findSql(where, opts){
+        <span class="pl-c">// this is the default query</span>
+        <span class="pl-k">return</span> <span class="pl-c">/*sql*/</span><span class="pl-s">`SELECT * 
+                        FROM <span class="hljs-subst">${<span class="pl-k">this</span>.config.table}</span> <span class="hljs-subst">${<span class="pl-k">this</span>.config.tableAlias||<span class="pl-s">&apos;&apos;</span>}</span>
+                        <span class="hljs-subst">${where}</span>
+                        <span class="hljs-subst">${<span class="pl-k">this</span>.findOrderBy()}</span>
+                        <span class="hljs-subst">${<span class="pl-k">this</span>.findLimit}</span>`</span>
+    }
+
+    findParseRow(row, index, resultCount){
+        <span class="pl-c">// defaults to noop, only passing the row along as-is</span>
+        <span class="pl-k">return</span> row
+    }
+
+    <span class="pl-c">// alter the attributes before updating</span>
+    validateUpdate(attrs){
+        <span class="pl-k">return</span> attrs
+    }
+
+    <span class="pl-k">async</span> beforeAdd(attrs){ <span class="pl-c">/* noop */</span> }
+    afterAdd(attrs){ <span class="pl-c">/* noop */</span> }
+
+    <span class="pl-k">async</span> beforeUpdate(attrs){ <span class="pl-c">/* noop */</span> }
+    afterUpdate(attrs){ <span class="pl-c">/* noop */</span> }
+
+    <span class="pl-k">async</span> beforeDestroy(){ <span class="pl-c">/* noop */</span> }
+    afterDestroy(){ <span class="pl-c">/* noop */</span> }
+
+}
+</code></pre>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../models/index.html"><span class="title">Models (WIP)</span></a></div>
+          <div class="right"><a href="../server/realtime/index.html"><span class="label">Next: </span><span class="title">Realtime</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

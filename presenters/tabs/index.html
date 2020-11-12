@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../assets/style.css?t=615badd5">
+    <link rel="stylesheet" href="../../style.css?t=0174a9d9">
+    <link rel="stylesheet" href="../../bui.css?t=968c6b38">
+    <script src="../../assets/script.js?t=42463e55"></script>
+    <script src="../../bui.js?t=b780e518"></script>
+    <title>Tabs - Blackstone UI</title>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body class="-menu-visible">
+    <div class="doc-layout">
+      <div class="toggle menu-toggle js-menu-toggle"></div>
+      <div class="menu toc-menu">
+        <li class="menu-item -level-0 -parent">
+          <ul class="submenu">
+            <li class="menu-item -level-1"><a class="link title  link-index" href="../../index.html">Blackstone UI</a>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Components</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-elements" href="../../elements/index.html">Elements</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-icons" href="../../icons.html">Icons</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="../../presenters/dialog/index.html">Dialog</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersform-control" href="../../presenters/form-control/index.html">Form Control</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterslist" href="../../presenters/list/index.html">List</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmenu" href="../../presenters/menu/index.html">Menu</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspanel" href="../../presenters/panel/index.html">Panel</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersnotif" href="../../presenters/notif/index.html">Notif</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterspopover" href="../../presenters/popover/index.html">Popover</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title -active link-presenterstabs" href="../../presenters/tabs/index.html">Tabs</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-2"><a class="hlink link-attributes" href="#attributes">Attributes</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-events" href="#events">Events</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-style-hooks" href="#style-hooks">Style Hooks</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-views" href="#views">Views</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-custom-menu-items" href="#custom-menu-items">Custom Menu Items</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-menu-slots" href="#menu-slots">Menu Slots</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-no-tab-bar" href="#no-tab-bar">No Tab Bar</a>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-custom-tab-bar" href="#custom-tab-bar">Custom Tab Bar</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersselection" href="../../presenters/selection/index.html">Selection</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presentersmentions" href="../../presenters/mentions/index.html">Mentions</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-presenterscal" href="../../presenters/cal/index.html">Calendar</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Extras</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-colors" href="../../colors.html">Colors</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-util" href="../../util/index.html">Util</a>
+                </li>
+                <li class="menu-item -level-2 -parent"><a class="link title  link-helpers" href="../../helpers/index.html">Helpers</a>
+                  <ul class="submenu">
+                    <li class="menu-item -level-3"><a class="link title  link-helpersbackbonerelations" href="../../helpers/backbone/relations/index.html">Backbone.js Relations</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-router" href="../../router/index.html">Router</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-models" href="../../models/index.html">Models (WIP)</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item -level-1 -parent"><span class="title">Server</span>
+              <ul class="submenu">
+                <li class="menu-item -level-2"><a class="link title  link-server" href="../../server/index.html">Overview</a>
+                </li>
+                <li class="menu-item -level-2"><a class="link title  link-serverrealtime" href="../../server/realtime/index.html">Realtime</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </div>
+      <div class="body page-presenterstabs">
+        <div class="header-nav">
+          <div class="right">
+          </div>
+        </div>
+        <div class="markdown-body"><h1 id="tabs">Tabs</h1>
+<p>Toggle between different views with a tab/menu bar. Supports html elements and
+lazy-loading of custom elements.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span>&gt;</span>
+    custom-element-1
+    custom-element-2
+    <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;View 3&quot;</span>&gt;</span>view 3 content<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;View 4&quot;</span> <span class="hljs-attr">layout</span>=<span class="pl-s">&quot;left&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;View 4 (A)&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;View 4 (b)&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
+</code></pre>
+<!--
+<b-tabs>
+    <section title="View 1">view 1 content</section>
+    <section title="View 2">view 2 content</section>
+    <section title="View 3">view 3 content</section>
+    <b-tabs title="View 4" layout="left">
+        <section title="View 4 (A)"></section>
+        <section title="View 4 (b)"></section>
+    <b-tabs>
+</b-tabs>
+-->
+<blockquote>
+<p>NOTE: If you set <code>.model</code> on <code>b-tabs</code> it will be propagated down
+to the views. This will only happen when the sub view is active so it is safe
+to take action on the model change.</p>
+</blockquote>
+<h2 id="attributes">Attributes</h2>
+<ul>
+<li><code>layout</code> - (top, bottom, left, right) where the menu should be placed</li>
+<li><code>key</code> - used to remember the last active view</li>
+</ul>
+<h2 id="events">Events</h2>
+<p>An event will be triggered with the view becomes active/inactive if the view implements
+any of the following</p>
+<ul>
+<li>
+<p><code>view.didBecomeActive</code></p>
+</li>
+<li>
+<p><code>view.didBecomeInactive</code></p>
+</li>
+<li>
+<p><code>menu-clicked</code> - anytime a menu item is clicked (even if already active)</p>
+</li>
+<li>
+<p><code>active-changed</code> - the tabs element will also emit a DOM event</p>
+<ul>
+<li>The event detail will contain a reference to the tab view object: <code>event.detail.tabView</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>NOTE: <code>didBecomeActive</code> only fires after the view has been created and is switching
+from an inactive state. Implement the <code>connectedCallback</code> if you need to do something
+on first show</p>
+</blockquote>
+<h2 id="style-hooks">Style Hooks</h2>
+<ul>
+<li><code>--menuFontSize</code></li>
+<li><code>--menuItemPadding</code></li>
+<li><code>--inactiveColor</code></li>
+<li><code>--activeColor</code></li>
+<li><code>--contentPadding</code></li>
+</ul>
+<h2 id="views">Views</h2>
+<p>The tabs presenter is designed to lazy load custom element views in
+order to improve performance. Custom elements need to define a static
+<code>title</code> to be displayed in the menu.</p>
+<pre><code class="lang-javascript"><span class="pl-k">static</span> <span class="pl-k">get</span> title(){ <span class="pl-k">return</span> <span class="pl-s">&apos;Menu Title&apos;</span> }
+
+<span class="pl-c">// optional, title will be used if not set</span>
+<span class="pl-k">static</span> <span class="pl-k">get</span> id(){ <span class="pl-k">return</span> <span class="pl-s">&apos;menu-title&apos;</span> }
+
+<span class="pl-c">// optional, id will be used if not set</span>
+<span class="pl-k">static</span> <span class="pl-k">get</span> path(){ <span class="pl-k">return</span> <span class="pl-s">&apos;menu-title/&apos;</span>+<span class="pl-k">this</span>.model.id }
+
+<span class="pl-c">// optional, stop display of view for any reason</span>
+<span class="pl-k">static</span> <span class="pl-k">get</span> canDisplay(){ <span class="pl-k">return</span> <span class="pl-c1">true</span> }
+</code></pre>
+<p>Then list the custom elements one per line</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span>&gt;</span>
+    custom-element-1
+    custom-element-2
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
+</code></pre>
+<p>If using a standard html element, a <code>title</code> attribute must be defined.
+Any elements missing a title will be ignored.</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;Menu Title&quot;</span>&gt;</span>view content<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
+</code></pre>
+<h4 id="properties">Properties</h4>
+<ul>
+<li><code>no-padding</code> add this class to a view for no padding</li>
+</ul>
+<h2 id="custom-menu-items">Custom Menu Items</h2>
+<p>If you need more control over how a menu item is displayed, you can specify
+your own with the proper slot. The slot name will be the view&#x2019;s <code>title</code>
+prefixed with <code>menu:</code></p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">title</span>=<span class="pl-s">&quot;Menu Title&quot;</span>&gt;</span>view content<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;menu:Menu Title&quot;</span>&gt;</span>Menu Title Customized<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
+</code></pre>
+<h2 id="menu-slots">Menu Slots</h2>
+<p>The tabbar/menu provides slots for rendering content before and after the menu items</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;menu:before&quot;</span>&gt;</span>before menu items<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">slot</span>=<span class="pl-s">&quot;menu:after&quot;</span>&gt;</span>after menu items<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<h2 id="no-tab-bar">No Tab Bar</h2>
+<p>You can disable a tab bar menu from showing by adding<code>tab-bar=&quot;none&quot;</code> attribute</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span> <span class="hljs-attr">tab-bar</span>=<span class="pl-s">&quot;none&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
+</code></pre>
+<h2 id="custom-tab-bar">Custom Tab Bar</h2>
+<p>You can choose to implement your own tab bar menu by specificying the custom element in
+a <code>tab-bar</code> attribute. The custom tab bar will have inherit styles to support the
+different layouts</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">b-tabs</span> <span class="hljs-attr">tab-bar</span>=<span class="pl-s">&quot;my-custom-tab-bar&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">b-tabs</span>&gt;</span>
+</code></pre>
+<p>The tab bar will have the following references set:</p>
+<pre><code class="lang-js"><span class="pl-k">this</span>.views <span class="pl-c">// class containing the views</span>
+<span class="pl-k">this</span>.onMenuClick <span class="pl-c">// the function to call when a menu item is clicked</span>
+</code></pre>
+<h4 id="example">Example</h4>
+<pre><code class="lang-js">customElements.define(<span class="pl-s">&apos;my-custom-tab-bar&apos;</span>, <span class="hljs-class"><span class="pl-k">class</span> <span class="pl-k">extends</span> <span class="pl-ent">LitElement</span></span>{
+
+    <span class="pl-k">static</span> <span class="pl-k">get</span> styles(){<span class="pl-k">return</span> css`<span class="css">
+        <span class="hljs-selector-attr">[active]</span> {
+            <span class="pl-e">color</span>: <span class="pl-c1">var</span>(--blue);
+        }
+    `</span>}
+
+    render(){<span class="pl-k">return</span> html`<span class="xml">
+        </span><span class="hljs-subst">${<span class="pl-k">this</span>.views.map(v=&gt;html`<span class="xml">
+            </span><span class="hljs-subst">${v.canDisplay?html`<span class="xml">
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> ?<span class="hljs-attr">active</span>=</span></span><span class="hljs-subst">${v.active}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">.tabView</span>=</span></span><span class="hljs-subst">${v}</span><span class="xml"><span class="hljs-tag"> @<span class="hljs-attr">click</span>=</span></span><span class="hljs-subst">${<span class="pl-k">this</span>.onMenuClick}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+                    </span><span class="hljs-subst">${v.title}</span><span class="xml">
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            `</span>:<span class="pl-s">&apos;&apos;</span>}</span><span class="xml">
+        `</span>)}</span><span class="xml">
+    `</span>}
+
+})
+</code></pre>
+<p>Clicked menu items <strong>must</strong> have <code>.tabView=${view}</code> set to work</p>
+
+        </div>
+        <div class="footer-nav">
+          <div class="left"><a href="../../presenters/popover/index.html"><span class="title">Popover</span></a></div>
+          <div class="right"><a href="../../presenters/selection/index.html"><span class="label">Next: </span><span class="title">Selection</span></a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
