@@ -281,11 +281,6 @@
                 "id": "list-options"
               },
               {
-                "title": "Custom Styles",
-                "depth": 2,
-                "id": "custom-styles"
-              },
-              {
                 "title": "Filters",
                 "depth": 2,
                 "id": "filters",
@@ -368,6 +363,28 @@
                     "title": "Slots",
                     "depth": 3,
                     "id": "slots"
+                  }
+                ]
+              },
+              {
+                "title": "Styling",
+                "depth": 2,
+                "id": "styling",
+                "headings": [
+                  {
+                    "title": "CSS Variables",
+                    "depth": 3,
+                    "id": "css-variables"
+                  },
+                  {
+                    "title": "Parts",
+                    "depth": 3,
+                    "id": "parts"
+                  },
+                  {
+                    "title": "Custom Styles",
+                    "depth": 3,
+                    "id": "custom-styles"
                   }
                 ]
               },
@@ -1472,11 +1489,6 @@
           "id": "list-options"
         },
         {
-          "title": "Custom Styles",
-          "depth": 2,
-          "id": "custom-styles"
-        },
-        {
           "title": "Filters",
           "depth": 2,
           "id": "filters",
@@ -1559,6 +1571,28 @@
               "title": "Slots",
               "depth": 3,
               "id": "slots"
+            }
+          ]
+        },
+        {
+          "title": "Styling",
+          "depth": 2,
+          "id": "styling",
+          "headings": [
+            {
+              "title": "CSS Variables",
+              "depth": 3,
+              "id": "css-variables"
+            },
+            {
+              "title": "Parts",
+              "depth": 3,
+              "id": "parts"
+            },
+            {
+              "title": "Custom Styles",
+              "depth": 3,
+              "id": "custom-styles"
             }
           ]
         },
@@ -2393,16 +2427,16 @@
     "models/README.md": "models/index.html",
     "server/README.md": "server/index.html",
     "server/realtime/README.md": "server/realtime/index.html",
-    "docs/bui.css": "bui.css",
     "docs/bui.css.map": "bui.css.map",
+    "docs/bui.css": "bui.css",
     "docs/bui.js": "bui.js",
     "docs/bui.js.map": "bui.js.map",
     "docs/bui.map": "bui.map",
+    "docs/icons.svg.28577cf8.html": "icons.svg.28577cf8.html",
     "docs/icons.svg.10aef11a.html": "icons.svg.10aef11a.html",
     "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
     "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
-    "docs/icons.svg.28577cf8.html": "icons.svg.28577cf8.html",
     "docs/icons.svg.99a755f0.html": "icons.svg.99a755f0.html",
     "docs/icons.svg.b0516ff5.html": "icons.svg.b0516ff5.html",
     "docs/icons.svg.b9327995.html": "icons.svg.b9327995.html",

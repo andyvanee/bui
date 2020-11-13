@@ -6306,8 +6306,11 @@ class Label extends _litElement.LitElement {
         :host([filled]),
         :host([badge]),
         :host([outline]) {
-            --bgd: #aaa;
-            --color: #fff;
+            /* --bgd: #aaa;
+            --color: #fff; */
+            --bgd: rgba(var(--theme-rgb, 0,0,0), .5);
+            --color: var(--theme-bgd, #fff);
+
             padding: 0.15em 0.3em 0.1em;
             --radius: 3px;
             font-size: .8rem;
@@ -6348,10 +6351,26 @@ class Label extends _litElement.LitElement {
             padding: 0;
         }
 
-        :host([filled="clear"]), :host([badge="black"]) { --bgd: transparent; --color: inherit; }
-        :host([filled="black"]), :host([badge="black"]) { --bgd: var(--theme-color, #333); }
-        :host([filled="white"]), :host([badge="white"]) { --bgd: var(--theme-bgd, #fff); --color: var(--theme-color, #333); }
-        :host([filled="gray"]), :host([badge="gray"]) { --bgd: #ddd; --color: #777; }
+        :host([filled="clear"]), :host([badge="clear"]) {
+            --bgd: transparent;
+            --color: inherit;
+        }
+        
+        :host([filled="black"]), :host([badge="black"]) { 
+            --bgd: var(--theme-color, #333);
+            --color: var(--theme-bgd, #fff)
+        }
+        
+        :host([filled="white"]), :host([badge="white"]) {
+            --bgd: var(--theme-bgd, #fff);
+            --color: var(--theme-color, #333);
+        }
+
+        :host([filled="gray"]), :host([badge="gray"]) {
+            --bgd: rgba(var(--theme-rgb, 0,0,0), .15);
+            --color: rgba(var(--theme-rgb, 0,0,0), .5);
+        }
+
         :host([filled="theme"]), :host([badge="theme"]) { --bgd: var(--theme); }
         :host([filled="blue"]), :host([badge="blue"]) { --bgd: var(--blue); }
         :host([filled="red"]), :host([badge="red"]) { --bgd: var(--red); }
@@ -6371,8 +6390,8 @@ class Label extends _litElement.LitElement {
         
 
         :host([outline="clear"]) { --bgd: transparent; --color: inherit; }
-        :host([outline="black"]) { --bgd: #333; }
-        :host([outline="gray"]) { --bgd: #ddd; }
+        :host([outline="black"]) { --bgd: var(--theme-color,#333); }
+        :host([outline="gray"]) { --bgd: var(--theme-color-accent, #ddd); }
         :host([outline="theme"]) { --bgd: var(--theme); }
         :host([outline="blue"]) { --bgd: var(--blue); }
         :host([outline="red"]) { --bgd: var(--red); }
@@ -6606,7 +6625,7 @@ customElements.define('b-hr', class extends _litElement.LitElement {
             --bgd: var(--b-hr-bgd, rgba(0,0,0,.1));
 
             display: block;
-            margin: 1em auto;
+            margin: var(--padding, 1em) auto;
             height: 1px;
             width: 100%;
             background: var(--bgd);
@@ -6630,9 +6649,15 @@ customElements.define('b-hr', class extends _litElement.LitElement {
             min-height: 1em;
             height: auto;
             width: 1px;
-            margin: 0 .5em;
+            margin: 0 var(--padding, .5em);
             align-self: stretch;
         }
+
+        :host([pad="none"]) { --padding: 0em; }
+        :host([pad="xs"]) { --padding: .25em; }
+        :host([pad="sm"]) { --padding: .5em; }
+        :host([pad="md"]) { --padding: 1.5em; }
+        :host([pad="lg"]) { --padding: 2em; }
 
         :host([vert][thick]) {
             height: auto;
@@ -6692,7 +6717,126 @@ customElements.define('b-sub', class extends _litElement.LitElement {
 var _default = customElements.get('b-sub');
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"VfwF":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"Qy1v":[function(require,module,exports) {
+var define;
+!function(r,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):r.dayjs_plugin_relativeTime=t()}(this,function(){"use strict";return function(r,t,e){r=r||{};var n=t.prototype,o={future:"in %s",past:"%s ago",s:"a few seconds",m:"a minute",mm:"%d minutes",h:"an hour",hh:"%d hours",d:"a day",dd:"%d days",M:"a month",MM:"%d months",y:"a year",yy:"%d years"};e.en.relativeTime=o;var d=function(t,n,d,i){for(var u,a,s,f=d.$locale().relativeTime||o,l=r.thresholds||[{l:"s",r:44,d:"second"},{l:"m",r:89},{l:"mm",r:44,d:"minute"},{l:"h",r:89},{l:"hh",r:21,d:"hour"},{l:"d",r:35},{l:"dd",r:25,d:"day"},{l:"M",r:45},{l:"MM",r:10,d:"month"},{l:"y",r:17},{l:"yy",d:"year"}],h=l.length,m=0;m<h;m+=1){var c=l[m];c.d&&(u=i?e(t).diff(d,c.d,!0):d.diff(t,c.d,!0));var y=(r.rounding||Math.round)(Math.abs(u));if(s=u>0,y<=c.r||!c.r){y<=1&&m>0&&(c=l[m-1]);var p=f[c.l];a="string"==typeof p?p.replace("%d",y):p(y,n,c.l,s);break}}return n?a:(s?f.future:f.past).replace("%s",a)};n.to=function(r,t){return d(r,t,this,!0)},n.from=function(r,t){return d(r,t,this)};var i=function(r){return r.$u?e.utc():e()};n.toNow=function(r){return this.to(i(this),r)},n.fromNow=function(r){return this.from(i(this),r)}}});
+
+},{}],"Agap":[function(require,module,exports) {
+var define;
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.dayjs_plugin_localizedFormat=t()}(this,function(){"use strict";var e={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"};return function(t,n,o){var r=n.prototype,M=r.format;o.en.formats=e,r.format=function(t){void 0===t&&(t="YYYY-MM-DDTHH:mm:ssZ");var n=this.$locale().formats,o=function(t,n){return t.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,function(t,o,r){var M=r&&r.toUpperCase();return o||n[r]||e[r]||n[M].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,function(e,t,n){return t||n.slice(1)})})}(t,void 0===n?{}:n);return M.call(this,o)}}});
+
+},{}],"B5kD":[function(require,module,exports) {
+var define;
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.dayjs_plugin_calendar=t()}(this,function(){"use strict";return function(e,t,a){var n="h:mm A",d={lastDay:"[Yesterday at] "+n,sameDay:"[Today at] "+n,nextDay:"[Tomorrow at] "+n,nextWeek:"dddd [at] "+n,lastWeek:"[Last] dddd [at] "+n,sameElse:"MM/DD/YYYY"};t.prototype.calendar=function(e,t){var n=t||this.$locale().calendar||d,s=a(e||void 0).startOf("d"),o=this.diff(s,"d",!0),i=o<-6?"sameElse":o<-1?"lastWeek":o<0?"lastDay":o<1?"sameDay":o<2?"nextDay":o<7?"nextWeek":"sameElse",f=n[i]||d[i];return"function"==typeof f?f.call(this,a()):this.format(f)}}});
+
+},{}],"yPwf":[function(require,module,exports) {
+/*
+    Adds Day.js plugins that matches Blackstone's use of moment.js
+
+    - Also changes 'Invalid Date' in .format() to empty string
+    - adds dayjs.months()
+    - adds dayjs.weekdays()
+    - supports hash of changes in `.set()`
+*/
+var dayjs = require('dayjs');
+
+var relativeTime = require('dayjs/plugin/relativeTime');
+
+dayjs.extend(relativeTime);
+
+var localizedFormat = require('dayjs/plugin/localizedFormat');
+
+dayjs.extend(localizedFormat);
+
+var calendar = require('dayjs/plugin/calendar');
+
+dayjs.extend(calendar);
+
+dayjs.prototype.calendarDate = function (formats = {}) {
+  formats = Object.assign({
+    lastDay: '[Yesterday]',
+    sameDay: '[Today]',
+    nextDay: '[Tomorrow]',
+    lastWeek: '[last] dddd',
+    nextWeek: 'dddd',
+    sameElse: 'l'
+  }, formats);
+  return this.calendar(null, formats);
+};
+
+const DayJsFormat = dayjs.prototype.format;
+
+dayjs.prototype.format = function (...args) {
+  // https://github.com/iamkun/dayjs/blob/dev/src/index.js#L252
+  if (!this.isValid()) return '';
+  return DayJsFormat.call(this, ...args);
+}; // let `.set` handle hash of changes
+
+
+const DayJsSet = dayjs.prototype.set;
+
+dayjs.prototype.set = function (...args) {
+  if (args.length == 1 && typeof args[0] == 'object') {
+    let date = this;
+
+    for (let unit in args[0]) {
+      date = DayJsSet.call(date, unit, args[0][unit]);
+    }
+
+    return date;
+  }
+
+  return DayJsSet.call(this, ...args);
+};
+
+const MONTH_NAMES = {};
+
+dayjs.months = function (format = "MMMM") {
+  // cached
+  if (MONTH_NAMES[format]) return MONTH_NAMES[format];
+  let d = dayjs();
+  let months = [];
+  let i = 0;
+
+  while (i < 12) {
+    months.push(d.set('month', i++).format(format));
+  }
+
+  MONTH_NAMES[format] = months;
+  return months;
+};
+
+dayjs.monthsShort = function () {
+  return dayjs.months('MMM');
+};
+
+const WEEKDAY_NAMES = {};
+
+dayjs.weekdays = function (format = "dddd") {
+  // cached
+  if (WEEKDAY_NAMES[format]) return WEEKDAY_NAMES[format];
+  let d = dayjs();
+  let days = [];
+  let i = 0;
+
+  while (i < 7) {
+    days.push(d.set('day', i++).format(format));
+  }
+
+  WEEKDAY_NAMES[format] = days;
+  return days;
+};
+
+dayjs.weekdaysShort = function () {
+  return dayjs.weekdays('ddd');
+};
+
+dayjs.weekdaysMin = function () {
+  return dayjs.weekdays('dd');
+};
+
+module.exports = dayjs;
+},{"dayjs":"dZYI","dayjs/plugin/relativeTime":"Qy1v","dayjs/plugin/localizedFormat":"Agap","dayjs/plugin/calendar":"B5kD"}],"VfwF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6702,7 +6846,7 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-var _dayjs = _interopRequireDefault(require("dayjs"));
+var _dayJs = _interopRequireDefault(require("../helpers/day-js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6745,7 +6889,7 @@ customElements.define('b-ts', class extends _litElement.LitElement {
   }
 
   set date(date) {
-    if (typeof date === 'string') date = (0, _dayjs.default)(date);
+    if (typeof date === 'string') date = (0, _dayJs.default)(date);
     this.__date = date;
     if (date) this.title = this._extraTitle + this.date.format('LT l');
     this.requestUpdate();
@@ -6768,7 +6912,7 @@ customElements.define('b-ts', class extends _litElement.LitElement {
 var _default = customElements.get('b-ts');
 
 exports.default = _default;
-},{"lit-element":"bhxD","dayjs":"dZYI"}],"DaYz":[function(require,module,exports) {
+},{"lit-element":"bhxD","../helpers/day-js":"yPwf"}],"DaYz":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16217,7 +16361,7 @@ class Menu {
     this._fetchingTerm = term;
     let url = this.searchUrl; // URL can be a dynamic function
 
-    if (typeof url == 'function') url = url(term);else url += term;
+    if (typeof url == 'function') url = url(encodeURIComponent(term));else url += encodeURIComponent(term);
     this.searchSpinner.hidden = false;
     let resp = await fetch(url).then(resp => resp.json()); // looks like we started searching for another term before we got
     // this response back, so ignore the results
@@ -24395,6 +24539,15 @@ customElements.define('b-list', class extends _litElement.LitElement {
         contract-draft-row:not(:last-child) {
             border-bottom: solid 1px rgba(0,0,0,.1);
         }
+        
+        [part="empty-view"] {
+            grid-column: 1/-1;
+            grid-row: 1/-1;
+        }
+
+        [part="divider"] {
+            grid-column: 1/-1;
+        }
 
         /* .queuing-overlay {
             display: none;
@@ -24423,14 +24576,14 @@ customElements.define('b-list', class extends _litElement.LitElement {
         </slot>
         
         <b-list-toolbar .filters=${this.filters} .sorts=${this.sorts} .layouts=${this.layouts}
-            @filter-term-changed=${this.onFilterTermChange}>
+            @filter-term-changed=${this.onFilterTermChange} part="toolbar">
             <slot name="toolbar:before" slot="before"></slot>
             <slot name="toolbar:after" slot="after"></slot>
             <slot name="toolbar:refresh" slot="refresh-btn">
                 <b-btn text pill icon="arrows-ccw" @click=${this.refresh}></b-btn>
             </slot>
             <!-- <b-label slot="after" class="queuing-label">Queuing filters, release to apply</b-label> -->
-            <b-list-selection-bar>
+            <b-list-selection-bar part="selectionbar">
                 <slot name="actions:left" slot="left"></slot>
                 <slot name="actions:right" slot="right"></slot>
             </b-list-selection-bar>
@@ -24438,6 +24591,7 @@ customElements.define('b-list', class extends _litElement.LitElement {
 
         <slot name="header"></slot>
         <b-infinite-list
+            part="list"
             .empty="${this.createEmptyElement}"
             .row="${this.createRow}"
             .divider=${this.createDivider}
@@ -24511,12 +24665,14 @@ customElements.define('b-list', class extends _litElement.LitElement {
       row = new row();
       row.model = model;
       row.list = this;
+      row.part = 'row';
       return row;
     }
   }
 
   createEmptyElement() {
     this.emptyView = this.emptyView || document.createElement(this.emptyElement);
+    this.emptyView.part = 'empty-view';
     this.emptyView.list = this;
     this.emptyView.dataSource = this.dataSource; // this.emptyView.innerHTML = '<slot name="empty"></slot>'
 
@@ -24532,6 +24688,7 @@ customElements.define('b-list', class extends _litElement.LitElement {
 
     if (divider && divider.shouldDisplay && divider.shouldDisplay(prevModel, model, this)) {
       divider = new divider(prevModel, model, this);
+      divider.part = 'divider';
       divider.list = this;
       divider.model = model;
       divider.prevModel = prevModel;
@@ -24640,126 +24797,7 @@ customElements.define('b-list', class extends _litElement.LitElement {
 var _default = customElements.get('b-list');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./data/source":"zXhY","./data/filters":"HGW8","./data/sorts":"sAKI","./data/layouts":"ZTm8","./toolbar":"iwaU","./toolbar/selection-bar":"xA0J","./infinite-list":"zwrR","../../elements/spinner-overlay":"eyVY","../../helpers/lit-element/selectors":"yvN8","../selection":"aR3g"}],"Qy1v":[function(require,module,exports) {
-var define;
-!function(r,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):r.dayjs_plugin_relativeTime=t()}(this,function(){"use strict";return function(r,t,e){r=r||{};var n=t.prototype,o={future:"in %s",past:"%s ago",s:"a few seconds",m:"a minute",mm:"%d minutes",h:"an hour",hh:"%d hours",d:"a day",dd:"%d days",M:"a month",MM:"%d months",y:"a year",yy:"%d years"};e.en.relativeTime=o;var d=function(t,n,d,i){for(var u,a,s,f=d.$locale().relativeTime||o,l=r.thresholds||[{l:"s",r:44,d:"second"},{l:"m",r:89},{l:"mm",r:44,d:"minute"},{l:"h",r:89},{l:"hh",r:21,d:"hour"},{l:"d",r:35},{l:"dd",r:25,d:"day"},{l:"M",r:45},{l:"MM",r:10,d:"month"},{l:"y",r:17},{l:"yy",d:"year"}],h=l.length,m=0;m<h;m+=1){var c=l[m];c.d&&(u=i?e(t).diff(d,c.d,!0):d.diff(t,c.d,!0));var y=(r.rounding||Math.round)(Math.abs(u));if(s=u>0,y<=c.r||!c.r){y<=1&&m>0&&(c=l[m-1]);var p=f[c.l];a="string"==typeof p?p.replace("%d",y):p(y,n,c.l,s);break}}return n?a:(s?f.future:f.past).replace("%s",a)};n.to=function(r,t){return d(r,t,this,!0)},n.from=function(r,t){return d(r,t,this)};var i=function(r){return r.$u?e.utc():e()};n.toNow=function(r){return this.to(i(this),r)},n.fromNow=function(r){return this.from(i(this),r)}}});
-
-},{}],"Agap":[function(require,module,exports) {
-var define;
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.dayjs_plugin_localizedFormat=t()}(this,function(){"use strict";var e={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"};return function(t,n,o){var r=n.prototype,M=r.format;o.en.formats=e,r.format=function(t){void 0===t&&(t="YYYY-MM-DDTHH:mm:ssZ");var n=this.$locale().formats,o=function(t,n){return t.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,function(t,o,r){var M=r&&r.toUpperCase();return o||n[r]||e[r]||n[M].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,function(e,t,n){return t||n.slice(1)})})}(t,void 0===n?{}:n);return M.call(this,o)}}});
-
-},{}],"B5kD":[function(require,module,exports) {
-var define;
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):e.dayjs_plugin_calendar=t()}(this,function(){"use strict";return function(e,t,a){var n="h:mm A",d={lastDay:"[Yesterday at] "+n,sameDay:"[Today at] "+n,nextDay:"[Tomorrow at] "+n,nextWeek:"dddd [at] "+n,lastWeek:"[Last] dddd [at] "+n,sameElse:"MM/DD/YYYY"};t.prototype.calendar=function(e,t){var n=t||this.$locale().calendar||d,s=a(e||void 0).startOf("d"),o=this.diff(s,"d",!0),i=o<-6?"sameElse":o<-1?"lastWeek":o<0?"lastDay":o<1?"sameDay":o<2?"nextDay":o<7?"nextWeek":"sameElse",f=n[i]||d[i];return"function"==typeof f?f.call(this,a()):this.format(f)}}});
-
-},{}],"yPwf":[function(require,module,exports) {
-/*
-    Adds Day.js plugins that matches Blackstone's use of moment.js
-
-    - Also changes 'Invalid Date' in .format() to empty string
-    - adds dayjs.months()
-    - adds dayjs.weekdays()
-    - supports hash of changes in `.set()`
-*/
-var dayjs = require('dayjs');
-
-var relativeTime = require('dayjs/plugin/relativeTime');
-
-dayjs.extend(relativeTime);
-
-var localizedFormat = require('dayjs/plugin/localizedFormat');
-
-dayjs.extend(localizedFormat);
-
-var calendar = require('dayjs/plugin/calendar');
-
-dayjs.extend(calendar);
-
-dayjs.prototype.calendarDate = function (formats = {}) {
-  formats = Object.assign({
-    lastDay: '[Yesterday]',
-    sameDay: '[Today]',
-    nextDay: '[Tomorrow]',
-    lastWeek: '[last] dddd',
-    nextWeek: 'dddd',
-    sameElse: 'l'
-  }, formats);
-  return this.calendar(null, formats);
-};
-
-const DayJsFormat = dayjs.prototype.format;
-
-dayjs.prototype.format = function (...args) {
-  // https://github.com/iamkun/dayjs/blob/dev/src/index.js#L252
-  if (!this.isValid()) return '';
-  return DayJsFormat.call(this, ...args);
-}; // let `.set` handle hash of changes
-
-
-const DayJsSet = dayjs.prototype.set;
-
-dayjs.prototype.set = function (...args) {
-  if (args.length == 1 && typeof args[0] == 'object') {
-    let date = this;
-
-    for (let unit in args[0]) {
-      date = DayJsSet.call(date, unit, args[0][unit]);
-    }
-
-    return date;
-  }
-
-  return DayJsSet.call(this, ...args);
-};
-
-const MONTH_NAMES = {};
-
-dayjs.months = function (format = "MMMM") {
-  // cached
-  if (MONTH_NAMES[format]) return MONTH_NAMES[format];
-  let d = dayjs();
-  let months = [];
-  let i = 0;
-
-  while (i < 12) {
-    months.push(d.set('month', i++).format(format));
-  }
-
-  MONTH_NAMES[format] = months;
-  return months;
-};
-
-dayjs.monthsShort = function () {
-  return dayjs.months('MMM');
-};
-
-const WEEKDAY_NAMES = {};
-
-dayjs.weekdays = function (format = "dddd") {
-  // cached
-  if (WEEKDAY_NAMES[format]) return WEEKDAY_NAMES[format];
-  let d = dayjs();
-  let days = [];
-  let i = 0;
-
-  while (i < 7) {
-    days.push(d.set('day', i++).format(format));
-  }
-
-  WEEKDAY_NAMES[format] = days;
-  return days;
-};
-
-dayjs.weekdaysShort = function () {
-  return dayjs.weekdays('ddd');
-};
-
-dayjs.weekdaysMin = function () {
-  return dayjs.weekdays('dd');
-};
-
-module.exports = dayjs;
-},{"dayjs":"dZYI","dayjs/plugin/relativeTime":"Qy1v","dayjs/plugin/localizedFormat":"Agap","dayjs/plugin/calendar":"B5kD"}],"tqEd":[function(require,module,exports) {
+},{"lit-element":"bhxD","./data/source":"zXhY","./data/filters":"HGW8","./data/sorts":"sAKI","./data/layouts":"ZTm8","./toolbar":"iwaU","./toolbar/selection-bar":"xA0J","./infinite-list":"zwrR","../../elements/spinner-overlay":"eyVY","../../helpers/lit-element/selectors":"yvN8","../selection":"aR3g"}],"tqEd":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

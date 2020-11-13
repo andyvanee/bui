@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../style.css?t=0174a9d9">
     <link rel="stylesheet" href="../../bui.css?t=968c6b38">
     <script src="../../assets/script.js?t=42463e55"></script>
-    <script src="../../bui.js?t=b780e518"></script>
+    <script src="../../bui.js?t=c71c793b"></script>
     <title>List - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -35,8 +35,6 @@
                     <li class="heading-item -depth-2"><a class="hlink link-list-row" href="#list-row">List Row</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-list-options" href="#list-options">List Options</a>
-                    </li>
-                    <li class="heading-item -depth-2"><a class="hlink link-custom-styles" href="#custom-styles">Custom Styles</a>
                     </li>
                     <li class="heading-item -depth-2"><a class="hlink link-filters" href="#filters">Filters</a>
                       <ul class="heading-list -depth-2">
@@ -73,6 +71,16 @@
                         <li class="heading-item -depth-3"><a class="hlink link-selection-button" href="#selection-button">Selection Button</a>
                         </li>
                         <li class="heading-item -depth-3"><a class="hlink link-slots" href="#slots">Slots</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="heading-item -depth-2"><a class="hlink link-styling" href="#styling">Styling</a>
+                      <ul class="heading-list -depth-2">
+                        <li class="heading-item -depth-3"><a class="hlink link-css-variables" href="#css-variables">CSS Variables</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-parts" href="#parts">Parts</a>
+                        </li>
+                        <li class="heading-item -depth-3"><a class="hlink link-custom-styles" href="#custom-styles">Custom Styles</a>
                         </li>
                       </ul>
                     </li>
@@ -181,28 +189,6 @@ when all available data has been displayed</p>
 <p><code>perPage</code> - how many rows to display at one time.
 Also determines how many &#x201C;more&#x201D; rows are requested
 via fetch:more</p>
-<h2 id="custom-styles">Custom Styles</h2>
-<p>The list view uses shadow dom to render the content. If you need to apply
-custom styles (ex: to make results display as a grid) you can provide
-a <code>.customStyles</code> prop</p>
-<pre><code class="lang-css">let styles = css`
-    :host b-infinite-list {
-        display: grid;
-        grid-template-columns: repeat( auto-fit, minmax(140px, 1fr) );
-        grid-template-rows: 140px;
-        gap: 1em;
-    }
-
-    :host b-infinite-list[layout=&quot;list&quot;] {
-        /* 
-            apply different styles for each layout 
-            see &quot;layout&quot; options below
-        */
-    }
-
-`
-&lt;b-list .customStyles=${styles}&gt;&lt;/b-list&gt;
-</code></pre>
 <h2 id="filters">Filters</h2>
 <pre><code class="lang-js"><span class="pl-k">const</span> filters = {
 
@@ -497,11 +483,67 @@ If you dont also provide an export button or some actions, this will not be of a
 <li><code>actions:left</code> - displayed when selection is on</li>
 <li><code>actions:right</code></li>
 </ul>
+<h2 id="styling">Styling</h2>
+<h3 id="css-variables">CSS Variables</h3>
+<blockquote>
+<p>Needs documentation</p>
+</blockquote>
+<ul>
+<li><code>--list-toolbar-shadow</code></li>
+</ul>
+<h3 id="parts">Parts</h3>
+<p>Certain <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::part">parts</a> can be styled:</p>
+<ul>
+<li><code>toolbar</code></li>
+<li><code>selectionbar</code></li>
+<li><code>list</code></li>
+<li><code>row</code></li>
+<li><code>divider</code></li>
+<li><code>empty-view</code></li>
+</ul>
+<pre><code class="lang-css"><span class="pl-c">/* example */</span>
+<span class="hljs-selector-tag">b-list</span><span class="hljs-selector-pseudo">::part(toolbar)</span> {
+    <span class="pl-e">background</span>: black;
+    <span class="pl-e">color</span>: white;
+}
+
+<span class="hljs-selector-tag">b-list</span><span class="hljs-selector-attr">[layout=<span class="pl-s">&quot;grid&quot;</span>]</span><span class="hljs-selector-pseudo">::part(list)</span> {
+    <span class="pl-e">display</span>: grid;
+    <span class="pl-e">grid-template-columns</span>: <span class="pl-c1">repeat</span>( auto-fit, minmax(<span class="hljs-number">140px</span>, <span class="hljs-number">1</span>fr) );
+    <span class="pl-e">grid-template-rows</span>: <span class="hljs-number">140px</span>;
+    <span class="pl-e">gap</span>: <span class="hljs-number">1em</span>;
+}
+</code></pre>
+<h3 id="custom-styles">Custom Styles</h3>
+<p>The list view uses shadow dom to render the content. If you need to apply
+custom styles (ex: to make results display as a grid) you can provide
+a <code>.customStyles</code> prop</p>
+<blockquote>
+<p>NOTE: using <code>parts</code> is preferred now</p>
+</blockquote>
+<pre><code class="lang-css">let styles = css`
+    :host b-infinite-list {
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(140px, 1fr) );
+        grid-template-rows: 140px;
+        gap: 1em;
+    }
+
+    :host b-infinite-list[layout=&quot;list&quot;] {
+        /* 
+            apply different styles for each layout 
+            see &quot;layout&quot; options below
+        */
+    }
+
+`
+&lt;b-list .customStyles=${styles}&gt;&lt;/b-list&gt;
+</code></pre>
 <h2 id="events">Events</h2>
 <p>Filters and Sorts emit events when changed:</p>
-<pre><code>list.filters.on(&apos;change&apos;, changes=&gt;{})
-list.sorts.on(&apos;change&apos;, selectedSorts=&gt;{})
-list.dataSource.on(&apos;changed&apos;, ()=&gt;{})
+<pre><code class="lang-js">list.filters.on(<span class="pl-s">&apos;change&apos;</span>, changes=&gt;{})
+list.sorts.on(<span class="pl-s">&apos;change&apos;</span>, selectedSorts=&gt;{})
+list.dataSource.on(<span class="pl-s">&apos;changed&apos;</span>, ()=&gt;{})
 </code></pre>
 <p>The list dispatches a DOM event when the content changes (this would happen when applied filters change, sort changes, or content is fetched from the server)</p>
 <pre><code>list.addEventListener(&apos;content-changed&apos;, e=&gt;{})
