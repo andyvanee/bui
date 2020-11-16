@@ -196,9 +196,9 @@
           },
           {
             "title": "Form Control",
-            "source": "presenters/form-control/README.md",
-            "url": "presenters/form-control/index.html",
-            "slug": "presentersform-control",
+            "source": "presenters/form/README.md",
+            "url": "presenters/form/index.html",
+            "slug": "presentersform",
             "headings": [
               {
                 "title": "<form-control>",
@@ -1402,11 +1402,11 @@
         }
       ]
     },
-    "presenters/form-control/index.html": {
-      "source": "presenters/form-control/README.md",
+    "presenters/form/index.html": {
+      "source": "presenters/form/README.md",
       "title": "Form Control - Blackstone UI",
       "pageTitle": "Form Control",
-      "slug": "presentersform-control",
+      "slug": "presentersform",
       "headings": [
         {
           "title": "<form-control>",
@@ -2409,7 +2409,7 @@
     "elements/README.md": "elements/index.html",
     "docs/icons.md": "icons.html",
     "presenters/dialog/README.md": "presenters/dialog/index.html",
-    "presenters/form-control/README.md": "presenters/form-control/index.html",
+    "presenters/form/README.md": "presenters/form/index.html",
     "presenters/list/README.md": "presenters/list/index.html",
     "presenters/menu/README.md": "presenters/menu/index.html",
     "presenters/panel/README.md": "presenters/panel/index.html",
@@ -2427,20 +2427,20 @@
     "models/README.md": "models/index.html",
     "server/README.md": "server/index.html",
     "server/realtime/README.md": "server/realtime/index.html",
-    "docs/bui.css.map": "bui.css.map",
     "docs/bui.css": "bui.css",
     "docs/bui.js": "bui.js",
+    "docs/bui.css.map": "bui.css.map",
     "docs/bui.js.map": "bui.js.map",
     "docs/bui.map": "bui.map",
-    "docs/icons.svg.28577cf8.html": "icons.svg.28577cf8.html",
     "docs/icons.svg.10aef11a.html": "icons.svg.10aef11a.html",
-    "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
+    "docs/icons.svg.28577cf8.html": "icons.svg.28577cf8.html",
     "docs/icons.svg.57b98de6.js": "icons.svg.57b98de6.js",
-    "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
+    "docs/icons.svg.57b98de6.html": "icons.svg.57b98de6.html",
     "docs/icons.svg.99a755f0.html": "icons.svg.99a755f0.html",
     "docs/icons.svg.b0516ff5.html": "icons.svg.b0516ff5.html",
-    "docs/icons.svg.b9327995.html": "icons.svg.b9327995.html",
+    "docs/icons.svg.57b98de6.js.map": "icons.svg.57b98de6.js.map",
     "docs/icons.svg.c6868b42.html": "icons.svg.c6868b42.html",
+    "docs/icons.svg.b9327995.html": "icons.svg.b9327995.html",
     "docs/icons.svg.f5352611.html": "icons.svg.f5352611.html",
     "docs/style.css": "style.css"
   }

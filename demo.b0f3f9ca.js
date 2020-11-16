@@ -42179,9 +42179,9 @@ var _fuse = _interopRequireDefault(require("fuse.js"));
 
 require("../../elements/hr");
 
-require("../form-control/controls/check-box");
+require("../form/controls/check-box");
 
-require("../form-control/controls/select-field");
+require("../form/controls/select-field");
 
 var _device = _interopRequireDefault(require("../../util/device"));
 
@@ -42825,7 +42825,7 @@ class Menu {
 }
 
 exports.default = Menu;
-},{"lit-html":"SPDu","lit-html/directives/unsafe-html":"jTPt","lit-html/directives/live":"RaiV","../popover":"Soyf","../dialog":"pos3","../panel":"cmZt","fuse.js":"Wp9p","../../elements/hr":"IOAQ","../form-control/controls/check-box":"jNfL","../form-control/controls/select-field":"h8fl","../../util/device":"la8o","./style.less":"r4vn"}],"PCqe":[function(require,module,exports) {
+},{"lit-html":"SPDu","lit-html/directives/unsafe-html":"jTPt","lit-html/directives/live":"RaiV","../popover":"Soyf","../dialog":"pos3","../panel":"cmZt","fuse.js":"Wp9p","../../elements/hr":"IOAQ","../form/controls/check-box":"jNfL","../form/controls/select-field":"h8fl","../../util/device":"la8o","./style.less":"r4vn"}],"PCqe":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47179,7 +47179,7 @@ var _litElement = require("lit-element");
 
 require("./icon");
 
-require("../presenters/form-control/controls/range-slider");
+require("../presenters/form/controls/range-slider");
 
 var _dayjs = _interopRequireDefault(require("dayjs"));
 
@@ -47605,7 +47605,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
 var _default = customElements.get('b-audio');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./icon":"ncPe","../presenters/form-control/controls/range-slider":"ZCfn","dayjs":"dZYI","dayjs/plugin/duration":"oxIj","../util/store":"z4Ln"}],"inC5":[function(require,module,exports) {
+},{"lit-element":"bhxD","./icon":"ncPe","../presenters/form/controls/range-slider":"ZCfn","dayjs":"dZYI","dayjs/plugin/duration":"oxIj","../util/store":"z4Ln"}],"inC5":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55697,9 +55697,9 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-require("../../form-control/form-control");
+require("../../form/form-control");
 
-require("../../form-control/controls/text-field");
+require("../../form/controls/text-field");
 
 customElements.define('b-list-search-bar', class extends _litElement.LitElement {
   static get properties() {
@@ -55780,7 +55780,7 @@ customElements.define('b-list-search-bar', class extends _litElement.LitElement 
 var _default = customElements.get('b-list-search-bar');
 
 exports.default = _default;
-},{"lit-element":"bhxD","../../form-control/form-control":"swB1","../../form-control/controls/text-field":"ezNL"}],"iwaU":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../form/form-control":"swB1","../../form/controls/text-field":"ezNL"}],"iwaU":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -69608,9 +69608,9 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-var _README = _interopRequireDefault(require("bui/presenters/form-control/README.md"));
+var _README = _interopRequireDefault(require("bui/presenters/form/README.md"));
 
-require("bui/presenters/form-control/controls/rich-text-field");
+require("bui/presenters/form/controls/rich-text-field");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69770,7 +69770,7 @@ customElements.define('demo-presenter-form-control', class extends _litElement.L
 var _default = customElements.get('demo-presenter-form-control');
 
 exports.default = _default;
-},{"lit-element":"bhxD","bui/presenters/form-control/README.md":"WPSm","bui/presenters/form-control/controls/rich-text-field":"k1zW"}],"AzfL":[function(require,module,exports) {
+},{"lit-element":"bhxD","bui/presenters/form/README.md":"WPSm","bui/presenters/form/controls/rich-text-field":"k1zW"}],"AzfL":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

@@ -34223,7 +34223,7 @@ customElements.define('demo-markdown-docs', class extends _litElement.LitElement
             border-radius: 0;
             padding-top: 0;
             padding-bottom: 0;
-            color: rgba(var(--theme-rgb), .7);
+            color: rgba(var(--theme-text-rgb), .7);
         }
 
         h2 {
@@ -34250,7 +34250,7 @@ customElements.define('demo-markdown-docs', class extends _litElement.LitElement
         .toc [level] {
             margin-left: 1.25em;
             padding: .25em 0;
-            color: rgba(var(--theme-rgb), .7);
+            color: rgba(var(--theme-text-rgb), .7);
         }
 
         .toc [level]:hover {
@@ -34379,7 +34379,7 @@ customElements.define('b-text', class extends _litElement.LitElement {
         :host([xl]) { font-size: 1.7em; line-height: 1.1em; }
         :host([xxl]) { font-size: 2em; line-height: 1.1em; }
 
-        :host([tone="muted"]), :host([muted]) { color: rgba(var(--theme-rgb, 0,0,0),.4); }
+        :host([tone="muted"]), :host([muted]) { color: rgba(var(--theme-text-rgb, 0,0,0),.4); }
         :host([tone="theme"]) { color: var(--theme); }
         :host([tone="critical"]) { color: var(--b-text-tone-critical, var(--red-A400, red)); }
         :host([tone="warning"]) { color: var(--b-text-tone-warning, var(--orange, orange)); }
@@ -37346,7 +37346,7 @@ const colorScheme = {
     colorizeFaviconComposition = ''
   } = {}) {
     localStorage.setItem('theme-colorize-icon', colorizeFaviconComposition || localStorage.getItem('theme-colorize-icon') || 'lighten');
-    this.onChange(this.setTheme);
+    this.onChange(this.setTheme.bind(this));
     this.setTheme();
     this.setAccent();
   },
@@ -38391,7 +38391,7 @@ class IconList extends _litElement.LitElement {
 		}
 
 		small {
-			color: var(--theme-color-accent);
+			color: var(--theme-text-accent);
 		}
 
 		@media (max-width: 550px) {
@@ -41416,7 +41416,7 @@ customElements.define('b-hr', class extends _litElement.LitElement {
 var _default = customElements.get('b-hr');
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"uH6r":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"vXAz":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41532,7 +41532,7 @@ customElements.define('touch-ripple', TouchRippleElement);
 var _default = customElements.get('touch-ripple');
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"jNfL":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"lrfI":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41754,7 +41754,7 @@ customElements.define('check-box', CheckBoxElement);
 var _default = customElements.get('check-box');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./touch-ripple":"uH6r"}],"h8fl":[function(require,module,exports) {
+},{"lit-element":"bhxD","./touch-ripple":"vXAz"}],"lQrn":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41792,7 +41792,7 @@ main > svg {
 	height: 1em;
 	width: 1em;
 	flex-shrink: 0;
-	fill: var(--theme-color-accent, #333);
+	fill: var(--theme-text-accent, #333);
 }
 
 slot#options {
@@ -42831,7 +42831,7 @@ class Menu {
 }
 
 exports.default = Menu;
-},{"lit-html":"SPDu","lit-html/directives/unsafe-html":"jTPt","lit-html/directives/live":"RaiV","../popover":"Soyf","../dialog":"pos3","../panel":"cmZt","fuse.js":"Wp9p","../../elements/hr":"IOAQ","../form/controls/check-box":"jNfL","../form/controls/select-field":"h8fl","../../util/device":"la8o","./style.less":"r4vn"}],"PCqe":[function(require,module,exports) {
+},{"lit-html":"SPDu","lit-html/directives/unsafe-html":"jTPt","lit-html/directives/live":"RaiV","../popover":"Soyf","../dialog":"pos3","../panel":"cmZt","fuse.js":"Wp9p","../../elements/hr":"IOAQ","../form/controls/check-box":"lrfI","../form/controls/select-field":"lQrn","../../util/device":"la8o","./style.less":"r4vn"}],"PCqe":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42849,7 +42849,7 @@ customElements.define('bui-logo', class extends _litElement.LitElement {
             font-size: var(--size, 2em);
             height: .7em;
             align-items: center;
-            color: var(--theme-color);
+            color: var(--theme-text);
             user-select: none;
         }
 
@@ -44070,6 +44070,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
 
         this.__customTabBar.classList.add('tab-bar');
 
+        this.__customTabBar.part = 'tab-bar';
         this.__customTabBar.innerHTML =
         /*html*/
         `
@@ -44083,7 +44084,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
       return this.__customTabBar;
     } else {
       return (0, _litElement.html)`
-            <header class="tab-bar">
+            <header class="tab-bar" part="tab-bar">
                 <slot name="menu:before"></slot>
                 <div class="tab-bar-item single-menu" active @click=${this.popoverMenu}>
                     <b-icon name="menu"></b-icon>
@@ -44261,7 +44262,7 @@ customElements.define('b-app-tab-bar', class extends _litElement.LitElement {
         }
 
         b-btn {
-            color: var(--theme-color);
+            color: var(--theme-text);
             text-align: center;
             display: flex;
             align-content: center;
@@ -44284,11 +44285,11 @@ customElements.define('b-app-tab-bar', class extends _litElement.LitElement {
 
         b-btn[active] {
             --b-btn-stacked-icon-opacity: 1;
-            color: var(--b-app-tab-bar-active-color, var(--theme-color));
+            color: var(--b-app-tab-bar-active-color, var(--theme-text));
             /* top border */
             /* box-shadow: black 1px 6px 0px -2px inset; */
             border-radius: 0;
-            /* --bgdColor: rgba(var(--theme-rgb),.1); */
+            /* --bgdColor: rgba(var(--theme-text-rgb),.1); */
         }
         
         b-btn[active] span {
@@ -44296,7 +44297,7 @@ customElements.define('b-app-tab-bar', class extends _litElement.LitElement {
         }
         
         b-btn:not([active]):hover {
-            --hoverBgdColor: rgba(var(--theme-rgb),.01);
+            --hoverBgdColor: rgba(var(--theme-text-rgb),.01);
         }
 
         [icon="search"] {
@@ -44324,7 +44325,7 @@ customElements.define('b-app-tab-bar', class extends _litElement.LitElement {
 
             b-btn[active] {
                 /* left border */
-                box-shadow: var(--b-app-tab-bar-active-color, var(--theme-chosen, var(--theme-color))) 6px 1px 0px -2px inset;
+                box-shadow: var(--b-app-tab-bar-active-color, var(--theme-chosen, var(--theme-text))) 6px 1px 0px -2px inset;
                 /* border-top-left-radius: 0;
                 border-bottom-left-radius: 0; */
             }
@@ -44346,7 +44347,7 @@ customElements.define('b-app-tab-bar', class extends _litElement.LitElement {
   render() {
     return (0, _litElement.html)`
 
-        <slot name="menu:before"></slot>
+        <!-- <slot name="menu:before"></slot> -->
 
         ${this.views.map(v => (0, _litElement.html)`
             ${v.canDisplay && (!_device.default.isMobile || v.id != 'emails') ? (0, _litElement.html)`
@@ -44364,7 +44365,7 @@ customElements.define('b-app-tab-bar', class extends _litElement.LitElement {
             </b-btn>
         ` : ''}
 
-        <slot name="menu:after"></slot>
+        <!-- <slot name="menu:after"></slot> -->
     `;
   }
 
@@ -44440,11 +44441,11 @@ customElements.define('b-app', class extends _litElement.LitElement {
             display: flex;
             flex-direction: column;
             position:relative;
-            color: var(--theme-color);
+            color: var(--theme-text);
             min-width: 0;
             overflow: auto;
             -webkit-overflow-scrolling: touch;
-            --b-sub-color: var(--theme-color-accent);
+            --b-sub-color: var(--theme-text-accent);
             --list-toolbar-shadow: 0 0 0 1px var(--theme-bgd-accent);
         }
 
@@ -44618,7 +44619,129 @@ customElements.define('b-h3', class extends _litElement.LitElement {
 });
 },{"lit-element":"bhxD"}],"OviO":[function(require,module,exports) {
 module.exports = "<p align=\"center\">\n  <a href=\"https://github.com/kjantzer/bui\" rel=\"noopener\" target=\"_blank\">\n    <img width=\"200\" src=\"https://raw.githubusercontent.com/kjantzer/bui/master/logo.png\"/>\n  </a>\n</p>\n\n<h1 align=\"center\">Blackstone UI (BUI)</h1>\n\n<div align=\"center\">\n\n[![demo](https://img.shields.io/badge/npm-v3.0.0-blue)](https://www.npmjs.com/package/blackstone-ui)\n[![demo](https://img.shields.io/badge/-Demo-blue)](https://bui.js.org)\n[![docs](https://img.shields.io/badge/-Documentation-black)](https://bui.js.org/docs/)\n\n</div>\n\nWeb components for creating interfaces - built with [lit-html](https://lit-html.polymer-project.org/) and [lit-element](https://lit-element.polymer-project.org/) by [Blackstone Publishing](https://blackstonepublishing.com)\n\n[![preview](https://repository-images.githubusercontent.com/204566076/10c85c80-9b40-11ea-8331-e9678c241682)](https://bui.js.org)\n\n\n## Installation\nBlackstone-UI is available as an [npm package](https://www.npmjs.com/package/blackstone-ui)\n\n```\nnpm install blackstone-ui --save\n```\n\nOr if you want the latest cutting-edge version\n\n```\nnpm install https://github.com/kjantzer/bui.git --save\n```\n\n## Overview\n\nWeb components (or custom elements) allow us to encapsalate\nlogic, designs, and features in html elements. Along with custom\nelements, various \"presenters\" (or views) have been created\nfor all the ways an app needs to display data\n\n- [Elements](./elements/README.md) - common building-block elements \n- Presenters - ways to present views and data\n- [Util](./util/README.md) - utility methods\n- [Router](./router/README.md) - manages the url and triggers views\n- [Helpers](./elements/README.md) - helper/extensions\n\n\n## Run the Demo\n\nYou can run the demo locally by fist installing the parcel bundler (globally) then start the demo\n\n```\n$ npm install -g parcel-bundler\n$ npm start\n```\n\n## Developing\n\n[lit-html](https://lit-html.polymer-project.org) and [lit-element](https://lit-element.polymer-project.org)\nare being used to create and render custom elements. The beauty in these tools\nis that they are simply syntactic sugar for native web technologies\n\n`lit-html` - this is a templating tool that replaces a need for something like mustache.js\n\n`lit-element` - this is a base class for that makes it easier to make custom elements removing\na lot of the boilerplate code usually needed.\n"
-},{}],"Ldw2":[function(require,module,exports) {
+},{}],"f2rY":[function(require,module,exports) {
+module.exports = "# Setup\n\n## Installation\nBlackstone-UI is available as an [npm package](https://www.npmjs.com/package/blackstone-ui)\n\n```\nnpm install blackstone-ui --save\n```\n\nOr if you want the latest cutting-edge version\n\n```\nnpm install https://github.com/kjantzer/bui.git --save\n```\n\n\n## Bundler\nAfter installing BUI, it can be nice to setup an alias to the module to reduce how much typing is needed:\n\n```js\n// webpack\nresolve: {\n    alias: {\n        'bui': 'blackstone-ui',\n\n        // aliases for common presenters is also helpful\n        'notif': 'bui/presenters/notif',\n        'panel': 'bui/presenters/panel',\n        'dialog': 'bui/presenters/dialog',\n        'popover': 'bui/presenters/popover'\n    }\n}\n```\n\n```js\n// package.json (for parcel.js)\n\"alias\": {\n    \"bui\": \"blackstone-ui\"\n}\n```\n\n> The code examples below assume you have setup an alias. If not, swap `bui` for `blackstone-ui` in the imports\n\n\n## Styles\n\n```less\n// style.less\n\n// import a css reset if you wish\n@import '~bui/styles/reset.less';\n\n// include BUI styles\n@import '~bui/styles/index.less';\n\n// Or only import specific\n@import '~bui/styles/colors.less';\n@import '~bui/styles/theme.less';\n@import '~bui/styles/pwa.less';\n```\n\n### `colors.less`\nCreates css vars for list of [material colors](https://material.io/design/color)\n- `--blue`\n- `--blue-200`\n- etc...\n\n### `theme.less`\nSets css vars for to support the dark/light mode, accent, and text colors.\n\n- `--theme` - accent color\n- `--theme-text` - text color\n- `--theme-text-accent`\n- `--theme-bgd` - background\n- `--theme-bgd-accent`\n- `--theme-bgd-accent2`\n\n### `pwa.less`\nThis makes some styling assumptions for a Progressive Web App (PWA)\n- `html/body` full height and no overflow\n    - expected that the app element will take care of scrolling\n- sets `--view-gutter` (adjust for smaller screens)\n- prevents iOS \"callouts\" from image long presses\n- makes a few adjustments to BUI presenter styles\n\n## App Entry\n\n```js\n// index.js\n\n// import your styles from above\nimport 'style.less'\n\n// if your gonna use the router, import and set the config now\nimport router from 'bui/router'\nrouter.config({\n    root: '/',\n})\n\nimport device, {colorScheme} from 'bui/util/device'\n\n// import all the lit-element helpers \nimport 'bui/helpers/lit-element'\n\n// updates global window.open to better support installed PWA\nimport 'bui/util/window.open'\n\nimport App from './app.js'\n\nwindow.addEventListener('DOMContentLoaded', e=>{\n    \n    // Adds clases html tag like `mobile`, `ios`, `android`, `installed`\n    device.applyClasses()\n\n    // Sets the theme, accent, and colorizes the favicon (based on accent)\n    // will also set handler to update theme when dark/light mode changed via system\n    colorScheme.apply()\n\n    // initialze your main app view\n    document.appendChild(new App())\n})\n```\n\n```js\n// app.js\n\n// NOTE: the tabs/app presenter will call `router.start()`\nimport AppView from 'bui/presenters/tabs/app'\n\ncustomElements.define('my-app', class extends App{\n\n    get views(){return `\n        my-view\n        my-second-view\n    `}\n\n})\n\n\n```\n\n## PWA\n\nhttps://web.dev/progressive-web-apps/\n\n### Web Manifest\n\n```html\n<link rel=\"manifest\" href=\"/manifest.webmanifest\">\n```\n```json\n// manifest.webmanifest\n{\n  \"short_name\": \"App\",\n  \"name\": \"My PWA App\",\n  \"display\": \"standalone\",\n  \"theme_color\": \"#fff\",\n  \"background_color\": \"#fff\",\n  \"start_url\": \"/\",\n  \"icons\": [\n    {\n      \"src\": \"icons/192.png\",\n      \"sizes\": \"192x192\",\n      \"type\": \"image/png\"\n    },\n    {\n      \"src\": \"icons/512.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\"\n    }\n  ]\n}\n\n```\n\n### Service Worker\nA service worker allows you to cache files and http requests, letting your app work offline. It is also a requirement for your app to be \"installable\"\n\n```js\nwindow.addEventListener('load', function() {\n    navigator.serviceWorker.register('sw.js').then(registration=>{\n        console.log('ServiceWorker registered:', registration.scope);\n    }, err=>{\n        console.log('ServiceWorker registration failed: ', err);\n    });\n});\n```\n\n### Mobile\n\n```html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1\">\n\n<meta name=\"apple-mobile-web-app-title\" content=\"My App\" />\n<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\">\n\n<link rel=\"apple-touch-icon\" href=\"/icons/192.jpg\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/icons/favicon-32.png\">\n```\n\nAndroid [maskable](https://web.dev/maskable-icon/) icons: https://maskable.app/\n\n### Splashscreens\niOS (and Android?) can show a splash screen when opening your installed PWA\n\nUse this link to create the sizes and get the html code: https://appsco.pe/developer/splash-screens\n\n"
+},{}],"T33o":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+var _setup = _interopRequireDefault(require("../../docs/setup.md"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+customElements.define('demo-setup', class extends _litElement.LitElement {
+  static get title() {
+    return 'Setup';
+  }
+
+  static get styles() {
+    return (0, _litElement.css)`
+        :host {
+            display: block;
+            position:relative;
+        }
+
+        main {
+            margin: var(--view-gutter, 2em) auto;
+            /* width: 900px; */
+            max-width: calc(100% - (var(--view-gutter, 2em)*2));
+        }
+
+        b-paper {
+            min-height: 70vh;
+        }
+        
+    `;
+  }
+
+  render() {
+    return (0, _litElement.html)`
+        <main>
+        
+        <b-paper>
+
+            <demo-markdown-docs .docs=${_setup.default}></demo-markdown-docs>
+
+        </b-paper>
+
+
+        </main>
+    `;
+  }
+
+});
+
+var _default = customElements.get('demo-setup');
+
+exports.default = _default;
+},{"lit-element":"bhxD","../../docs/setup.md":"f2rY"}],"FmJT":[function(require,module,exports) {
+module.exports = "# Changelog\n\n## 2020-11-16\n- Breaking: `--theme-color` renamed to `--theme-text`\n- Breaking: `--theme-color-accent` renamed to `--theme-text-accent`\n- Breaking: `--theme-rgb` renamed to `--theme-text-rgb`\n\n## 2020-11-13\n- Breaking: import for `form-control` presenter renamed to `form`\n- Breaking: import for `form-handler.js` renamed to `handler.js`\n- Breaking: import for `form-control.js` renamed to `control.js`"
+},{}],"fikP":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _litElement = require("lit-element");
+
+var _CHANGELOG = _interopRequireDefault(require("../../CHANGELOG.md"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+customElements.define('demo-changelog', class extends _litElement.LitElement {
+  static get title() {
+    return 'Changelog';
+  }
+
+  static get styles() {
+    return (0, _litElement.css)`
+        :host {
+            display: block;
+            position:relative;
+        }
+
+        main {
+            margin: var(--view-gutter, 2em) auto;
+            /* width: 900px; */
+            max-width: calc(100% - (var(--view-gutter, 2em)*2));
+        }
+
+        b-paper {
+            min-height: 70vh;
+        }
+        
+    `;
+  }
+
+  render() {
+    return (0, _litElement.html)`
+        <main>
+        
+        <b-paper>
+
+            <demo-markdown-docs .docs=${_CHANGELOG.default}></demo-markdown-docs>
+
+        </b-paper>
+
+
+        </main>
+    `;
+  }
+
+});
+
+var _default = customElements.get('demo-changelog');
+
+exports.default = _default;
+},{"lit-element":"bhxD","../../CHANGELOG.md":"FmJT"}],"Ldw2":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44633,6 +44756,10 @@ require("bui/elements/headers");
 require("bui/elements/hr");
 
 var _README = _interopRequireDefault(require("bui/README.md"));
+
+require("./overview/setup");
+
+require("./overview/changelog");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44659,10 +44786,10 @@ customElements.define('demo-overview', class extends _litElement.LitElement {
   static get styles() {
     return (0, _litElement.css)`
         :host {
-            display: block;
+            display: grid;
             position:relative;
             height: 100%;
-            overflow: auto;
+            overflow: hidden;
         }
 
         .bgd {
@@ -44699,8 +44826,8 @@ customElements.define('demo-overview', class extends _litElement.LitElement {
             color: white;
             text-align: center;
             font-size: 1.4em;
-            padding-top: var(--view-gutter);
-            padding-bottom: 6%;
+            /* padding-top: var(--view-gutter); */
+            padding-bottom: 3%;
         }
 
         bui-logo {
@@ -44724,6 +44851,16 @@ customElements.define('demo-overview', class extends _litElement.LitElement {
             color: var(--theme);
             text-decoration: none;
         }
+
+        b-tabs > * {
+            min-width: 0;
+        }
+
+        b-tabs::part(tab-bar) {
+            color: white;
+            --inactiveColor: rgba(255,255,255,.4);
+            --border-color: rgba(255,255,255,.1);
+        }
     `;
   }
 
@@ -44735,27 +44872,35 @@ customElements.define('demo-overview', class extends _litElement.LitElement {
         <div class="bgd"></div>
         
 
-        <main>
+        <b-tabs key="demo-overview">
+            <div title="About">
+            <main>
 
-            <header>
+                <header>
 
-                <bui-logo></bui-logo>
-                
-                <b-text xl align="center" block>
-                    Blackstone <b-text bold>UI</b-text>
-                </b-text>
+                    <bui-logo></bui-logo>
+                    
+                    <b-text xl align="center" block>
+                        Blackstone <b-text bold>UI</b-text>
+                    </b-text>
 
-                <p><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">Web components</a> for creating applications – built by Blackstone Publishing using <a href="https://lit-html.polymer-project.org">lit-html</a> and <a href="https://lit-element.polymer-project.org">lit-element</a></p>
+                    <p><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">Web components</a> for creating applications – built by Blackstone Publishing using <a href="https://lit-html.polymer-project.org">lit-html</a> and <a href="https://lit-element.polymer-project.org">lit-element</a></p>
 
-            </header>
+                </header>
 
-            <b-paper overshadow>
+                <b-paper overshadow>
 
-                <demo-markdown-docs notoc .docs=${docsStr}></demo-markdown-docs>
+                    <demo-markdown-docs notoc .docs=${docsStr}></demo-markdown-docs>
 
-            </b-paper>
+                </b-paper>
 
-        </main>
+            </main>
+            </div>
+
+            demo-setup
+            demo-changelog
+
+        </b-tabs>
     `;
   }
 
@@ -44789,7 +44934,7 @@ const codePreview = `
     </div>
 </b-tabs>
 </b-paper>`;
-},{"lit-element":"bhxD","bui/elements/headers":"pCMX","bui/elements/hr":"IOAQ","bui/README.md":"OviO"}],"dZYI":[function(require,module,exports) {
+},{"lit-element":"bhxD","bui/elements/headers":"pCMX","bui/elements/hr":"IOAQ","bui/README.md":"OviO","./overview/setup":"T33o","./overview/changelog":"fikP"}],"dZYI":[function(require,module,exports) {
 var define;
 !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):t.dayjs=e()}(this,function(){"use strict";var t="millisecond",e="second",n="minute",r="hour",i="day",s="week",u="month",a="quarter",o="year",f="date",h=/^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[^0-9]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?.?(\d+)?$/,c=/\[([^\]]+)]|Y{2,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,d={name:"en",weekdays:"Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),months:"January_February_March_April_May_June_July_August_September_October_November_December".split("_")},$=function(t,e,n){var r=String(t);return!r||r.length>=e?t:""+Array(e+1-r.length).join(n)+t},l={s:$,z:function(t){var e=-t.utcOffset(),n=Math.abs(e),r=Math.floor(n/60),i=n%60;return(e<=0?"+":"-")+$(r,2,"0")+":"+$(i,2,"0")},m:function t(e,n){if(e.date()<n.date())return-t(n,e);var r=12*(n.year()-e.year())+(n.month()-e.month()),i=e.clone().add(r,u),s=n-i<0,a=e.clone().add(r+(s?-1:1),u);return+(-(r+(n-i)/(s?i-a:a-i))||0)},a:function(t){return t<0?Math.ceil(t)||0:Math.floor(t)},p:function(h){return{M:u,y:o,w:s,d:i,D:f,h:r,m:n,s:e,ms:t,Q:a}[h]||String(h||"").toLowerCase().replace(/s$/,"")},u:function(t){return void 0===t}},y="en",M={};M[y]=d;var m=function(t){return t instanceof S},D=function(t,e,n){var r;if(!t)return y;if("string"==typeof t)M[t]&&(r=t),e&&(M[t]=e,r=t);else{var i=t.name;M[i]=t,r=i}return!n&&r&&(y=r),r||!n&&y},v=function(t,e){if(m(t))return t.clone();var n="object"==typeof e?e:{};return n.date=t,n.args=arguments,new S(n)},g=l;g.l=D,g.i=m,g.w=function(t,e){return v(t,{locale:e.$L,utc:e.$u,x:e.$x,$offset:e.$offset})};var S=function(){function d(t){this.$L=D(t.locale,null,!0),this.parse(t)}var $=d.prototype;return $.parse=function(t){this.$d=function(t){var e=t.date,n=t.utc;if(null===e)return new Date(NaN);if(g.u(e))return new Date;if(e instanceof Date)return new Date(e);if("string"==typeof e&&!/Z$/i.test(e)){var r=e.match(h);if(r){var i=r[2]-1||0,s=(r[7]||"0").substring(0,3);return n?new Date(Date.UTC(r[1],i,r[3]||1,r[4]||0,r[5]||0,r[6]||0,s)):new Date(r[1],i,r[3]||1,r[4]||0,r[5]||0,r[6]||0,s)}}return new Date(e)}(t),this.$x=t.x||{},this.init()},$.init=function(){var t=this.$d;this.$y=t.getFullYear(),this.$M=t.getMonth(),this.$D=t.getDate(),this.$W=t.getDay(),this.$H=t.getHours(),this.$m=t.getMinutes(),this.$s=t.getSeconds(),this.$ms=t.getMilliseconds()},$.$utils=function(){return g},$.isValid=function(){return!("Invalid Date"===this.$d.toString())},$.isSame=function(t,e){var n=v(t);return this.startOf(e)<=n&&n<=this.endOf(e)},$.isAfter=function(t,e){return v(t)<this.startOf(e)},$.isBefore=function(t,e){return this.endOf(e)<v(t)},$.$g=function(t,e,n){return g.u(t)?this[e]:this.set(n,t)},$.unix=function(){return Math.floor(this.valueOf()/1e3)},$.valueOf=function(){return this.$d.getTime()},$.startOf=function(t,a){var h=this,c=!!g.u(a)||a,d=g.p(t),$=function(t,e){var n=g.w(h.$u?Date.UTC(h.$y,e,t):new Date(h.$y,e,t),h);return c?n:n.endOf(i)},l=function(t,e){return g.w(h.toDate()[t].apply(h.toDate("s"),(c?[0,0,0,0]:[23,59,59,999]).slice(e)),h)},y=this.$W,M=this.$M,m=this.$D,D="set"+(this.$u?"UTC":"");switch(d){case o:return c?$(1,0):$(31,11);case u:return c?$(1,M):$(0,M+1);case s:var v=this.$locale().weekStart||0,S=(y<v?y+7:y)-v;return $(c?m-S:m+(6-S),M);case i:case f:return l(D+"Hours",0);case r:return l(D+"Minutes",1);case n:return l(D+"Seconds",2);case e:return l(D+"Milliseconds",3);default:return this.clone()}},$.endOf=function(t){return this.startOf(t,!1)},$.$set=function(s,a){var h,c=g.p(s),d="set"+(this.$u?"UTC":""),$=(h={},h[i]=d+"Date",h[f]=d+"Date",h[u]=d+"Month",h[o]=d+"FullYear",h[r]=d+"Hours",h[n]=d+"Minutes",h[e]=d+"Seconds",h[t]=d+"Milliseconds",h)[c],l=c===i?this.$D+(a-this.$W):a;if(c===u||c===o){var y=this.clone().set(f,1);y.$d[$](l),y.init(),this.$d=y.set(f,Math.min(this.$D,y.daysInMonth())).$d}else $&&this.$d[$](l);return this.init(),this},$.set=function(t,e){return this.clone().$set(t,e)},$.get=function(t){return this[g.p(t)]()},$.add=function(t,a){var f,h=this;t=Number(t);var c=g.p(a),d=function(e){var n=v(h);return g.w(n.date(n.date()+Math.round(e*t)),h)};if(c===u)return this.set(u,this.$M+t);if(c===o)return this.set(o,this.$y+t);if(c===i)return d(1);if(c===s)return d(7);var $=(f={},f[n]=6e4,f[r]=36e5,f[e]=1e3,f)[c]||1,l=this.$d.getTime()+t*$;return g.w(l,this)},$.subtract=function(t,e){return this.add(-1*t,e)},$.format=function(t){var e=this;if(!this.isValid())return"Invalid Date";var n=t||"YYYY-MM-DDTHH:mm:ssZ",r=g.z(this),i=this.$locale(),s=this.$H,u=this.$m,a=this.$M,o=i.weekdays,f=i.months,h=function(t,r,i,s){return t&&(t[r]||t(e,n))||i[r].substr(0,s)},d=function(t){return g.s(s%12||12,t,"0")},$=i.meridiem||function(t,e,n){var r=t<12?"AM":"PM";return n?r.toLowerCase():r},l={YY:String(this.$y).slice(-2),YYYY:this.$y,M:a+1,MM:g.s(a+1,2,"0"),MMM:h(i.monthsShort,a,f,3),MMMM:h(f,a),D:this.$D,DD:g.s(this.$D,2,"0"),d:String(this.$W),dd:h(i.weekdaysMin,this.$W,o,2),ddd:h(i.weekdaysShort,this.$W,o,3),dddd:o[this.$W],H:String(s),HH:g.s(s,2,"0"),h:d(1),hh:d(2),a:$(s,u,!0),A:$(s,u,!1),m:String(u),mm:g.s(u,2,"0"),s:String(this.$s),ss:g.s(this.$s,2,"0"),SSS:g.s(this.$ms,3,"0"),Z:r};return n.replace(c,function(t,e){return e||l[t]||r.replace(":","")})},$.utcOffset=function(){return 15*-Math.round(this.$d.getTimezoneOffset()/15)},$.diff=function(t,f,h){var c,d=g.p(f),$=v(t),l=6e4*($.utcOffset()-this.utcOffset()),y=this-$,M=g.m(this,$);return M=(c={},c[o]=M/12,c[u]=M,c[a]=M/3,c[s]=(y-l)/6048e5,c[i]=(y-l)/864e5,c[r]=y/36e5,c[n]=y/6e4,c[e]=y/1e3,c)[d]||y,h?M:g.a(M)},$.daysInMonth=function(){return this.endOf(u).$D},$.$locale=function(){return M[this.$L]},$.locale=function(t,e){if(!t)return this.$L;var n=this.clone(),r=D(t,e,!0);return r&&(n.$L=r),n},$.clone=function(){return g.w(this.$d,this)},$.toDate=function(){return new Date(this.valueOf())},$.toJSON=function(){return this.isValid()?this.toISOString():null},$.toISOString=function(){return this.$d.toISOString()},$.toString=function(){return this.$d.toUTCString()},d}(),p=S.prototype;return v.prototype=p,[["$ms",t],["$s",e],["$m",n],["$H",r],["$W",i],["$M",u],["$y",o],["$D",f]].forEach(function(t){p[t[1]]=function(e){return this.$g(e,t[0],t[1])}}),v.extend=function(t,e){return t(e,S,v),v},v.locale=D,v.isDayjs=m,v.unix=function(t){return v(1e3*t)},v.en=M[y],v.Ls=M,v.p={},v});
 
@@ -45988,7 +46133,7 @@ class Label extends _litElement.LitElement {
         :host([outline]) {
             /* --bgd: #aaa;
             --color: #fff; */
-            --bgd: rgba(var(--theme-rgb, 0,0,0), .5);
+            --bgd: rgba(var(--theme-text-rgb, 0,0,0), .5);
             --color: var(--theme-bgd, #fff);
 
             padding: 0.15em 0.3em 0.1em;
@@ -46037,18 +46182,18 @@ class Label extends _litElement.LitElement {
         }
         
         :host([filled="black"]), :host([badge="black"]) { 
-            --bgd: var(--theme-color, #333);
+            --bgd: var(--theme-text, #333);
             --color: var(--theme-bgd, #fff)
         }
         
         :host([filled="white"]), :host([badge="white"]) {
             --bgd: var(--theme-bgd, #fff);
-            --color: var(--theme-color, #333);
+            --color: var(--theme-text, #333);
         }
 
         :host([filled="gray"]), :host([badge="gray"]) {
-            --bgd: rgba(var(--theme-rgb, 0,0,0), .15);
-            --color: rgba(var(--theme-rgb, 0,0,0), .5);
+            --bgd: rgba(var(--theme-text-rgb, 0,0,0), .15);
+            --color: rgba(var(--theme-text-rgb, 0,0,0), .5);
         }
 
         :host([filled="theme"]), :host([badge="theme"]) { --bgd: var(--theme); }
@@ -46060,18 +46205,18 @@ class Label extends _litElement.LitElement {
         :host([filled="purple"]), :host([badge="purple"]) { --bgd: var(--deep-purple); }
 
         :host([filled="text"]), :host([badge="text"]) { 
-            --bgd: var(--theme-color, #333);
+            --bgd: var(--theme-text, #333);
             --color: var(--theme-bgd, #fff);
         }
         :host([filled="accent"]), :host([badge="accent"]) {
-            --bgd: rgba(var(--theme-rgb, 0,0,0), .2);
-            --color: var(--theme-color, #333);
+            --bgd: rgba(var(--theme-text-rgb, 0,0,0), .2);
+            --color: var(--theme-text, #333);
         }
         
 
         :host([outline="clear"]) { --bgd: transparent; --color: inherit; }
-        :host([outline="black"]) { --bgd: var(--theme-color,#333); }
-        :host([outline="gray"]) { --bgd: var(--theme-color-accent, #ddd); }
+        :host([outline="black"]) { --bgd: var(--theme-text,#333); }
+        :host([outline="gray"]) { --bgd: var(--theme-text-accent, #ddd); }
         :host([outline="theme"]) { --bgd: var(--theme); }
         :host([outline="blue"]) { --bgd: var(--blue); }
         :host([outline="red"]) { --bgd: var(--red); }
@@ -46756,7 +46901,7 @@ customElements.define('b-code', class extends _litElement.LitElement {
         }
 
         code {
-            color: var(--theme-color, inherit);
+            color: var(--theme-text, inherit);
         }
 
         :host([block]) {
@@ -46865,7 +47010,7 @@ customElements.define('b-embed', class Embed extends _litElement.LitElement {
 var _default = customElements.get('b-embed');
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"ZCfn":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"nDk4":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46926,7 +47071,7 @@ customElements.define('range-slider', class extends _litElement.LitElement {
             --thumbSize: 18px;
             --color: var(--fc-theme);
             --thumbColor: var(--color);
-            --bgd: var(--theme-color-accent, rgba(0,0,0,.4));
+            --bgd: var(--theme-text-accent, rgba(0,0,0,.4));
             --padding: 10px;
 
             display: inline-block;
@@ -47440,7 +47585,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
             min-width: 100px;
             height: 10px;
             border-radius: 5px;
-            background: var(--theme-color, var(--black));
+            background: var(--theme-text, var(--black));
             outline: none;
             padding: 0;
             margin: 0 .5em;
@@ -47461,7 +47606,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
             height: 18px;
             border-radius: 50%;
             border: solid 2px var(--theme-bgd, #fff);
-            background: var(--theme-color, var(--black));
+            background: var(--theme-text, var(--black));
             cursor: pointer;
             box-shadow: none;
             margin-top: -4px;
@@ -47628,7 +47773,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
   setProgress() {
     var percent = this.progress.value / this.audio.duration * 100;
     var time = this.progress.value;
-    var color = 'var(--theme-color, #333)';
+    var color = 'var(--theme-text, #333)';
     var color2 = 'var(--theme-bgd-accent, #bbb)';
     this.progress.style.background = `linear-gradient(to right, ${color} ${percent}%, ${color2} ${percent}%)`;
     this.elapsed.innerHTML = formatTime(time);
@@ -47749,7 +47894,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
 var _default = customElements.get('b-audio');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./icon":"ncPe","../presenters/form/controls/range-slider":"ZCfn","dayjs":"dZYI","dayjs/plugin/duration":"oxIj","../util/store":"z4Ln"}],"inC5":[function(require,module,exports) {
+},{"lit-element":"bhxD","./icon":"ncPe","../presenters/form/controls/range-slider":"nDk4","dayjs":"dZYI","dayjs/plugin/duration":"oxIj","../util/store":"z4Ln"}],"inC5":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47948,14 +48093,14 @@ customElements.define('b-timeline-horz', class extends _litElement.LitElement {
             width: 1.6em;
             border-radius: 1em;
             background: var(--b-timeline-bubble-bgd, var(--theme-bgd-accent, #e5e5e5));
-            color: var(--theme-color-accent, #e5e5e5);
+            color: var(--theme-text-accent, #e5e5e5);
             transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
         }
         
 
         .bubble b-icon {
             font-size: 1.6em;
-            color: var(--theme-color);
+            color: var(--theme-text);
         }
 
         slot[name="bubble"]::slotted(b-icon) {
@@ -51210,7 +51355,7 @@ customElements.define('b-list-of-colors', class extends _litElement.LitElement {
   }
 
 });
-},{"lit-element":"bhxD"}],"ZQnj":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"hkoO":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51520,7 +51665,7 @@ const toggleIf = {
   }
 
 };
-},{"../../util/store":"z4Ln"}],"Sclr":[function(require,module,exports) {
+},{"../../util/store":"z4Ln"}],"jmzC":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51733,7 +51878,7 @@ slot[name="help"] {
 /* remove autofill blue/yellow background */
 ::slotted(input:-webkit-autofill) {
     -webkit-box-shadow:0 0 0 50px var(--bgd) inset;
-	-webkit-text-fill-color: var(--theme-color);
+	-webkit-text-fill-color: var(--theme-text);
 }
 
 ::slotted(input:-webkit-autofill:focus) {
@@ -52064,7 +52209,7 @@ slot[name="help"] {
 `;
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"pZT1":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"sJ46":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52079,7 +52224,7 @@ var _default = (el, val) => {
 };
 
 exports.default = _default;
-},{}],"hx3P":[function(require,module,exports) {
+},{}],"I0ba":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52113,7 +52258,7 @@ var _default = (el, val) => {
 };
 
 exports.default = _default;
-},{}],"h6i7":[function(require,module,exports) {
+},{}],"BBnx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52131,7 +52276,7 @@ var _default = (e, el, val) => {
 };
 
 exports.default = _default;
-},{}],"wYzd":[function(require,module,exports) {
+},{}],"VQLm":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52211,7 +52356,7 @@ const onKeyDown = e => {
 
   if ((0, _stopMaxLength.default)(e, e.target, e.target.value)) e.preventDefault();
 };
-},{"./setValueAttrs":"pZT1","./validatePattern":"hx3P","./stopMaxLength":"h6i7"}],"swB1":[function(require,module,exports) {
+},{"./setValueAttrs":"sJ46","./validatePattern":"I0ba","./stopMaxLength":"BBnx"}],"atLM":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52219,7 +52364,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _formControlCss = _interopRequireDefault(require("./form-control.css.js"));
+var _controlCss = _interopRequireDefault(require("./control.css.js"));
 
 var _nativeInputHelper = _interopRequireDefault(require("./util/nativeInputHelper"));
 
@@ -52248,7 +52393,7 @@ class FormControlElement extends HTMLElement {
     suffix = suffix.replace(/^\s+/, '&nbsp;');
     suffix = suffix.replace(/\s+$/, '&nbsp;');
     temp.innerHTML = `
-			<style>${_formControlCss.default.cssText}</style>
+			<style>${_controlCss.default.cssText}</style>
 			<slot name="before"></slot>
 			<main>
 				<slot name="control"></slot>
@@ -52425,7 +52570,7 @@ customElements.define('form-control', FormControlElement);
 var _default = customElements.get('form-control');
 
 exports.default = _default;
-},{"./form-control.css.js":"Sclr","./util/nativeInputHelper":"wYzd"}],"VxKk":[function(require,module,exports) {
+},{"./control.css.js":"jmzC","./util/nativeInputHelper":"VQLm"}],"CuiF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52433,7 +52578,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _dayjs = _interopRequireDefault(require("dayjs"));
+var _dayJs = _interopRequireDefault(require("../../../helpers/day-js"));
 
 var _litElement = require("lit-element");
 
@@ -52509,7 +52654,7 @@ nav > svg {
     height: 1.4em;
     padding: .25em;
     margin: -.25em;
-	color: var(--theme-color, #000);
+	color: var(--theme-text, #000);
 	fill: currentColor;
     opacity: .4;
     cursor: pointer;
@@ -52538,7 +52683,7 @@ main.pick-month section > *{
 }
 
 section header {
-    color: var(--theme-color-accent, rgba(0,0,0,.3));
+    color: var(--theme-text-accent, rgba(0,0,0,.3));
     margin: 1em 0;
     font-size: .7em;
 }
@@ -52635,7 +52780,7 @@ class DatePickerElement extends HTMLElement {
   constructor() {
     super();
 
-    let htmlDaysHeader = _dayjs.default.weekdaysMin().map(str => `<div>${str}</div>`).join("\n");
+    let htmlDaysHeader = _dayJs.default.weekdaysMin().map(str => `<div>${str}</div>`).join("\n");
 
     let startYear = parseInt(this.getAttribute('year-start') || '1900');
     let endYear = parseInt(this.getAttribute('year-end') || '2099');
@@ -52645,7 +52790,7 @@ class DatePickerElement extends HTMLElement {
       years += `<year value="${startYear}">${startYear++}</year>`;
     }
 
-    let months = _dayjs.default.monthsShort().map((m, i) => `<month value="${i}">${m}</month>`).join("\n");
+    let months = _dayJs.default.monthsShort().map((m, i) => `<month value="${i}">${m}</month>`).join("\n");
 
     this.attachShadow({
       mode: 'open'
@@ -52842,12 +52987,12 @@ class DatePickerElement extends HTMLElement {
   }
 
   get _lookingAtToday() {
-    this._today = this._today || (0, _dayjs.default)();
+    this._today = this._today || (0, _dayJs.default)();
     return this._date.year() == this._today.year() && this._date.month() == this._today.month();
   }
 
   get _lookingAtSelectedMonth() {
-    this._today = this._today || (0, _dayjs.default)();
+    this._today = this._today || (0, _dayJs.default)();
     return this._date.year() == this._dateSelected.year() && this._date.month() == this._dateSelected.month();
   }
 
@@ -52857,7 +53002,7 @@ class DatePickerElement extends HTMLElement {
       this._date = this._date.set(val);
       changeEvent(this, val);
     } else {
-      this._date = val ? (0, _dayjs.default)(val, this.format) : (0, _dayjs.default)();
+      this._date = val ? (0, _dayJs.default)(val, this.format) : (0, _dayJs.default)();
       this._dateSelected = this._date.clone();
     }
 
@@ -52909,7 +53054,7 @@ customElements.define('date-picker', DatePickerElement);
 var _default = customElements.get('date-picker');
 
 exports.default = _default;
-},{"dayjs":"dZYI","lit-element":"bhxD"}],"E0RO":[function(require,module,exports) {
+},{"../../../helpers/day-js":"yPwf","lit-element":"bhxD"}],"E0RO":[function(require,module,exports) {
 /*
     HTML Cleaner
 
@@ -53885,7 +54030,7 @@ var _toCSV = _interopRequireDefault(require("./toCSV"));
 var _wait = _interopRequireDefault(require("./wait"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./htmlCleaner":"E0RO","./normalizeText":"hNKD","./csvToArray":"E8jA","./plural":"Zwl6","./readFile":"MqKw","./titleize":"NUHt","./toCSV":"TuEj","./wait":"DKKB"}],"ezNL":[function(require,module,exports) {
+},{"./htmlCleaner":"E0RO","./normalizeText":"hNKD","./csvToArray":"E8jA","./plural":"Zwl6","./readFile":"MqKw","./titleize":"NUHt","./toCSV":"TuEj","./wait":"DKKB"}],"i70U":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54500,7 +54645,7 @@ customElements.define('text-field', TextFieldElement);
 var _default = customElements.get('text-field');
 
 exports.default = _default;
-},{"lit-element":"bhxD","dayjs":"dZYI","../../dialog":"pos3","./date-picker":"VxKk","../util/setValueAttrs":"pZT1","../util/validatePattern":"hx3P","../util/stopMaxLength":"h6i7","../../../util":"xBze"}],"GLLF":[function(require,module,exports) {
+},{"lit-element":"bhxD","dayjs":"dZYI","../../dialog":"pos3","./date-picker":"CuiF","../util/setValueAttrs":"sJ46","../util/validatePattern":"I0ba","../util/stopMaxLength":"BBnx","../../../util":"xBze"}],"HtKb":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54633,7 +54778,7 @@ customElements.define('radio-btn', RadioBtnElement);
 var _default = customElements.get('radio-btn');
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"mCnW":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"c8QH":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54733,12 +54878,12 @@ customElements.define('radio-group', RadioGroupElement);
 var _default = customElements.get('radio-group');
 
 exports.default = _default;
-},{}],"wbVn":[function(require,module,exports) {
+},{}],"C29C":[function(require,module,exports) {
 "use strict";
 
-require("./form-handler");
+require("./handler");
 
-require("./form-control");
+require("./control");
 
 require("./controls/text-field");
 
@@ -54753,7 +54898,7 @@ require("./controls/radio-group");
 require("./controls/touch-ripple");
 
 require("./controls/range-slider");
-},{"./form-handler":"ZQnj","./form-control":"swB1","./controls/text-field":"ezNL","./controls/select-field":"h8fl","./controls/check-box":"jNfL","./controls/radio-btn":"GLLF","./controls/radio-group":"mCnW","./controls/touch-ripple":"uH6r","./controls/range-slider":"ZCfn"}],"Wr69":[function(require,module,exports) {
+},{"./handler":"hkoO","./control":"atLM","./controls/text-field":"i70U","./controls/select-field":"lQrn","./controls/check-box":"lrfI","./controls/radio-btn":"HtKb","./controls/radio-group":"c8QH","./controls/touch-ripple":"vXAz","./controls/range-slider":"nDk4"}],"Wr69":[function(require,module,exports) {
 
 /**
  * Expose `Emitter`.
@@ -56813,7 +56958,7 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-require("../../form/form-control");
+require("../../form/control");
 
 require("../../form/controls/text-field");
 
@@ -56867,7 +57012,7 @@ customElements.define('b-list-search-bar', class extends _litElement.LitElement 
         }
 
         b-icon {
-            color: var(--theme-color,#444);
+            color: var(--theme-text,#444);
             margin-right: .5em;
         }
     `;
@@ -56896,7 +57041,7 @@ customElements.define('b-list-search-bar', class extends _litElement.LitElement 
 var _default = customElements.get('b-list-search-bar');
 
 exports.default = _default;
-},{"lit-element":"bhxD","../../form/form-control":"swB1","../../form/controls/text-field":"ezNL"}],"iwaU":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../form/control":"atLM","../../form/controls/text-field":"i70U"}],"iwaU":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58150,7 +58295,7 @@ customElements.define('b-cal-day', class extends _litElement.LitElement {
         }
 
         :host([overflow]) .date {
-            color: var(--theme-color-accent, #999);
+            color: var(--theme-text-accent, #999);
             padding: 0 .35em;
         }
 
@@ -58267,7 +58412,7 @@ customElements.define('b-cal', class extends _litElement.LitElement {
             top: 0;
             z-index: 10;
             background: var(--b-cal-header-bgd, var(--theme-bgd, #fff));
-            border-bottom: solid 1px rgba(var(--theme-rgb, 0,0,0), .1);
+            border-bottom: solid 1px rgba(var(--theme-text-rgb, 0,0,0), .1);
             display: grid;
             grid-template-columns: max-content max-content;
             justify-content: space-between;
@@ -58310,8 +58455,8 @@ customElements.define('b-cal', class extends _litElement.LitElement {
         }
 
         b-cal-day {
-            border-right: solid 1px rgba(var(--theme-rgb, 0,0,0), .1);
-            border-bottom: solid 1px rgba(var(--theme-rgb, 0,0,0), .1);
+            border-right: solid 1px rgba(var(--theme-text-rgb, 0,0,0), .1);
+            border-bottom: solid 1px rgba(var(--theme-text-rgb, 0,0,0), .1);
             flex-shrink: 0;
             min-width: 0;
         }
@@ -58430,9 +58575,9 @@ customElements.define('b-cal', class extends _litElement.LitElement {
 var _default = customElements.get('b-cal');
 
 exports.default = _default;
-},{"lit-element":"bhxD","../../elements/btn-group":"pV6C","../../helpers/lit-element/events":"euwv","../../helpers/day-js":"yPwf","dayjs":"dZYI","./day":"tqEd"}],"WPSm":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../elements/btn-group":"pV6C","../../helpers/lit-element/events":"euwv","../../helpers/day-js":"yPwf","dayjs":"dZYI","./day":"tqEd"}],"n3N5":[function(require,module,exports) {
 module.exports = "Form Control\n========================================\n\n# Example\n\n![screenshot](https://i.imgur.com/XcEXhKh.png)\n\n```html\n<form-control id=\"email\" material=\"outline\" label=\"Email\">\n\t<text-field pattern=\"email\">test@example.com</text-field>\n\t<div slot=\"prefix\" class=\"icon-mail\">&nbsp;</div>\n\t<div slot=\"help\">Please provide your email</div>\n</form-control>\n```\n\n```js\nlet control = document.querySelector('#email')\n\ncontrol.addEventListener('change', e=>{\n\t\n\tif( control.isValid )\n\t\tconsole.log(control.value);\n})\n```\n\n## `<form-control>`\n\nForm controls provide a uniform and consistent style for controls (see below)\n\n#### Attributes\n\n- `material` - material UI style (add =\"outline\" or =\"filled\" for variant)\n- `disabled`\n- `label`\n- `prefix`\n- `suffix`\n\n#### Slots\n\nSlots provide a way to customize the display of the form control\n\n- `label`\n- `main` - same position as control but without any bindings\n- `prefix`\n- `suffix`\n- `help`\n- `before` - (considering deprecation for these two)\n- `after`\n\n```html\n<form-control>\n\t<div slot=\"help\">Help text here</div>\n</form-control>\n```\n\n#### Style Hooks\n\nSome of the CSS styles can be tweaked using these CSS variables\n\n```\n--placeholderColor\n--selectionBgd\n--focusBgd\n--focusColor\n--bgd\n--borderColor\n--invalidColor\n```\n\n#### Native Inputs\n`form-control` supports native inputs as a control but you must mark it as the control slot\n\n```html\n<form-control>\n\t<input type=\"text\" slot=\"control\">\n</form-control>\n```\n\n# Controls\n\nEvery `form-control` should have one (and only one) control element.\n\n## `<text-field>`\n\nCreates an input-like control. Add `multiline` attribute to make it perform like a text area.\n\n<!--\n<form-control label=\"Text Field\" material>\n\t<text-field></text-field>\n</form-control>\n\n<form-control label=\"Text Field\" material>\n\t<text-field type=\"date\"></text-field>\n</form-control>\n-->\n\n#### Attributes\n\n- `required`\n- `multiline`\n- `html` use html `<p>` tags for new lines\n- `.htmlClean` - see below\n- `pattern=\"int\"` - regexp or preset\n- `max=\"10\"` - max length of chars\n- `type=\"date\"`\n- `reset-invalid`\n- `placeholder`\n- `input`\n- `name` - useful for autofill (must use `input`)\n- `autocomplete` (must use `input`)\n- `change-delay` will trigger change after stopped typing\n\n`.htmlClean` - override `util/htmlCleaner` options to change how the html is cleaned when the value is set or pasted.\n```html\n<!-- only allow <i> tags -->\n<text-field html .htmlClean=${{allowTags:['i'], allowStyles:false}}></text-field>\n```\n\n#### Events\n- `change`\n- `submit`\n- `enterkey` (DEPRECATED, use submit)\n- `esckey`\n- `pasted` (see event.detail)\n\n`pasted` - if multiline is not activated and a multiline string is pasted, the first line will kept and the remaining will be available in the event details: `{str='', extras=[]}`\n\n#### Styles\n`--b-text-field-paragraph-margin`\n\n#### Input type\n`text-field` defaults to using `contenteditable` which allows the field to grow and shrink\nas the user types. However, doing so removes support for autofill and input types such\nas `password`. For this purpose the `input` attribute can be applied.\n\n```html\n<text-field input=\"password\"></text-field>\n<text-field input=\"email\"></text-field>\n<text-field input=\"tel\" name=\"phone\"></text-field>\n```\n\n#### Multiline\nIn this mode the enter key will create new lines instead of submitting/saving the value. Holding `ctrl/cmd` and enter will trigger the submit event.\n\n## `<rich-text-field>`\n\nSimilar to the `text-field` but with [quill.js](https://quilljs.com) enabled for rich text editing.\n\nThe field will also auto convert some special characters (such as 3 periods to an ellipsis) using\n`util/normalizeText`\n\n<!--\n<form-control label=\"Rich Text Field\" material style=\"width: 100%\">\n\t<rich-text-field></rich-text-field>\n</form-control>\n-->\n\n#### Attributes\n- `value`\n- `placeholder`\n\n> NOTE: current quill.js doesn't like the shadowDOM so we are using a forked version\n> that has changes made to work inside the shadowDOM; however, the changes\n> may still have some issues in certain browsers – see https://github.com/quilljs/quill/pull/2337\n\n## `<select-field>`\n\nCreates a select field that uses `Menu` and `Popover` to display options.\n\n<!--\n<form-control label=\"Select Field\" material>\n\t<select-field>\n\t\t<option value=\"\">–</option>\n\t\t<option value=\"1\">Value 1</option>\n\t\t<option value=\"2\">Value 2</option>\n\t</select-field>\n</form-control>\n-->\n\n#### Attributes\n\n- `multiple`\n- `placeholder`\n- `show-empty` - by default, the selected empty value will NOT be shown\n- `chip` - show selected values as \"chips\"\n- `menu-max-height`\n- `menu-align`\n- `no-arrow`\n\n```html\n<form-control material=\"filled\" label=\"Select an option\">\n\t<select-field show-empty>\n\t\t<optgroup>Header</optgroup>\n\t\t<option value selected><i>None</i></option>\n\t\t<hr>\n\t\t<option value=\"yes\">Yes</option>\n\t\t<option value=\"no\">No</option>\n\t</select-field>\n</form-control>\n```\n\nThe select-field options can also be set programmatically\n\n```js\nlet selectOptions = [\n\t{divider: 'Header'}\n\t{label: 'None', val: ''},\n\t'divider'\n\t{label: 'Option 1', val: 1},\n\t{label: 'Option 2', val: 2}\n]\n\nhtml`<form-control material=\"filled\" label=\"Select an option\">\n\t<select-field show-empty .options=${selectOptions}></select-field>\n</form-control>`\n```\n\n## `<check-box>`\n\n#### Attributes\n\n- `checked`\n- `label`\n- `placement=\"right\"` - placement of label\n- `type=\"switch\"`\n\n```html\n<form-control>\n\t<check-box label=\"Active\"></check-box>\n</form-control>\n```\n\n<!--\n<check-box label=\"Active\"></check-box>\n-->\n\n## `<radio-btn>`\n\nRadio buttons should be nested inside of a `radio-group`\n\n<!--\n<radio-group>\n\t<radio-btn label=\"Male\"></radio-btn>\n\t<radio-btn label=\"Female\"></radio-btn>\n</radio-group>\n-->\n\n#### Attributes\n\n- `active`\n- `label`\n- `placement=\"right\"` - placement of label\n\n```html\n<form-control material=\"filled\">\n\t<radio-group>\n\t\t<radio-btn value label=\"Null\" active></radio-btn>\n\t\t<radio-btn value=0 label=\"No\"></radio-btn>\n\t\t<radio-btn value=1 label=\"Yes\"></radio-btn>\n\t</radio-group>\n</form-control>\n```\n\n## `<range-slider>`\n\n<!--\n<range-slider></range-slider>\n-->\n\n#### Attributes\n- `value`\n- `range` - true/false\n- `min`\n- `max`\n- `step` - how much the value should change by\n- `label` - auto/show (toggle or always show the value label)\n\n## `<token-text-field>`\nA specialized text field that detects typed words and presents a menu of tokens to select. Selected tokens cannot be edited, but they can be deleted.\n\n> Note: maybe this functionality should be incorporated into text-field?  \n> TODO: add `change` event so `form-handler` can use it  \n> TODO: fix bug when clicking token in auto complete menu\n\n#### Attributes\n- `placeholder`\n- `.value`\n- `.tokens` - array of tokens for autocomplete (see below)\n- `.options` - special options to override\n- `token-name` - the custom element to use for token (defaults to `b-label`)\n- `lines` - number of lines to allow (default is 999)\n- `showlines` - lines will be drawn when in disabled mode\n\n**Value**\n```js\nlet value = [\n    [\n        \"Simple text string\",\n        {\n            \"label\": \"Token label\",\n            \"attrs\": {\n                \"id\": \"22645\"\n            }\n        }\n    ],\n    [\n        \"Simple text on line 2\",\n    ]\n]\"\n```\n\nAccessing the `control.value` will return this ^ same format. The HTML version can be accessed with `control.htmlValue`\n\n**Tokens**\n\n```js\nlet tokens = [\n\t{\n\t\tlabel: 'Required Label',\n\t\t// attributes will be added to the token dataset\n\t\tattrs: {\n\t\t\toptional: 'attributes',\n\t\t\tid: 'some id'\n\t\t}\n\t}\n]\n```\n\n**Options**\n\n```js\n// default options\nlet options = {\n\tautoComplete: {\n        minLength: 3, // word length to trigger auto complete\n        allResults: '@' // set to null to disable feature\n    },\n    allowPaste: false,\n    allowStyling: false,\n}\n```\n\n#### Style Hooks\n- `--token-text-field-line-height`\n- `--token-text-field-padding`\n\n\n## `<form-handler>`\n\nWrap this around form controls to sync with a backbone model\n\n```html\n<form-handler .model=${this.model} autosave patchsave>\n\t\n\t<form-control key=\"attr_1\">\n\t\t<!-- .... -->\n\t</form-control>\n\n\t<form-control key=\"attr_2\">\n\t\t<!-- .... -->\n\t</form-control>\n\n</form-handler>\n```\n\nYou can also choose to save changes in local storage instead of model by using the `store` attribute\n\n```html\n<form-handler store=\"local-store-key\">\n\t<!-- .... -->\n</form-handler>\n```\n\n#### Attributes\n- `autosave` - will save any control changes to the model\n- `patchsave` - use with `autosave`; changed values will be synced with `patch:true`\n- `store` - a key to save form data in local storage\n- `no-grid-area` - disable auto grid-area names\n\n#### Properties\n- `.validateChange(m, changes, key, val)` - adjust or prevent changes from happening\n- `.onChange(changes)`\n\n#### Control \"Display If\"\n> Needs better documentation\n\n```html\n<check-box key=\"another_value\"></check-box>\n<check-box key=\"is_active\" .displayIf=${{another_value:true}}></check-box>\n```\n\n- `.displayIf`\n- `.enableIf`\n- `.disableIf`\n\n\n## Extras\n\n### `<date-picker>`\nRenders a date picker view\n\n```js\nlet picker = document.createElement('date-picker')\npicker.addEventListener('change', e=>{\n\tconsole.log(picker.value)\n})\n```\n\n#### Attributes\n- `value`\n- `format` - [day.js](https://day.js.org/docs/en/display/format) format (default `MM/DD/YYYY`)\n- `year-start` - defaults to 1900\n- `year-end` - defaults to 2099\n\n\n# Notes\n- TODO: fix rich-text-fild relying on `util/htmlCleaner`\n- TODO: range-slider has issues when nested in certain elements\n- IDEA: https://github.com/insin/inputmask-core"
-},{}],"d7Am":[function(require,module,exports) {
+},{}],"tLTC":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -58531,7 +58676,7 @@ rich-text-field toolbar {
     position: absolute;
     display: flex;
     background: var(--theme-bgd-accent2, #f5f5f5);
-    color: var(--theme-color, #000);
+    color: var(--theme-text, #000);
     /* box-shadow: rgba(0,0,0,.1) 0 1px 3px; */
     border-radius: 3px;
     top: -1em;
@@ -70218,7 +70363,7 @@ List.scope = _parchment.default.Scope.BLOCK_BLOT;
 List.tagName = ['OL', 'UL'];
 List.defaultChild = 'list-item';
 List.allowedChildren = [ListItem];
-},{"parchment":"CQm3","../blots/block":"ehqu","../blots/container":"tnfo"}],"t5Za":[function(require,module,exports) {
+},{"parchment":"CQm3","../blots/block":"ehqu","../blots/container":"tnfo"}],"WhYh":[function(require,module,exports) {
 "use strict";
 
 var _core = _interopRequireDefault(require("quill/core"));
@@ -70260,7 +70405,7 @@ _core.default.debug('error');
 _core.default.register({
   'modules/clipboard': BUIClipboard
 });
-},{"quill/core":"qOpY","quill/modules/clipboard":"tAeH","../../../../util":"xBze"}],"IkMa":[function(require,module,exports) {
+},{"quill/core":"qOpY","quill/modules/clipboard":"tAeH","../../../../util":"xBze"}],"Mn0X":[function(require,module,exports) {
 "use strict";
 
 var _core = _interopRequireDefault(require("quill/core"));
@@ -70276,7 +70421,7 @@ DividerBlot.blotName = 'divider';
 DividerBlot.tagName = 'hr';
 
 _core.default.register(DividerBlot);
-},{"quill/core":"qOpY"}],"ZpO7":[function(require,module,exports) {
+},{"quill/core":"qOpY"}],"Hb2e":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -70342,7 +70487,7 @@ const keyboardLinebreak = {
   }
 };
 exports.keyboardLinebreak = keyboardLinebreak;
-},{"quill/core":"qOpY","quill/blots/break":"WpVR","quill/blots/embed":"UVAQ"}],"COD5":[function(require,module,exports) {
+},{"quill/core":"qOpY","quill/blots/break":"WpVR","quill/blots/embed":"UVAQ"}],"ZTij":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -70404,7 +70549,7 @@ _core.default.register({
   'formats/list': _list.default,
   'formats/list-item': _list.ListItem
 });
-},{"quill/core":"qOpY","quill/modules/toolbar":"UjOo","quill/formats/bold":"BIiT","quill/formats/italic":"WGr4","quill/formats/align":"y5yF","quill/formats/list":"ao68","./clipboard":"t5Za","./divider":"IkMa","./break":"ZpO7"}],"k1zW":[function(require,module,exports) {
+},{"quill/core":"qOpY","quill/modules/toolbar":"UjOo","quill/formats/bold":"BIiT","quill/formats/italic":"WGr4","quill/formats/align":"y5yF","quill/formats/list":"ao68","./clipboard":"WhYh","./divider":"Mn0X","./break":"Hb2e"}],"ol0w":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -70727,7 +70872,7 @@ customElements.define('rich-text-field', RichTextField);
 var _default = customElements.get('rich-text-field');
 
 exports.default = _default;
-},{"lit-html":"SPDu","lit-html/directives/unsafe-html.js":"jTPt","../../../../util":"xBze","../../../menu":"tCYJ","./style":"d7Am","./quill":"COD5"}],"Inwy":[function(require,module,exports) {
+},{"lit-html":"SPDu","lit-html/directives/unsafe-html.js":"jTPt","../../../../util":"xBze","../../../menu":"tCYJ","./style":"tLTC","./quill":"ZTij"}],"Gel6":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -70744,13 +70889,13 @@ require("bui/presenters/form/controls/rich-text-field");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // must be deliberately imported
-customElements.define('demo-presenter-form-control', class extends _litElement.LitElement {
+customElements.define('demo-presenter-form', class extends _litElement.LitElement {
   static get title() {
-    return 'Form Control';
+    return 'Form';
   }
 
   static get id() {
-    return 'form-control';
+    return 'form';
   }
 
   static get styles() {
@@ -70779,7 +70924,7 @@ customElements.define('demo-presenter-form-control', class extends _litElement.L
 
 
         <b-paper>
-            <b-h1>Form Control</b-h1>
+            <b-h1>Form</b-h1>
             <br>
 
         <b-grid cols=3 cols-mobile=1>
@@ -70896,10 +71041,10 @@ customElements.define('demo-presenter-form-control', class extends _litElement.L
 
 });
 
-var _default = customElements.get('demo-presenter-form-control');
+var _default = customElements.get('demo-presenter-form');
 
 exports.default = _default;
-},{"lit-element":"bhxD","bui/presenters/form/README.md":"WPSm","bui/presenters/form/controls/rich-text-field":"k1zW"}],"AzfL":[function(require,module,exports) {
+},{"lit-element":"bhxD","bui/presenters/form/README.md":"n3N5","bui/presenters/form/controls/rich-text-field":"ol0w"}],"AzfL":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -72105,13 +72250,13 @@ var _litElement = require("lit-element");
 
 require("bui/helpers/colors-list");
 
-require("bui/presenters/form-control");
+require("bui/presenters/form");
 
 require("bui/presenters/list");
 
 require("bui/presenters/cal");
 
-require("./form-control");
+require("./form");
 
 require("./notif");
 
@@ -72171,7 +72316,7 @@ customElements.define('demo-presenters', class extends _litElement.LitElement {
     return (0, _litElement.html)`
         <b-tabs-router path="presenters/" key="presenters" layout="left" >
 
-            demo-presenter-form-control
+            demo-presenter-form
             demo-presenter-dialog
             demo-presenter-menu
             demo-presenter-panel
@@ -72228,7 +72373,7 @@ customElements.define('tab-divider', class extends _litElement.LitElement {
   }
 
 });
-},{"lit-element":"bhxD","bui/helpers/colors-list":"TMO9","bui/presenters/form-control":"wbVn","bui/presenters/list":"tkaB","bui/presenters/cal":"YTQF","./form-control":"Inwy","./notif":"ISzv","./tabs":"vkZ4","./selection":"LSjJ","./mentions":"tpbv","./panel":"Ivfd","./popover":"jJ1y","./dialog":"m25E","./menu":"PBfr","./list":"A2Qd","./previewer":"shKf","dayjs":"dZYI"}],"H6j2":[function(require,module,exports) {
+},{"lit-element":"bhxD","bui/helpers/colors-list":"TMO9","bui/presenters/form":"C29C","bui/presenters/list":"tkaB","bui/presenters/cal":"YTQF","./form":"Gel6","./notif":"ISzv","./tabs":"vkZ4","./selection":"LSjJ","./mentions":"tpbv","./panel":"Ivfd","./popover":"jJ1y","./dialog":"m25E","./menu":"PBfr","./list":"A2Qd","./previewer":"shKf","dayjs":"dZYI"}],"H6j2":[function(require,module,exports) {
 module.exports = "Util\n========\n\n## `AJAX`\nA wrapper around [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) to simplify and provide async/await. \n\n> `fetch` is a good solution most of the time, but does not provide progress.\n\n```js\nlet formData = new FormData()\n\nformData.set('file', FileObject)\n\nnew AJAX(method, url)\n.on('progress', e=>{\n    let progress = Math.round(e.loaded / e.total * 100)\n    console.log(progress)\n})\n.send(formData)\n.then(resp=>{\n    console.log(resp)\n})\n```\n\nThe `.on` method provides a chainable version of `target.addEventListener`\n\n```js\nnew AJAX(method, url)\n.on('loadstart', handler)\n.on('progress', handler)\n.send()\n```\n\n## Background Resume\n\n```js\nimport 'bui/util/background-resume'\n\nwindow.addEventListener('background-resume', e=>{ /*do something*/ })\n```\n\niOS devices (untested on Android) stop processing JS\nwhen backgrounded for a few seconds (10-20 in my testing)\n\nWhen the browser is reopended, safari resumes with the JS \"state\"\nintact but since time was essentially frozen, no updates (long poll)\nwould have been made or received (websocket).\n\nIt may be important to trigger a refresh of data when resuming \nfrom the background; this script enables such a function.\n\n## `colorScheme`\nDetect OS level [color schemes](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) and react to changes. You can do this with CSS, this utilty is for use in JS if needed\n\n```js\nimport { colorScheme } from 'util/device'\n\ncolorScheme.isDarkMode\ncolorScheme.isLightMode\ncolorScheme.isSupported\n\ncolorScheme.onChange(mode=>console.log(mode))\n```\n\n## `device`\nSome simple device detection\n```js\nimport device from 'util/device'\n\ndevice.is_ios\ndevice.is_android\ndevice.is_mobile\n```\n\n## `normalizeText`\nConverts strings to some special characters, such as three periods to an ellipsis\n```js\nlet str = normalizeText(str)\n```\n\n## `pick`\n\n```js\nlet newObj = pick({first:'name', last:'name}, ['first'])\n```\n\n## `omit`\n\n```js\nlet newObj = omit({first:'name', last:'name}, ['last'])\n```\n\n## `Promise.series`\nPerform a set of promise tasks in series (waiting to complete until moving on to the next)\n```js\nimport 'util/promise.series' // import once\n\nPromise.series([task1, task2, task3], (task, i, prevResult)=>{\n    await task()\n})\n\n// return `false` at any time to cancel the series\nPromise.series([task1, task2, task3], (task,i)=>{\n    if( i > 0 ) return false // cancel the series\n    await task()\n})\n```\n\n## `sortString`\nMoves the leading article to the end (also strips leading and trailing quotes)\n```js\nsortString('The Book Title') // Book Title, The\nsortString('\"A Book Title\"') // Book Title, A\n\n// disable quote strip\nsortString('\"A Book Title\"', false) // \"A Book Title\"\n```\n\n## `titleize`\nConverts underscores and dashes to spaces and then capitlizes each word\n```js\nlet str = normalizeText('my_string') // My String\n```\n\n## `store`\nSimplified method for using [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage); automatically encodes and decodes JSON.\n```js\nstore(key, val)\n\n// set\nstore('my-setting', {some:'setting', another:'setting'})\n\n// get\nlet mySetting = store('my-setting')\n\n// clear\nstore('my-setting', null)\n```\n\n## `sum`\nWrapper around `Array.reduce` for summing the values in an array.\nWill automatically be added to the prototype of Array\n```js\nimport 'util/sum' // only needs to be done once\n\n[1,2].sum() // = 3\n[{val:1}, {val: 2}].sum(o=>o.val) // = 3\n```\n\n## `wait`\nPromise based setTimeout\n```js\nawait wait(ms) // default is zero which will let the event loop finish\nawait wait(1000) // wait 1 second\n```\n\n## `toCSV`\nConvert an array of data to a CSV string (or tab delimited)\n```js\nlet data = [{title: 'title 1', info: 'info'}, {title: 'title 2', info: 'info'}]\nlet csvData = toCSV(data, {title: 'My Data'})\n```\n\n>The array of data can also contain backbone models or custom objects that implement `toCSV` or `toJSON`\n\n##### Options\n- `delimiter: ','`\n- `newline: \"\\n\"`\n- `title: ''` - title at the top of the csv data\n- `description: ''` - similar to title ^ \n- `header: true` - show header row?\n\n##### Downloading\nYou can use `util/download` to download your csv data to a file\n\n```js\nimport {downloadCSV} from 'bui/util/download'\ndownloadCSV(csvData)\ndownloadCSV(csvData, 'custom-file-name.csv')\n```\n\n## `csvToArray`\nConvert a CSV string to an array\n```js\nlet data = csvToArray(str)\n```\n\n## `range`\n\n\n## `readFile`\nRead a [file](https://developer.mozilla.org/en-US/docs/Web/API/File) to text (async)\n```js\nlet text = await readFile(file)\n```\n\n## Touch Events\n\n`bindLongpress`  \nMobile/touch devices do not have right+click abilities. In many cases, a long press can\nbe good alternative. By default, `bindLongPress` will trigger a `contextmenu` event\nafter the user has touched down for `500ms` without dragging.\n\n```js\nimport {bindLongpress} from 'bui/util/touch-events'\n\nbindLongpress(el) // use defaults\nbindLongress(el, {\n    touchOnly: true, // change to false if you want to watch for mouse long press too\n    event: 'contextmenu', // (default) what event to fire after long press\n    delay: 500 // (default) how long until triggering event\n})\n```"
 },{}],"Oh9i":[function(require,module,exports) {
 "use strict";
@@ -72770,4 +72915,4 @@ module.exports = function loadHTMLBundle(bundle) {
 },{}],0:[function(require,module,exports) {
 var b=require("TUK3");b.register("html",require("A3BY"));b.load([["icons.svg.10aef11a.html","pxeq"]]).then(function(){require("Focm");});
 },{}]},{},[0], null)
-//# sourceMappingURL=demo.5f1d070c.js.map
+//# sourceMappingURL=demo.251d1f19.js.map

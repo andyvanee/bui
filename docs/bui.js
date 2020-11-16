@@ -4355,7 +4355,7 @@ class IconList extends _litElement.LitElement {
 		}
 
 		small {
-			color: var(--theme-color-accent);
+			color: var(--theme-text-accent);
 		}
 
 		@media (max-width: 550px) {
@@ -5702,7 +5702,7 @@ customElements.define('b-text', class extends _litElement.LitElement {
         :host([xl]) { font-size: 1.7em; line-height: 1.1em; }
         :host([xxl]) { font-size: 2em; line-height: 1.1em; }
 
-        :host([tone="muted"]), :host([muted]) { color: rgba(var(--theme-rgb, 0,0,0),.4); }
+        :host([tone="muted"]), :host([muted]) { color: rgba(var(--theme-text-rgb, 0,0,0),.4); }
         :host([tone="theme"]) { color: var(--theme); }
         :host([tone="critical"]) { color: var(--b-text-tone-critical, var(--red-A400, red)); }
         :host([tone="warning"]) { color: var(--b-text-tone-warning, var(--orange, orange)); }
@@ -6308,7 +6308,7 @@ class Label extends _litElement.LitElement {
         :host([outline]) {
             /* --bgd: #aaa;
             --color: #fff; */
-            --bgd: rgba(var(--theme-rgb, 0,0,0), .5);
+            --bgd: rgba(var(--theme-text-rgb, 0,0,0), .5);
             --color: var(--theme-bgd, #fff);
 
             padding: 0.15em 0.3em 0.1em;
@@ -6357,18 +6357,18 @@ class Label extends _litElement.LitElement {
         }
         
         :host([filled="black"]), :host([badge="black"]) { 
-            --bgd: var(--theme-color, #333);
+            --bgd: var(--theme-text, #333);
             --color: var(--theme-bgd, #fff)
         }
         
         :host([filled="white"]), :host([badge="white"]) {
             --bgd: var(--theme-bgd, #fff);
-            --color: var(--theme-color, #333);
+            --color: var(--theme-text, #333);
         }
 
         :host([filled="gray"]), :host([badge="gray"]) {
-            --bgd: rgba(var(--theme-rgb, 0,0,0), .15);
-            --color: rgba(var(--theme-rgb, 0,0,0), .5);
+            --bgd: rgba(var(--theme-text-rgb, 0,0,0), .15);
+            --color: rgba(var(--theme-text-rgb, 0,0,0), .5);
         }
 
         :host([filled="theme"]), :host([badge="theme"]) { --bgd: var(--theme); }
@@ -6380,18 +6380,18 @@ class Label extends _litElement.LitElement {
         :host([filled="purple"]), :host([badge="purple"]) { --bgd: var(--deep-purple); }
 
         :host([filled="text"]), :host([badge="text"]) { 
-            --bgd: var(--theme-color, #333);
+            --bgd: var(--theme-text, #333);
             --color: var(--theme-bgd, #fff);
         }
         :host([filled="accent"]), :host([badge="accent"]) {
-            --bgd: rgba(var(--theme-rgb, 0,0,0), .2);
-            --color: var(--theme-color, #333);
+            --bgd: rgba(var(--theme-text-rgb, 0,0,0), .2);
+            --color: var(--theme-text, #333);
         }
         
 
         :host([outline="clear"]) { --bgd: transparent; --color: inherit; }
-        :host([outline="black"]) { --bgd: var(--theme-color,#333); }
-        :host([outline="gray"]) { --bgd: var(--theme-color-accent, #ddd); }
+        :host([outline="black"]) { --bgd: var(--theme-text,#333); }
+        :host([outline="gray"]) { --bgd: var(--theme-text-accent, #ddd); }
         :host([outline="theme"]) { --bgd: var(--theme); }
         :host([outline="blue"]) { --bgd: var(--blue); }
         :host([outline="red"]) { --bgd: var(--red); }
@@ -7144,7 +7144,7 @@ customElements.define('b-code', class extends _litElement.LitElement {
         }
 
         code {
-            color: var(--theme-color, inherit);
+            color: var(--theme-text, inherit);
         }
 
         :host([block]) {
@@ -7446,7 +7446,7 @@ const colorScheme = {
     colorizeFaviconComposition = ''
   } = {}) {
     localStorage.setItem('theme-colorize-icon', colorizeFaviconComposition || localStorage.getItem('theme-colorize-icon') || 'lighten');
-    this.onChange(this.setTheme);
+    this.onChange(this.setTheme.bind(this));
     this.setTheme();
     this.setAccent();
   },
@@ -7508,7 +7508,7 @@ const colorScheme = {
 
 };
 exports.colorScheme = colorScheme;
-},{"./colorize-favicon":"FgfO"}],"ZCfn":[function(require,module,exports) {
+},{"./colorize-favicon":"FgfO"}],"nDk4":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7569,7 +7569,7 @@ customElements.define('range-slider', class extends _litElement.LitElement {
             --thumbSize: 18px;
             --color: var(--fc-theme);
             --thumbColor: var(--color);
-            --bgd: var(--theme-color-accent, rgba(0,0,0,.4));
+            --bgd: var(--theme-text-accent, rgba(0,0,0,.4));
             --padding: 10px;
 
             display: inline-block;
@@ -7966,7 +7966,7 @@ var _litElement = require("lit-element");
 
 require("./icon");
 
-require("../presenters/form-control/controls/range-slider");
+require("../presenters/form/controls/range-slider");
 
 var _dayjs = _interopRequireDefault(require("dayjs"));
 
@@ -8083,7 +8083,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
             min-width: 100px;
             height: 10px;
             border-radius: 5px;
-            background: var(--theme-color, var(--black));
+            background: var(--theme-text, var(--black));
             outline: none;
             padding: 0;
             margin: 0 .5em;
@@ -8104,7 +8104,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
             height: 18px;
             border-radius: 50%;
             border: solid 2px var(--theme-bgd, #fff);
-            background: var(--theme-color, var(--black));
+            background: var(--theme-text, var(--black));
             cursor: pointer;
             box-shadow: none;
             margin-top: -4px;
@@ -8271,7 +8271,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
   setProgress() {
     var percent = this.progress.value / this.audio.duration * 100;
     var time = this.progress.value;
-    var color = 'var(--theme-color, #333)';
+    var color = 'var(--theme-text, #333)';
     var color2 = 'var(--theme-bgd-accent, #bbb)';
     this.progress.style.background = `linear-gradient(to right, ${color} ${percent}%, ${color2} ${percent}%)`;
     this.elapsed.innerHTML = formatTime(time);
@@ -8392,7 +8392,7 @@ customElements.define('b-audio', class extends _litElement.LitElement {
 var _default = customElements.get('b-audio');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./icon":"ncPe","../presenters/form-control/controls/range-slider":"ZCfn","dayjs":"dZYI","dayjs/plugin/duration":"oxIj","../util/store":"z4Ln"}],"jTPt":[function(require,module,exports) {
+},{"lit-element":"bhxD","./icon":"ncPe","../presenters/form/controls/range-slider":"nDk4","dayjs":"dZYI","dayjs/plugin/duration":"oxIj","../util/store":"z4Ln"}],"jTPt":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15363,7 +15363,7 @@ var define;
     };
   }]);
 });
-},{}],"uH6r":[function(require,module,exports) {
+},{}],"vXAz":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15479,7 +15479,7 @@ customElements.define('touch-ripple', TouchRippleElement);
 var _default = customElements.get('touch-ripple');
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"jNfL":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"lrfI":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15701,7 +15701,7 @@ customElements.define('check-box', CheckBoxElement);
 var _default = customElements.get('check-box');
 
 exports.default = _default;
-},{"lit-element":"bhxD","./touch-ripple":"uH6r"}],"h8fl":[function(require,module,exports) {
+},{"lit-element":"bhxD","./touch-ripple":"vXAz"}],"lQrn":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15739,7 +15739,7 @@ main > svg {
 	height: 1em;
 	width: 1em;
 	flex-shrink: 0;
-	fill: var(--theme-color-accent, #333);
+	fill: var(--theme-text-accent, #333);
 }
 
 slot#options {
@@ -16132,9 +16132,9 @@ var _fuse = _interopRequireDefault(require("fuse.js"));
 
 require("../../elements/hr");
 
-require("../form-control/controls/check-box");
+require("../form/controls/check-box");
 
-require("../form-control/controls/select-field");
+require("../form/controls/select-field");
 
 var _device = _interopRequireDefault(require("../../util/device"));
 
@@ -16778,7 +16778,7 @@ class Menu {
 }
 
 exports.default = Menu;
-},{"lit-html":"SPDu","lit-html/directives/unsafe-html":"jTPt","lit-html/directives/live":"RaiV","../popover":"Soyf","../dialog":"pos3","../panel":"cmZt","fuse.js":"Wp9p","../../elements/hr":"IOAQ","../form-control/controls/check-box":"jNfL","../form-control/controls/select-field":"h8fl","../../util/device":"la8o","./style.less":"r4vn"}],"P61z":[function(require,module,exports) {
+},{"lit-html":"SPDu","lit-html/directives/unsafe-html":"jTPt","lit-html/directives/live":"RaiV","../popover":"Soyf","../dialog":"pos3","../panel":"cmZt","fuse.js":"Wp9p","../../elements/hr":"IOAQ","../form/controls/check-box":"lrfI","../form/controls/select-field":"lQrn","../../util/device":"la8o","./style.less":"r4vn"}],"P61z":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -17804,6 +17804,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
 
         this.__customTabBar.classList.add('tab-bar');
 
+        this.__customTabBar.part = 'tab-bar';
         this.__customTabBar.innerHTML =
         /*html*/
         `
@@ -17817,7 +17818,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
       return this.__customTabBar;
     } else {
       return (0, _litElement.html)`
-            <header class="tab-bar">
+            <header class="tab-bar" part="tab-bar">
                 <slot name="menu:before"></slot>
                 <div class="tab-bar-item single-menu" active @click=${this.popoverMenu}>
                     <b-icon name="menu"></b-icon>
@@ -17896,7 +17897,7 @@ customElements.define('b-tabs', class extends _litElement.LitElement {
 var _default = customElements.get('b-tabs');
 
 exports.default = _default;
-},{"lit-element":"bhxD","../menu":"tCYJ","./views":"jVU8","./view":"P61z","lodash/debounce":"CXfR"}],"ZQnj":[function(require,module,exports) {
+},{"lit-element":"bhxD","../menu":"tCYJ","./views":"jVU8","./view":"P61z","lodash/debounce":"CXfR"}],"hkoO":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18206,7 +18207,7 @@ const toggleIf = {
   }
 
 };
-},{"../../util/store":"z4Ln"}],"Sclr":[function(require,module,exports) {
+},{"../../util/store":"z4Ln"}],"jmzC":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18419,7 +18420,7 @@ slot[name="help"] {
 /* remove autofill blue/yellow background */
 ::slotted(input:-webkit-autofill) {
     -webkit-box-shadow:0 0 0 50px var(--bgd) inset;
-	-webkit-text-fill-color: var(--theme-color);
+	-webkit-text-fill-color: var(--theme-text);
 }
 
 ::slotted(input:-webkit-autofill:focus) {
@@ -18750,7 +18751,7 @@ slot[name="help"] {
 `;
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"pZT1":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"sJ46":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18765,7 +18766,7 @@ var _default = (el, val) => {
 };
 
 exports.default = _default;
-},{}],"hx3P":[function(require,module,exports) {
+},{}],"I0ba":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18799,7 +18800,7 @@ var _default = (el, val) => {
 };
 
 exports.default = _default;
-},{}],"h6i7":[function(require,module,exports) {
+},{}],"BBnx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18817,7 +18818,7 @@ var _default = (e, el, val) => {
 };
 
 exports.default = _default;
-},{}],"wYzd":[function(require,module,exports) {
+},{}],"VQLm":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18897,7 +18898,7 @@ const onKeyDown = e => {
 
   if ((0, _stopMaxLength.default)(e, e.target, e.target.value)) e.preventDefault();
 };
-},{"./setValueAttrs":"pZT1","./validatePattern":"hx3P","./stopMaxLength":"h6i7"}],"swB1":[function(require,module,exports) {
+},{"./setValueAttrs":"sJ46","./validatePattern":"I0ba","./stopMaxLength":"BBnx"}],"atLM":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -18905,7 +18906,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _formControlCss = _interopRequireDefault(require("./form-control.css.js"));
+var _controlCss = _interopRequireDefault(require("./control.css.js"));
 
 var _nativeInputHelper = _interopRequireDefault(require("./util/nativeInputHelper"));
 
@@ -18934,7 +18935,7 @@ class FormControlElement extends HTMLElement {
     suffix = suffix.replace(/^\s+/, '&nbsp;');
     suffix = suffix.replace(/\s+$/, '&nbsp;');
     temp.innerHTML = `
-			<style>${_formControlCss.default.cssText}</style>
+			<style>${_controlCss.default.cssText}</style>
 			<slot name="before"></slot>
 			<main>
 				<slot name="control"></slot>
@@ -19111,7 +19112,7 @@ customElements.define('form-control', FormControlElement);
 var _default = customElements.get('form-control');
 
 exports.default = _default;
-},{"./form-control.css.js":"Sclr","./util/nativeInputHelper":"wYzd"}],"VxKk":[function(require,module,exports) {
+},{"./control.css.js":"jmzC","./util/nativeInputHelper":"VQLm"}],"CuiF":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19119,7 +19120,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _dayjs = _interopRequireDefault(require("dayjs"));
+var _dayJs = _interopRequireDefault(require("../../../helpers/day-js"));
 
 var _litElement = require("lit-element");
 
@@ -19195,7 +19196,7 @@ nav > svg {
     height: 1.4em;
     padding: .25em;
     margin: -.25em;
-	color: var(--theme-color, #000);
+	color: var(--theme-text, #000);
 	fill: currentColor;
     opacity: .4;
     cursor: pointer;
@@ -19224,7 +19225,7 @@ main.pick-month section > *{
 }
 
 section header {
-    color: var(--theme-color-accent, rgba(0,0,0,.3));
+    color: var(--theme-text-accent, rgba(0,0,0,.3));
     margin: 1em 0;
     font-size: .7em;
 }
@@ -19321,7 +19322,7 @@ class DatePickerElement extends HTMLElement {
   constructor() {
     super();
 
-    let htmlDaysHeader = _dayjs.default.weekdaysMin().map(str => `<div>${str}</div>`).join("\n");
+    let htmlDaysHeader = _dayJs.default.weekdaysMin().map(str => `<div>${str}</div>`).join("\n");
 
     let startYear = parseInt(this.getAttribute('year-start') || '1900');
     let endYear = parseInt(this.getAttribute('year-end') || '2099');
@@ -19331,7 +19332,7 @@ class DatePickerElement extends HTMLElement {
       years += `<year value="${startYear}">${startYear++}</year>`;
     }
 
-    let months = _dayjs.default.monthsShort().map((m, i) => `<month value="${i}">${m}</month>`).join("\n");
+    let months = _dayJs.default.monthsShort().map((m, i) => `<month value="${i}">${m}</month>`).join("\n");
 
     this.attachShadow({
       mode: 'open'
@@ -19528,12 +19529,12 @@ class DatePickerElement extends HTMLElement {
   }
 
   get _lookingAtToday() {
-    this._today = this._today || (0, _dayjs.default)();
+    this._today = this._today || (0, _dayJs.default)();
     return this._date.year() == this._today.year() && this._date.month() == this._today.month();
   }
 
   get _lookingAtSelectedMonth() {
-    this._today = this._today || (0, _dayjs.default)();
+    this._today = this._today || (0, _dayJs.default)();
     return this._date.year() == this._dateSelected.year() && this._date.month() == this._dateSelected.month();
   }
 
@@ -19543,7 +19544,7 @@ class DatePickerElement extends HTMLElement {
       this._date = this._date.set(val);
       changeEvent(this, val);
     } else {
-      this._date = val ? (0, _dayjs.default)(val, this.format) : (0, _dayjs.default)();
+      this._date = val ? (0, _dayJs.default)(val, this.format) : (0, _dayJs.default)();
       this._dateSelected = this._date.clone();
     }
 
@@ -19595,7 +19596,7 @@ customElements.define('date-picker', DatePickerElement);
 var _default = customElements.get('date-picker');
 
 exports.default = _default;
-},{"dayjs":"dZYI","lit-element":"bhxD"}],"E0RO":[function(require,module,exports) {
+},{"../../../helpers/day-js":"yPwf","lit-element":"bhxD"}],"E0RO":[function(require,module,exports) {
 /*
     HTML Cleaner
 
@@ -20571,7 +20572,7 @@ var _toCSV = _interopRequireDefault(require("./toCSV"));
 var _wait = _interopRequireDefault(require("./wait"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./htmlCleaner":"E0RO","./normalizeText":"hNKD","./csvToArray":"E8jA","./plural":"Zwl6","./readFile":"MqKw","./titleize":"NUHt","./toCSV":"TuEj","./wait":"DKKB"}],"ezNL":[function(require,module,exports) {
+},{"./htmlCleaner":"E0RO","./normalizeText":"hNKD","./csvToArray":"E8jA","./plural":"Zwl6","./readFile":"MqKw","./titleize":"NUHt","./toCSV":"TuEj","./wait":"DKKB"}],"i70U":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21186,7 +21187,7 @@ customElements.define('text-field', TextFieldElement);
 var _default = customElements.get('text-field');
 
 exports.default = _default;
-},{"lit-element":"bhxD","dayjs":"dZYI","../../dialog":"pos3","./date-picker":"VxKk","../util/setValueAttrs":"pZT1","../util/validatePattern":"hx3P","../util/stopMaxLength":"h6i7","../../../util":"xBze"}],"GLLF":[function(require,module,exports) {
+},{"lit-element":"bhxD","dayjs":"dZYI","../../dialog":"pos3","./date-picker":"CuiF","../util/setValueAttrs":"sJ46","../util/validatePattern":"I0ba","../util/stopMaxLength":"BBnx","../../../util":"xBze"}],"HtKb":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21319,7 +21320,7 @@ customElements.define('radio-btn', RadioBtnElement);
 var _default = customElements.get('radio-btn');
 
 exports.default = _default;
-},{"lit-element":"bhxD"}],"mCnW":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"c8QH":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21419,12 +21420,12 @@ customElements.define('radio-group', RadioGroupElement);
 var _default = customElements.get('radio-group');
 
 exports.default = _default;
-},{}],"wbVn":[function(require,module,exports) {
+},{}],"C29C":[function(require,module,exports) {
 "use strict";
 
-require("./form-handler");
+require("./handler");
 
-require("./form-control");
+require("./control");
 
 require("./controls/text-field");
 
@@ -21439,7 +21440,7 @@ require("./controls/radio-group");
 require("./controls/touch-ripple");
 
 require("./controls/range-slider");
-},{"./form-handler":"ZQnj","./form-control":"swB1","./controls/text-field":"ezNL","./controls/select-field":"h8fl","./controls/check-box":"jNfL","./controls/radio-btn":"GLLF","./controls/radio-group":"mCnW","./controls/touch-ripple":"uH6r","./controls/range-slider":"ZCfn"}],"Wr69":[function(require,module,exports) {
+},{"./handler":"hkoO","./control":"atLM","./controls/text-field":"i70U","./controls/select-field":"lQrn","./controls/check-box":"lrfI","./controls/radio-btn":"HtKb","./controls/radio-group":"c8QH","./controls/touch-ripple":"vXAz","./controls/range-slider":"nDk4"}],"Wr69":[function(require,module,exports) {
 
 /**
  * Expose `Emitter`.
@@ -23499,9 +23500,9 @@ exports.default = void 0;
 
 var _litElement = require("lit-element");
 
-require("../../form-control/form-control");
+require("../../form/control");
 
-require("../../form-control/controls/text-field");
+require("../../form/controls/text-field");
 
 customElements.define('b-list-search-bar', class extends _litElement.LitElement {
   static get properties() {
@@ -23553,7 +23554,7 @@ customElements.define('b-list-search-bar', class extends _litElement.LitElement 
         }
 
         b-icon {
-            color: var(--theme-color,#444);
+            color: var(--theme-text,#444);
             margin-right: .5em;
         }
     `;
@@ -23582,7 +23583,7 @@ customElements.define('b-list-search-bar', class extends _litElement.LitElement 
 var _default = customElements.get('b-list-search-bar');
 
 exports.default = _default;
-},{"lit-element":"bhxD","../../form-control/form-control":"swB1","../../form-control/controls/text-field":"ezNL"}],"iwaU":[function(require,module,exports) {
+},{"lit-element":"bhxD","../../form/control":"atLM","../../form/controls/text-field":"i70U"}],"iwaU":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24836,7 +24837,7 @@ customElements.define('b-cal-day', class extends _litElement.LitElement {
         }
 
         :host([overflow]) .date {
-            color: var(--theme-color-accent, #999);
+            color: var(--theme-text-accent, #999);
             padding: 0 .35em;
         }
 
@@ -24953,7 +24954,7 @@ customElements.define('b-cal', class extends _litElement.LitElement {
             top: 0;
             z-index: 10;
             background: var(--b-cal-header-bgd, var(--theme-bgd, #fff));
-            border-bottom: solid 1px rgba(var(--theme-rgb, 0,0,0), .1);
+            border-bottom: solid 1px rgba(var(--theme-text-rgb, 0,0,0), .1);
             display: grid;
             grid-template-columns: max-content max-content;
             justify-content: space-between;
@@ -24996,8 +24997,8 @@ customElements.define('b-cal', class extends _litElement.LitElement {
         }
 
         b-cal-day {
-            border-right: solid 1px rgba(var(--theme-rgb, 0,0,0), .1);
-            border-bottom: solid 1px rgba(var(--theme-rgb, 0,0,0), .1);
+            border-right: solid 1px rgba(var(--theme-text-rgb, 0,0,0), .1);
+            border-bottom: solid 1px rgba(var(--theme-text-rgb, 0,0,0), .1);
             flex-shrink: 0;
             min-width: 0;
         }
@@ -25489,7 +25490,7 @@ require("../elements/audio");
 
 require("../presenters/tabs");
 
-require("../presenters/form-control");
+require("../presenters/form");
 
 require("../presenters/list");
 
@@ -25555,7 +25556,7 @@ history.replaceState = (f => function replaceState() {
 window.addEventListener('popstate', function () {
   convertComments();
 });
-},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"pV6C","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/text":"yukA","../elements/grid":"BALQ","../elements/carousel":"inC5","../elements/timer":"uEYO","../elements/empty-state":"dUnZ","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"VfwF","../elements/avatar":"DaYz","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form-control":"wbVn","../presenters/list":"tkaB","../presenters/cal":"YTQF","../helpers/colors-list":"TMO9","../styles/colors.less":"r4vn","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"tCYJ","../presenters/notif":"XAiK"}],"FheM":[function(require,module,exports) {
+},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"pV6C","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/text":"yukA","../elements/grid":"BALQ","../elements/carousel":"inC5","../elements/timer":"uEYO","../elements/empty-state":"dUnZ","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"VfwF","../elements/avatar":"DaYz","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form":"C29C","../presenters/list":"tkaB","../presenters/cal":"YTQF","../helpers/colors-list":"TMO9","../styles/colors.less":"r4vn","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"tCYJ","../presenters/notif":"XAiK"}],"FheM":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
