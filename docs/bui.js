@@ -4139,64 +4139,54 @@ LitElement.render = _shadyRender.render;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.IconList = exports.IconElement = exports.svgIcons = void 0;
+exports.IconList = exports.default = void 0;
 
 var _litElement = require("lit-element");
 
 /*
 	https://icomoon.io/app
 */
-const svgDef = require('./icons.svg.html');
+const SVG_ICONS = new Map();
 
-class SvgIcons {
-  get prefix() {
-    return 'icon-';
+function registerIcon(name, icon, {
+  prefix = 'icon-'
+} = {}) {
+  let d = document.createElement('div');
+  d.innerHTML = icon;
+  icon = d.firstElementChild; // if no name, get it from the icon attribute
+
+  if (!name) {
+    name = icon.id || icon.name || '';
+    name = name.replace(prefix, '');
   }
 
-  get svgDefElement() {
-    if (!this.__svgDefElement) {
-      let div = document.createElement('div');
-      div.innerHTML = svgDef;
-      this.__svgDefElement = div.firstChild; // remove all the <title> tags so they dont show as "tooltips" when hovering
-
-      this.__svgDefElement.querySelectorAll('title').forEach(el => el.remove());
-
-      div = null;
-    }
-
-    return this.__svgDefElement;
-  }
-
-  get names() {
-    return Array.from(this.svgDefElement.querySelectorAll('symbol')).map(el => el.id.replace(this.prefix, '')).sort();
-  }
-
-  get(name) {
-    let symbol = this.svgDefElement.querySelector(`#${this.prefix}${name}`);
-    let svg = null;
-
-    if (symbol) {
-      let div = document.createElement('div');
-      div.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg">${symbol.innerHTML}</svg>`;
-      svg = div.firstChild; // copy attributes
-
-      Array.from(symbol.attributes).forEach(attr => {
-        svg.setAttribute(attr.name, attr.value);
-      });
-    }
-
-    return svg;
-  }
-
+  if (!name) return console.warn('Icons must have a name');
+  if (SVG_ICONS.get(name)) return console.warn('There is already an icon registered with that name');
+  SVG_ICONS.set(name, icon);
 }
 
-const svgIcons = new SvgIcons();
-exports.svgIcons = svgIcons;
+let hasWarnedNoIcons = false;
+
+function warnNoIcons() {
+  if (hasWarnedNoIcons) return;
+  hasWarnedNoIcons = true;
+  console.warn('No icons have been registered. Do so with `IconElement.register()` – Or import `bui/elements/icons/_all`');
+}
 
 class IconElement extends HTMLElement {
-  // not ideal...
+  static register(...icons) {
+    icons.forEach(icon => {
+      let name = '';
+      if (Array.isArray(icon)) [name, icon] = icon;
+      registerIcon(name, icon);
+    });
+  } // not ideal...
+
+
   get styles() {
-    return `
+    return (
+      /*css*/
+      `
 		:host {
 			display: inline-flex;
 			vertical-align: middle;
@@ -4250,7 +4240,8 @@ class IconElement extends HTMLElement {
 		:host([name="arrows-ccw"][spin]) svg {
 			animation: 1600ms rotate360CCW infinite linear;
 		}
-		`;
+	`
+    );
   }
 
   constructor() {
@@ -4268,12 +4259,13 @@ class IconElement extends HTMLElement {
   }
 
   _setSVG() {
+    if (SVG_ICONS.size == 0) warnNoIcons();
     if (this._svg) this._svg.remove();
-    this._svg = svgIcons.get(this.name);
+    this._svg = SVG_ICONS.get(this.name);
 
     if (this._svg) {
       this.removeAttribute('invalid');
-      this.shadowRoot.appendChild(this._svg);
+      this.shadowRoot.appendChild(this._svg.cloneNode(true));
     } else {
       this.setAttribute('invalid', '');
     }
@@ -4305,7 +4297,7 @@ class IconElement extends HTMLElement {
 
 }
 
-exports.IconElement = IconElement;
+exports.default = IconElement;
 customElements.define('b-icon', IconElement);
 
 class IconList extends _litElement.LitElement {
@@ -4368,7 +4360,7 @@ class IconList extends _litElement.LitElement {
 
   render() {
     return (0, _litElement.html)`
-		${svgIcons.names.map(name => (0, _litElement.html)`
+		${Array.from(SVG_ICONS.keys()).map(name => (0, _litElement.html)`
 			<div>
 				<b-icon name=${name}></b-icon> <small>${name}</small>
 			</div>
@@ -4380,7 +4372,7 @@ class IconList extends _litElement.LitElement {
 
 exports.IconList = IconList;
 customElements.define('b-icon-list', IconList);
-},{"lit-element":"bhxD","./icons.svg.html":"pxeq"}],"EnCN":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"EnCN":[function(require,module,exports) {
 /*
 	SVG and idea taken from https://ant.design/components/button/
 	
@@ -4876,6 +4868,31 @@ customElements.define('b-btn-group', class extends _litElement.LitElement {
         ::slotted(b-btn:last-of-type:not(:first-of-type)){
             border-radius: 0 var(--radius) var(--radius) 0;
             border-left: solid 1px rgba(0,0,0,.2);
+        }
+
+        ::slotted(b-btn:not(:first-of-type)[clear]) {
+            border-left: solid 1px rgba(0,0,0,.1);
+        }
+
+
+        :host([vert]) {
+            flex-direction: column;
+        }
+
+        :host([vert]) ::slotted(b-btn:first-of-type:not(:last-of-type)){
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        :host([vert]) ::slotted(b-btn:not(:first-of-type):not(:last-of-type)){
+            border-radius: 0;
+            border-top: solid 1px rgba(0,0,0,.2);
+            border-left: none;
+        }
+
+        :host([vert]) ::slotted(b-btn:last-of-type:not(:first-of-type)){
+            border-radius: 0 0 var(--radius) var(--radius);
+            border-top: solid 1px rgba(0,0,0,.2);
+            border-left: none;
         }
     `;
   }
@@ -19929,6 +19946,16 @@ module.exports = (strData, {
     arrData[arrData.length - 1].push(strMatchedValue);
   }
 
+  let comments = []; // filter out comments
+
+  arrData = arrData.filter(row => {
+    if (row && row[0][0] == '#') {
+      comments.push(row);
+      return false;
+    }
+
+    return true;
+  });
   let header = [];
   let footer = [];
   let foundRow = false;
@@ -19953,6 +19980,7 @@ module.exports = (strData, {
     });
   }
 
+  arrData.comments = comments.join(`\n`);
   arrData.header = header;
   arrData.footer = footer; // Return the parsed data.
 
@@ -25234,7 +25262,15 @@ customElements.define('b-list-of-colors', class extends _litElement.LitElement {
   }
 
 });
-},{"lit-element":"bhxD"}],"u6Cc":[function(require,module,exports) {
+},{"lit-element":"bhxD"}],"kKF2":[function(require,module,exports) {
+"use strict";
+
+var _icon = _interopRequireDefault(require("../icon"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_icon.default.register(['address', require('./address.svg.html')], ['alert', require('./alert.svg.html')], ['amazon', require('./amazon.svg.html')], ['android', require('./android.svg.html')], ['appstore', require('./appstore.svg.html')], ['archive', require('./archive.svg.html')], ['arrows-ccw', require('./arrows-ccw.svg.html')], ['article-alt', require('./article-alt.svg.html')], ['at', require('./at.svg.html')], ['attention-1', require('./attention-1.svg.html')], ['attention-circle', require('./attention-circle.svg.html')], ['award', require('./award.svg.html')], ['back-in-time', require('./back-in-time.svg.html')], ['bank', require('./bank.svg.html')], ['barcode', require('./barcode.svg.html')], ['basket', require('./basket.svg.html')], ['bell-alt', require('./bell-alt.svg.html')], ['bell-off', require('./bell-off.svg.html')], ['bell', require('./bell.svg.html')], ['blackstone', require('./blackstone.svg.html')], ['block', require('./block.svg.html')], ['bold', require('./bold.svg.html')], ['book-1', require('./book-1.svg.html')], ['book-open', require('./book-open.svg.html')], ['book', require('./book.svg.html')], ['bookmark', require('./bookmark.svg.html')], ['bookmarks', require('./bookmarks.svg.html')], ['books', require('./books.svg.html')], ['border_outer', require('./border_outer.svg.html')], ['border_top', require('./border_top.svg.html')], ['box-1', require('./box-1.svg.html')], ['box', require('./box.svg.html')], ['braille', require('./braille.svg.html')], ['briefcase', require('./briefcase.svg.html')], ['bucket', require('./bucket.svg.html')], ['bug', require('./bug.svg.html')], ['bus', require('./bus.svg.html')], ['calc', require('./calc.svg.html')], ['calendar-1', require('./calendar-1.svg.html')], ['calendar-2', require('./calendar-2.svg.html')], ['calendar-3', require('./calendar-3.svg.html')], ['calendar', require('./calendar.svg.html')], ['camera', require('./camera.svg.html')], ['campsite', require('./campsite.svg.html')], ['cancel-1', require('./cancel-1.svg.html')], ['cancel-alt-filled', require('./cancel-alt-filled.svg.html')], ['cancel-circled', require('./cancel-circled.svg.html')], ['cancel', require('./cancel.svg.html')], ['cassette', require('./cassette.svg.html')], ['category', require('./category.svg.html')], ['cc-nc-eu', require('./cc-nc-eu.svg.html')], ['cc-nc', require('./cc-nc.svg.html')], ['ccw', require('./ccw.svg.html')], ['cd', require('./cd.svg.html')], ['certificate', require('./certificate.svg.html')], ['chart-1', require('./chart-1.svg.html')], ['chart-bar', require('./chart-bar.svg.html')], ['chart-line', require('./chart-line.svg.html')], ['chart-pie', require('./chart-pie.svg.html')], ['chart', require('./chart.svg.html')], ['chat-1', require('./chat-1.svg.html')], ['chat-empty', require('./chat-empty.svg.html')], ['chat', require('./chat.svg.html')], ['check-empty', require('./check-empty.svg.html')], ['check', require('./check.svg.html')], ['circle-empty', require('./circle-empty.svg.html')], ['circle', require('./circle.svg.html')], ['clearclose', require('./clearclose.svg.html')], ['clock', require('./clock.svg.html')], ['code', require('./code.svg.html')], ['cog-alt', require('./cog-alt.svg.html')], ['cog', require('./cog.svg.html')], ['collections-photos', require('./collections-photos.svg.html')], ['collections-text', require('./collections-text.svg.html')], ['color-lens', require('./color-lens.svg.html')], ['columns', require('./columns.svg.html')], ['comment-2', require('./comment-2.svg.html')], ['comment', require('./comment.svg.html')], ['compass-1', require('./compass-1.svg.html')], ['compass', require('./compass.svg.html')], ['credit-card', require('./credit-card.svg.html')], ['cube', require('./cube.svg.html')], ['cubes', require('./cubes.svg.html')], ['cw', require('./cw.svg.html')], ['database', require('./database.svg.html')], ['desktop', require('./desktop.svg.html')], ['direction', require('./direction.svg.html')], ['doc-1', require('./doc-1.svg.html')], ['doc-2', require('./doc-2.svg.html')], ['doc-inv', require('./doc-inv.svg.html')], ['doc-text-inv', require('./doc-text-inv.svg.html')], ['doc-text', require('./doc-text.svg.html')], ['doc', require('./doc.svg.html')], ['docs', require('./docs.svg.html')], ['dollar-1', require('./dollar-1.svg.html')], ['dollar', require('./dollar.svg.html')], ['dot-2', require('./dot-2.svg.html')], ['dot-3', require('./dot-3.svg.html')], ['dot', require('./dot.svg.html')], ['down-1', require('./down-1.svg.html')], ['down-circled', require('./down-circled.svg.html')], ['down-open', require('./down-open.svg.html')], ['down', require('./down.svg.html')], ['download-cloud-1', require('./download-cloud-1.svg.html')], ['download-cloud', require('./download-cloud.svg.html')], ['download', require('./download.svg.html')], ['dropbox', require('./dropbox.svg.html')], ['droplet', require('./droplet.svg.html')], ['edit', require('./edit.svg.html')], ['equalizer', require('./equalizer.svg.html')], ['erase', require('./erase.svg.html')], ['export', require('./export.svg.html')], ['eye-1', require('./eye-1.svg.html')], ['eye-off', require('./eye-off.svg.html')], ['facebook', require('./facebook.svg.html')], ['fast-bw', require('./fast-bw.svg.html')], ['fast-fw', require('./fast-fw.svg.html')], ['file-archive', require('./file-archive.svg.html')], ['file-audio', require('./file-audio.svg.html')], ['file-code', require('./file-code.svg.html')], ['file-excel', require('./file-excel.svg.html')], ['file-image', require('./file-image.svg.html')], ['file-pdf', require('./file-pdf.svg.html')], ['file-powerpoint', require('./file-powerpoint.svg.html')], ['file-word', require('./file-word.svg.html')], ['filter', require('./filter.svg.html')], ['flag', require('./flag.svg.html')], ['folder-open-empty', require('./folder-open-empty.svg.html')], ['folder', require('./folder.svg.html')], ['font-size', require('./font-size.svg.html')], ['fork', require('./fork.svg.html')], ['format-color-fill', require('./format-color-fill.svg.html')], ['gauge-1', require('./gauge-1.svg.html')], ['gauge', require('./gauge.svg.html')], ['github', require('./github.svg.html')], ['gitlab', require('./gitlab.svg.html')], ['globe', require('./globe.svg.html')], ['google', require('./google.svg.html')], ['group-circled', require('./group-circled.svg.html')], ['group', require('./group.svg.html')], ['hdd', require('./hdd.svg.html')], ['headphones', require('./headphones.svg.html')], ['heart', require('./heart.svg.html')], ['height', require('./height.svg.html')], ['home-1', require('./home-1.svg.html')], ['home', require('./home.svg.html')], ['info-1', require('./info-1.svg.html')], ['info-circled', require('./info-circled.svg.html')], ['info', require('./info.svg.html')], ['instagram', require('./instagram.svg.html')], ['invert-colors-on', require('./invert-colors-on.svg.html')], ['italic', require('./italic.svg.html')], ['key-inv', require('./key-inv.svg.html')], ['key', require('./key.svg.html')], ['keyboard', require('./keyboard.svg.html')], ['layers', require('./layers.svg.html')], ['leaf', require('./leaf.svg.html')], ['left-1', require('./left-1.svg.html')], ['left-circled-1', require('./left-circled-1.svg.html')], ['left-circled', require('./left-circled.svg.html')], ['left-open-big', require('./left-open-big.svg.html')], ['left-open', require('./left-open.svg.html')], ['left', require('./left.svg.html')], ['lightbulb', require('./lightbulb.svg.html')], ['link-ext', require('./link-ext.svg.html')], ['link', require('./link.svg.html')], ['list-add', require('./list-add.svg.html')], ['list-numbered', require('./list-numbered.svg.html')], ['list2', require('./list2.svg.html')], ['location', require('./location.svg.html')], ['lock-open-alt', require('./lock-open-alt.svg.html')], ['lock', require('./lock.svg.html')], ['logout', require('./logout.svg.html')], ['mail-1', require('./mail-1.svg.html')], ['mail', require('./mail.svg.html')], ['megaphone', require('./megaphone.svg.html')], ['menu', require('./menu.svg.html')], ['mic', require('./mic.svg.html')], ['minus-circled', require('./minus-circled.svg.html')], ['minus-squared-alt', require('./minus-squared-alt.svg.html')], ['minus-squared', require('./minus-squared.svg.html')], ['minus', require('./minus.svg.html')], ['mobile', require('./mobile.svg.html')], ['move', require('./move.svg.html')], ['music', require('./music.svg.html')], ['na', require('./na.svg.html')], ['net', require('./net.svg.html')], ['note', require('./note.svg.html')], ['ok-circled', require('./ok-circled.svg.html')], ['ok-circled2', require('./ok-circled2.svg.html')], ['ok', require('./ok.svg.html')], ['paragraph-center', require('./paragraph-center.svg.html')], ['paste', require('./paste.svg.html')], ['pause', require('./pause.svg.html')], ['pencil', require('./pencil.svg.html')], ['phone', require('./phone.svg.html')], ['photo_size_select_small', require('./photo_size_select_small.svg.html')], ['picture', require('./picture.svg.html')], ['pin', require('./pin.svg.html')], ['play', require('./play.svg.html')], ['plus-1', require('./plus-1.svg.html')], ['plus-circled', require('./plus-circled.svg.html')], ['plus-squared', require('./plus-squared.svg.html')], ['plus', require('./plus.svg.html')], ['print', require('./print.svg.html')], ['qrcode', require('./qrcode.svg.html')], ['quote-right', require('./quote-right.svg.html')], ['rain-inv', require('./rain-inv.svg.html')], ['rain', require('./rain.svg.html')], ['recycle', require('./recycle.svg.html')], ['reply-all', require('./reply-all.svg.html')], ['reply', require('./reply.svg.html')], ['resize-full', require('./resize-full.svg.html')], ['resize-small', require('./resize-small.svg.html')], ['retweet', require('./retweet.svg.html')], ['right-1', require('./right-1.svg.html')], ['right-circled-1', require('./right-circled-1.svg.html')], ['right-circled', require('./right-circled.svg.html')], ['right-open-big', require('./right-open-big.svg.html')], ['right-open', require('./right-open.svg.html')], ['right', require('./right.svg.html')], ['scissors', require('./scissors.svg.html')], ['scissors1', require('./scissors1.svg.html')], ['search', require('./search.svg.html')], ['settings', require('./settings.svg.html')], ['shield', require('./shield.svg.html')], ['shop', require('./shop.svg.html')], ['shuffle', require('./shuffle.svg.html')], ['signal', require('./signal.svg.html')], ['sort-alt-down', require('./sort-alt-down.svg.html')], ['sort-alt-up', require('./sort-alt-up.svg.html')], ['sort-down', require('./sort-down.svg.html')], ['sort-name-down', require('./sort-name-down.svg.html')], ['sort-name-up', require('./sort-name-up.svg.html')], ['sort-number-down', require('./sort-number-down.svg.html')], ['sort-number-up', require('./sort-number-up.svg.html')], ['sort-up', require('./sort-up.svg.html')], ['sort', require('./sort.svg.html')], ['stackoverflow', require('./stackoverflow.svg.html')], ['stamp', require('./stamp.svg.html')], ['star-empty', require('./star-empty.svg.html')], ['star', require('./star.svg.html')], ['stop', require('./stop.svg.html')], ['strikethrough', require('./strikethrough.svg.html')], ['suitcase', require('./suitcase.svg.html')], ['tag-1', require('./tag-1.svg.html')], ['tag', require('./tag.svg.html')], ['tags', require('./tags.svg.html')], ['tasks', require('./tasks.svg.html')], ['terminal', require('./terminal.svg.html')], ['th-list-1', require('./th-list-1.svg.html')], ['th-list', require('./th-list.svg.html')], ['th-thumb', require('./th-thumb.svg.html')], ['thumbs-down', require('./thumbs-down.svg.html')], ['thumbs-up', require('./thumbs-up.svg.html')], ['ticket', require('./ticket.svg.html')], ['top-list', require('./top-list.svg.html')], ['trash', require('./trash.svg.html')], ['truck', require('./truck.svg.html')], ['twitter', require('./twitter.svg.html')], ['underline', require('./underline.svg.html')], ['up-1', require('./up-1.svg.html')], ['up-circled', require('./up-circled.svg.html')], ['up-open', require('./up-open.svg.html')], ['up', require('./up.svg.html')], ['upload-cloud', require('./upload-cloud.svg.html')], ['user-add', require('./user-add.svg.html')], ['user', require('./user.svg.html')], ['users', require('./users.svg.html')], ['vcard', require('./vcard.svg.html')], ['video', require('./video.svg.html')], ['videocam', require('./videocam.svg.html')], ['view-mode', require('./view-mode.svg.html')], ['volume-high', require('./volume-high.svg.html')], ['volume-low', require('./volume-low.svg.html')], ['volume-medium', require('./volume-medium.svg.html')], ['volume-mute', require('./volume-mute.svg.html')], ['window', require('./window.svg.html')], ['wrench-1', require('./wrench-1.svg.html')], ['wrench', require('./wrench.svg.html')], ['youtube', require('./youtube.svg.html')]);
+},{"../icon":"ncPe","./address.svg.html":"ZFOG","./alert.svg.html":"V4qL","./amazon.svg.html":"eWxt","./android.svg.html":"NaX5","./appstore.svg.html":"lRnZ","./archive.svg.html":"tiIy","./arrows-ccw.svg.html":"eLNG","./article-alt.svg.html":"p8xF","./at.svg.html":"Sw4O","./attention-1.svg.html":"gfK1","./attention-circle.svg.html":"RA4T","./award.svg.html":"rrjE","./back-in-time.svg.html":"g2hR","./bank.svg.html":"CI9C","./barcode.svg.html":"iOWI","./basket.svg.html":"ZeOn","./bell-alt.svg.html":"KWSB","./bell-off.svg.html":"rZxD","./bell.svg.html":"yBlq","./blackstone.svg.html":"pAT7","./block.svg.html":"rJ5V","./bold.svg.html":"GIyL","./book-1.svg.html":"u945","./book-open.svg.html":"tL7M","./book.svg.html":"i3Cs","./bookmark.svg.html":"QO8c","./bookmarks.svg.html":"LimV","./books.svg.html":"D4T0","./border_outer.svg.html":"GWg7","./border_top.svg.html":"wQl6","./box-1.svg.html":"IkR6","./box.svg.html":"JFOL","./braille.svg.html":"Y7R9","./briefcase.svg.html":"hBU7","./bucket.svg.html":"oFfg","./bug.svg.html":"S6fm","./bus.svg.html":"VXFZ","./calc.svg.html":"jSIR","./calendar-1.svg.html":"Vpet","./calendar-2.svg.html":"HCgh","./calendar-3.svg.html":"pVNG","./calendar.svg.html":"Xg7Z","./camera.svg.html":"Hjd8","./campsite.svg.html":"bS0K","./cancel-1.svg.html":"XYaW","./cancel-alt-filled.svg.html":"vluS","./cancel-circled.svg.html":"RHnp","./cancel.svg.html":"ykuG","./cassette.svg.html":"Xwof","./category.svg.html":"CFUY","./cc-nc-eu.svg.html":"kT3b","./cc-nc.svg.html":"tZRI","./ccw.svg.html":"GZ8G","./cd.svg.html":"CAtL","./certificate.svg.html":"XYF3","./chart-1.svg.html":"heB6","./chart-bar.svg.html":"ztpP","./chart-line.svg.html":"FJGI","./chart-pie.svg.html":"ofNV","./chart.svg.html":"DsJl","./chat-1.svg.html":"PfiH","./chat-empty.svg.html":"tWFf","./chat.svg.html":"MLTh","./check-empty.svg.html":"UQ3O","./check.svg.html":"AsY6","./circle-empty.svg.html":"oYmA","./circle.svg.html":"At2I","./clearclose.svg.html":"zeVT","./clock.svg.html":"sGBh","./code.svg.html":"QgRp","./cog-alt.svg.html":"hCOV","./cog.svg.html":"IiOf","./collections-photos.svg.html":"tYTi","./collections-text.svg.html":"GTPp","./color-lens.svg.html":"u0m5","./columns.svg.html":"qQko","./comment-2.svg.html":"akaf","./comment.svg.html":"GylG","./compass-1.svg.html":"Ao05","./compass.svg.html":"fEMA","./credit-card.svg.html":"xsWB","./cube.svg.html":"SNXL","./cubes.svg.html":"x3oz","./cw.svg.html":"EaXq","./database.svg.html":"OJPj","./desktop.svg.html":"Tyxk","./direction.svg.html":"xgbl","./doc-1.svg.html":"Xp2z","./doc-2.svg.html":"BD6e","./doc-inv.svg.html":"dcLT","./doc-text-inv.svg.html":"dbSL","./doc-text.svg.html":"JS88","./doc.svg.html":"oZ0g","./docs.svg.html":"eB22","./dollar-1.svg.html":"PIWA","./dollar.svg.html":"XDM2","./dot-2.svg.html":"iZU7","./dot-3.svg.html":"qKiQ","./dot.svg.html":"dETr","./down-1.svg.html":"tpVl","./down-circled.svg.html":"fj0z","./down-open.svg.html":"Nf9U","./down.svg.html":"ZyAL","./download-cloud-1.svg.html":"WVi2","./download-cloud.svg.html":"h9Kp","./download.svg.html":"MnH7","./dropbox.svg.html":"aRY2","./droplet.svg.html":"luEU","./edit.svg.html":"fjoK","./equalizer.svg.html":"kIbi","./erase.svg.html":"VOIG","./export.svg.html":"x6dV","./eye-1.svg.html":"Zkoi","./eye-off.svg.html":"OjIf","./facebook.svg.html":"yW5R","./fast-bw.svg.html":"NkhY","./fast-fw.svg.html":"WQ1y","./file-archive.svg.html":"Mi7K","./file-audio.svg.html":"mxTu","./file-code.svg.html":"hNvA","./file-excel.svg.html":"GUuS","./file-image.svg.html":"GIqe","./file-pdf.svg.html":"lDp8","./file-powerpoint.svg.html":"AaPF","./file-word.svg.html":"IecS","./filter.svg.html":"Bs3a","./flag.svg.html":"InbL","./folder-open-empty.svg.html":"RRGW","./folder.svg.html":"cKkT","./font-size.svg.html":"gADI","./fork.svg.html":"JLPo","./format-color-fill.svg.html":"ECfy","./gauge-1.svg.html":"Zqtv","./gauge.svg.html":"QEny","./github.svg.html":"EO6w","./gitlab.svg.html":"yxsB","./globe.svg.html":"xLFO","./google.svg.html":"Xj8b","./group-circled.svg.html":"IvQD","./group.svg.html":"obFb","./hdd.svg.html":"IhZ9","./headphones.svg.html":"zcK8","./heart.svg.html":"n1x5","./height.svg.html":"eWjN","./home-1.svg.html":"LvFd","./home.svg.html":"QBYw","./info-1.svg.html":"cUWd","./info-circled.svg.html":"myKM","./info.svg.html":"DAPZ","./instagram.svg.html":"fNni","./invert-colors-on.svg.html":"WIjS","./italic.svg.html":"qpPN","./key-inv.svg.html":"gfMf","./key.svg.html":"cI22","./keyboard.svg.html":"VVDD","./layers.svg.html":"v9bX","./leaf.svg.html":"A6d3","./left-1.svg.html":"tTdX","./left-circled-1.svg.html":"FGT6","./left-circled.svg.html":"R9nJ","./left-open-big.svg.html":"CmGY","./left-open.svg.html":"xdQ2","./left.svg.html":"rLsT","./lightbulb.svg.html":"LeXZ","./link-ext.svg.html":"eYxw","./link.svg.html":"jHfT","./list-add.svg.html":"hvAh","./list-numbered.svg.html":"SAxC","./list2.svg.html":"cglV","./location.svg.html":"pPR7","./lock-open-alt.svg.html":"FgDu","./lock.svg.html":"tOBi","./logout.svg.html":"mhPu","./mail-1.svg.html":"DWbn","./mail.svg.html":"iVRJ","./megaphone.svg.html":"eTzv","./menu.svg.html":"j9nP","./mic.svg.html":"DnH1","./minus-circled.svg.html":"ZjUa","./minus-squared-alt.svg.html":"aM3O","./minus-squared.svg.html":"wM9V","./minus.svg.html":"xAaL","./mobile.svg.html":"vG6M","./move.svg.html":"htQV","./music.svg.html":"ScA5","./na.svg.html":"NaYR","./net.svg.html":"KriT","./note.svg.html":"PCOh","./ok-circled.svg.html":"AhE0","./ok-circled2.svg.html":"M1Kb","./ok.svg.html":"pPTy","./paragraph-center.svg.html":"mmM5","./paste.svg.html":"WzPy","./pause.svg.html":"blDz","./pencil.svg.html":"CdPN","./phone.svg.html":"Hbpl","./photo_size_select_small.svg.html":"Rtj6","./picture.svg.html":"hFx0","./pin.svg.html":"HQKm","./play.svg.html":"QmoH","./plus-1.svg.html":"M5It","./plus-circled.svg.html":"zCKW","./plus-squared.svg.html":"aQw1","./plus.svg.html":"zxmr","./print.svg.html":"MmUu","./qrcode.svg.html":"MDLf","./quote-right.svg.html":"N8Ej","./rain-inv.svg.html":"iZF8","./rain.svg.html":"dLjQ","./recycle.svg.html":"rrzb","./reply-all.svg.html":"GSrX","./reply.svg.html":"b0S8","./resize-full.svg.html":"x9Wr","./resize-small.svg.html":"rvmM","./retweet.svg.html":"H2yY","./right-1.svg.html":"s5sL","./right-circled-1.svg.html":"ewAY","./right-circled.svg.html":"FfS0","./right-open-big.svg.html":"E7xg","./right-open.svg.html":"rJdz","./right.svg.html":"dAoX","./scissors.svg.html":"x1fz","./scissors1.svg.html":"LwhP","./search.svg.html":"LaGA","./settings.svg.html":"JpZM","./shield.svg.html":"NQp2","./shop.svg.html":"YRyA","./shuffle.svg.html":"FieZ","./signal.svg.html":"ch6H","./sort-alt-down.svg.html":"WA5z","./sort-alt-up.svg.html":"ngX2","./sort-down.svg.html":"owV8","./sort-name-down.svg.html":"TmxR","./sort-name-up.svg.html":"llEr","./sort-number-down.svg.html":"dXgB","./sort-number-up.svg.html":"e8Y1","./sort-up.svg.html":"N3VI","./sort.svg.html":"xhFJ","./stackoverflow.svg.html":"H22X","./stamp.svg.html":"n3FT","./star-empty.svg.html":"rT5F","./star.svg.html":"iUc0","./stop.svg.html":"gXAG","./strikethrough.svg.html":"GHzm","./suitcase.svg.html":"mwLP","./tag-1.svg.html":"z0kV","./tag.svg.html":"cAO8","./tags.svg.html":"IAcB","./tasks.svg.html":"Bxw7","./terminal.svg.html":"xJIg","./th-list-1.svg.html":"Xqi1","./th-list.svg.html":"wwGP","./th-thumb.svg.html":"WmhS","./thumbs-down.svg.html":"iblK","./thumbs-up.svg.html":"FC17","./ticket.svg.html":"xGNW","./top-list.svg.html":"OCYc","./trash.svg.html":"Hsjv","./truck.svg.html":"BHQQ","./twitter.svg.html":"m7SY","./underline.svg.html":"pkHT","./up-1.svg.html":"j9JL","./up-circled.svg.html":"bOmq","./up-open.svg.html":"GwiB","./up.svg.html":"wpHX","./upload-cloud.svg.html":"XCC4","./user-add.svg.html":"BLTh","./user.svg.html":"t372","./users.svg.html":"KTI8","./vcard.svg.html":"hOhc","./video.svg.html":"UgZy","./videocam.svg.html":"pyK7","./view-mode.svg.html":"ugM4","./volume-high.svg.html":"S9Ol","./volume-low.svg.html":"FvjC","./volume-medium.svg.html":"CwnQ","./volume-mute.svg.html":"iLGX","./window.svg.html":"DJmt","./wrench-1.svg.html":"QUFS","./wrench.svg.html":"EyaP","./youtube.svg.html":"Ek6H"}],"u6Cc":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25500,6 +25536,8 @@ require("../helpers/colors-list");
 
 require("../styles/colors.less");
 
+require("../elements/icons/_all");
+
 var _fileIcon = _interopRequireDefault(require("../elements/file-icon"));
 
 var _dialog = _interopRequireDefault(require("../presenters/dialog"));
@@ -25556,7 +25594,7 @@ history.replaceState = (f => function replaceState() {
 window.addEventListener('popstate', function () {
   convertComments();
 });
-},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"pV6C","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/text":"yukA","../elements/grid":"BALQ","../elements/carousel":"inC5","../elements/timer":"uEYO","../elements/empty-state":"dUnZ","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"VfwF","../elements/avatar":"DaYz","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form":"C29C","../presenters/list":"tkaB","../presenters/cal":"YTQF","../helpers/colors-list":"TMO9","../styles/colors.less":"r4vn","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"tCYJ","../presenters/notif":"XAiK"}],"FheM":[function(require,module,exports) {
+},{"../elements/icon":"ncPe","../elements/btn":"DABr","../elements/btn-group":"pV6C","../elements/spinner":"EnCN","../elements/spinner-overlay":"eyVY","../elements/uploader":"aYTp","../elements/paper":"Yy3A","../elements/text":"yukA","../elements/grid":"BALQ","../elements/carousel":"inC5","../elements/timer":"uEYO","../elements/empty-state":"dUnZ","../elements/label":"DcCw","../elements/ribbon":"jV4C","../elements/hr":"IOAQ","../elements/sub":"VANQ","../elements/ts":"VfwF","../elements/avatar":"DaYz","../elements/code":"v5wz","../elements/embed":"bpDM","../elements/audio":"EIVk","../presenters/tabs":"BsQP","../presenters/form":"C29C","../presenters/list":"tkaB","../presenters/cal":"YTQF","../helpers/colors-list":"TMO9","../styles/colors.less":"r4vn","../elements/icons/_all":"kKF2","../elements/file-icon":"u6Cc","../presenters/dialog":"pos3","../presenters/menu":"tCYJ","../presenters/notif":"XAiK"}],"FheM":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -25678,6 +25716,6 @@ module.exports = function loadHTMLBundle(bundle) {
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("TUK3");b.register("html",require("A3BY"));b.load([["icons.svg.10aef11a.html","pxeq"]]).then(function(){require("gE6T");});
+var b=require("TUK3");b.register("html",require("A3BY"));b.load([["address.svg.c30a479a.html","ZFOG"],["alert.svg.f21a6590.html","V4qL"],["amazon.svg.e876370d.html","eWxt"],["android.svg.6c3002fd.html","NaX5"],["appstore.svg.97d763dc.html","lRnZ"],["archive.svg.0e449726.html","tiIy"],["arrows-ccw.svg.8ed7a99e.html","eLNG"],["article-alt.svg.63072f40.html","p8xF"],["at.svg.ca06c1b9.html","Sw4O"],["attention-1.svg.6d3842c6.html","gfK1"],["attention-circle.svg.4442f597.html","RA4T"],["award.svg.aa4329cd.html","rrjE"],["back-in-time.svg.45b3d44c.html","g2hR"],["bank.svg.f47d72e7.html","CI9C"],["barcode.svg.00988df2.html","iOWI"],["basket.svg.909f07e0.html","ZeOn"],["bell-alt.svg.6be40d52.html","KWSB"],["bell-off.svg.431cc49a.html","rZxD"],["bell.svg.75a0d15b.html","yBlq"],["blackstone.svg.1c2ac846.html","pAT7"],["block.svg.19fa8e1a.html","rJ5V"],["bold.svg.a32d876f.html","GIyL"],["book-1.svg.73e01471.html","u945"],["book-open.svg.c6b4abd4.html","tL7M"],["book.svg.f007ea4e.html","i3Cs"],["bookmark.svg.fcbf608d.html","QO8c"],["bookmarks.svg.ff7f921d.html","LimV"],["books.svg.aea4fa95.html","D4T0"],["border_outer.svg.c288d3c6.html","GWg7"],["border_top.svg.c2fe79fb.html","wQl6"],["box-1.svg.2ed77a47.html","IkR6"],["box.svg.9d28f4b9.html","JFOL"],["braille.svg.26975d6c.html","Y7R9"],["briefcase.svg.90632f65.html","hBU7"],["bucket.svg.2e71be7d.html","oFfg"],["bug.svg.f9c959e7.html","S6fm"],["bus.svg.42de0af4.html","VXFZ"],["calc.svg.960d6146.html","jSIR"],["calendar-1.svg.279b2a0f.html","Vpet"],["calendar-2.svg.07c02329.html","HCgh"],["calendar-3.svg.a04160c1.html","pVNG"],["calendar.svg.0ce39ed6.html","Xg7Z"],["camera.svg.399fd539.html","Hjd8"],["campsite.svg.fc070c59.html","bS0K"],["cancel-1.svg.d52edf2b.html","XYaW"],["cancel-alt-filled.svg.ad8dfe18.html","vluS"],["cancel-circled.svg.22fb19c3.html","RHnp"],["cancel.svg.10efa274.html","ykuG"],["cassette.svg.e459b2af.html","Xwof"],["category.svg.37e891b1.html","CFUY"],["cc-nc-eu.svg.11f7e09e.html","kT3b"],["cc-nc.svg.83300c80.html","tZRI"],["ccw.svg.fe6621a5.html","GZ8G"],["cd.svg.f5dfdd6f.html","CAtL"],["certificate.svg.3c160bcf.html","XYF3"],["chart-1.svg.ba537dfe.html","heB6"],["chart-bar.svg.1e666e10.html","ztpP"],["chart-line.svg.8e25bff4.html","FJGI"],["chart-pie.svg.cae47762.html","ofNV"],["chart.svg.6b53e99e.html","DsJl"],["chat-1.svg.40b20998.html","PfiH"],["chat-empty.svg.17b1cbe2.html","tWFf"],["chat.svg.bab4f9c4.html","MLTh"],["check-empty.svg.19a8634c.html","UQ3O"],["check.svg.1a01eaae.html","AsY6"],["circle-empty.svg.e1d8c6ac.html","oYmA"],["circle.svg.b3e1f337.html","At2I"],["clearclose.svg.8024a425.html","zeVT"],["clock.svg.f20ad144.html","sGBh"],["code.svg.4f696da4.html","QgRp"],["cog-alt.svg.0e72be09.html","hCOV"],["cog.svg.c7d212d3.html","IiOf"],["collections-photos.svg.21700759.html","tYTi"],["collections-text.svg.aa1131cf.html","GTPp"],["color-lens.svg.6d86bbb5.html","u0m5"],["columns.svg.eec6a957.html","qQko"],["comment-2.svg.be5e7286.html","akaf"],["comment.svg.484fd6a9.html","GylG"],["compass-1.svg.5072e6b1.html","Ao05"],["compass.svg.e5a93553.html","fEMA"],["credit-card.svg.8c933614.html","xsWB"],["cube.svg.1079b37f.html","SNXL"],["cubes.svg.5460fd1c.html","x3oz"],["cw.svg.809e5cdb.html","EaXq"],["database.svg.ebd1d125.html","OJPj"],["desktop.svg.3a689fc4.html","Tyxk"],["direction.svg.bc9b9385.html","xgbl"],["doc-1.svg.1cc0ad1c.html","Xp2z"],["doc-2.svg.afe72802.html","BD6e"],["doc-inv.svg.e08dcddc.html","dcLT"],["doc-text-inv.svg.2b60fae3.html","dbSL"],["doc-text.svg.edbaedd9.html","JS88"],["doc.svg.c5001fc6.html","oZ0g"],["docs.svg.d298e5c4.html","eB22"],["dollar-1.svg.7a398c39.html","PIWA"],["dollar.svg.25152525.html","XDM2"],["dot-2.svg.3ad670b2.html","iZU7"],["dot-3.svg.d1cc4948.html","qKiQ"],["dot.svg.e70f9292.html","dETr"],["down-1.svg.5048c7aa.html","tpVl"],["down-circled.svg.e87a9aaa.html","fj0z"],["down-open.svg.fd30ef8f.html","Nf9U"],["down.svg.7b68bf3e.html","ZyAL"],["download-cloud-1.svg.6142a9f3.html","WVi2"],["download-cloud.svg.c2aee263.html","h9Kp"],["download.svg.ec2227cb.html","MnH7"],["dropbox.svg.161e386d.html","aRY2"],["droplet.svg.5417771d.html","luEU"],["edit.svg.0f99b9d7.html","fjoK"],["equalizer.svg.472f7dbd.html","kIbi"],["erase.svg.edf23092.html","VOIG"],["export.svg.9fa7792a.html","x6dV"],["eye-1.svg.4e3a28be.html","Zkoi"],["eye-off.svg.2e2e7e23.html","OjIf"],["facebook.svg.8107f5a0.html","yW5R"],["fast-bw.svg.c014f24e.html","NkhY"],["fast-fw.svg.996bdd99.html","WQ1y"],["file-archive.svg.5f00005d.html","Mi7K"],["file-audio.svg.5b3ca955.html","mxTu"],["file-code.svg.2bd10a83.html","hNvA"],["file-excel.svg.8244eba3.html","GUuS"],["file-image.svg.6cef31c9.html","GIqe"],["file-pdf.svg.b3bf976b.html","lDp8"],["file-powerpoint.svg.057d91f0.html","AaPF"],["file-word.svg.54d509b9.html","IecS"],["filter.svg.a3503232.html","Bs3a"],["flag.svg.ce0830fc.html","InbL"],["folder-open-empty.svg.a9c622c1.html","RRGW"],["folder.svg.94e147a7.html","cKkT"],["font-size.svg.c2b7ea59.html","gADI"],["fork.svg.1e46a894.html","JLPo"],["format-color-fill.svg.d56068f1.html","ECfy"],["gauge-1.svg.86e67358.html","Zqtv"],["gauge.svg.36c9b1e5.html","QEny"],["github.svg.98dc0472.html","EO6w"],["gitlab.svg.411f4eed.html","yxsB"],["globe.svg.e154b7e0.html","xLFO"],["google.svg.ddb0b19c.html","Xj8b"],["group-circled.svg.cf922004.html","IvQD"],["group.svg.cd59e670.html","obFb"],["hdd.svg.7b0a0972.html","IhZ9"],["headphones.svg.6aeb157c.html","zcK8"],["heart.svg.adce90a2.html","n1x5"],["height.svg.44cc09dc.html","eWjN"],["home-1.svg.34e6b03d.html","LvFd"],["home.svg.7e3e59e4.html","QBYw"],["info-1.svg.edc3e794.html","cUWd"],["info-circled.svg.5b5cab28.html","myKM"],["info.svg.1f7555f4.html","DAPZ"],["instagram.svg.5562c446.html","fNni"],["invert-colors-on.svg.97970e0a.html","WIjS"],["italic.svg.7b1ba9a3.html","qpPN"],["key-inv.svg.a6a58825.html","gfMf"],["key.svg.ad3a9f28.html","cI22"],["keyboard.svg.117808fb.html","VVDD"],["layers.svg.1f5be857.html","v9bX"],["leaf.svg.ec674a33.html","A6d3"],["left-1.svg.a4d7a5b0.html","tTdX"],["left-circled-1.svg.3d83cea8.html","FGT6"],["left-circled.svg.68e4b213.html","R9nJ"],["left-open-big.svg.7d9efd4d.html","CmGY"],["left-open.svg.f40d96db.html","xdQ2"],["left.svg.349d0a8f.html","rLsT"],["lightbulb.svg.f4b59300.html","LeXZ"],["link-ext.svg.73d4bb49.html","eYxw"],["link.svg.0faf44a6.html","jHfT"],["list-add.svg.7214c21c.html","hvAh"],["list-numbered.svg.a6945c68.html","SAxC"],["list2.svg.c567b260.html","cglV"],["location.svg.b2167198.html","pPR7"],["lock-open-alt.svg.3887a427.html","FgDu"],["lock.svg.113b07b5.html","tOBi"],["logout.svg.b35ce104.html","mhPu"],["mail-1.svg.2cdd5162.html","DWbn"],["mail.svg.c60462ec.html","iVRJ"],["megaphone.svg.a991f5ab.html","eTzv"],["menu.svg.26bb4408.html","j9nP"],["mic.svg.d3728309.html","DnH1"],["minus-circled.svg.807c5c29.html","ZjUa"],["minus-squared-alt.svg.fbbff2e3.html","aM3O"],["minus-squared.svg.8a049882.html","wM9V"],["minus.svg.f30bc715.html","xAaL"],["mobile.svg.85290c6f.html","vG6M"],["move.svg.4605f991.html","htQV"],["music.svg.8389f512.html","ScA5"],["na.svg.03e82f34.html","NaYR"],["net.svg.e8bdcc08.html","KriT"],["note.svg.c72ce733.html","PCOh"],["ok-circled.svg.3e3e7ce4.html","AhE0"],["ok-circled2.svg.380c36a9.html","M1Kb"],["ok.svg.170d77cc.html","pPTy"],["paragraph-center.svg.b2df0523.html","mmM5"],["paste.svg.e716e45d.html","WzPy"],["pause.svg.1a8e460b.html","blDz"],["pencil.svg.6672fdc8.html","CdPN"],["phone.svg.e8a90d01.html","Hbpl"],["photo_size_select_small.svg.0329e0d3.html","Rtj6"],["picture.svg.6a3bf01d.html","hFx0"],["pin.svg.60f76f6d.html","HQKm"],["play.svg.e6207028.html","QmoH"],["plus-1.svg.8378210f.html","M5It"],["plus-circled.svg.e696b038.html","zCKW"],["plus-squared.svg.3b1a22a1.html","aQw1"],["plus.svg.291b7134.html","zxmr"],["print.svg.a5f260f4.html","MmUu"],["qrcode.svg.50419119.html","MDLf"],["quote-right.svg.caa696db.html","N8Ej"],["rain-inv.svg.27d425da.html","iZF8"],["rain.svg.5ab2ff1d.html","dLjQ"],["recycle.svg.db9e304e.html","rrzb"],["reply-all.svg.f7025d77.html","GSrX"],["reply.svg.0a70f9e2.html","b0S8"],["resize-full.svg.7528d73a.html","x9Wr"],["resize-small.svg.9b9d2c5e.html","rvmM"],["retweet.svg.3144ff81.html","H2yY"],["right-1.svg.d85edd86.html","s5sL"],["right-circled-1.svg.42b14406.html","ewAY"],["right-circled.svg.9f1640d2.html","FfS0"],["right-open-big.svg.9eedf5ab.html","E7xg"],["right-open.svg.625f4067.html","rJdz"],["right.svg.3f3a34f7.html","dAoX"],["scissors.svg.e3c5c18d.html","x1fz"],["scissors1.svg.12072ab8.html","LwhP"],["search.svg.09a51c78.html","LaGA"],["settings.svg.11377dd0.html","JpZM"],["shield.svg.32774461.html","NQp2"],["shop.svg.79779df6.html","YRyA"],["shuffle.svg.b87cb18c.html","FieZ"],["signal.svg.07e5ad20.html","ch6H"],["sort-alt-down.svg.9cc30ca4.html","WA5z"],["sort-alt-up.svg.df181c0f.html","ngX2"],["sort-down.svg.32053396.html","owV8"],["sort-name-down.svg.617e101c.html","TmxR"],["sort-name-up.svg.e4e7bd98.html","llEr"],["sort-number-down.svg.4b27bae5.html","dXgB"],["sort-number-up.svg.a1358f62.html","e8Y1"],["sort-up.svg.c9985b94.html","N3VI"],["sort.svg.b920e49d.html","xhFJ"],["stackoverflow.svg.450577c6.html","H22X"],["stamp.svg.9ed29240.html","n3FT"],["star-empty.svg.05ebf365.html","rT5F"],["star.svg.0b7f9b52.html","iUc0"],["stop.svg.be2607c4.html","gXAG"],["strikethrough.svg.c98a66fc.html","GHzm"],["suitcase.svg.9830e95a.html","mwLP"],["tag-1.svg.37d74496.html","z0kV"],["tag.svg.19eb1a18.html","cAO8"],["tags.svg.f07983e5.html","IAcB"],["tasks.svg.c9e898d8.html","Bxw7"],["terminal.svg.9cb8f564.html","xJIg"],["th-list-1.svg.4b8de763.html","Xqi1"],["th-list.svg.4edc518f.html","wwGP"],["th-thumb.svg.3aba7b7e.html","WmhS"],["thumbs-down.svg.94081d7d.html","iblK"],["thumbs-up.svg.e2328374.html","FC17"],["ticket.svg.11c8ac6b.html","xGNW"],["top-list.svg.ac303f8a.html","OCYc"],["trash.svg.58189db2.html","Hsjv"],["truck.svg.8a4cf4af.html","BHQQ"],["twitter.svg.cd34dedd.html","m7SY"],["underline.svg.df94aea0.html","pkHT"],["up-1.svg.2a641a62.html","j9JL"],["up-circled.svg.4619d679.html","bOmq"],["up-open.svg.c3e4300d.html","GwiB"],["up.svg.8b3867ee.html","wpHX"],["upload-cloud.svg.61ee6d4e.html","XCC4"],["user-add.svg.9693e29e.html","BLTh"],["user.svg.785dd21a.html","t372"],["users.svg.f3ed2830.html","KTI8"],["vcard.svg.c2ad01d5.html","hOhc"],["video.svg.3b9fcd41.html","UgZy"],["videocam.svg.78259356.html","pyK7"],["view-mode.svg.0b123c78.html","ugM4"],["volume-high.svg.262d54bf.html","S9Ol"],["volume-low.svg.0c4861ca.html","FvjC"],["volume-medium.svg.3c1fa486.html","CwnQ"],["volume-mute.svg.d8d9e0b9.html","iLGX"],["window.svg.b5eb26c6.html","DJmt"],["wrench-1.svg.937d5530.html","QUFS"],["wrench.svg.793e93ed.html","EyaP"],["youtube.svg.6eeebe97.html","Ek6H"]]).then(function(){require("gE6T");});
 },{}]},{},[0], null)
 //# sourceMappingURL=/bui.js.map

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css?t=0174a9d9">
     <link rel="stylesheet" href="bui.css?t=d5fa3047">
     <script src="assets/script.js?t=42463e55"></script>
-    <script src="bui.js?t=cffeb6cc"></script>
+    <script src="bui.js?t=fe627057"></script>
     <title>Icons - Blackstone UI</title>
     <meta name="viewport" content="width=device-width">
   </head>
@@ -23,6 +23,10 @@
                 <li class="menu-item -level-2"><a class="link title  link-elements" href="elements/index.html">Elements</a>
                 </li>
                 <li class="menu-item -level-2"><a class="link title -active link-icons" href="icons.html">Icons</a>
+                  <ul class="headings heading-list">
+                    <li class="heading-item -depth-3"><a class="hlink link-icon-resources:" href="#icon-resources:">Icon Resources:</a>
+                    </li>
+                  </ul>
                 </li>
                 <li class="menu-item -level-2"><a class="link title  link-presentersdialog" href="presenters/dialog/index.html">Dialog</a>
                 </li>
@@ -83,7 +87,29 @@
           </div>
         </div>
         <div class="markdown-body"><h1 id="icons">Icons</h1>
-<p>Icons are saved as svg symbol references. These can be generated here: <a href="https://icomoon.io/app">https://icomoon.io/app</a></p>
+<p>In order for svg icons to change colors, they must be inlined. To accomplish this, svg icons must be imported as text and registered.</p>
+<pre><code class="lang-js"><span class="pl-k">import</span> Icon <span class="pl-k">from</span> <span class="pl-s">&apos;bui/elements/icon&apos;</span>
+
+<span class="pl-c">// register specific icons</span>
+Icon.register(
+    <span class="pl-c">// [name, iconString]</span>
+    [<span class="pl-s">&apos;my-icon&apos;</span>, <span class="pl-c1">require</span>(<span class="pl-s">&apos;path/to/my/icon&apos;</span>)],
+
+    <span class="pl-c">// iconString (`id` attr in icon will be used for name)</span>
+    <span class="pl-c1">require</span>(<span class="pl-s">&apos;bui/elements/icons/user.svg.html&apos;</span>),
+    <span class="pl-c1">require</span>(<span class="pl-s">&apos;bui/elements/icons/cog.svg.html&apos;</span>)
+)
+</code></pre>
+<pre><code class="lang-js">// include and register all BUI icons
+import &apos;bui/elements/icons/_all
+</code></pre>
+<blockquote>
+<p><strong>NOTE:</strong> BUI icons have been named <code>.svg.html</code> rather than <code>.svg</code> so that <a href="https://parceljs.org/">parcel.js</a> will import as text. Webpack can import <code>.svg</code> as text and parcel2 will be able to with a <a href="https://github.com/parcel-bundler/parcel/discussions/4829#discussioncomment-32740"><code>.parcelrc</code></a>. If you&#x2019;re registering your own svg icons and using the parcel bundler, make sure your icons end in <code>.html</code></p>
+</blockquote>
+<h3 id="icon-resources:">Icon Resources:</h3>
+<ul>
+<li><a href="https://icomoon.io/app">https://icomoon.io/app</a></li>
+</ul>
 <!--plain
 <b-icon-list cols="3"></b-icon-list>
 -->
