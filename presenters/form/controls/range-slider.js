@@ -185,7 +185,7 @@ customElements.define('range-slider', class extends LitElement{
         if( Array.isArray(val) ){
             if( typeof val[0] !== 'number' || typeof val[1] !== 'number' ) return
 
-            val.sort()
+            val.sort((a,b) => a-b)
 
             if( this.range )
                 this.valMin = this._polishVal(val[0])
